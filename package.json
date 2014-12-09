@@ -2,7 +2,13 @@
     "name": "ut-codec",
     "version": "1.0.0",
     "main": "./index",
-    "dependencies": {
+    "devDependencies": {
+      "mocha": "*"
+    },
+    "dependencies":{
         "ut-bus": "~5.0.0"
+    },
+    "scripts": {
+      "test-iso-8583": "mocha --grep iso-8583"
     }
 }
