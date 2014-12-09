@@ -1,7 +1,7 @@
 'use strict'
 var bitsyntax = require('bitsyntax');
 var nconf = require('nconf');
-var fieldsDefinition = nconf.file('./fieldFormats.json');
+var fieldsDefinition = nconf.file('./iso-8583.fieldFormats.json');
 
 module.exports = {
 
