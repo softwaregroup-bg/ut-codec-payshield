@@ -1,0 +1,8 @@
+{
+    "name": "ut-codec",
+    "version": "1.0.0",
+    "main": "./index",
+    "dependencies": {
+        "ut-bus": "~5.0.0"
+    }
+}

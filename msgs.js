@@ -1,0 +1,33 @@
+module.exports = {
+    msgs: [
+        { _mtid:'notification' , _opcode: 'transaction'           ,message_class: '1', message_subclass: '1', fields: 'message_sub_class,FS,luno,FS,,FS,time_variant,FS,trtf_mcn,FS,track2,FS,track3,FS,operation_code,FS,amount_entry,FS,pin_block,FS,buffer_b,FS,buffer_c,FS,data'},
+        { _mtid:'notification' , _opcode: 'unsolicited_status'    ,message_class: '1', message_subclass: '2', fields: 'message_sub_class,FS,luno,FS,,FS,status_information,FS,error_severity,FS,diagnostic_status,FS,supplies_status'},
+        { _mtid:'response'     , _opcode: 'solicited_status'      ,message_class: '2', message_subclass: '2', fields: 'message_sub_class,FS,luno,FS,,FS,status_descriptor,FS,status_information1,FS,status_information2,FS,status_information3,FS,status_information4,FS,status_information5,FS,status_information6,FS,status_information7'},
+        { _mtid:'response'     , _opcode: 'encryptor_ini_data'    ,message_class: '2', message_subclass: '3', fields: 'message_sub_class,FS,luno,FS,,FS,information_identifier,FS,encryptor_information'},
+        { _mtid:'request'      , _opcode: 'tm_alert1'             ,message_class: '3', message_subclass: '' , fields: ''},
+        { _mtid:'request'      , _opcode: 'sm_install_status'     ,message_class: '4', message_subclass: '1', fields: ''},
+        { _mtid:'request'      , _opcode: 'exit_to_host'          ,message_class: '5', message_subclass: '1', fields: ''},
+        { _mtid:'notification' , _opcode: 'upload_ej_data'        ,message_class: '6', message_subclass: '1', fields: 'message_sub_class,FS,,FS,,FS,,FS,data'},
+        { _mtid:'notification' , _opcode: 'ej_options'            ,message_class: '6', message_subclass: '3', fields: 'FS,FS,FS,command_type,options,FS,timer'},
+        { _mtid:'notification' , _opcode: 'ej_ack'                ,message_class: '6', message_subclass: '' , fields: 'FS,FS,FS,command_type,last_char'},
+        { _mtid:'request'      , _opcode: 'terminal_command'      ,message_class: '1', message_subclass: '' , fields: 'response_flag,FS,luno,FS,seq,FS,command_code,command_modifier'},
+        { _mtid:'request'      , _opcode: 'params_load'           ,message_class: '3', message_subclass: '1', fields: 'response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,supply_mode,FS,new_luno'},
+        { _mtid:'request'      , _opcode: 'state_table_load'      ,message_class: '3', message_subclass: '1', fields: 'response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,state_table_data'},
+        { _mtid:'request'      , _opcode: 'config_id_load'        ,message_class: '3', message_subclass: '1', fields: 'response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,config_id'},
+        { _mtid:'request'      , _opcode: 'screen_data_load'      ,message_class: '3', message_subclass: '1', fields: 'response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,screen_data'},
+        { _mtid:'request'      , _opcode: 'currency_mapping_load' ,message_class: '3', message_subclass: '1', fields: 'response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,currency_mapping_data'},
+        { _mtid:'request'      , _opcode: 'datetime_load'         ,message_class: '3', message_subclass: '1', fields: 'response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,datetime'},
+        { _mtid:'request'      , _opcode: 'fit_data_load'         ,message_class: '3', message_subclass: '1', fields: 'response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,fit_data'},
+        { _mtid:'request'      , _opcode: 'key_change'            ,message_class: '3', message_subclass: '3', fields: 'response_flag,FS,luno,FS,seq,FS,message_sub_class,modifier,FS,key'},
+        { _mtid:'response'     , _opcode: 'inter_trans_resp'      ,message_class: '3', message_subclass: '2', fields: ''},
+        { _mtid:'request'      , _opcode: 'transaction_reply'     ,message_class: '4', message_subclass: '' , fields: 'response_flag,FS,luno,FS,seq,FS,next_state,FS,type1_notes,type2_notes,type3_notes,type4_notes,FS,sernum,function,FS,coordination,card_return,printer'},
+        { _mtid:'request'      , _opcode: 'tm_alert2'             ,message_class: '5', message_subclass: '' , fields: ''},
+        { _mtid:'request'      , _opcode: 'host_to_exit'          ,message_class: '7', message_subclass: '1', fields: ''},
+        { _mtid:'request'      , _opcode: 'unknown_command'       ,message_class: '' , message_subclass: '' , fields: 'body'},
+        { _mtid:'request'      , _opcode: 'emv_currency'          ,message_class: '8', message_subclass: '1', fields: 'response_flag,FS,luno,FS,message_sub_class,FS,data'},
+        { _mtid:'request'      , _opcode: 'emv_transaction'       ,message_class: '8', message_subclass: '2', fields: 'response_flag,FS,luno,FS,message_sub_class,FS,data'},
+        { _mtid:'request'      , _opcode: 'emv_language'          ,message_class: '8', message_subclass: '3', fields: 'response_flag,FS,luno,FS,message_sub_class,FS,data'},
+        { _mtid:'request'      , _opcode: 'emv_terminal'          ,message_class: '8', message_subclass: '4', fields: 'response_flag,FS,luno,FS,message_sub_class,FS,data'},
+        { _mtid:'request'      , _opcode: 'emv_application'       ,message_class: '8', message_subclass: '5', fields: 'response_flag,FS,luno,FS,message_sub_class,FS,data'}
+   ]
+}
