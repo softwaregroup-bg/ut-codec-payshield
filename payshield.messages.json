@@ -104,7 +104,7 @@
   "derive_pin_ibm": { 
     "Code": "EE",
     "mtid": "request",
-    "Pattern": "pvk:33/string, offset:12/string, check_length:2/string-left-zero, account:12/string, decimalisation_table:16/string, pin_validation_data:12/string"
+    "Pattern": "pvk:pvk/string, offset:12/string, check_length:2/string-left-zero, account:12/string, decimalisation_table:16/string, pin_validation_data:12/string"
   },
 
   "derive_pin_ibm_resp": {
@@ -128,7 +128,7 @@
  "generate_offset_ibm": { 
     "Code": "BK",
     "mtid": "request",
-    "Pattern": "key_type:3/string, keyA32:33/string, pvk:33/string, pin_block:16/string, pin_block_format:2/string, check_length:2/string-left-zero, account:12/string, decimalisation_table:16/string, pin_validation_data:12/string"
+    "Pattern": "key_type:3/string, keyA32:33/string, pvk:pvk/string, pin_block:16/string, pin_block_format:2/string, check_length:2/string-left-zero, account:12/string, decimalisation_table:16/string, pin_validation_data:12/string"
   },
   
   "generate_offset_ibm_resp": {
@@ -140,7 +140,7 @@
   "verify_term_pin_ibm": {
     "Code": "DA",
     "mtid": "request",
-    "Pattern": "tpk:33/string, pvk:33/string, maximum_pin_length:2/string-left-zero, pin_block:16/string, pin_block_format:2/string, check_length:2/string-left-zero, account:12/string, decimalisation_table:16/string, pin_validation_data:12/string, offset:12/string"
+    "Pattern": "tpk:33/string, pvk:pvk/string, maximum_pin_length:2/string-left-zero, pin_block:16/string, pin_block_format:2/string, check_length:2/string-left-zero, account:12/string, decimalisation_table:16/string, pin_validation_data:12/string, offset:12/string"
   },
   
   "verify_term_pin_ibm_resp": {
