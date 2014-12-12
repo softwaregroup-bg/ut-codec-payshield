@@ -1,8 +1,8 @@
 ﻿var mocha = require('mocha');
 var assert = require('assert');
 var hsmp = require('../payshield.js');
-//var expect = require('chai').expect;
-//var assert = require('chai').assert;
+
+//var assert = require('chai').assert; - tova ne raboti v tozi slu4ai
 
 
 encode_test_data = {
@@ -76,13 +76,13 @@ encode_test_data = {
     },
 
     import_key: {
-        data: { _opcode: 'import_key', _trace: 234, key_type: '003', zmk: 'UB15E645AFC1A3F4444A48D58EE983BD3', keyA32: 'X725D74BD3FDC0AA910EB213487423466', key_scheme: 'X'},
-        buf: new Buffer("000234A6003UB15E645AFC1A3F4444A48D58EE983BD3X725D74BD3FDC0AA910EB213487423466X")
+        data: { _opcode: 'import_key', _trace: 234, key_type: '001', zmk: 'U71979DEB8587E2734F1E99D5DCAEF9AC', keyA32: 'U482C4E722BB0CF1845E1E5BD16310119', key_scheme: 'U'},
+        buf: new Buffer("000234A6001U71979DEB8587E2734F1E99D5DCAEF9ACU482C4E722BB0CF1845E1E5BD16310119U")
     },
 
     translate_tpk_zpk: {
-        data: { _opcode: 'translate_tpk_zpk', _trace: 234, source_tpk: 'X725D74BD3FDC0AA910EB213487423466', destination_zpk: 'UB15E645AFC1A3F4444A48D58EE983BD3', source_pin_block: '0592789FFFEDCBA9', source_pin_block_format: '01', destination_pin_block_format: '01', account: '123456789012' },
-        buf: new Buffer("000234CAX725D74BD3FDC0AA910EB213487423466UB15E645AFC1A3F4444A48D58EE983BD3120592789FFFEDCBA90101123456789012")
+        data: { _opcode: 'translate_tpk_zpk', _trace: 234, source_tpk: 'U8463435FC4B4DAA0C49025272C29B12C', destination_zpk: 'U1EF828AA8F6B80EB83E19FBC373F3A85', source_pin_block: '6428EB94035AF53B', source_pin_block_format: '01', destination_pin_block_format: '01', account: '550000025321' },
+        buf: new Buffer("000234CAU8463435FC4B4DAA0C49025272C29B12CU1EF828AA8F6B80EB83E19FBC373F3A85126428EB94035AF53B0101550000025321")
     },
 
     print_pin: {
@@ -96,13 +96,13 @@ encode_test_data = {
     },
 
     translate_tpk_lmk: {
-        data: { _opcode: 'translate_tpk_lmk', _trace: 234, source_tpk: 'X725D74BD3FDC0AA910EB213487423466', source_pin_block: '0592789FFFEDCBA9', source_pin_block_format: '01', account: '123456789012'},
-        buf: new Buffer("000234JCX725D74BD3FDC0AA910EB2134874234660592789FFFEDCBA901123456789012")
+        data: { _opcode: 'translate_tpk_lmk', _trace: 234, source_tpk: 'U8463435FC4B4DAA0C49025272C29B12C', source_pin_block: '6428EB94035AF53B', source_pin_block_format: '01', account: '550000025321'},
+        buf: new Buffer("000234JCU8463435FC4B4DAA0C49025272C29B12C6428EB94035AF53B01550000025321")
     },
 
     translate_zpk_lmk: {
-        data: { _opcode: 'translate_zpk_lmk', _trace: 234, source_zpk: 'X725D74BD3FDC0AA910EB213487423466', source_pin_block: '0592789FFFEDCBA9', source_pin_block_format: '01', account: '123456789012'},
-        buf: new Buffer("000234JEX725D74BD3FDC0AA910EB2134874234660592789FFFEDCBA901123456789012")
+        data: { _opcode: 'translate_zpk_lmk', _trace: 234, source_zpk: 'U1EF828AA8F6B80EB83E19FBC373F3A85', source_pin_block: '91DDDA0A7C12CFAA', source_pin_block_format: '01', account: '550000025321'},
+        buf: new Buffer("000234JEU1EF828AA8F6B80EB83E19FBC373F3A8591DDDA0A7C12CFAA01550000025321")
     },
 
     generate_offset_ibm_lmk: {
@@ -192,13 +192,21 @@ decode_test_data = {
     },
 
     import_key_resp: {
-        data: { errorcode: '10', rest: new Buffer(0), headerNo: '000234', headerCode: 'A7', mtid: 'response', opcode: 'import_key_resp'},
-        buf: new Buffer("000234A710")
+        data: {errorcode: '00', keyA32: 'U0E07CDC0161A0DE3B5AA44DF227EC9DE', key_check_value: 'ABDEBC', headerNo: '000234', headerCode: 'A7', mtid: 'response', opcode: 'import_key_resp'},
+        buf: new Buffer("000234A700U0E07CDC0161A0DE3B5AA44DF227EC9DEABDEBC")
     },
 
     translate_tpk_zpk_resp: {
-        data: {errorcode: '10', rest: new Buffer(0), headerNo: '000234', headerCode: 'CB', mtid: 'response', opcode: 'translate_tpk_zpk_resp' },
-        buf: new Buffer("000234CB10")
+        data: {errorcode: '00',
+            check_length: '04',
+            destination_pin_block: '91DDDA0A7C12CFAA',
+            pin_block_format: '01',
+            headerNo: '000234',
+            headerCode: 'CB',
+            mtid: 'response',
+            opcode: 'translate_tpk_zpk_resp'
+        },
+        buf: new Buffer("000234CB000491DDDA0A7C12CFAA01")
     },
     
     print_pin_start: {
@@ -217,13 +225,13 @@ decode_test_data = {
     },
 
     translate_tpk_lmk_resp: {
-        data: { errorcode: '10', rest: new Buffer(0), headerNo: '000234', headerCode: 'JD', mtid: 'response', opcode: 'translate_tpk_lmk_resp' },
-        buf: new Buffer("000234JD10")
+        data: {errorcode: '00', pin: '01234', headerNo: '000234', headerCode: 'JD', mtid: 'response', opcode: 'translate_tpk_lmk_resp'},
+        buf: new Buffer("000234JD0001234")
     },
 
     translate_zpk_lmk_resp: {
-        data: { errorcode: '10', rest: new Buffer(0), headerNo: '000234', headerCode: 'JF', mtid: 'response', opcode: 'translate_zpk_lmk_resp' },
-        buf: new Buffer("000234JF10")
+        data: {errorcode: '00', pin: '01234', headerNo: '000234', headerCode: 'JF', mtid: 'response', opcode: 'translate_zpk_lmk_resp'},
+        buf: new Buffer("000234JF0001234")
     },
  
     generate_offset_ibm_lmk_resp: {
@@ -310,6 +318,12 @@ describe('payshield messages', function () {
             countt++;
         }
 
+        it('#Buffer with error code', function () {
+            var parser = new PayshieldParser();
+            var data = { errorcode: '10', rest: new Buffer(0), headerNo: '000234', headerCode: 'A7', mtid: 'response', opcode: 'import_key_resp' };
+            var actualData = parser.decode(new Buffer("000234A710"));
+            assert.deepEqual(actualData, data, "invalid decoded object");
+        });
     });
 
     describe('#Testing custom formats', function () {
