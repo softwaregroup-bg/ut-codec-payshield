@@ -1,12 +1,12 @@
 'use strict'
 var bitsyntax = require('bitsyntax');
 var nconf = require('nconf');
-var fieldsDefinition = nconf.file('./iso-8583.fieldFormats.json');
+var fieldsDefinition = nconf.file('./iso8583.fields.json');
 
 //bitmap bitmask
 var bitmasks = [
-  bitsyntax.matcher('size:16/integer, msgType:4/string, bitmap1:16/string, rest/binary'),
-  bitsyntax.matcher('size:16/integer, msgType:4/string, bitmap1:16/string, bitmap2:16/string, rest/binary')
+  bitsyntax.matcher('msgType:4/string, bitmap1:16/string, rest/binary'),
+  bitsyntax.matcher('msgType:4/string, bitmap1:16/string, bitmap2:16/string, rest/binary')
 ];
 
 //bitmask for bitmap bytes
@@ -29,7 +29,6 @@ var decoder = function decoder(_buffer, log){
   this.dataBuffer = '';
   this.bitmaps = [];
   this.fields = [];
-  this.size = -1;
   this.typeID = '';
 };
 
@@ -71,7 +70,6 @@ decoder.prototype.extractBitmaps = function() {
   }
 
   //assign some values
-  this.size = parsedBitmap.size;
   this.typeID = parsedBitmap.msgType;
   this.dataBuffer = parsedBitmap.rest;
 
@@ -147,7 +145,7 @@ iso8583.prototype.decode = function(buffer, log) {
 iso8583.prototype.encode = function(message, log) {
 };
 
-var buff = new Buffer('00E1303230303732334134343131323841303930303031363633363136303530303030303731323033303130303030303030303030303030303031303231303631303139343734303333303631303139313032313130323136303131303231443030303030303030313136323732303030303030303239363336313630353030303030373132303D32323031313031303030303037363537202020202020202056414E41544D3035434F4D505554455220574F524C44202020202020202020504F52542056494C41202020202020565535343845454534423232364343364636423044', 'hex');
+var buff = new Buffer('303230303732334134343131323841303930303031363633363136303530303030303731323033303130303030303030303030303030303031303231303631303139343734303333303631303139313032313130323136303131303231443030303030303030313136323732303030303030303239363336313630353030303030373132303D32323031313031303030303037363537202020202020202056414E41544D3035434F4D505554455220574F524C44202020202020202020504F52542056494C41202020202020565535343845454534423232364343364636423044', 'hex');
 
 (new iso8583({}))
   .decode(buff, 1);
