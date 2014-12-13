@@ -4,7 +4,7 @@ Codec folder
 ISO8583
 -----------
 
-Runing tests
+Running tests
 -----------
 
 * All tests `npm run test`
