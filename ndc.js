@@ -10,21 +10,21 @@ var path = require('path');
 /**
  * @class NDC
  * @description Creates new NDC object instance
- * @param {Object} params Input configuration parameters
+ * @param {Object} config Input configuration parameters
  */
-function NDC(params) {
+function NDC(config, validator, logger) {
     /**
      * @param {String} fieldSeparator
      * @description Buffer field separator for
      */
-    this.fieldSeparator = params.fieldSeparator || '\u001c';
+    this.fieldSeparator = config.fieldSeparator || '\u001c';
     /**
      * @param {Array} fieldFormat
      * @description List of all fields within a message
      */
     this.fieldFormat = new nconf.Provider({
         stores: [
-            { name: 'impl'   , type: 'literal', store: params.messageFormatOverride || {} },
+            { name: 'impl'   , type: 'literal', store: config.messageFormatOverride || {} },
             { name: 'default', type: 'file', file: path.join(__dirname, 'ndc.messages.json') }
         ]
     }).get();
@@ -32,12 +32,12 @@ function NDC(params) {
      * @function val
      * @description Empty validation method
      */
-    this.val = params.validator || null;
+    this.val = validator || null;
     /**
      * @function log
      * @description Empty log method
      */
-    this.log = params.logger || null;
+    this.log = logger || null;
     /**
      * Split each message fields by comma and assign the array to message.fieldSplit variable
      */
@@ -64,7 +64,7 @@ NDC.prototype.decode = function(buffer) {
         var messageSubclass = '';
         var tokens = bufferString.split(this.fieldSeparator);
 
-        if (typeof tokens[0] !== 'undefined' && tokens[0].length) {
+        if (tokens[0]) {
             messageClass = tokens[0].charAt(0);
             messageSubclass = tokens[0].charAt(1) || '';
         }
@@ -73,6 +73,12 @@ NDC.prototype.decode = function(buffer) {
         Object.keys($self.fieldFormat).forEach(function(opcode) {
             var command = $self.fieldFormat[opcode];
             if (command.message_class === messageClass && command.message_subclass === messageSubclass) {
+                message = {
+                    _mtid: command._mtid,
+                    _opcode: opcode,
+                    message_class: command.message_class,
+                    message_subclass: command.message_subclass
+                };
                 if (opcode !== 'unknown_command') {
                     command.fieldsSplit.filter(function(field) {
                         return field !== 'FS';
@@ -80,12 +86,7 @@ NDC.prototype.decode = function(buffer) {
                         if (element === '' || element === 'message_sub_class') return previous;
                         previous[element] = tokens[key] || '';
                         return previous;
-                    }, {
-                        _mtid: command._mtid,
-                        _opcode: opcode,
-                        message_class: command.message_class,
-                        message_subclass: command.message_subclass
-                    });
+                    }, message);
                 }
                 message.payload = buffer.toString();
             }

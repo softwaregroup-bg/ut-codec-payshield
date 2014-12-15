@@ -1,15 +1,19 @@
 //D:\Node\ut5\lib\ut\node_modules\bitsyntax>node node_modules\pegjs\bin\pegjs lib\grammar.pegjs lib\parser.js
 var NDC = require('../').get('ndc');
 var BitSyntax = require('bitsyntax');
-var mocha = require('mocha');
+//var mocha = require('mocha');
 var expect = require('chai').expect;
 var assert = require('chai').assert;
-var ndcComms = require('./ndc').tests;
+var ndcComms = require('./ndc/data').tests;
 
-var ndc = new NDC({
-    validator: require('ut-validate').get('joi').validateNdc
-    //logger: require('ut-log/ut-log-winston').log
-});
+var ndc = new NDC(
+    {
+        //fieldSeparator: '\u001c',
+        //messageFormatOverride: {}
+    },
+    require('ut-validate').get('joi').validateNdc
+    //require logger
+);
 
 function processBuffer(buffer, pattern, callback) {
     var buf = pattern(buffer);
@@ -21,7 +25,10 @@ function processBuffer(buffer, pattern, callback) {
 }
 
 var framePattern = BitSyntax.matcher('len:16/integer, frame:len/binary, rest/binary');
-
+processBuffer(ndcComms.solicited, framePattern, function(msg) {
+    var decodedMsg = ndc.decode(msg);console.log(decodedMsg)
+});
+return false;
 describe('SolicitedMessage', function() {
     it('Terminal->Central Solicited Status Message', function() {
         processBuffer(ndcComms.solicited, framePattern, function(msg) {
