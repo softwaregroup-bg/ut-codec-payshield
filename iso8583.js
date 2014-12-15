@@ -13,7 +13,7 @@ var bitmasks = [
 var bitmapBytes = bitsyntax.matcher('byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary');
 
 function iso8583(config) {
-  this.config = config;
+    this.config = config;
 };
 
 /**
@@ -21,103 +21,108 @@ function iso8583(config) {
  * @param  {Byte} _byte      [description]
  * @param  {integer} _byteNum   number of the byte in bitmap series
  * @param  {integer} _bitmapNum bitmap number
- * @return {void}            [description]
+ * @return {Array}            Fields array
  */
 iso8583.prototype.extractByteFields = function(_byte, _byteNum, _bitmapNum, fields) {
-  var _realByteNum = (_byteNum*8)+(_bitmapNum*64);
+    var _realByteNum = (_byteNum * 8) + (_bitmapNum * 64);
 
-  for(var i=0; i < 8; i++) {
-    var _b = 128;// = 10000000 starting with upper bit, because we checking from left to right
-    _b = _b >> i;//moving bit on right side with 1 position per iteration
-    if(_byte&_b) {//if bit matches(10000000&128=true) going in
-      var bit = i+1;//real bit number
-      var fieldNum = bit+_realByteNum;//calculationg field number
-      console.log('byte: %d, bit: %d, _byteNum: %d, fieldnum: %d', _byte, bit, _byteNum, fieldNum);
-      fields.push(fieldNum);
+    for (var i = 0; i < 8; i++) {
+        var _b = 128;// = 10000000 starting with upper bit, because we checking from left to right
+        _b = _b >> i;//moving bit on right side with 1 position per iteration
+        if (_byte & _b) {//if bit matches(10000000&128=true) going in
+            var bit = i + 1;//real bit number
+            var fieldNum = bit + _realByteNum;//calculationg field number
+            console.log('byte: %d, bit: %d, _byteNum: %d, fieldnum: %d', _byte, bit, _byteNum, fieldNum);
+            fields.push(fieldNum);
+        }
     }
-  }
-  console.log('---------------');
-  return fields;
+    console.log('---------------');
+    return fields;
 };
 
 /**
  * extract bitmap itself
- * @return {void} [description]
+ * @param {String} buffer [description]
+ * @return {object} object that contains first two bitmaps, message type id and rest of the rest of the data buffer
  */
 iso8583.prototype.extractBitmaps = function(buffer) {
-  var parsedBitmap = bitmasks[0](buffer);//parse only with 1 bitmap
-  var _data = {
-    "bitmaps":[],
-    "typeID":'',
-    "dataBuffer":undefined
-  };
+    var parsedBitmap = bitmasks[0](buffer);//parse only with 1 bitmap
+    var _data = {
+        'bitmaps':[],
+        'typeID':'',
+        'dataBuffer':undefined
+    };
 
+    if (!parsedBitmap['bitmap1']) {//if no bitmaps found throws and error
+        throw new Error('No bitmaps found');
+    } else if (parsedBitmap['bitmap1'][0] & 128) {//parse the second bitmap
+        var parsedBitmap = bitmasks[1](buffer);
+    }
 
-  if(!parsedBitmap['bitmap1']) {//if no bitmaps found throws and error
-    throw new Error('No bitmaps found');
-  } else if(parsedBitmap['bitmap1'][0]&128) {//parse the second bitmap
-    var parsedBitmap = bitmasks[1](buffer);
-  }
+    //assign some values
+    _data.typeID = parsedBitmap.msgType;
+    _data.dataBuffer = parsedBitmap.rest;
 
-  //assign some values
-  _data.typeID = parsedBitmap.msgType;
-  _data.dataBuffer = parsedBitmap.rest;
+    //adds bitmaps that are found
+    _data.bitmaps.push(parsedBitmap.bitmap1);
+    if (parsedBitmap.bitmap2) {
+        _data.bitmaps.push(parsedBitmap.bitmap2);
+    }
 
-  //adds bitmaps that are found
-  _data.bitmaps.push(parsedBitmap.bitmap1);
-  if(parsedBitmap.bitmap2)
-    _data.bitmaps.push(parsedBitmap.bitmap2);
-
-  return _data;
+    return _data;
 };
 
 /**
  * find all fields from the given bitmap index
- * @param  {integer} bitmapNum bitmap index
- * @return {void}           [description]
+ * @param  {Array}  bitmaps
+ * @param  {Integer}  bitmapNum bitmap index
+ * @param  {Array}  fields
+ * @return {Array} array of fields
  */
 iso8583.prototype.findFIelds = function(bitmaps, bitmapNum, fields) {
   //if bitmap not found from the given index, stops the execution
-  if(!bitmaps[bitmapNum-1]) {
-    console.log('no bitmap with number: %d', bitmapNum-1)
+    if (!bitmaps[bitmapNum - 1]) {
+        console.log('no bitmap with number: %d', bitmapNum - 1)
+        return fields;
+    }
+
+    //parse bitmap and return byte chunked array
+    var bitmapByteList = bitmapBytes(bitmaps[bitmapNum - 1]);
+
+    for (var i = 0;i <= 7;i++) {
+        var bytenum = i + 1;
+        //find all fields in the given byte
+        fields = this.extractByteFields(parseInt(bitmapByteList['byte' + bytenum.toString()], 16), i, bitmapNum - 1, fields);
+    }
     return fields;
-  }
-
-  //parse bitmap and return byte chunked array
-  var bitmapByteList = bitmapBytes(bitmaps[bitmapNum-1]);
-
-  for(var i=0;i <= 7;i++) {
-    var bytenum = i+1;
-    //find all fields in the given byte
-    fields = this.extractByteFields(parseInt(bitmapByteList['byte'+bytenum.toString()], 16), i, bitmapNum-1, fields);
-  }
-  return fields;
 };
 
 /**
  * extract the data from the message
+ * @param {Array} fields [description]
  * @return {Array} array with fields data
  */
 iso8583.prototype.extractFieldsData = function(fields) {
-  var _l = fields.length;
+    var _l = fields.length;
 
-  for(var i = 0; i < _l; i++) {
-    var field = fields[i];
-  }
-  return [];
+    for (var i = 0; i < _l; i++) {
+        var field = fields[i];
+    }
+    return [];
 };
+
 /**
  * endpoint function
  * @return {Array} array of all fields in the message
  */
 iso8583.prototype.decode = function(buffer) {
-  var fieldsFound = [];
-  var data = {};
-  data = this.extractBitmaps(buffer);
-  fieldsFound = this.findFIelds(data.bitmaps, 1, fieldsFound);
-  fieldsFound = this.findFIelds(data.bitmaps, 2, fieldsFound);
-  console.log(fieldsFound);
-  return this.extractFieldsData(fieldsFound);
+    var fieldsFound = [];
+    var data = {};
+    data = this.extractBitmaps(buffer);
+    fieldsFound = this.findFIelds(data.bitmaps, 1, fieldsFound);
+    fieldsFound = this.findFIelds(data.bitmaps, 2, fieldsFound);
+    console.log(fieldsFound);
+    return this.extractFieldsData(fieldsFound);
 };
 
 iso8583.prototype.encode = function(message, log) {
