@@ -2,38 +2,48 @@
  * @module ndc
  * @author UT Route Team
  * @description Parser module to handle I/O for the NDC protocol
- * @requires ut-validate-joi
+ * @requires nconf
  */
+var nconf = require('nconf');
+var path = require('path');
 
 /**
  * @class NDC
  * @description Creates new NDC object instance
- * @param {Object} params Input configuration parameters
+ * @param {Object} config Input configuration parameters
  */
-function NDC(params) {
+function NDC(config, validator, logger) {
     /**
      * @param {String} fieldSeparator
-     * @description Buffer field separator for 
+     * @description Buffer field separator for
      */
-    this.fieldSeparator = params.fieldSeparator;
-    /** 
+    this.fieldSeparator = config.fieldSeparator || '\u001c';
+    /**
      * @param {Array} fieldFormat
-     * @description List of all fields witihin a message
+     * @description List of all fields within a message
      */
-    this.fieldFormat = params.fieldFormat;
+    this.fieldFormat = new nconf.Provider({
+        stores: [
+            { name: 'impl'   , type: 'literal', store: config.messageFormatOverride || {} },
+            { name: 'default', type: 'file', file: path.join(__dirname, 'ndc.messages.json') }
+        ]
+    }).get();
     /**
      * @function val
      * @description Empty validation method
      */
-    this.val = params.validator || null;
+    this.val = validator || null;
     /**
      * @function log
      * @description Empty log method
      */
-    this.log = params.logger || null;
-
-    this.fieldFormat.msgs.forEach(function(msg) {
-        msg.fieldsSplit = msg.fields.split(',');
+    this.log = logger || null;
+    /**
+     * Split each message fields by comma and assign the array to message.fieldSplit variable
+     */
+    var $self = this;
+    Object.keys(this.fieldFormat).forEach(function(message) {
+        $self.fieldFormat[message].fieldsSplit = $self.fieldFormat[message].fields.split(',');
     });
 
     return this;
@@ -45,46 +55,42 @@ function NDC(params) {
  * @param {Buffer} buffer NDC buffer
  * @return {Object} message JSON object
  */
- NDC.prototype.decode = function(buffer) {
+NDC.prototype.decode = function(buffer) {
     var message = {};
     var bufferString = buffer.toString();
 
     if (buffer.length > 0) {
-
         var messageClass = '';
         var messageSubclass = '';
         var tokens = bufferString.split(this.fieldSeparator);
 
-        if (typeof tokens[0] !== 'undefined' && tokens[0].length) {
+        if (tokens[0]) {
             messageClass = tokens[0].charAt(0);
             messageSubclass = tokens[0].charAt(1) || '';
         }
 
-        var command = this.fieldFormat.msgs.filter(function(c) {
-            return c.message_class === messageClass
-                && c.message_subclass === messageSubclass;
-        });
-
-        if (command.length) {
-            message = {
-                _mtid : command[0]._mtid,
-                _opcode : command[0]._opcode,
-                message_class : command[0].message_class,
-                message_subclass : command[0].message_subclass
-            };
-
-            if (command[0]._opcode !== 'unknown_command') {
-                command[0].fieldsSplit.filter(function(field) {
-                    return field !== 'FS';
-                }).reduce(function(previous, element, key) {
-                    if (element === '' || element === 'message_sub_class') return previous;
-                    previous[element] = tokens[key] || '';
-                    return previous;
-                }, message);
+        var $self = this;
+        Object.keys($self.fieldFormat).forEach(function(opcode) {
+            var command = $self.fieldFormat[opcode];
+            if (command.message_class === messageClass && command.message_subclass === messageSubclass) {
+                message = {
+                    _mtid: command._mtid,
+                    _opcode: opcode,
+                    message_class: command.message_class,
+                    message_subclass: command.message_subclass
+                };
+                if (opcode !== 'unknown_command') {
+                    command.fieldsSplit.filter(function(field) {
+                        return field !== 'FS';
+                    }).reduce(function(previous, element, key) {
+                        if (element === '' || element === 'message_sub_class') return previous;
+                        previous[element] = tokens[key] || '';
+                        return previous;
+                    }, message);
+                }
+                message.payload = buffer.toString();
             }
-
-            message.payload = buffer.toString();
-        }
+        });
     }
 
     return message;
@@ -105,26 +111,22 @@ NDC.prototype.encode = function(json) {
     var $self = this;
     var bufferString = '';
 
-    var command = this.fieldFormat.msgs.filter(function(c) {
-        return c._mtid === json._mtid
-            && c._opcode === json._opcode;
-    });
-
-    if (command.length) {
-        json.message_sub_class = command[0].message_subclass;
-
-        bufferString += command[0].message_class;
-
-        command[0].fieldsSplit.forEach(function(field, key) {
-            if (field.length) {
-                if (field === 'FS') {
-                    bufferString += $self.fieldSeparator;
-                } else {
-                    bufferString += json[field] || '';
+    Object.keys($self.fieldFormat).forEach(function(opcode) {
+        var command = $self.fieldFormat[opcode];
+        if (command._mtid === json._mtid && opcode === json._opcode) {
+            json.message_sub_class = command.message_subclass;
+            bufferString += command.message_class;
+            command.fieldsSplit.forEach(function(field) {
+                if (field.length) {
+                    if (field === 'FS') {
+                        bufferString += $self.fieldSeparator;
+                    } else {
+                        bufferString += json[field] || '';
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
+    });
 
     return new Buffer(bufferString);
 };
