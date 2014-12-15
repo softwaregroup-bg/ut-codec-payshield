@@ -12,8 +12,26 @@ var bitmasks = [
 //bitmask for bitmap bytes
 var bitmapBytes = bitsyntax.matcher('byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary');
 
-function iso8583(config) {
+/**
+ * @module ut-codec
+ * @author UT Route Team
+ * @description UT-Codecs, used for encode decode module
+ */
+/**
+ * @class iso8583
+ *
+ **/
+function iso8583(config, validator, logger) {
+    /**
+     * config protperties
+     * @type {Object}
+     */
     this.config = config;
+    /**
+     * @function log
+     * @description Empty log method
+     */
+    this.log = logger || null;
 };
 
 /**
