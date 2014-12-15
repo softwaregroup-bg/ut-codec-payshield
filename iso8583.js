@@ -1,156 +1,131 @@
 'use strict'
 var bitsyntax = require('bitsyntax');
 var nconf = require('nconf');
-var fieldsDefinition = nconf.file('./iso-8583.fieldFormats.json');
+var fieldsDefinition = nconf.file('./iso8583.fields.json');
 
-module.exports = {
+//bitmap bitmask
+var bitmasks = [
+  bitsyntax.matcher('msgType:4/string, bitmap1:16/string, rest/binary'),
+  bitsyntax.matcher('msgType:4/string, bitmap1:16/string, bitmap2:16/string, rest/binary')
+];
 
-  /**
-   * bitmap parser object
-   */
-  'parser':function(buffer) {
-    var bitmasks = [
-      bitsyntax.matcher('size:16/integer, msgType:4/binary, bitmap1:8/binary, rest/binary'),
-      bitsyntax.matcher('size:16/integer, msgType:4/binary, bitmap1:8/binary, bitmap2:8/binary, rest/binary'),
-      bitsyntax.matcher('size:16/integer, msgType:4/binary, bitmap1:8/binary, bitmap2:8/binary, bitmap3:8/binary, rest/binary')
-    ];
+//bitmask for bitmap bytes
+var bitmapBytes = bitsyntax.matcher('byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary');
 
-    var isoParser = function(buffer) {
-      this.packet = buffer;
-      this.dataBuffer = '';
-      this.bitmaps = [];
-      this.fields = [];
-      this.size = -1;
-      this.typeID = '';//@TODO
-    };
-
-    /**
-     * sets a bitmap array
-     * @param {array} record [description]
-     * @returns {void} [description]
-     */
-    isoParser.prototype.setBmps = function(bmp) {
-      this.bitmaps = [];
-
-      for(var i in bmp) {
-        if(i.indexOf('bitmap') !== -1) {
-          this.bitmaps.push(bmp[i])
-        }
-      }
-    };
-
-    /**
-     * get bitmaps array.parseServiceData should be called before
-     * @returns {array} array of bitmaps in hex
-     */
-    isoParser.prototype.getBmps = function() {
-      return this.bitmaps;
-    };
-
-    /**
-     * get size of the message.parseServiceData should be called before
-     * @returns {integer} message size
-     */
-    isoParser.prototype.getSize = function() {
-      return this.size;
-    };
-
-    /**
-     * get message type id.parseServiceData should be called before
-     * @type {[type]}
-     */
-    isoParser.prototype.getTypeID = function() {
-      return this.typeID;
-    };
-
-    /**
-     * extract bitmaps from buffer
-     * @returns {void} [description]
-     */
-    isoParser.prototype.parseServiceData = function(count) {
-      var _this = this;
-      count = (!count?1:count);
-      var _bmp = bitmasks[count-1](new Buffer(this.packet, 'hex'));
-
-      if(_bmp['bitmap' + count.toString()][0]&128){//is there more bmps
-        return _this.parseServiceData(count+1);
-      } else {
-        _this.setBmps(_bmp);
-        this.dataBuffer = _bmp.rest;
-        this.size = _bmp.size;
-        this.typeID = _bmp.msgType.toString();
-      }
-    };
-
-    /**
-     * gets actual bitmap numbers
-     * @returns {void} [description]
-     */
-    isoParser.prototype.findNumbers = function(_byte, _plus) {
-      var _s = 1;
-
-      for (var i = 8; i > 0; i--) {
-        if(_byte&_s) {
-          this.fields.push(i+_plus);
-        }
-        _s = _s*2;
-      };
-    };
-
-    /**
-     * function that is called for parsing iso message
-     * @type {[type]}
-     */
-    isoParser.prototype.parse = function() {
-      this.parseServiceData();
-
-      for(var i in this.bitmaps) {
-        var _i = (parseInt(i)*64);
-        for(var i2=0;i2 < 7;i2++) {
-          var _i2 = parseInt(i2)*8;
-          this.findNumbers(this.bitmaps[i][i2], _i2+_i);
-        }
-      }
-
-      fields = this.fields.sort(function(a, b) {return a-b;});
-      var fieldsPattern = this.getFieldsPattern(fields);
-      //@TODO
-    };
-
-    /**
-     * creates pattern for every parsed field
-     * @returns {array} bitsyntax pattern
-     */
-    isoParser.prototype.getFieldsPattern = function(fields) {
-      var _fps = [];
-      var _l = fields.length;
-
-      for (var i = 0; i < _l; i++) {
-        var _field = fields[i].toString();
-        if(!fieldsDefinition.get(_field)){
-          throw new Error('no such field: ' + fields[i])
-        } else {
-          var _fp = this.getFieldPattern(fieldsDefinition.get(_field));
-          _fps.push(_fp);
-        }
-      };
-
-      return _fps.join(', ');
-    };
-
-    /**
-     * defines pattern creation
-     * @returns {string}
-     */
-    isoParser.prototype.getFieldPattern = function(info) {
-      return 'f' + info.FieldId.toString()
-      +':'+info.DataLength.toString()
-      +'/'+info.DataCodec
-    };
-
-    return new isoParser(buffer);
-  },
-  'pack':function() {
-
-  }
+function iso8583(config) {
+  this.config = config;
 };
+
+/**
+ * extract fields from given byte
+ * @param  {Byte} _byte      [description]
+ * @param  {integer} _byteNum   number of the byte in bitmap series
+ * @param  {integer} _bitmapNum bitmap number
+ * @return {void}            [description]
+ */
+iso8583.prototype.extractByteFields = function(_byte, _byteNum, _bitmapNum, fields) {
+  var _realByteNum = (_byteNum*8)+(_bitmapNum*64);
+
+  for(var i=0; i < 8; i++) {
+    var _b = 128;// = 10000000 starting with upper bit, because we checking from left to right
+    _b = _b >> i;//moving bit on right side with 1 position per iteration
+    if(_byte&_b) {//if bit matches(10000000&128=true) going in
+      var bit = i+1;//real bit number
+      var fieldNum = bit+_realByteNum;//calculationg field number
+      console.log('byte: %d, bit: %d, _byteNum: %d, fieldnum: %d', _byte, bit, _byteNum, fieldNum);
+      fields.push(fieldNum);
+    }
+  }
+  console.log('---------------');
+  return fields;
+};
+
+/**
+ * extract bitmap itself
+ * @return {void} [description]
+ */
+iso8583.prototype.extractBitmaps = function(buffer) {
+  var parsedBitmap = bitmasks[0](buffer);//parse only with 1 bitmap
+  var _data = {
+    "bitmaps":[],
+    "typeID":'',
+    "dataBuffer":undefined
+  };
+
+
+  if(!parsedBitmap['bitmap1']) {//if no bitmaps found throws and error
+    throw new Error('No bitmaps found');
+  } else if(parsedBitmap['bitmap1'][0]&128) {//parse the second bitmap
+    var parsedBitmap = bitmasks[1](buffer);
+  }
+
+  //assign some values
+  _data.typeID = parsedBitmap.msgType;
+  _data.dataBuffer = parsedBitmap.rest;
+
+  //adds bitmaps that are found
+  _data.bitmaps.push(parsedBitmap.bitmap1);
+  if(parsedBitmap.bitmap2)
+    _data.bitmaps.push(parsedBitmap.bitmap2);
+
+  return _data;
+};
+
+/**
+ * find all fields from the given bitmap index
+ * @param  {integer} bitmapNum bitmap index
+ * @return {void}           [description]
+ */
+iso8583.prototype.findFIelds = function(bitmaps, bitmapNum, fields) {
+  //if bitmap not found from the given index, stops the execution
+  if(!bitmaps[bitmapNum-1]) {
+    console.log('no bitmap with number: %d', bitmapNum-1)
+    return fields;
+  }
+
+  //parse bitmap and return byte chunked array
+  var bitmapByteList = bitmapBytes(bitmaps[bitmapNum-1]);
+
+  for(var i=0;i <= 7;i++) {
+    var bytenum = i+1;
+    //find all fields in the given byte
+    fields = this.extractByteFields(parseInt(bitmapByteList['byte'+bytenum.toString()], 16), i, bitmapNum-1, fields);
+  }
+  return fields;
+};
+
+/**
+ * extract the data from the message
+ * @return {Array} array with fields data
+ */
+iso8583.prototype.extractFieldsData = function(fields) {
+  var _l = fields.length;
+
+  for(var i = 0; i < _l; i++) {
+    var field = fields[i];
+  }
+  return [];
+};
+/**
+ * endpoint function
+ * @return {Array} array of all fields in the message
+ */
+iso8583.prototype.decode = function(buffer) {
+  var fieldsFound = [];
+  var data = {};
+  data = this.extractBitmaps(buffer);
+  fieldsFound = this.findFIelds(data.bitmaps, 1, fieldsFound);
+  fieldsFound = this.findFIelds(data.bitmaps, 2, fieldsFound);
+  console.log(fieldsFound);
+  return this.extractFieldsData(fieldsFound);
+};
+
+iso8583.prototype.encode = function(message, log) {
+};
+
+var buff = new Buffer('303230303732334134343131323841303930303031363633363136303530303030303731323033303130303030303030303030303030303031303231303631303139343734303333303631303139313032313130323136303131303231443030303030303030313136323732303030303030303239363336313630353030303030373132303D32323031313031303030303037363537202020202020202056414E41544D3035434F4D505554455220574F524C44202020202020202020504F52542056494C41202020202020565535343845454534423232364343364636423044', 'hex');
+
+(new iso8583({}))
+  .decode(buff, 1);
+
+module.exports = iso8583;
