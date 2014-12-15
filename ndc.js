@@ -32,12 +32,12 @@ function NDC(config, validator, logger) {
      * @function val
      * @description Empty validation method
      */
-    this.val = validator || null;
+    this.val = validator;
     /**
      * @function log
      * @description Empty log method
      */
-    this.log = logger || null;
+    this.log = logger;
     /**
      * Split each message fields by comma and assign the array to message.fieldSplit variable
      */
@@ -104,7 +104,7 @@ NDC.prototype.decode = function(buffer) {
  */
 NDC.prototype.encode = function(json) {
 
-    if (this.val !== null) {
+    if (typeof this.val === 'function') {
         this.val(json);
     }
 
