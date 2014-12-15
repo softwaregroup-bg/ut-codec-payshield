@@ -7,8 +7,6 @@ var assert = require('chai').assert;
 var ndcComms = require('./ndc').tests;
 
 var ndc = new NDC({
-    fieldSeparator: '\u001c',
-    fieldFormat: require('../ndc.msgs.js'),
     validator: require('ut-validate').get('joi').validateNdc
     //logger: require('ut-log/ut-log-winston').log
 });

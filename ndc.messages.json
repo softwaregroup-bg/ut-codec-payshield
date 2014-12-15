@@ -1,0 +1,176 @@
+{
+    "transaction": {
+        "_mtid": "notification",
+        "message_class": "1",
+        "message_subclass": "1",
+        "fields": "message_sub_class,FS,luno,FS,,FS,time_variant,FS,trtf_mcn,FS,track2,FS,track3,FS,operation_code,FS,amount_entry,FS,pin_block,FS,buffer_b,FS,buffer_c,FS,data"
+    },
+    "unsolicited_status": {
+        "_mtid": "notification",
+        "message_class": "1",
+        "message_subclass": "2",
+        "fields": "message_sub_class,FS,luno,FS,,FS,status_information,FS,error_severity,FS,diagnostic_status,FS,supplies_status"
+    },
+    "solicited_status": {
+        "_mtid": "response",
+        "message_class": "2",
+        "message_subclass": "2",
+        "fields": "message_sub_class,FS,luno,FS,,FS,status_descriptor,FS,status_information1,FS,status_information2,FS,status_information3,FS,status_information4,FS,status_information5,FS,status_information6,FS,status_information7"
+    },
+    "encryptor_ini_data": {
+        "_mtid": "response",
+        "message_class": "2",
+        "message_subclass": "3",
+        "fields": "message_sub_class,FS,luno,FS,,FS,information_identifier,FS,encryptor_information"
+    },
+    "tm_alert1": {
+        "_mtid": "request",
+        "message_class": "3",
+        "message_subclass": "",
+        "fields": ""
+    },
+    "sm_install_status": {
+        "_mtid": "request",
+        "message_class": "4",
+        "message_subclass": "1",
+        "fields": ""
+    },
+    "exit_to_host": {
+        "_mtid": "request",
+        "message_class": "5",
+        "message_subclass": "1",
+        "fields": ""
+    },
+    "upload_ej_data": {
+        "_mtid": "notification",
+        "message_class": "6",
+        "message_subclass": "1",
+        "fields": "message_sub_class,FS,,FS,,FS,,FS,data"
+    },
+    "ej_options": {
+        "_mtid": "notification",
+        "message_class": "6",
+        "message_subclass": "3",
+        "fields": "FS,FS,FS,command_type,options,FS,timer"
+    },
+    "ej_ack": {
+        "_mtid": "notification",
+        "message_class": "6",
+        "message_subclass": "",
+        "fields": "FS,FS,FS,command_type,last_char"
+    },
+    "terminal_command": {
+        "_mtid": "request",
+        "message_class": "1",
+        "message_subclass": "",
+        "fields": "response_flag,FS,luno,FS,seq,FS,command_code,command_modifier"
+    },
+    "params_load": {
+        "_mtid": "request",
+        "message_class": "3",
+        "message_subclass": "1",
+        "fields": "response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,supply_mode,FS,new_luno"
+    },
+    "state_table_load": {
+        "_mtid": "request",
+        "message_class": "3",
+        "message_subclass": "1",
+        "fields": "response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,state_table_data"
+    },
+    "config_id_load": {
+        "_mtid": "request",
+        "message_class": "3",
+        "message_subclass": "1",
+        "fields": "response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,config_id"
+    },
+    "screen_data_load": {
+        "_mtid": "request",
+        "message_class": "3",
+        "message_subclass": "1",
+        "fields": "response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,screen_data"
+    },
+    "currency_mapping_load": {
+        "_mtid": "request",
+        "message_class": "3",
+        "message_subclass": "1",
+        "fields": "response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,currency_mapping_data"
+    },
+    "datetime_load": {
+        "_mtid": "request",
+        "message_class": "3",
+        "message_subclass": "1",
+        "fields": "response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,datetime"
+    },
+    "fit_data_load": {
+        "_mtid": "request",
+        "message_class": "3",
+        "message_subclass": "1",
+        "fields": "response_flag,FS,luno,FS,seq,FS,message_sub_class,message_identifier,FS,fit_data"
+    },
+    "key_change": {
+        "_mtid": "request",
+        "message_class": "3",
+        "message_subclass": "3",
+        "fields": "response_flag,FS,luno,FS,seq,FS,message_sub_class,modifier,FS,key"
+    },
+    "inter_trans_resp": {
+        "_mtid": "response",
+        "message_class": "3",
+        "message_subclass": "2",
+        "fields": ""
+    },
+    "transaction_reply": {
+        "_mtid": "request",
+        "message_class": "4",
+        "message_subclass": "",
+        "fields": "response_flag,FS,luno,FS,seq,FS,next_state,FS,type1_notes,type2_notes,type3_notes,type4_notes,FS,sernum,function,FS,coordination,card_return,printer"
+    },
+    "tm_alert2": {
+        "_mtid": "request",
+        "message_class": "5",
+        "message_subclass": "",
+        "fields": ""
+    },
+    "host_to_exit": {
+        "_mtid": "request",
+        "message_class": "7",
+        "message_subclass": "1",
+        "fields": ""
+    },
+    "unknown_command": {
+        "_mtid": "request",
+        "message_class": "",
+        "message_subclass": "",
+        "fields": "body"
+    },
+    "emv_currency": {
+        "_mtid": "request",
+        "message_class": "8",
+        "message_subclass": "1",
+        "fields": "response_flag,FS,luno,FS,message_sub_class,FS,data"
+    },
+    "emv_transaction": {
+        "_mtid": "request",
+        "message_class": "8",
+        "message_subclass": "2",
+        "fields": "response_flag,FS,luno,FS,message_sub_class,FS,data"
+    },
+    "emv_language": {
+        "_mtid": "request",
+        "message_class": "8",
+        "message_subclass": "3",
+        "fields": "response_flag,FS,luno,FS,message_sub_class,FS,data"
+    },
+    "emv_terminal": {
+        "_mtid": "request",
+        "message_class": "8",
+        "message_subclass": "4",
+        "fields": "response_flag,FS,luno,FS,message_sub_class,FS,data"
+    },
+    "emv_application": {
+        "_mtid": "request",
+        "message_class": "8",
+        "message_subclass": "5",
+        "fields": "response_flag,FS,luno,FS,message_sub_class,FS,data"
+    }
+}
