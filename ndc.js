@@ -86,7 +86,7 @@
                         command.fieldsSplit.filter(function(field) {
                             return field !== 'FS';
                         }).reduce(function(previous, element, key) {
-                            if (element === '') {
+                            if (element === '' || element === 'messageSubclass') {
                                 return previous;
                             }
                             previous[element] = tokens[key] || '';
