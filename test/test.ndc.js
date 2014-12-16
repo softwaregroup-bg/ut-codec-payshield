@@ -35,7 +35,7 @@ describe('SolicitedMessage', function() {
             expect(decodedMsg).to.be.a('object');
             assert.deepEqual(decodedMsg, {
                 _mtid: 'response',
-                _opcode: 'solicited_status',
+                _opcode: 'solicitedStatus',
                 messageClass: '2',
                 messageSubclass: '2',
                 luno: '001000001',
@@ -81,7 +81,7 @@ describe('TransactionReply:Terminal->Central->Terminal', function() {
                 // Central->Terminal
                 var buffer = ndc.encode({
                     _mtid: 'request',
-                    _opcode: 'transaction_reply',
+                    _opcode: 'transactionReply',
                     luno: '001',
                     nextState: '007',
                     type1Notes: '00',
@@ -135,7 +135,7 @@ describe('TransactionReply:Terminal->Central->Terminal', function() {
                 // Central->Terminal
                 var buffer = ndc.encode({
                     _mtid: 'request',
-                    _opcode: 'transaction_reply',
+                    _opcode: 'transactionReply',
                     luno: '001',
                     nextState: '133',
                     type1Notes: '00',
@@ -189,7 +189,7 @@ describe('TransactionReply:Terminal->Central->Terminal', function() {
                 // Central->Terminal
                 var buffer = ndc.encode({
                     _mtid: 'request',
-                    _opcode: 'transaction_reply',
+                    _opcode: 'transactionReply',
                     luno: '001',
                     nextState: '055',
                     type1Notes: '00',
@@ -243,7 +243,7 @@ describe('TransactionReply:Terminal->Central->Terminal', function() {
                 // Central->Terminal
                 var buffer = ndc.encode({
                     _mtid: 'request',
-                    _opcode: 'transaction_reply',
+                    _opcode: 'transactionReply',
                     luno: '001',
                     nextState: '055',
                     type1Notes: '22',

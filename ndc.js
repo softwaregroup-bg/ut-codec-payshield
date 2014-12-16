@@ -22,10 +22,10 @@
          */
         this.fieldSeparator = config.fieldSeparator || '\u001c';
         /**
-         * @param {Array} fieldFormat
+         * @param {Object} messageFormat
          * @description List of all fields within a message
          */
-        this.fieldFormat = new nconf.Provider({
+        this.messageFormat = new nconf.Provider({
             stores: [
                 {name: 'impl'   , type: 'literal', store: config.messageFormatOverride || {}},
                 {name: 'default', type: 'file', file: path.join(__dirname, 'ndc.messages.json')}
@@ -45,8 +45,8 @@
          * Split each message fields by comma and assign the array to message.fieldSplit variable
          */
         var $self = this;
-        Object.keys(this.fieldFormat).forEach(function(message) {
-            $self.fieldFormat[message].fieldsSplit = $self.fieldFormat[message].fields.split(',');
+        Object.keys(this.messageFormat).forEach(function(message) {
+            $self.messageFormat[message].fieldsSplit = $self.messageFormat[message].fields.split(',');
         });
 
         return this;
@@ -72,8 +72,8 @@
             }
 
             var $self = this;
-            Object.keys($self.fieldFormat).forEach(function(opcode) {
-                var command = $self.fieldFormat[opcode];
+            Object.keys($self.messageFormat).forEach(function(opcode) {
+                var command = $self.messageFormat[opcode];
                 if (command.messageClass === messageClass && command.messageSubclass === messageSubclass) {
                     message = {
                         _mtid: command._mtid,
@@ -114,8 +114,8 @@
         var $self = this;
         var bufferString = '';
 
-        Object.keys($self.fieldFormat).forEach(function(opcode) {
-            var command = $self.fieldFormat[opcode];
+        Object.keys($self.messageFormat).forEach(function(opcode) {
+            var command = $self.messageFormat[opcode];
             if (command._mtid === json._mtid && opcode === json._opcode) {
                 json.messageSubclass = command.messageSubclass;
                 bufferString += command.messageClass;

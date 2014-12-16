@@ -3,25 +3,25 @@
         "_mtid": "notification",
         "messageClass": "1",
         "messageSubclass": "1",
-        "fields": "messageSubclass,FS,luno,FS,,FS,time_variant,FS,trtf_mcn,FS,track2,FS,track3,FS,operation_code,FS,amount_entry,FS,pin_block,FS,buffer_b,FS,buffer_c,FS,data"
+        "fields": "messageSubclass,FS,luno,FS,,FS,timeVariant,FS,trtfMcn,FS,track2,FS,track3,FS,operationCode,FS,amountEntry,FS,pinBlock,FS,bufferB,FS,bufferC,FS,data"
     },
     "unsolicitedStatus": {
         "_mtid": "notification",
         "messageClass": "1",
         "messageSubclass": "2",
-        "fields": "messageSubclass,FS,luno,FS,,FS,status_information,FS,error_severity,FS,diagnostic_status,FS,supplies_status"
+        "fields": "messageSubclass,FS,luno,FS,,FS,statusInformation,FS,errorSeverity,FS,diagnosticStatus,FS,suppliesStatus"
     },
     "solicitedStatus": {
         "_mtid": "response",
         "messageClass": "2",
         "messageSubclass": "2",
-        "fields": "messageSubclass,FS,luno,FS,,FS,status_descriptor,FS,status_information1,FS,status_information2,FS,status_information3,FS,status_information4,FS,status_information5,FS,status_information6,FS,status_information7"
+        "fields": "messageSubclass,FS,luno,FS,,FS,statusDescriptor,FS,statusInformation1,FS,statusInformation2,FS,statusInformation3,FS,statusInformation4,FS,statusInformation5,FS,statusInformation6,FS,statusInformation7"
     },
     "encryptorIniData": {
         "_mtid": "response",
         "messageClass": "2",
         "messageSubclass": "3",
-        "fields": "messageSubclass,FS,luno,FS,,FS,information_identifier,FS,encryptor_information"
+        "fields": "messageSubclass,FS,luno,FS,,FS,informationIdentifier,FS,encryptorInformation"
     },
     "tmAlert1": {
         "_mtid": "request",
@@ -51,13 +51,13 @@
         "_mtid": "notification",
         "messageClass": "6",
         "messageSubclass": "3",
-        "fields": "FS,FS,FS,command_type,options,FS,timer"
+        "fields": "FS,FS,FS,commandType,options,FS,timer"
     },
     "ejAck": {
         "_mtid": "notification",
         "messageClass": "6",
         "messageSubclass": "",
-        "fields": "FS,FS,FS,command_type,last_char"
+        "fields": "FS,FS,FS,commandType,lastChar"
     },
     "terminalCommand": {
         "_mtid": "request",
@@ -81,7 +81,7 @@
         "_mtid": "request",
         "messageClass": "3",
         "messageSubclass": "1",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,config_id"
+        "fields": "responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,configId"
     },
     "screenDataLoad": {
         "_mtid": "request",
