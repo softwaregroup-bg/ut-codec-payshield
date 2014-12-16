@@ -1,8 +1,6 @@
 ﻿var mocha = require('mocha');
 var assert = require('assert');
-var hsmp = require('../payshield.js');
-
-//var assert = require('chai').assert; - tova ne raboti v tozi slu4ai
+var PayshieldParser = require('../payshield.js');
 
 
 encode_test_data = {
@@ -240,7 +238,9 @@ decode_test_data = {
     }
 };
 
-
+var log = function () { }
+log.info = function (v) {  };
+log.debug = function (v) {  };
 
 
 describe('payshield messages', function () {
@@ -249,13 +249,15 @@ describe('payshield messages', function () {
     var messageFormat = {};
     
     it(' ##Initial template parsing', function () {
-        hsmp.prototype.init({ headerFormat: "6/string-left-zero", fieldFormat: fieldFormat, messageFormat: messageFormat });
-        var defaultPvk = hsmp.prototype.commands.generate_offset_ibm_lmk.pattern[0].size;
+        
+        var parser = new PayshieldParser({ headerFormat: "6/string-left-zero", fieldFormat: fieldFormat, messageFormat: messageFormat }, log, null);
+        var defaultPvk = parser.commands.generate_offset_ibm_lmk.pattern[0].size;
         assert.equal(defaultPvk, 33, "Default pvk size of opCode: generate_offset_ibm_lmk NOT OK!")
     });
+    var parser = new PayshieldParser({ headerFormat: "6/string-left-zero", fieldFormat: fieldFormat, messageFormat: messageFormat }, log, null);
     describe('#Testing [Encode] on every initialized operation codes', function () {
-        hsmp.prototype.init({ headerFormat: "6/string-left-zero", fieldFormat: fieldFormat, messageFormat: messageFormat });
-        var commandArr = hsmp.prototype.commands;
+        
+        var commandArr = parser.commands;
     
         var countt = 0;
         for (var cmdName in commandArr) {
@@ -272,7 +274,6 @@ describe('payshield messages', function () {
                         return;
                     }
 
-                    var parser = new PayshieldParser();
                     var actualBuff = parser.encode(encode_test_data[cmdName1].data);
                 
                     assert.deepEqual(actualBuff, encode_test_data[cmdName1].buf, "invalid encoded buffer");
@@ -289,9 +290,7 @@ describe('payshield messages', function () {
     
     describe('#Testing [Decode] on every initialized operation codes', function () {
         
-        
-        hsmp.prototype.init({ headerFormat: "6/string-left-zero", fieldFormat: fieldFormat, messageFormat: messageFormat });
-        var commandArr = hsmp.prototype.commands;
+        var commandArr = parser.commands;
         
         var countt = 0;
         for (var cmdName in commandArr) {
@@ -308,7 +307,6 @@ describe('payshield messages', function () {
                         return;
                     }
                     
-                    var parser = new PayshieldParser();
                     var actualData = parser.decode(decode_test_data[cmdName1].buf);
                     assert.deepEqual(actualData, decode_test_data[cmdName1].data, "invalid decoded object");
                 };
@@ -319,7 +317,6 @@ describe('payshield messages', function () {
         }
 
         it('#Buffer with error code', function () {
-            var parser = new PayshieldParser();
             var data = { errorcode: '10', rest: new Buffer(0), headerNo: '000234', headerCode: 'A7', mtid: 'response', opcode: 'import_key_resp' };
             var actualData = parser.decode(new Buffer("000234A710"));
             assert.deepEqual(actualData, data, "invalid decoded object");
@@ -331,8 +328,8 @@ describe('payshield messages', function () {
         it(' ##custom fieldFormat ', function () {
             var fieldFormat = {pvk:16};
             var messageFormat = {};
-            hsmp.prototype.init({ headerFormat: "6/string-left-zero", fieldFormat: fieldFormat, messageFormat: messageFormat });
-            var commandArr = hsmp.prototype.commands;
+            var parser = new PayshieldParser({ headerFormat: "6/string-left-zero", fieldFormat: fieldFormat, messageFormat: messageFormat }, log, null);
+            var commandArr = parser.commands;
             var custPvk = commandArr.generate_offset_ibm_lmk.pattern[0].size;
             assert.equal(custPvk, 16, "Custom pvk size of opCode: generate_offset_ibm_lmk NOT OK!")
         });
@@ -345,9 +342,9 @@ describe('payshield messages', function () {
                     Pattern: 'tmk:21/string, ";", key_scheme:1/string, key_scheme1:1/string, "0"'
                 }
             };
-            hsmp.prototype.init({ headerFormat: "6/string-left-zero", fieldFormat: fieldFormat, messageFormat: messageFormat });
-            assert.equal(hsmp.prototype.commands.generate_tpk.code, "zzz", "Custom message code NOT OK!")
-            assert.equal(hsmp.prototype.commands.generate_tpk.pattern[0].size, 21, "Custom pattern NOT OK!")
+            var parser = new PayshieldParser({ headerFormat: "6/string-left-zero", fieldFormat: fieldFormat, messageFormat: messageFormat }, log, null);
+            assert.equal(parser.commands.generate_tpk.code, "zzz", "Custom message code NOT OK!")
+            assert.equal(parser.commands.generate_tpk.pattern[0].size, 21, "Custom pattern NOT OK!")
         });
     });
 });
