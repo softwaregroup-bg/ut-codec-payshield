@@ -13,7 +13,7 @@ var bitmasks = [
 var bitmapBytes = bitsyntax.matcher('byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary');
 
 /**
- * @module ut-codec
+ * @module iso8583
  * @author UT Route Team
  * @description UT-Codecs, used for encode decode module
  */

@@ -11,6 +11,7 @@
     /**
      * @class NDC
      * @description Creates new NDC object instance
+     * @tutorial ndc
      * @param {Object} config Input configuration parameters
      * @param {Function} validator
      * @param {Function} logger
