@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "./index",
     "dependencies":{
-      "bitsyntax": "git@github.com:softwaregroup-bg/bitsyntax-js.git#commit-ish",
+      "bitsyntax": "https://github.com/softwaregroup-bg/bitsyntax-js/archive/v0.0.4.tar.gz",
       "nconf": "0.7.1",
       "path": "0.4.9"
     },
