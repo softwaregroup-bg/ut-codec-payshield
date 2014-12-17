@@ -240,7 +240,8 @@ decode_test_data = {
 
 var log = function () { }
 log.info = function (v) {  };
-log.debug = function (v) {  };
+log.debug = function (v) { };
+log.initLevels = function (v) { return {info:false, debug:false}; };
 
 
 describe('payshield messages', function () {
