@@ -3,6 +3,6 @@
  * If individual testing is required copy/paste intern.js with different name and change the command
  */
 define({
-	suites: ['tests/test.ndc'],
+	suites: ['test/test.ndc'],
 	excludeInstrumentation: /^(?:tests)\//
 });
