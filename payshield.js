@@ -89,7 +89,7 @@ PayshieldParser.prototype.init = function(config) {
  * @returns {JSON}  json object with extracted values from buffer with property names from message pattern
  *  and 'headerNo', 'headerCode', 'mtid', 'opcode'
  */
-PayshieldParser.prototype.decode = function(buff) {
+PayshieldParser.prototype.decode = function (buff) {
     if (this.logLevel.debug) { this.log.debug('PayshieldParser.decode buffer:' + buff.toString()); }
     var headObj = bitsyntax.match(this.headerPattern, buff);
     if (!headObj) {
