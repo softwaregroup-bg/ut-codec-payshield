@@ -1,6 +1,6 @@
 {
     "name": "ut-codec",
-    "version": "1.0.0",
+    "version": "5.0.0",
     "main": "./index",
     "dependencies":{
       "bitsyntax": "https://github.com/softwaregroup-bg/bitsyntax-js/archive/v0.0.5.tar.gz",
