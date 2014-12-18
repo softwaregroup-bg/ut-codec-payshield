@@ -4,5 +4,5 @@
  */
 define({
 	suites: ['test/test.ndc'],
-	excludeInstrumentation: /^(?:tests)\//
+	excludeInstrumentation: /^(?:test)\//
 });
