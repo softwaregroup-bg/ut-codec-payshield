@@ -137,6 +137,7 @@ iso8583.prototype.decode = function(buffer) {
     var fieldsFound = [];
     var data = {};
     data = this.extractBitmaps(buffer);
+    console.log(data);
     fieldsFound = this.findFIelds(data.bitmaps, 1, fieldsFound);
     fieldsFound = this.findFIelds(data.bitmaps, 2, fieldsFound);
     console.log(fieldsFound);
