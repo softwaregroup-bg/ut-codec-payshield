@@ -1,12 +1,21 @@
 {
     "name": "ut-codec",
-    "version": "1.0.0",
+    "version": "5.0.0",
     "main": "./index",
     "dependencies":{
-        "ut-bus": "~5.0.0"
+      "bitsyntax": "https://github.com/softwaregroup-bg/bitsyntax-js/archive/v0.0.5.tar.gz",
+      "nconf": "0.7.1",
+      "path": "0.4.9"
+    },
+    "devDependencies": {
+      "chai": "1.10.0",
+      "jsdoc": "3.3.0-alpha11",
+      "mocha": "2.0.1",
+      "intern": "~2.2.2"
     },
     "scripts": {
       "testi8583": "mocha ./test/test.iso-8583.js",
-      "test": "mocha ./test/*.js"
+      "testMocha": "mocha ./test/*.js",
+      "test" : "intern-client config=test/intern"
     }
 }
