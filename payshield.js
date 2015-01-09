@@ -6,7 +6,7 @@
  * @module PayshieldParser
  * @version 1.0
  */
-function PayshieldParser(config, log, val) {
+function PayshieldParser(config, val, log) {
     this.log = log;
     this.logLevel = null;
     this.val = val;
