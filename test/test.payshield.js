@@ -250,9 +250,7 @@ define([
         };
 
         var log = function() { };
-        log.info = function(v) {  };
-        log.debug = function(v) { };
-        log.initLevels = function(v) { return {info:false, debug:false}; };
+        log.initLevels = function(v) { return {info:function(v) {}, debug:function(v) {}}; };
 
         describe('payshield messages', function() {
 

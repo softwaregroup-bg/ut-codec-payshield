@@ -29,9 +29,9 @@ PayshieldParser.prototype.init = function(config) {
     //config.fieldFormat {pvk:33}
     //config.messageFormat {generate_offset_ibm_lmk:{...}}
     //config.headerFormat = '4/string'
-    this.logLevel = this.log.initLevels(config.logLevel);
+    this.logLevel = this.log.initLevels(config.logLevel, {name:config.id, context:'PayShield codec'});
     if (this.logLevel.info) {
-        this.log.info('Initializing Payshield parser! headerFormat: ' + config.headerFormat + ', fieldFormat: ' +
+        this.logLevel.info('Initializing Payshield parser! headerFormat: ' + config.headerFormat + ', fieldFormat: ' +
         config.fieldFormat + ',messageFormat:' + config.messageFormat);
     }
 
@@ -90,7 +90,7 @@ PayshieldParser.prototype.init = function(config) {
  *  and 'headerNo', 'headerCode', 'mtid', 'opcode'
  */
 PayshieldParser.prototype.decode = function (buff) {
-    if (this.logLevel.debug) { this.log.debug('PayshieldParser.decode buffer:' + buff.toString()); }
+    if (this.logLevel.debug) { this.logLevel.debug('PayshieldParser.decode buffer:' + buff.toString()); }
     var headObj = bitsyntax.match(this.headerPattern, buff);
     if (!headObj) {
         throw new Error('Unable to match header to header pattern!');
@@ -131,7 +131,7 @@ PayshieldParser.prototype.decode = function (buff) {
  */
 PayshieldParser.prototype.encode = function(data) {
     //TODO: add validation
-    this.logLevel.debug && this.log.debug('PayshieldParser.encode data:' + data);
+    this.logLevel.debug && this.logLevel.debug('PayshieldParser.encode data:' + data);
     var commandName = data._opcode;
     var headerNo = data._trace;
 
