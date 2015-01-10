@@ -3,15 +3,6 @@ var bitsyntax = require('bitsyntax');
 var nconf = require('nconf');
 var fieldsDefinition = nconf.file('./iso8583.fields.json');
 
-//bitmap bitmask
-var bitmasks = [
-  bitsyntax.matcher('msgType:4/string, bitmap1:16/string, rest/binary'),
-  bitsyntax.matcher('msgType:4/string, bitmap1:16/string, bitmap2:16/string, rest/binary')
-];
-
-//bitmask for bitmap bytes
-var bitmapBytes = bitsyntax.matcher('byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary');
-
 /**
  * @module iso8583
  * @author UT Route Team
@@ -59,54 +50,15 @@ iso8583.prototype.extractByteFields = function(_byte, _byteNum, _bitmapNum, fiel
 };
 
 /**
- * extract bitmap itself
- * @param {String} buffer [description]
- * @return {object} object that contains first two bitmaps, message type id and rest of the rest of the data buffer
- */
-iso8583.prototype.extractBitmaps = function(buffer) {
-    var parsedBitmap = bitmasks[0](buffer);//parse only with 1 bitmap
-    var _data = {
-        'bitmaps':[],
-        'typeID':'',
-        'dataBuffer':undefined
-    };
-
-    if (!parsedBitmap['bitmap1']) {//if no bitmaps found throws and error
-        throw new Error('No bitmaps found');
-    } else if (parsedBitmap['bitmap1'][0] & 128) {//parse the second bitmap
-        var parsedBitmap = bitmasks[1](buffer);
-    }
-
-    //assign some values
-    _data.typeID = parsedBitmap.msgType;
-    _data.dataBuffer = parsedBitmap.rest;
-
-    //adds bitmaps that are found
-    _data.bitmaps.push(parsedBitmap.bitmap1);
-    if (parsedBitmap.bitmap2) {
-        _data.bitmaps.push(parsedBitmap.bitmap2);
-    }
-
-    return _data;
-};
-
-/**
  * find all fields from the given bitmap index
- * @param  {Array}  bitmaps
+ * @param  {Array}  bitmap
  * @param  {Integer}  bitmapNum bitmap index
  * @param  {Array}  fields
  * @return {Array} array of fields
  */
-iso8583.prototype.findFIelds = function(bitmaps, bitmapNum, fields) {
-  //if bitmap not found from the given index, stops the execution
-    if (!bitmaps[bitmapNum - 1]) {
-        console.log('no bitmap with number: %d', bitmapNum - 1)
-        return fields;
-    }
-
+iso8583.prototype.findFIelds = function(bitmap, bitmapNum, fields) {
     //parse bitmap and return byte chunked array
-    var bitmapByteList = bitmapBytes(bitmaps[bitmapNum - 1]);
-
+    var bitmapByteList = bitsyntax.matcher('byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary')(bitmap);
     for (var i = 0;i <= 7;i++) {
         var bytenum = i + 1;
         //find all fields in the given byte
@@ -116,40 +68,42 @@ iso8583.prototype.findFIelds = function(bitmaps, bitmapNum, fields) {
 };
 
 /**
- * extract the data from the message
- * @param {Array} fields [description]
- * @return {Array} array with fields data
- */
-iso8583.prototype.extractFieldsData = function(fields) {
-    var _l = fields.length;
-
-    for (var i = 0; i < _l; i++) {
-        var field = fields[i];
-    }
-    return [];
-};
-
-/**
  * endpoint function
  * @return {Array} array of all fields in the message
  */
 iso8583.prototype.decode = function(buffer) {
-    var fieldsFound = [];
-    var data = {};
-    data = this.extractBitmaps(buffer);
-    console.log(data);
-    fieldsFound = this.findFIelds(data.bitmaps, 1, fieldsFound);
-    fieldsFound = this.findFIelds(data.bitmaps, 2, fieldsFound);
-    console.log(fieldsFound);
-    return this.extractFieldsData(fieldsFound);
+    var fieldsFound = [0, 1];//required fields, MTID and first bitmap
+    var fieldsParsed = {};
+    var computedBitmaps = 0;
+    var fieldIndex;
+
+    while ((fieldIndex = fieldsFound.shift()) !== undefined) {
+        fieldIndex = fieldIndex.toString();
+        var field = fieldsDefinition.get(fieldIndex);
+
+        if (field) {
+            var matchString = field.mask + ', rest/binary';
+            var mathes = bitsyntax.matcher(matchString)(buffer);
+            buffer = mathes.rest;
+
+            if (fieldIndex === '1') {
+                fieldsFound = this.findFIelds(mathes.field, ++computedBitmaps, fieldsFound);
+            }
+
+            fieldsParsed[fieldIndex] = mathes.field;
+        } else {
+            fieldsParsed[fieldIndex] = 'no matcher found';
+        }
+    };
+
+    return fieldsParsed;
 };
 
-iso8583.prototype.encode = function(message, log) {
-};
+iso8583.prototype.encode = function(message, log) {};
 
 var buff = new Buffer('303230303732334134343131323841303930303031363633363136303530303030303731323033303130303030303030303030303030303031303231303631303139343734303333303631303139313032313130323136303131303231443030303030303030313136323732303030303030303239363336313630353030303030373132303D32323031313031303030303037363537202020202020202056414E41544D3035434F4D505554455220574F524C44202020202020202020504F52542056494C41202020202020565535343845454534423232364343364636423044', 'hex');
 
-(new iso8583({}))
-  .decode(buff, 1);
+console.log((new iso8583({}))
+  .decode(buff, 1));
 
 module.exports = iso8583;
