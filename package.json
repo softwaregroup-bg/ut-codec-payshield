@@ -10,12 +10,10 @@
     "devDependencies": {
       "chai": "1.10.0",
       "jsdoc": "3.3.0-alpha11",
-      "mocha": "2.0.1",
-      "intern": "~2.2.2"
+      "mocha": "2.0.1"
     },
     "scripts": {
       "testi8583": "mocha ./test/test.iso-8583.js",
-      "testMocha": "mocha ./test/*.js",
-      "test" : "intern-client config=test/intern"
+      "test": "mocha ./test/*.js"
     }
 }

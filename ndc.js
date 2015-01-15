@@ -45,10 +45,9 @@
         /**
          * Split each message fields by comma and assign the array to message.fieldSplit variable
          */
-        var $self = this;
         Object.keys(this.messageFormat).forEach(function(message) {
-            $self.messageFormat[message].fieldsSplit = $self.messageFormat[message].fields.split(',');
-        });
+            this.messageFormat[message].fieldsSplit = this.messageFormat[message].fields.split(',');
+        }.bind(this));
 
         return this;
     }
@@ -72,9 +71,8 @@
                 messageSubclass = tokens[0].charAt(1) || '';
             }
 
-            var $self = this;
-            Object.keys($self.messageFormat).forEach(function(opcode) {
-                var command = $self.messageFormat[opcode];
+            Object.keys(this.messageFormat).forEach(function(opcode) {
+                var command = this.messageFormat[opcode];
                 if (command.messageClass === messageClass && command.messageSubclass === messageSubclass) {
                     message = {
                         _mtid: command._mtid,
@@ -95,7 +93,7 @@
                     }
                     message.payload = buffer.toString();
                 }
-            });
+            }.bind(this));
         }
 
         return message;
@@ -112,25 +110,24 @@
         if (typeof this.val === 'function') {
             this.val(json);
         }
-        var $self = this;
         var bufferString = '';
 
-        Object.keys($self.messageFormat).forEach(function(opcode) {
-            var command = $self.messageFormat[opcode];
+        Object.keys(this.messageFormat).forEach(function(opcode) {
+            var command = this.messageFormat[opcode];
             if (command._mtid === json._mtid && opcode === json._opcode) {
                 json.messageSubclass = command.messageSubclass;
                 bufferString += command.messageClass;
                 command.fieldsSplit.forEach(function(field) {
                     if (field.length) {
                         if (field === 'FS') {
-                            bufferString += $self.fieldSeparator;
+                            bufferString += this.fieldSeparator;
                         } else {
                             bufferString += json[field] || '';
                         }
                     }
                 });
             }
-        });
+        }.bind(this));
 
         return new Buffer(bufferString);
 
