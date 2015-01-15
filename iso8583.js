@@ -68,6 +68,15 @@ iso8583.prototype.findFIelds = function(bitmap, bitmapNum, fields) {
 };
 
 /**
+ * get field data
+ * @param  {ascii|hex|string|binary} fieldData parsed field data
+ * @return {mixed}           field data
+ */
+iso8583.prototype.parseField = function(fieldData) {
+    return fieldData;
+};
+
+/**
  * endpoint function
  * @return {Array} array of all fields in the message
  */
@@ -86,11 +95,12 @@ iso8583.prototype.decode = function(buffer) {
             var mathes = bitsyntax.matcher(matchString)(buffer);
             buffer = mathes.rest;
 
-            if (fieldIndex === '1') {
+            if ((fieldIndex === '1') || (fieldIndex === '64') || (fieldIndex === '128')) {//bitmap fields
                 fieldsFound = this.findFIelds(mathes.field, ++computedBitmaps, fieldsFound);
+            } else {//rest of the fields (non bitmap one)
+                fieldsParsed[fieldIndex] = this.parseField(mathes.field);
             }
 
-            fieldsParsed[fieldIndex] = mathes.field;
         } else {
             fieldsParsed[fieldIndex] = 'no matcher found';
         }
