@@ -75,8 +75,7 @@
                 var command = this.messageFormat[opcode];
                 if (command.messageClass === messageClass && command.messageSubclass === messageSubclass) {
                     message = {
-                        _mtid: command._mtid,
-                        _opcode: opcode,
+                        $$:{mtid: command._mtid, opcode: opcode},
                         messageClass: command.messageClass,
                         messageSubclass: command.messageSubclass
                     };
@@ -102,27 +101,27 @@
     /**
      * @function encode
      * @description Encodes input JSON object to ASCII string
-     * @param {Object} json JSON object
+     * @param {Object} message JSON object
      * @return {String} bufferString ASCII string
      */
-    NDC.prototype.encode = function(json) {
+    NDC.prototype.encode = function(message) {
 
         if (typeof this.val === 'function') {
-            this.val(json);
+            this.val(message);
         }
         var bufferString = '';
 
         Object.keys(this.messageFormat).forEach(function(opcode) {
             var command = this.messageFormat[opcode];
-            if (command._mtid === json._mtid && opcode === json._opcode) {
-                json.messageSubclass = command.messageSubclass;
+            if (command._mtid === message.$$.mtid && opcode === message.$$.opcode) {
+                message.messageSubclass = command.messageSubclass;
                 bufferString += command.messageClass;
                 command.fieldsSplit.forEach(function(field) {
                     if (field.length) {
                         if (field === 'FS') {
                             bufferString += this.fieldSeparator;
                         } else {
-                            bufferString += json[field] || '';
+                            bufferString += message[field] || '';
                         }
                     }
                 });

@@ -87,9 +87,9 @@ PayshieldParser.prototype.init = function(config) {
  * Decoding Buffer
  * @param {Buffer} buff - buffer for decoding.
  * @returns {JSON}  json object with extracted values from buffer with property names from message pattern
- *  and 'headerNo', 'headerCode', 'mtid', 'opcode'
+ *  and system field $$:{'trace', 'mtid', 'opcode'}
  */
-PayshieldParser.prototype.decode = function (buff) {
+PayshieldParser.prototype.decode = function(buff) {
     if (this.log.debug) { this.log.debug('PayshieldParser.decode buffer:' + buff.toString()); }
     var headObj = bitsyntax.match(this.headerPattern, buff);
     if (!headObj) {
@@ -102,7 +102,7 @@ PayshieldParser.prototype.decode = function (buff) {
     }
     var cmd = this.commands[commandName];
     if (!cmd) {
-        throw new Error('Not implemented _opcode:' + commandName + '!');
+        throw new Error('Not implemented opcode:' + commandName + '!');
     }
 
     var bodyObj = bitsyntax.match(bitsyntax.parse('errorcode:2/string, rest/binary'), headObj.body);
@@ -113,45 +113,45 @@ PayshieldParser.prototype.decode = function (buff) {
 
         bodyObj = bitsyntax.match(cmd.pattern, headObj.body);
         if (!bodyObj) {
-            throw new Error('Unable to match pattern for _opcode:' + commandName + '!');
+            throw new Error('Unable to match pattern for opcode:' + commandName + '!');
         }
 
     }
-    bodyObj.headerNo = headObj.headerNo;
-    bodyObj.headerCode = headObj.code;
-    bodyObj.mtid = cmd.mtid;
-    bodyObj.opcode = commandName;
+    bodyObj.$$ = {mtid : cmd.mtid, opcode : commandName, trace: headObj.headerNo};
     return bodyObj;
 };
 
 /**
  * Convert object to Buffer
- * @param {JSON} data - json object with fields:{_opcode - required, _trace - required,  rest are field names from message pattern}
+ * @param {object} data - json object with fields:{$$:{opcode - required, trace - required},  rest are field names from message pattern}
+ * @param {object} context - the connection context
  * @returns {buffer}  encoded buffer
  */
-PayshieldParser.prototype.encode = function(data) {
+PayshieldParser.prototype.encode = function(data, context) {
     //TODO: add validation
     this.log.debug && this.log.debug('PayshieldParser.encode data:' + data);
-    var commandName = data._opcode;
-    var headerNo = data._trace;
+    var commandName = data.$$.opcode;
+    var headerNo = data.$$.trace;
 
     if (this.commands[commandName] === undefined) {
-        throw new Error('Not implemented _opcode:' + commandName + '!');
+        throw new Error('Not implemented opcode:' + commandName + '!');
     }
 
-    if (!headerNo) {
-        throw new Error('Missing _trace number!');
+    if (headerNo === undefined || headerNo === null) {
+        headerNo = data.$$.trace = ('000000' + context.trace).substr(-6);
+        if (++context.trace > 999999) {
+            context.trace = 0;
+        }
     }
 
     var bodyBuff = bitsyntax.build(this.commands[commandName].pattern, data);
     if (!bodyBuff) {
-        throw new Error('Unable to match body of _opcode:' + commandName + '!');
+        throw new Error('Unable to build body of opcode:' + commandName + '!');
     }
 
     var cmdCode = this.commands[commandName].code;
 
-    var buff = bitsyntax.build(this.headerPattern, {headerNo: headerNo, code: cmdCode, body: bodyBuff});
-
-    return buff;
+    return bitsyntax.build(this.headerPattern, {headerNo: headerNo, code: cmdCode, body: bodyBuff});
 };
+
 module.exports = PayshieldParser;
