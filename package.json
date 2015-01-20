@@ -14,6 +14,7 @@
     },
     "scripts": {
       "testi8583": "mocha ./test/test.iso-8583.js",
-      "test": "mocha ./test/*.js"
+      "testMocha": "mocha ./test/*.js",
+      "test": "intern-client config=tests/intern"
     }
 }

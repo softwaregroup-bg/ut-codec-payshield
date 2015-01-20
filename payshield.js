@@ -105,11 +105,11 @@ PayshieldParser.prototype.decode = function(buff) {
         throw new Error('Not implemented opcode:' + commandName + '!');
     }
 
-    var bodyObj = bitsyntax.match(bitsyntax.parse('errorcode:2/string, rest/binary'), headObj.body);
+    var bodyObj = bitsyntax.match(bitsyntax.parse('errorCode:2/string, rest/binary'), headObj.body);
     if (!bodyObj) {
-        throw new Error('Unable to match response errorcode!');
+        throw new Error('Unable to match response errorCode!');
     }
-    if (bodyObj.errorcode === '00' || bodyObj.errorcode === '02') {
+    if (bodyObj.errorCode === '00' || bodyObj.errorCode === '02') {
 
         bodyObj = bitsyntax.match(cmd.pattern, headObj.body);
         if (!bodyObj) {
@@ -117,7 +117,7 @@ PayshieldParser.prototype.decode = function(buff) {
         }
 
     }
-    bodyObj.$$ = {mtid : cmd.mtid, opcode : commandName, trace: headObj.headerNo};
+    bodyObj.$$ = {trace: headObj.headerNo, mtid : cmd.mtid, opcode : commandName};
     return bodyObj;
 };
 
@@ -144,6 +144,7 @@ PayshieldParser.prototype.encode = function(data, context) {
         }
     }
 
+    delete data.$$;
     var bodyBuff = bitsyntax.build(this.commands[commandName].pattern, data);
     if (!bodyBuff) {
         throw new Error('Unable to build body of opcode:' + commandName + '!');
