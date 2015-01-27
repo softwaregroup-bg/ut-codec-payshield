@@ -3,10 +3,9 @@ define([
     'intern/chai!assert',
     'intern/chai!expect',
     'intern/dojo/node!bitsyntax',
-    'intern/dojo/node!../ndc',
     'intern/dojo/node!ut-validate',
     'intern/dojo/node!./ndc/data'
-], function(bdd, assert, expect, BitSyntax, NDC, validators, samples) {
+], function(bdd, assert, expect, BitSyntax) {
 
     function processBuffer(buffer, pattern, callback) {
         var buf = pattern(buffer);
