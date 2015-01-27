@@ -5,7 +5,7 @@ define([
     'intern/dojo/node!bitsyntax',
     'intern/dojo/node!../ndc',
     'intern/dojo/node!ut-validate',
-    'intern/dojo/node!./ndc/data'
+    'intern/dojo/node!./testData/ndc'
 ], function(bdd, assert, expect, BitSyntax, NDC, validators, samples) {
 
     function processBuffer(buffer, pattern, callback) {
