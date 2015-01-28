@@ -37,7 +37,7 @@
   "submitSm"  : {
     "mtid"      : "request",
     "commandId" : "00000004",
-    "pattern"   : "serviceType:6/string-z, sourceAddrTon:8/integer, sourceAddrNpi:8/integer, sourceAddr:21/string-z, destAddrTon:8/integer, destAddrNpi:8/integer, destinationAddr:21/string-z, esmClass:8/integer, protocolId:8/integer, priorityFlag:8/integer, scheduleDeliveryTime:17/string-z, validityPeriod:17/string-z, registeredDelivery:8/integer, replaceIfPresentFlag:8/integer, dataCoding:8/integer, smDefaultMsgId:8/integer, shortMessage:254/string-z, tlvs/binary"
+    "pattern"   : "serviceType:6/string-z, sourceAddrTon:8/integer, sourceAddrNpi:8/integer, sourceAddr:21/string-z, destAddrTon:8/integer, destAddrNpi:8/integer, destinationAddr:21/string-z, esmClass:8/integer, protocolId:8/integer, priorityFlag:8/integer, scheduleDeliveryTime:17/string-z, validityPeriod:17/string-z, registeredDelivery:8/integer, replaceIfPresentFlag:8/integer, dataCoding:8/integer, smDefaultMsgId:8/integer, shortMessage:254/binary-z, tlvs/binary"
   },
   "submitSmResp"  : {
     "mtid"      : "response",
@@ -47,7 +47,7 @@
   "deliverSm"  : {
     "mtid"      : "request",
     "commandId" : "00000005",
-    "pattern"   : "serviceType:6/string-z, sourceAddrTon:8/integer, sourceAddrNpi:8/integer, sourceAddr:21/string-z, destAddrTon:8/integer, destAddrNpi:8/integer, destinationAddr:21/string-z, esmClass:8/integer, protocolId:8/integer, priorityFlag:8/integer, scheduleDeliveryTime:17/string-z, validityPeriod:17/string-z, registeredDelivery:8/integer, replaceIfPresentFlag:8/integer, dataCoding:8/integer, smDefaultMsgId:8/integer, shortMessage:254/string-z, tlvs/binary"
+    "pattern"   : "serviceType:6/string-z, sourceAddrTon:8/integer, sourceAddrNpi:8/integer, sourceAddr:21/string-z, destAddrTon:8/integer, destAddrNpi:8/integer, destinationAddr:21/string-z, esmClass:8/integer, protocolId:8/integer, priorityFlag:8/integer, scheduleDeliveryTime:17/string-z, validityPeriod:17/string-z, registeredDelivery:8/integer, replaceIfPresentFlag:8/integer, dataCoding:8/integer, smDefaultMsgId:8/integer, shortMessage:254/binary-z, tlvs/binary"
   },
   "deliverSmResp"  : {
     "mtid"      : "response",
@@ -67,7 +67,7 @@
   "replaceSm"  : {
     "mtid"      : "request",
     "commandId" : "00000007",
-    "pattern"   : "messageId:65/string-z, sourceAddrTon:8/integer, sourceAddrNpi:8/integer, sourceAddr:21/string-z, scheduleDeliveryTime:17/string-z, validityPeriod:17/string-z, registeredDelivery:8/integer, smDefaultMsgId:8/integer, shortMessage:254/string-z"
+    "pattern"   : "messageId:65/string-z, sourceAddrTon:8/integer, sourceAddrNpi:8/integer, sourceAddr:21/string-z, scheduleDeliveryTime:17/string-z, validityPeriod:17/string-z, registeredDelivery:8/integer, smDefaultMsgId:8/integer, shortMessage:254/binary-z"
   },
   "replaceSmResp"  : {
     "mtid"      : "response",
@@ -113,7 +113,7 @@
   "NOT_IMPLEMENTED_submitMulti"  : {
     "mtid"      : "request",
     "commandId" : "00000021",
-    "pattern"   : "serviceType:6/string-z, sourceAddrTon:8/integer, sourceAddrNpi:8/integer, sourceAddr:21/string-z, numberOfDests:8/integer, destAddresses, esmClass:8/integer, protocolId:8/integer, priorityFlag:8/integer, scheduleDeliveryTime:17/string-z, validityPeriod:17/string-z, registeredDelivery:8/integer, replaceIfPresentFlag:8/integer, dataCoding:8/integer, smDefaultMsgId:8/integer, shortMessage:254/string-z"
+    "pattern"   : "serviceType:6/string-z, sourceAddrTon:8/integer, sourceAddrNpi:8/integer, sourceAddr:21/string-z, numberOfDests:8/integer, destAddresses, esmClass:8/integer, protocolId:8/integer, priorityFlag:8/integer, scheduleDeliveryTime:17/string-z, validityPeriod:17/string-z, registeredDelivery:8/integer, replaceIfPresentFlag:8/integer, dataCoding:8/integer, smDefaultMsgId:8/integer, shortMessage:254/binary-z"
   },
   "NOT_IMPLEMENTED_submitMultiResp"  : {
     "mtid"      : "response",

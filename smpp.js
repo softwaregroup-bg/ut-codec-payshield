@@ -160,6 +160,9 @@ SmppParser.prototype.decode = function(buff) {
             }
         }
     }
+    if (body.shortMessage) {
+        body.shortMessage = body.shortMessage.toString();
+    }
     body.$$ = {trace: headObj.sequenceNumber, mtid : messageFormat.mtid, opcode : opcode};
     return body;
 };
@@ -171,6 +174,9 @@ SmppParser.prototype.decode = function(buff) {
  * @returns {buffer}  encoded buffer
  */
 SmppParser.prototype.encode = function(data, context) {
+    if (data.shortMessage) {
+        data.shortMessage = new Buffer(data.shortMessage);
+    }
     //TODO: add validation
     this.log.debug && this.log.debug('SmppParser.encode data:' + data);
     var opcode = data.$$.opcode;
