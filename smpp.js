@@ -2,6 +2,7 @@
 var nconf = require('nconf');
 var path = require('path');
 var _ = require('lodash');
+//var iconv = require('iconv-lite');
 var tlvTagsByName = {
     'dest_addr_subunit': '0005',
     'dest_network_type': '0006',
@@ -107,7 +108,9 @@ SmppParser.prototype.init = function(config) {
     }).get();
     Object.keys(this.messageFormats).map(function(opcode) {
         if (this.messageFormats[opcode] && this.messageFormats[opcode].commandId) {
-            this.messageFormats[opcode].pattern = this.messageFormats[opcode].pattern == '' ? null : bitsyntax.parse(this.messageFormats[opcode].pattern);
+            if (this.messageFormats[opcode].pattern) {
+                this.messageFormats[opcode].pattern = bitsyntax.parse(this.messageFormats[opcode].pattern.join(', '));
+            }
             this.opCodes[this.messageFormats[opcode].commandId] = opcode;
         }
     }, this);
