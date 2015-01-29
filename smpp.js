@@ -2,7 +2,7 @@
 var nconf = require('nconf');
 var path = require('path');
 var _ = require('lodash');
-//var iconv = require('iconv-lite');
+var iconv = require('iconv-lite');
 var tlvTagsByName = {
     'dest_addr_subunit': '0005',
     'dest_network_type': '0006',
@@ -71,6 +71,16 @@ var tlvTagsByName = {
 };
 var tlvTagsById = _.invert(tlvTagsByName);
 
+var encodingsByName = {
+    'default'    : 3,
+    'ISO-8859-1' : 3, // Latin 1
+    'ISO-8859-5' : 6, // Cyrillic
+    'ISO-8859-8' : 7, // Latin/Hebrew
+    'utf16le'    : 8, // ISO/IEC-10646
+    'UCS2'       : 8  // Alias of 'utf16le'
+};
+
+var encodingsById = _.invert(encodingsByName);
 /**
  * SMPP commands parser
  *
@@ -88,15 +98,6 @@ function SmppParser(config, val, log) {
     this.init(config);
 }
 
-/**
- * Initializing parser defaults
- * @param {JSON} config - json object with initial parameters
- *  config = {
-     *   headerFormat: pattern for header size e.g. '6/string-left-zero';
-     *   fieldFormat: json object with field parameters for overriding default parameters e.g.{pvk:33};
-     *   messageFormat: json object for overriding default messages e.g. {generate_offset_ibm_lmk:{...}};
-     * }
- */
 SmppParser.prototype.init = function(config) {
     this.logFactory && (this.log = this.logFactory.createLog(config.logLevel, {name:config.id, context:'SMPP codec'}));
     this.log.info && this.log.info('Initializing SMPP parser!');
@@ -163,8 +164,13 @@ SmppParser.prototype.decode = function(buff) {
             }
         }
     }
+    // TODO: revise dataCoding and shortMessage
+    if (body.dataCoding) {
+        // maybe throw an error if dataCoding byte represents an integer which is an undefined index in the encodingsById object
+        body.dataCoding = encodingsById[body.dataCoding] || encodingsById[encodingsByName['default']];
+    }
     if (body.shortMessage) {
-        body.shortMessage = body.shortMessage.toString();
+        body.shortMessage = iconv.decode(body.shortMessage, body.dataCoding || encodingsById[encodingsByName['default']]);
     }
     body.$$ = {trace: headObj.sequenceNumber, mtid : messageFormat.mtid, opcode : opcode};
     return body;
@@ -177,10 +183,14 @@ SmppParser.prototype.decode = function(buff) {
  * @returns {buffer}  encoded buffer
  */
 SmppParser.prototype.encode = function(data, context) {
-    if (data.shortMessage) {
-        data.shortMessage = new Buffer(data.shortMessage);
+    // TODO: add validation
+    // TODO: revise dataCoding and shortMessage
+    if (data.dataCoding) {
+        data.dataCoding = encodingsByName[data.dataCoding] || encodingsByName['default'];
     }
-    //TODO: add validation
+    if (data.shortMessage) {
+        data.shortMessage = iconv.encode(data.shortMessage, encodingsById[data.dataCoding || encodingsByName['default']]);
+    }
     this.log.debug && this.log.debug('SmppParser.encode data:' + data);
     var opcode = data.$$.opcode;
     if (!this.messageFormats[opcode]) {
