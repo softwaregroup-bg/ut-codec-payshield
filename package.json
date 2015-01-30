@@ -3,7 +3,7 @@
     "version": "5.0.0",
     "main": "./index",
     "dependencies":{
-      "bitsyntax": "https://github.com/softwaregroup-bg/bitsyntax-js/archive/master.zip",
+      "bitsyntax": "https://github.com/softwaregroup-bg/bitsyntax-js/archive/master.tar.gz",
       "nconf": "0.7.1",
       "path": "0.4.9"
     },
