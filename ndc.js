@@ -125,12 +125,11 @@
                             bufferString += message[field] || '';
                         }
                     }
-                });
+                }.bind(this));
             }
         }.bind(this));
 
         return new Buffer(bufferString);
-
     };
 
     return NDC;
