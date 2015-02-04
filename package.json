@@ -10,7 +10,8 @@
       "ut-validate": "git+ssh://git@git.softwaregroup-bg.com:ut5/ut-validate.git#master"
     },
     "devDependencies": {
-      "jsdoc": "~3.3.0"
+      "jsdoc": "~3.3.0",
+      "intern": "~2.2.2"
     },
     "scripts": {
       "test": "intern-client config=tests/intern"
