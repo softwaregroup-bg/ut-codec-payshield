@@ -58,7 +58,8 @@ iso8583.prototype.extractByteFields = function(_byte, _byteNum, _bitmapNum, fiel
  */
 iso8583.prototype.findFIelds = function(bitmap, bitmapNum, fields) {
     //parse bitmap and return byte chunked array
-    var bitmapByteList = bitsyntax.matcher('byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary')(bitmap);
+    var _mask = 'byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary';
+    var bitmapByteList = bitsyntax.matcher(_mask)(bitmap);
     for (var i = 0;i <= 7;i++) {
         var bytenum = i + 1;
         //find all fields in the given byte
