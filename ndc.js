@@ -37,12 +37,12 @@
          * @function val
          * @description Empty validation method
          */
-        this.val = validator;
+        this.val = validator ? validator : null;
         /**
          * @function log
          * @description Empty log method
          */
-        this.log = logger;
+        this.log = logger ? logger : {};
         /**
          * Split each message fields by comma and assign the array to message.fieldSplit variable
          */
