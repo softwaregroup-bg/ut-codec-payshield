@@ -1,5 +1,5 @@
 'use strict'
-var bitsyntax = require('bitsyntax');
+var bitsyntax = require('ut-bitsyntax');
 var nconf = require('nconf');
 var fieldsDefinition = nconf.file('./iso8583.fields.json');
 
