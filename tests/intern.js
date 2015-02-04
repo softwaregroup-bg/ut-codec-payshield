@@ -4,6 +4,6 @@
  */
 define({
 	suites: ['tests/test.ndc.js', 'tests/test.smpp.js',/* 'tests/test.payshield.js', 'tests/test.iso8583.js'*/],
-	excludeInstrumentation: /^(?:test)\//,
+    excludeInstrumentation: /^(?:tests|node_modules)\//,
     reporters: ['console', 'cobertura', 'junit', 'lcovhtml']
 });
