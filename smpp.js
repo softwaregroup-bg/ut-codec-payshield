@@ -1,4 +1,4 @@
-﻿var bitsyntax = require('bitsyntax');
+﻿var bitsyntax = require('ut-bitsyntax');
 var nconf = require('nconf');
 var path = require('path');
 var _ = require('lodash');

@@ -1,4 +1,4 @@
-﻿var bitsyntax = require('bitsyntax');
+﻿var bitsyntax = require('ut-bitsyntax');
 
 /**
  * HSM payShield commands parser
