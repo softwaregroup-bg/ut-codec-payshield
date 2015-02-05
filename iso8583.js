@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 var bitsyntax = require('ut-bitsyntax');
 var nconf = require('nconf');
 var fieldsDefinition = nconf.file('./iso8583.fields.json');
@@ -12,9 +12,9 @@ var fieldsDefinition = nconf.file('./iso8583.fields.json');
  * @class iso8583
  *
  **/
-function iso8583(config, validator, logger) {
+function iso8583(config, logger) {
     /**
-     * config protperties
+     * config properties
      * @type {Object}
      */
     this.config = config;
@@ -23,13 +23,14 @@ function iso8583(config, validator, logger) {
      * @description Empty log method
      */
     this.log = logger || null;
-};
+}
 
 /**
  * extract fields from given byte
- * @param  {Byte} _byte      [description]
- * @param  {integer} _byteNum   number of the byte in bitmap series
- * @param  {integer} _bitmapNum bitmap number
+ * @param  {Number} _byte      [description]
+ * @param  {Number} _byteNum   number of the byte in bitmap series
+ * @param  {Number} _bitmapNum bitmap number
+ * @param  {Array} fields array of found fields
  * @return {Array}            Fields array
  */
 iso8583.prototype.extractByteFields = function(_byte, _byteNum, _bitmapNum, fields) {
@@ -52,11 +53,11 @@ iso8583.prototype.extractByteFields = function(_byte, _byteNum, _bitmapNum, fiel
 /**
  * find all fields from the given bitmap index
  * @param  {Array}  bitmap
- * @param  {Integer}  bitmapNum bitmap index
+ * @param  {Number}  bitmapNum bitmap index
  * @param  {Array}  fields
  * @return {Array} array of fields
  */
-iso8583.prototype.findFIelds = function(bitmap, bitmapNum, fields) {
+iso8583.prototype.findFields = function(bitmap, bitmapNum, fields) {
     //parse bitmap and return byte chunked array
     var _mask = 'byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary';
     var bitmapByteList = bitsyntax.matcher(_mask)(bitmap);
@@ -71,7 +72,7 @@ iso8583.prototype.findFIelds = function(bitmap, bitmapNum, fields) {
 /**
  * get field data
  * @param  {ascii|hex|string|binary} fieldData parsed field data
- * @return {mixed}           field data
+ * @return {*}           field data
  */
 iso8583.prototype.parseField = function(fieldData) {
     return fieldData;
@@ -79,7 +80,8 @@ iso8583.prototype.parseField = function(fieldData) {
 
 /**
  * endpoint function
- * @return {Array} array of all fields in the message
+ * @param {Buffer} buffer incoming buffer
+ * @return {Object} object of all fields in the message
  */
 iso8583.prototype.decode = function(buffer) {
     var fieldsFound = [0, 1];//required fields, MTID and first bitmap
@@ -93,19 +95,19 @@ iso8583.prototype.decode = function(buffer) {
 
         if (field) {
             var matchString = field.mask + ', rest/binary';
-            var mathes = bitsyntax.matcher(matchString)(buffer);
-            buffer = mathes.rest;
+            var matches = bitsyntax.matcher(matchString)(buffer);
+            buffer = matches.rest;
 
             if ((fieldIndex === '1') || (fieldIndex === '64') || (fieldIndex === '128')) {//bitmap fields
-                fieldsFound = this.findFIelds(mathes.field, ++computedBitmaps, fieldsFound);
+                fieldsFound = this.findFields(matches.field, ++computedBitmaps, fieldsFound);
             } else {//rest of the fields (non bitmap one)
-                fieldsParsed[fieldIndex] = this.parseField(mathes.field);
+                fieldsParsed[fieldIndex] = this.parseField(matches.field);
             }
 
         } else {
             fieldsParsed[fieldIndex] = 'no matcher found';
         }
-    };
+    }
 
     return fieldsParsed;
 };
