@@ -42,14 +42,14 @@ PayshieldParser.prototype.init = function(config) {
 
     var commandsObj = new nconf.Provider({
         stores: [
-            {name: 'impl'   , type: 'literal', store: config.messageFormat},
+            {name: 'impl'   , type: 'literal', store: config.messageFormat || {}},
             {name: 'default', type: 'file', file: path.join(__dirname, 'payshield.messages.json')}
         ]
     }).get();
 
     var fieldFormat = new nconf.Provider({
         stores: [
-            {name: 'impl'   , type: 'literal', store: config.fieldFormat},
+            {name: 'impl'   , type: 'literal', store: config.fieldFormat || {}},
             {name: 'default', type: 'file', file: path.join(__dirname, 'payshield.fields.json')}
         ]
     }).get();
@@ -80,7 +80,6 @@ PayshieldParser.prototype.init = function(config) {
             this.commandNames[commandsObj[property].Code] = property;
         }
     }
-
 };
 
 /**
@@ -115,9 +114,13 @@ PayshieldParser.prototype.decode = function(buff) {
         if (!bodyObj) {
             throw new Error('Unable to match pattern for opcode:' + commandName + '!');
         }
+        bodyObj.$$ = {trace: headObj.headerNo, mtid : cmd.mtid, opcode : commandName};
 
+    } else {
+        bodyObj = {
+            $$:{trace: headObj.headerNo, opcode : commandName, mtid:'error', errorCode:bodyObj.errorCode}  //todo also return the error message as per payshield documentation
+        }
     }
-    bodyObj.$$ = {trace: headObj.headerNo, mtid : cmd.mtid, opcode : commandName};
     return bodyObj;
 };
 
@@ -144,7 +147,6 @@ PayshieldParser.prototype.encode = function(data, context) {
         }
     }
 
-    delete data.$$;
     var bodyBuff = bitsyntax.build(this.commands[commandName].pattern, data);
     if (!bodyBuff) {
         throw new Error('Unable to build body of opcode:' + commandName + '!');
