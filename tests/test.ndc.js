@@ -2,7 +2,7 @@ define([
     'intern!bdd',
     'intern/chai!assert',
     'intern/chai!expect',
-    'intern/dojo/node!bitsyntax',
+    'intern/dojo/node!ut-bitsyntax',
     'intern/dojo/node!../ndc',
     'intern/dojo/node!ut-validate',
     'intern/dojo/node!./testData/ndc'
@@ -172,7 +172,7 @@ define([
                     assert.deepEqual(out1.toString(), out2.toString());
                 });
             } catch(e) {
-                expect(e.message).to.be.equal('"mtid" is not allowed to be empty');
+                expect(e.message).to.be.equal('child "&#x24;&#x24;" fails because [child "mtid" fails because ["mtid" is not allowed to be empty]]');
             }
         });
         bdd.it('transactionReply(opCode=D): should succeed', function() {
