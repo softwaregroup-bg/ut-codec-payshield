@@ -172,7 +172,7 @@ define([
                     assert.deepEqual(out1.toString(), out2.toString());
                 });
             } catch(e) {
-                expect(e.message).to.be.equal('mtid is not allowed to be empty');
+                expect(e.message).to.be.equal('"mtid" is not allowed to be empty');
             }
         });
         bdd.it('transactionReply(opCode=D): should succeed', function() {
