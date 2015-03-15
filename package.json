@@ -6,8 +6,8 @@
     "nconf": "~0.7.1",
     "lodash": "~3.0.1",
     "iconv-lite": "~0.4.7",
-    "ut-bitsyntax": "https://github.com/softwaregroup-bg/bitsyntax-js/archive/master.tar.gz",
-    "ut-validate": "git+ssh://git@git.softwaregroup-bg.com:ut5/ut-validate.git#master"
+    "ut-bitsyntax": "~5.0.0",
+    "ut-validate": "~5.0.0"
   },
   "devDependencies": {
     "jsdoc": "~3.3.0",
@@ -15,5 +15,13 @@
   },
   "scripts": {
     "test": "intern-client config=tests/intern"
+  },
+  "publishConfig": {
+    "registry": "http://npm.softwaregroup-bg.com"
+  },
+  "description": "UT codec module",
+  "repository": {
+    "type": "git",
+    "url": "git@git.softwaregroup-bg.com:ut5/ut-codec.git"
   }
 }
