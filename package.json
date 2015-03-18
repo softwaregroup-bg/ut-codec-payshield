@@ -3,15 +3,17 @@
   "version": "5.0.0",
   "main": "./index",
   "dependencies": {
-    "nconf": "~0.7.1",
-    "lodash": "~3.0.1",
     "iconv-lite": "~0.4.7",
+    "lodash": "~3.0.1",
+    "nconf": "~0.7.1",
     "ut-bitsyntax": "~5.0.0",
     "ut-validate": "~5.0.0"
   },
   "devDependencies": {
+    "chai": "~1.10.0",
+    "intern": "~2.2.2",
     "jsdoc": "~3.3.0",
-    "intern": "~2.2.2"
+    "mocha": "~2.0.1"
   },
   "scripts": {
     "test": "intern-client config=tests/intern"
