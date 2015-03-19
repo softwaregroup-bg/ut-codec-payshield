@@ -4,7 +4,7 @@
   "main": "./index",
   "dependencies": {
     "iconv-lite": "~0.4.7",
-    "lodash": "~3.0.1",
+    "lodash": "^3.5.0",
     "nconf": "~0.7.1",
     "ut-bitsyntax": "~5.0.0",
     "ut-validate": "~5.0.0"
