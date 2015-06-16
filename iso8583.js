@@ -9,6 +9,7 @@ var nconf = require('nconf');
  */
 /**
  * @class iso8583
+ * @param {object} config 8583 config object
  *
  **/
 function iso8583(config){
