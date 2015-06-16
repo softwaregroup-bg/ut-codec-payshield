@@ -1,6 +1,6 @@
 {
   "-2":{"mask":"field:4/string", "name":"Message Size Header"},
+  "-1":{"mask":"field:15/string", "name":"Message Type ID"},
   "0":{"mask":"byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary", "name":"Primary Mask", "bitmap":true},
-  "2":{"mask":"field:16/string"},
-  "3":{"mask":"field:16/string"}
+  "1":{"mask":"byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary", "name":"Secondary Mask", "bitmap":true}
 }

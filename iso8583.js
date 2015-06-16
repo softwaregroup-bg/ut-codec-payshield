@@ -1,7 +1,6 @@
 'use strict';
 var bitsyntax = require('ut-bitsyntax');
 var nconf = require('nconf');
-var fieldsDefinition = nconf.file('./iso8583.fields.json');
 
 /**
  * @module iso8583
@@ -12,18 +11,15 @@ var fieldsDefinition = nconf.file('./iso8583.fields.json');
  * @class iso8583
  *
  **/
-function iso8583(config, logger) {
-    /**
-     * config properties
-     * @type {Object}
-     */
-    this.config = config;
-    /**
-     * @function log
-     * @description Empty log method
-     */
-    this.log = logger || null;
-}
+function iso8583(config){
+    config = config || {};
+
+    if(!config.fieldsDefinition) {
+        this.fieldsDefinition = nconf.file('./iso8583.fields.json');
+    } else {
+        this.fieldsDefinition = nconf.file(config.fieldsDefinition);
+    }
+};
 
 /**
  * extract fields from given byte
@@ -57,10 +53,7 @@ iso8583.prototype.extractByteFields = function(_byte, _byteNum, _bitmapNum, fiel
  * @param  {Array}  fields
  * @return {Array} array of fields
  */
-iso8583.prototype.findFields = function(bitmap, bitmapNum, fields) {
-    //parse bitmap and return byte chunked array
-    var _mask = 'byte1:2/binary,byte2:2/binary,byte3:2/binary,byte4:2/binary,byte5:2/binary,byte6:2/binary,byte7:2/binary,byte8:2/binary';
-    var bitmapByteList = bitsyntax.matcher(_mask)(bitmap);
+iso8583.prototype.findFields = function(bitmapByteList, bitmapNum, fields) {
     for (var i = 0;i <= 7;i++) {
         var bytenum = i + 1;
         //find all fields in the given byte
@@ -84,28 +77,30 @@ iso8583.prototype.parseField = function(fieldData) {
  * @return {Object} object of all fields in the message
  */
 iso8583.prototype.decode = function(buffer) {
-    var fieldsFound = [0, 1];//required fields, MTID and first bitmap
+    var fieldsFound = [-2, -1, 0];//required fields, MTID and first bitmap
     var fieldsParsed = {};
     var computedBitmaps = 0;
     var fieldIndex;
 
     while ((fieldIndex = fieldsFound.shift()) !== undefined) {
         fieldIndex = fieldIndex.toString();
-        var field = fieldsDefinition.get(fieldIndex);
+        var field = this.fieldsDefinition.get(fieldIndex);
 
         if (field) {
             var matchString = field.mask + ', rest/binary';
             var matches = bitsyntax.matcher(matchString)(buffer);
             buffer = matches.rest;
-
-            if ((fieldIndex === '1') || (fieldIndex === '64') || (fieldIndex === '128')) {//bitmap fields
-                fieldsFound = this.findFields(matches.field, ++computedBitmaps, fieldsFound);
+            if (field.bitmap) {//bitmap fields
+                console.log('mask @ pos: %s', fieldIndex);
+                fieldsFound = this.findFields(matches, ++computedBitmaps, fieldsFound);
+                delete matches.rest;
+                fieldsParsed[fieldIndex] = matches;
             } else {//rest of the fields (non bitmap one)
                 fieldsParsed[fieldIndex] = this.parseField(matches.field);
             }
 
         } else {
-            fieldsParsed[fieldIndex] = 'no matcher found';
+            fieldsParsed[fieldIndex] = undefined;
         }
     }
 
