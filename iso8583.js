@@ -2,6 +2,18 @@
 var bitsyntax = require('ut-bitsyntax');
 var nconf = require('nconf');
 
+function _log() {
+    this.log = true;
+}
+_log.prototype.it = function() {
+    if(this.log) {
+        console.log.apply(null, arguments);
+    }
+}
+
+var log = new _log();
+log.log = false;
+
 /**
  * @module iso8583
  * @author UT Route Team
@@ -24,26 +36,26 @@ function iso8583(config){
 
 /**
  * extract fields from given byte
- * @param  {Number} _byte      [description]
- * @param  {Number} _byteNum   number of the byte in bitmap series
- * @param  {Number} _bitmapNum bitmap number
+ * @param  {Number} byteRow      [description]
+ * @param  {Number} byteRowNum   number of the byte in bitmap series
+ * @param  {Number} bitmapNum bitmap number
  * @param  {Array} fields array of found fields
  * @return {Array}            Fields array
  */
-iso8583.prototype.extractByteFields = function(_byte, _byteNum, _bitmapNum, fields) {
-    var _realByteNum = (_byteNum * 8) + (_bitmapNum * 64);
+iso8583.prototype.extractByteFields = function(byteRow, byteRowNum, bitmapNum, fields) {
+    var _realByteNum = (byteRowNum * 8) + (bitmapNum * 64);
 
     for (var i = 0; i < 8; i++) {
         var _b = 128;// = 10000000 starting with upper bit, because we checking from left to right
         _b = _b >> i;//moving bit on right side with 1 position per iteration
-        if (_byte & _b) {//if bit matches(10000000&128=true) going in
+        if (byteRow & _b) {//if bit matches(10000000&128=true) going in
             var bit = i + 1;//real bit number
             var fieldNum = bit + _realByteNum;//calculationg field number
-            console.log('byte: %d, bit: %d, _byteNum: %d, fieldnum: %d', _byte, bit, _byteNum, fieldNum);
+            log.it('byte: %d, bit: %d, byteRowNum: %d, fieldnum: %d', byteRow, bit, byteRowNum, fieldNum);
             fields.push(fieldNum);
         }
     }
-    console.log('---------------');
+    log.it('---------------');
     return fields;
 };
 
@@ -58,7 +70,9 @@ iso8583.prototype.findFields = function(bitmapByteList, bitmapNum, fields) {
     for (var i = 0;i <= 7;i++) {
         var bytenum = i + 1;
         //find all fields in the given byte
-        fields = this.extractByteFields(parseInt(bitmapByteList['byte' + bytenum.toString()], 16), i, bitmapNum - 1, fields);
+        var byteRow = bitmapByteList['byte' + bytenum.toString()];
+        log.it('trying to extract fields from byte: %s [%s]', bytenum.toString(), byteRow);
+        fields = this.extractByteFields(byteRow, i, bitmapNum - 1, fields);
     }
     return fields;
 };
@@ -91,10 +105,10 @@ iso8583.prototype.decode = function(buffer) {
             var matchString = field.mask + ', rest/binary';
             var matches = bitsyntax.matcher(matchString)(buffer);
             buffer = matches.rest;
+            delete matches.rest;
             if (field.bitmap) {//bitmap fields
-                console.log('mask @ pos: %s', fieldIndex);
+                log.it('mask @ pos: %s', fieldIndex);
                 fieldsFound = this.findFields(matches, ++computedBitmaps, fieldsFound);
-                delete matches.rest;
                 fieldsParsed[fieldIndex] = matches;
             } else {//rest of the fields (non bitmap one)
                 fieldsParsed[fieldIndex] = this.parseField(matches.field);
