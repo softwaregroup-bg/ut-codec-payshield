@@ -6,13 +6,13 @@ function _log() {
     this.log = true;
 }
 _log.prototype.it = function() {
-    if(this.log) {
+    if (this.log) {
         console.log.apply(null, arguments);
     }
 }
 
 var log = new _log();
-log.log = false;
+//log.log = false;
 
 /**
  * @module iso8583
@@ -104,6 +104,7 @@ iso8583.prototype.decode = function(buffer) {
         if (field) {
             var matchString = field.mask + ', rest/binary';
             var matches = bitsyntax.matcher(matchString)(buffer);
+            console.log(matches);
             buffer = matches.rest;
             delete matches.rest;
             if (field.bitmap) {//bitmap fields
