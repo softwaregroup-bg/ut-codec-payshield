@@ -107,9 +107,10 @@ iso8583.prototype.decode = function(buffer) {
             buffer = matches.rest;
             delete matches.rest;
             if (field.bitmap) {//bitmap fields
-                log.it('mask @ pos: %s', fieldIndex);
+                log.it('START extracting bitmap: %s', fieldIndex);
                 fieldsFound = this.findFields(matches, ++computedBitmaps, fieldsFound);
                 fieldsParsed[fieldIndex] = matches;
+                log.it('END extracting bitmap: %s', fieldIndex);
             } else {//rest of the fields (non bitmap one)
                 fieldsParsed[fieldIndex] = this.parseField(matches.field);
             }
