@@ -23,9 +23,13 @@
     "19":{"mask":"field:3/string", "name":"Country Code, Acquiring Institution"},
     "20":{"mask":"field:3/string", "name":"Country Code, Primary Account Number"},
     "21":{"mask":"field:3/string", "name":"Country Code, Forwording Institution"},
+    "22":{"mask":"field:12/string", "name":"POS Data Code"},
     "24":{"mask":"field:3/string", "name":"Function Code"},
     "25":{"mask":"field:4/string", "name":"Message Reason Code"},
+    "32":{"mask":"field:11/string", "name":"Acquiring Institution Identification Code"},
     "33":{"mask":"field:11/string", "name":"Forwording Institution Identification Code"},
+    "35":{"mask":"field:37/string", "name":"Track 2 Data"},
     "37":{"mask":"field:9/string", "name":"Retrieval Reference Number"},
+    "39":{"mask":"field:3/string", "name":"Action Code"},
     "128":{"mask":"field:8/binary", "name":"Message Authentication Code Field"}
 }
