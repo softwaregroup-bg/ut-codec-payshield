@@ -19,3 +19,52 @@ var iso8583 = require('../iso8583.js');
     });
     console.log(Iso8583.decode(buff));
 })();
+
+/*
+
+-2=0338
+2=5892361255876035
+4=000000000000
+5=000000000000
+6=000000000000
+7=1506261409
+10=00000001
+12=150626161000
+14=1602
+15=150627
+16=0626
+18=6011
+19=288
+21=288
+22=511201019041
+24=200
+32=300316
+33=300316
+35=5892361255876035=1602100
+37=517714447030
+39=14
+41=10170011        
+42=FABG           
+43=FABG                  ACCRA        NULGH
+49=936
+50=936
+51=936
+53=0201000000
+128=E10F1F89
+_MessageID=ISO701000001210
+_Destination=isoscript
+_OpCode=302000
+_SystemTrace=885607
+DestinationPort=ghipss
+STAN=885607
+source=ghipss
+#zpk=2682DE2D0C039BB9710DF394BB7C1EBD
+_SrcAccountID=isoscript
+_SrcSystemTrace=885607
+_SrcInstitution=300316
+_SrcSystemTime=150626161000
+txid=8300
+_ErrorCode=14
+_ErrorMessage=Issuer:Unknown card or account
+_ErrorPrint=Invalid Card/Invalid Debit Account
+ */
