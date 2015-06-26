@@ -104,7 +104,6 @@ iso8583.prototype.decode = function(buffer) {
         if (field) {
             var matchString = field.mask + ', rest/binary';
             var matches = bitsyntax.matcher(matchString)(buffer);
-            console.log(matches);
             buffer = matches.rest;
             delete matches.rest;
             if (field.bitmap) {//bitmap fields
