@@ -1,128 +1,98 @@
 'use strict';
-var bitsyntax = require('ut-bitsyntax');
-var nconf = require('nconf');
+var _ = require('lodash');
+var defaultFields = require('./iso8583.fields.json');
+var bitSyntax = require('ut-bitsyntax');
 
-function _log() {
-    this.log = true;
-}
-_log.prototype.it = function() {
-    if (this.log) {
-        console.log.apply(null, arguments);
-    }
+function getFormat(format, fallback) {
+    return (format && {'numeric' : 'string', 'string' : 'string', 'amount' : 'string', 'bcdamount' : 'string'}[format]) || format || fallback || 'binary';
 }
 
-var log = new _log();
-//log.log = false;
-
-/**
- * @module iso8583
- * @author UT Route Team
- * @description UT-Codecs, used for encode decode module
- */
-/**
- * @class iso8583
- * @param {object} config 8583 config object
- *
- **/
-function iso8583(config){
-    config = config || {};
-
-    if(!config.fieldsDefinition) {
-        this.fieldsDefinition = nconf.file('./iso8583.fields.json');
-    } else {
-        this.fieldsDefinition = nconf.file(config.fieldsDefinition);
-    }
-};
-
-/**
- * extract fields from given byte
- * @param  {Number} byteRow      [description]
- * @param  {Number} byteRowNum   number of the byte in bitmap series
- * @param  {Number} bitmapNum bitmap number
- * @param  {Array} fields array of found fields
- * @return {Array}            Fields array
- */
-iso8583.prototype.extractByteFields = function(byteRow, byteRowNum, bitmapNum, fields) {
-    var _realByteNum = (byteRowNum * 8) + (bitmapNum * 64);
-
-    for (var i = 0; i < 8; i++) {
-        var _b = 128;// = 10000000 starting with upper bit, because we checking from left to right
-        _b = _b >> i;//moving bit on right side with 1 position per iteration
-        if (byteRow & _b) {//if bit matches(10000000&128=true) going in
-            var bit = i + 1;//real bit number
-            var fieldNum = bit + _realByteNum;//calculationg field number
-            log.it('byte: %d, bit: %d, byteRowNum: %d, fieldnum: %d', byteRow, bit, byteRowNum, fieldNum);
-            fields.push(fieldNum);
-        }
-    }
-    log.it('---------------');
-    return fields;
-};
-
-/**
- * find all fields from the given bitmap index
- * @param  {Array}  bitmap
- * @param  {Number}  bitmapNum bitmap index
- * @param  {Array}  fields
- * @return {Array} array of fields
- */
-iso8583.prototype.findFields = function(bitmapByteList, bitmapNum, fields) {
-    for (var i = 0;i <= 7;i++) {
-        var bytenum = i + 1;
-        //find all fields in the given byte
-        var byteRow = bitmapByteList['byte' + bytenum.toString()];
-        log.it('trying to extract fields from byte: %s [%s]', bytenum.toString(), byteRow);
-        fields = this.extractByteFields(byteRow, i, bitmapNum - 1, fields);
-    }
-    return fields;
-};
-
-/**
- * get field data
- * @param  {ascii|hex|string|binary} fieldData parsed field data
- * @return {*}           field data
- */
-iso8583.prototype.parseField = function(fieldData) {
-    return fieldData;
-};
-
-/**
- * endpoint function
- * @param {Buffer} buffer incoming buffer
- * @return {Object} object of all fields in the message
- */
-iso8583.prototype.decode = function(buffer) {
-    var fieldsFound = [-2, -1, 0];//required fields, MTID and first bitmap
-    var fieldsParsed = {};
-    var computedBitmaps = 0;
-    var fieldIndex;
-
-    while ((fieldIndex = fieldsFound.shift()) !== undefined) {
-        fieldIndex = fieldIndex.toString();
-        var field = this.fieldsDefinition.get(fieldIndex);
-
-        if (field) {
-            var matchString = field.mask + ', rest/binary';
-            var matches = bitsyntax.matcher(matchString)(buffer);
-            buffer = matches.rest;
-            delete matches.rest;
-            if (field.bitmap) {//bitmap fields
-                log.it('START extracting bitmap: %s', fieldIndex);
-                fieldsFound = this.findFields(matches, ++computedBitmaps, fieldsFound);
-                fieldsParsed[fieldIndex] = matches;
-                log.it('END extracting bitmap: %s', fieldIndex);
-            } else {//rest of the fields (non bitmap one)
-                fieldsParsed[fieldIndex] = this.parseField(matches.field);
+function Iso8583(config) {
+    this.fieldFormat = _.assign({}, defaultFields[(config.version || '0') + (config.baseEncoding || 'ascii')], config.fieldFormat);
+    this.framePattern = bitSyntax.matcher('header:' + this.fieldFormat.header.size + '/' + getFormat(this.fieldFormat.header.format) +
+                                          ', mtid:' + this.fieldFormat.mtid.size + '/' + getFormat(this.fieldFormat.mtid.format) +
+                                          ', field0:' + this.fieldFormat['1'].size + '/' + getFormat(this.fieldFormat['1'].format) +
+                                          ', rest/binary');
+    this.fieldPatterns = [];
+    var group = 0;
+    while (this.fieldFormat[(group + 1) * 64]) {
+        var pattern = [];
+        for (var i = 1; i <= 64; i += 1) {
+            var field  = group * 64 + i;
+            if (this.fieldFormat[field].prefixSize) {
+                pattern.push('prefix' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].prefixFormat, 'string') +
+                             ', field' + field + ':prefix' + field + '/' + getFormat(this.fieldFormat[field].format));
+            } else {
+                pattern.push('field' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].format));
             }
+        }
+        pattern.push('rest/binary');
+        this.fieldPatterns.push(bitSyntax.matcher(pattern.join(', ')));
+        group += 1;
+    }
+}
 
+Iso8583.prototype.fieldSizes = function(bitmap, start) {
+    /* jshint bitwise: false */
+    var result = {};
+    for (var i = 0; i <= 63; i += 1) {
+        var size = bitmap && ((bitmap[i >> 3] & (128 >> (i % 8))) !== 0);
+        if (size) {
+            result['field' + (start + i) + 'Size'] = this.fieldFormat[start + i].prefixSize || this.fieldFormat[start + i].size;
         } else {
-            fieldsParsed[fieldIndex] = undefined;
+            result['field' + (start + i) + 'Size'] = 0;
         }
     }
-
-    return fieldsParsed;
+    return result;
 };
 
-iso8583.prototype.encode = function(message, log) {};
+Iso8583.prototype.decode = function(buffer) {
+    var frame = this.framePattern(buffer);
+    var message = {header:frame.header, mtid:frame.mtid, '0':frame.field0};
+    var bitmapField = 0;
+    if (frame) {
+        var parsedLength = buffer.length - frame.rest.length;
+        var group = 0;
+        while (frame) {
+            var fieldPattern = this.fieldPatterns[group];
+            if (!fieldPattern) {
+                if (frame.rest && frame.rest.length) {
+                    throw new Error('Not all data was parsed. Remaining ' + frame.rest.length + ' bytes at offset ' + parsedLength +
+                        ' starting with 0x' + frame.rest.toString('hex') + '\r\nmessage:' + JSON.stringify(message));
+                } else {
+                    break;
+                }
+            }
+            var fieldSizes = this.fieldSizes(frame['field' + bitmapField], group * 64 + 1);
+            var rest = frame.rest;
+            frame = fieldPattern && fieldPattern(rest, fieldSizes);
+            if (!frame && fieldPattern) {
+                for (var failField = (group + 1) * 64; failField >= group * 64 + 1; failField -= 1) { //find at which field we failed by skipping fields from the end
+                    fieldSizes['field' + failField + 'Size'] = 0;
+                    frame = fieldPattern && fieldPattern(rest, fieldSizes);
+                    if (frame) {
+                        parsedLength += rest.length - frame.rest.length;
+                        throw new Error('Parsing failed at field ' + failField + '. Remaining ' + frame.rest.length + ' bytes at offset ' + parsedLength +
+                            ' starting with 0x' + frame.rest.toString('hex') + '\r\nmessage:' + JSON.stringify(message));
+                    }
+                }
+                throw new Error('Parsing failed at unknown field');
+            }
+            parsedLength += rest.length - frame.rest.length;
+            bitmapField = group * 64 + 1;
+            for (var fieldNo = group * 64 + 1; fieldNo <= (group + 1) * 64; fieldNo += 1) {
+                fieldSizes['field' + fieldNo + 'Size'] ? message[fieldNo] = frame['field' + fieldNo] : null;
+            }
+            group += 1;
+        }
+    } else {
+        throw new Error('Unable to parse message type or first bitmap!');
+    }
+    return message;
+};
 
-module.exports = iso8583;
+Iso8583.prototype.encode = function(message) {
+
+}
+
+module.exports = Iso8583;

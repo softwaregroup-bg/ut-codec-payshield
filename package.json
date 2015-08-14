@@ -1,12 +1,12 @@
 {
   "name": "ut-codec",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "main": "./index",
   "dependencies": {
     "iconv-lite": "~0.4.7",
     "lodash": "^3.5.0",
     "nconf": "~0.7.1",
-    "ut-bitsyntax": "~5.0.0",
+    "ut-bitsyntax": "~5.0.2",
     "ut-validate": "~5.0.0"
   },
   "devDependencies": {
