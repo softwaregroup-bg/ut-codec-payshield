@@ -14,17 +14,23 @@ function Iso8583(config) {
                                           ', field0:' + this.fieldFormat['1'].size + '/' + getFormat(this.fieldFormat['1'].format) +
                                           ', rest/binary');
     this.fieldPatterns = [];
+    this.fieldBuilders = [bitSyntax.parse('field:fieldSize/' + getFormat(this.fieldFormat['0'].format))];
+    this.fieldBuilders.mtid = bitSyntax.parse('field:fieldSize/' + getFormat(this.fieldFormat.mtid.format));
+    this.prefixBuilders = [null];
     var group = 0;
     while (this.fieldFormat[(group + 1) * 64]) {
         var pattern = [];
         for (var i = 1; i <= 64; i += 1) {
             var field  = group * 64 + i;
             if (this.fieldFormat[field].prefixSize) {
-                pattern.push('prefix' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].prefixFormat, 'string') +
+                pattern.push('prefix' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].prefixFormat, 'string-left-zero') +
                              ', field' + field + ':prefix' + field + '/' + getFormat(this.fieldFormat[field].format));
+                this.prefixBuilders.push(bitSyntax.parse('prefix:' + this.fieldFormat[field].prefixSize + '/' + getFormat(this.fieldFormat[field].prefixFormat, 'string-left-zero')));
             } else {
                 pattern.push('field' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].format));
+                this.prefixBuilders.push(null);
             }
+            this.fieldBuilders.push(bitSyntax.parse('field:fieldSize/' + getFormat(this.fieldFormat[field].format)));
         }
         pattern.push('rest/binary');
         this.fieldPatterns.push(bitSyntax.matcher(pattern.join(', ')));
@@ -91,8 +97,41 @@ Iso8583.prototype.decode = function(buffer) {
     return message;
 };
 
-Iso8583.prototype.encode = function(message) {
+Iso8583.prototype.encodeField = function(fieldName, fieldValue) {
+    var prefixBuilder = this.prefixBuilders[fieldName];
+    var field = bitSyntax.build(
+        this.fieldBuilders[fieldName],
+        {field:fieldValue, fieldSize: prefixBuilder ? fieldValue.length : this.fieldFormat[fieldName].size}
+    );
+    return prefixBuilder ? Buffer.concat([bitSyntax.build(prefixBuilder, {prefix : field.length}), field]) : field;
+};
 
-}
+Iso8583.prototype.encode = function(message) {
+    /* jshint bitwise: false */
+    var buffers = new Array(64 * this.fieldPatterns.length);
+    var emptyBuffer = new Buffer([]);
+    var bitmap = Array.apply(null, new Array(8 * this.fieldPatterns.length)).map(Number.prototype.valueOf, 0); //zero filled array
+
+    for (var i = 64 * this.fieldPatterns.length; i >= 0; i -= 1) {
+        if (message[i] !== undefined) {
+            bitmap [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
+            var fieldValue;
+            if (i === 0) {
+                fieldValue = new Buffer(bitmap.slice(0, 8));
+            } else if (i % 64 === 1 && i < 64 * (this.fieldPatterns.length - 1)) {
+                var index = (i >> 6) << 3 ;
+                fieldValue = new Buffer(bitmap.slice(index + 8, index + 16));
+            } else {
+                fieldValue = message[i];
+            }
+            buffers[i] = this.encodeField(i, fieldValue);
+        } else {
+            buffers[i] = emptyBuffer;
+        }
+    }
+    buffers.unshift(this.encodeField('mtid', message.mtid));
+
+    return Buffer.concat(buffers);
+};
 
 module.exports = Iso8583;
