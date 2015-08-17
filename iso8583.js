@@ -22,11 +22,11 @@ function Iso8583(config) {
         var pattern = [];
         for (var i = 1; i <= 64; i += 1) {
             var field  = group * 64 + i;
-            if (this.fieldFormat[field].prefixSize) {
+            if (this.fieldFormat[field].prefixSize) {//if the field is with variable size
                 pattern.push('prefix' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].prefixFormat, 'string-left-zero') +
                              ', field' + field + ':prefix' + field + '/' + getFormat(this.fieldFormat[field].format));
                 this.prefixBuilders.push(bitSyntax.parse('prefix:' + this.fieldFormat[field].prefixSize + '/' + getFormat(this.fieldFormat[field].prefixFormat, 'string-left-zero')));
-            } else {
+            } else {//if the field is with fixed size
                 pattern.push('field' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].format));
                 this.prefixBuilders.push(null);
             }
@@ -54,9 +54,9 @@ Iso8583.prototype.fieldSizes = function(bitmap, start) {
 
 Iso8583.prototype.decode = function(buffer) {
     var frame = this.framePattern(buffer);
-    var message = {header:frame.header, mtid:frame.mtid, '0':frame.field0};
     var bitmapField = 0;
     if (frame) {
+        var message = {'header':frame.header, 'mtid':frame.mtid, '0':frame.field0};
         var parsedLength = buffer.length - frame.rest.length;
         var group = 0;
         while (frame) {
@@ -101,9 +101,9 @@ Iso8583.prototype.encodeField = function(fieldName, fieldValue) {
     var prefixBuilder = this.prefixBuilders[fieldName];
     var field = bitSyntax.build(
         this.fieldBuilders[fieldName],
-        {field:fieldValue, fieldSize: prefixBuilder ? fieldValue.length : this.fieldFormat[fieldName].size}
+        {'field': fieldValue, 'fieldSize': prefixBuilder ? fieldValue.length : this.fieldFormat[fieldName].size}
     );
-    return prefixBuilder ? Buffer.concat([bitSyntax.build(prefixBuilder, {prefix : field.length}), field]) : field;
+    return prefixBuilder ? Buffer.concat([bitSyntax.build(prefixBuilder, {'prefix' : field.length}), field]) : field;
 };
 
 Iso8583.prototype.encode = function(message) {
