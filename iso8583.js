@@ -91,10 +91,10 @@ Iso8583.prototype.decode = function(buffer) {
             }
             group += 1;
         }
+        return message;
     } else {
         throw new Error('Unable to parse message type or first bitmap!');
     }
-    return message;
 };
 
 Iso8583.prototype.encodeField = function(fieldName, fieldValue) {
