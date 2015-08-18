@@ -113,18 +113,15 @@ Iso8583.prototype.encode = function(message) {
     var bitmap = Array.apply(null, new Array(8 * this.fieldPatterns.length)).map(Number.prototype.valueOf, 0); //zero filled array
 
     for (var i = 64 * this.fieldPatterns.length; i >= 0; i -= 1) {
-        if (message[i] !== undefined) {
+        if (i === 0) {
+            buffers[i] = this.encodeField(i, new Buffer(bitmap.slice(0, 8)));
+        } else if (i % 64 === 1 && i < 64 * (this.fieldPatterns.length - 1)) {
+            var index = (i >> 6) << 3 ;
             bitmap [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
-            var fieldValue;
-            if (i === 0) {
-                fieldValue = new Buffer(bitmap.slice(0, 8));
-            } else if (i % 64 === 1 && i < 64 * (this.fieldPatterns.length - 1)) {
-                var index = (i >> 6) << 3 ;
-                fieldValue = new Buffer(bitmap.slice(index + 8, index + 16));
-            } else {
-                fieldValue = message[i];
-            }
-            buffers[i] = this.encodeField(i, fieldValue);
+            buffers[i] = this.encodeField(i, new Buffer(bitmap.slice(index + 8, index + 16)));
+        } else if (message[i] !== undefined) {
+            bitmap [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
+            buffers[i] = this.encodeField(i, message[i]);
         } else {
             buffers[i] = emptyBuffer;
         }
