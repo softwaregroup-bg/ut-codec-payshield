@@ -2,8 +2,8 @@
   "0ascii": {
     "header":{"size":0  , "name": "Header", "format":"string"},
     "mtid": {"size": 4  , "name": "MESSAGE TYPE INDICATOR", "format": "string"},
-    "0":    {"size": 16 , "name": "BIT MAP 0", "format": "string-hex"},
-    "1":    {"size": 16 , "name": "BIT MAP 1", "format": "string-hex"},
+    "0":    {"size": 16 , "name": "BIT MAP 0", "format": "string-hexbin"},
+    "1":    {"size": 16 , "name": "BIT MAP 1", "format": "string-hexbin"},
     "2":    {"size": 19 , "name": "PAN - PRIMARY ACCOUNT NUMBER", "format": "numeric", "prefixSize":2},
     "3":    {"size": 6  , "name": "PROCESSING CODE", "format": "numeric"},
     "4":    {"size": 12 , "name": "AMOUNT, TRANSACTION", "format": "numeric"},
@@ -268,8 +268,8 @@
   "1ascii": {
     "header":{"size":0  , "name": "Header", "format":"string"},
     "mtid": {"size": 4  , "name": "Message Type Indicator", "format": "numeric"},
-    "0":    {"size": 16 , "name": "Bitmap 0", "format": "string-hex"},
-    "1":    {"size": 16 , "name": "Bitmap 1", "format": "string-hex"},
+    "0":    {"size": 16 , "name": "Bitmap 0", "format": "string-hexbin"},
+    "1":    {"size": 16 , "name": "Bitmap 1", "format": "string-hexbin"},
     "2":    {"size": 19 , "name": "Primary Account number", "format": "numeric", "prefixSize":2},
     "3":    {"size": 6  , "name": "Processing Code", "format": "numeric"},
     "4":    {"size": 12 , "name": "Amount, Transaction", "format": "numeric"},
