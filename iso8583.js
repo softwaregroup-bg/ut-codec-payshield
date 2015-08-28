@@ -116,13 +116,12 @@ Iso8583.prototype.encode = function(message) {
             buffers[i] = this.encodeField(i, new Buffer(bitmaps.slice(0, 8)));
         } else if (i % 64 === 1 && i < 64 * (this.fieldPatterns.length - 1)) {
             var index = (i >> 6) << 3 ;
-            bitmaps [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
             var bitmap = bitmaps.slice(index + 8, index + 16);
             if(bitmap.reduce(function(p, n) {return p + n;})) {
+                bitmaps [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
                 buffers[i] = this.encodeField(i, new Buffer(bitmap));
             } else {
                 buffers[i] = emptyBuffer;
-                bitmaps = bitmaps.slice(index, index + 8);
             }
         } else if (message[i] !== undefined) {
             bitmaps [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
@@ -131,9 +130,7 @@ Iso8583.prototype.encode = function(message) {
             buffers[i] = emptyBuffer;
         }
     }
-    if (message.mtid) {
-        buffers.unshift(this.encodeField('mtid', message.mtid));
-    }
+    buffers.unshift(this.encodeField('mtid', message.mtid || new Buffer([])));
 
     return Buffer.concat(buffers);
 };
