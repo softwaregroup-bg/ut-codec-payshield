@@ -131,7 +131,9 @@ Iso8583.prototype.encode = function(message) {
             buffers[i] = emptyBuffer;
         }
     }
-    buffers.unshift(this.encodeField('mtid', message.mtid));
+    if (message.mtid) {
+        buffers.unshift(this.encodeField('mtid', message.mtid));
+    }
 
     return Buffer.concat(buffers);
 };
