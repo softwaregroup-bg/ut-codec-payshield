@@ -11,7 +11,7 @@ function Iso8583(config) {
     this.fieldFormat = _.assign({}, defaultFields[(config.version || '0') + (config.baseEncoding || 'ascii')], config.fieldFormat);
     this.framePattern = bitSyntax.matcher('header:' + this.fieldFormat.header.size + '/' + getFormat(this.fieldFormat.header.format) +
                                           ', mtid:' + this.fieldFormat.mtid.size + '/' + getFormat(this.fieldFormat.mtid.format) +
-                                          ', field0:' + this.fieldFormat['1'].size + '/' + getFormat(this.fieldFormat['1'].format) +
+                                          ', field0:' + this.fieldFormat['0'].size + '/' + getFormat(this.fieldFormat['0'].format) +
                                           ', rest/binary');
     this.fieldPatterns = [];
     this.fieldBuilders = [bitSyntax.parse('field:fieldSize/' + getFormat(this.fieldFormat['0'].format))];
@@ -110,23 +110,27 @@ Iso8583.prototype.encode = function(message) {
     /* jshint bitwise: false */
     var buffers = new Array(64 * this.fieldPatterns.length);
     var emptyBuffer = new Buffer([]);
-    var bitmap = Array.apply(null, new Array(8 * this.fieldPatterns.length)).map(Number.prototype.valueOf, 0); //zero filled array
-
+    var bitmaps = Array.apply(null, new Array(8 * this.fieldPatterns.length)).map(Number.prototype.valueOf, 0); //zero filled array
     for (var i = 64 * this.fieldPatterns.length; i >= 0; i -= 1) {
         if (i === 0) {
-            buffers[i] = this.encodeField(i, new Buffer(bitmap.slice(0, 8)));
+            buffers[i] = this.encodeField(i, new Buffer(bitmaps.slice(0, 8)));
         } else if (i % 64 === 1 && i < 64 * (this.fieldPatterns.length - 1)) {
             var index = (i >> 6) << 3 ;
-            bitmap [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
-            buffers[i] = this.encodeField(i, new Buffer(bitmap.slice(index + 8, index + 16)));
+            var bitmap = bitmaps.slice(index + 8, index + 16);
+            if(bitmap.reduce(function(p, n) {return p + n;})) {
+                bitmaps [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
+                buffers[i] = this.encodeField(i, new Buffer(bitmap));
+            } else {
+                buffers[i] = emptyBuffer;
+            }
         } else if (message[i] !== undefined) {
-            bitmap [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
+            bitmaps [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
             buffers[i] = this.encodeField(i, message[i]);
         } else {
             buffers[i] = emptyBuffer;
         }
     }
-    buffers.unshift(this.encodeField('mtid', message.mtid));
+    buffers.unshift(this.encodeField('mtid', message.mtid || new Buffer([])));
 
     return Buffer.concat(buffers);
 };
