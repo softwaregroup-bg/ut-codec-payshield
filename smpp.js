@@ -131,19 +131,13 @@ SmppParser.prototype.decode = function(buff) {
     }
     headObj.commandId = ('00000000' + headObj.commandId.toString(16).toUpperCase()).slice(-8);
     var opcode = this.opCodes[headObj.commandId];
+    var messageFormat = this.messageFormats[opcode];
+    var body = {};
     if (!opcode) {
         throw new Error('Not implemented opcode:' + headObj.commandId);
     }
-    var messageFormat = this.messageFormats[opcode];
-    var body = {};
+
     if (messageFormat.pattern) {
-        if (!headObj.body) {
-            throw new Error('Unable to match response body!');
-        }
-        body = bitsyntax.match(messageFormat.pattern, headObj.body);
-        if (!body) {
-            throw new Error('Unable to match pattern for opcode:' + opcode + '!');
-        }
         if (body.tlvs) {
             if (body.tlvs.length) {
                 var tlvs = {};
@@ -172,8 +166,9 @@ SmppParser.prototype.decode = function(buff) {
     if (body.shortMessage) {
         body.shortMessage = iconv.decode(body.shortMessage, body.dataCoding || encodingsById[encodingsByName['default']]);
     }
-    body.$$ = {trace: headObj.sequenceNumber, mtid : messageFormat.mtid, opcode : opcode};
-    return body;
+    headObj.body = body;
+    headObj.$$ = {trace: headObj.sequenceNumber, mtid : messageFormat.mtid, opcode : opcode};
+    return headObj;
 };
 
 /**
