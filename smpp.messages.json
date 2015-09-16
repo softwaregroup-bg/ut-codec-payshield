@@ -86,7 +86,8 @@
                     "replaceIfPresentFlag:8/integer",
                     "dataCoding:8/integer",
                     "smDefaultMsgId:8/integer",
-                    "shortMessage:254/binary-z",
+                    "smLength:8/integer",
+                    "shortMessage:smLength/binary",
                     "tlvs/binary"
                   ]
   },

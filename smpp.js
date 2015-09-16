@@ -180,11 +180,13 @@ SmppParser.prototype.decode = function(buff) {
 SmppParser.prototype.encode = function(data, context) {
     // TODO: add validation
     // TODO: revise dataCoding and shortMessage
+    data.smLength = 0;
     if (data.dataCoding) {
         data.dataCoding = encodingsByName[data.dataCoding] || encodingsByName['default'];
     }
     if (data.shortMessage) {
         data.shortMessage = iconv.encode(data.shortMessage, encodingsById[data.dataCoding || encodingsByName['default']]);
+        data.smLength = data.shortMessage.length;
     }
     this.log.debug && this.log.debug('SmppParser.encode data:' + data);
     var opcode = data.$$.opcode;
