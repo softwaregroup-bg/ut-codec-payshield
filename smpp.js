@@ -94,7 +94,7 @@ function SmppParser(config, val, log) {
     this.messageFormats = {};
     this.opCodes = {};
     this.headerPattern = bitsyntax.parse('commandId:32/integer, commandStatus:32/integer, sequenceNumber:32/integer, body/binary');
-    this.tlvPattern = bitsyntax.parse('t:16/integer, l:16/integer, v:8/string, next/binary');
+    this.tlvPattern = bitsyntax.parse('t:16/integer, l:16/integer, v:1/string, next/binary');
     this.init(config);
 }
 
@@ -129,6 +129,7 @@ SmppParser.prototype.decode = function(buff) {
     if (!headObj) {
         throw new Error('Unable to match header to header pattern!');
     }
+
     headObj.commandId = ('00000000' + headObj.commandId.toString(16).toUpperCase()).slice(-8);
     var opcode = this.opCodes[headObj.commandId];
     var messageFormat = this.messageFormats[opcode];
@@ -138,6 +139,9 @@ SmppParser.prototype.decode = function(buff) {
     }
 
     if (messageFormat.pattern) {
+        if (headObj.body) {
+            body = bitsyntax.match(messageFormat.pattern, headObj.body);
+        }
         if (body.tlvs) {
             if (body.tlvs.length) {
                 var tlvs = {};
