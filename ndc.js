@@ -6,7 +6,7 @@
      * @requires nconf
      * @requires path
      */
-    var nconf = require('nconf');
+    var nconf = require('nconf'); //todo remove nconf instead use _.assign and loading file with require
     var path = require('path');
 
     /**

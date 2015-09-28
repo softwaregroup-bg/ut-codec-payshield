@@ -37,7 +37,7 @@ PayshieldParser.prototype.init = function(config) {
 
     this.headerPattern = bitsyntax.parse('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
 
-    var nconf = require('nconf');
+    var nconf = require('nconf'); //todo remove nconf instead use _.assign and loading file with require
     var path = require('path');
 
     var commandsObj = new nconf.Provider({

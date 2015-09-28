@@ -1,5 +1,5 @@
 ﻿var bitsyntax = require('ut-bitsyntax');
-var nconf = require('nconf');
+var nconf = require('nconf'); //todo remove nconf instead use _.assign and loading file with require
 var path = require('path');
 var _ = require('lodash');
 var iconv = require('iconv-lite');
