@@ -38,19 +38,18 @@ PayshieldParser.prototype.init = function(config) {
     this.headerPattern = bitsyntax.parse('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
 
     var nconf = require('nconf'); //todo remove nconf instead use _.assign and loading file with require
-    var path = require('path');
 
     var commandsObj = new nconf.Provider({
         stores: [
             {name: 'impl'   , type: 'literal', store: config.messageFormat || {}},
-            {name: 'default', type: 'file', file: path.join(__dirname, 'payshield.messages.json')}
+            {name: 'default', type: 'file', file: require.resolve('./payshield.messages.json')}
         ]
     }).get();
 
     var fieldFormat = new nconf.Provider({
         stores: [
             {name: 'impl'   , type: 'literal', store: config.fieldFormat || {}},
-            {name: 'default', type: 'file', file: path.join(__dirname, 'payshield.fields.json')}
+            {name: 'default', type: 'file', file: require.resolve('./payshield.fields.json')}
         ]
     }).get();
 

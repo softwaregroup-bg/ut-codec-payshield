@@ -1,6 +1,5 @@
 ﻿var bitsyntax = require('ut-bitsyntax');
 var nconf = require('nconf'); //todo remove nconf instead use _.assign and loading file with require
-var path = require('path');
 var _ = require('lodash');
 var iconv = require('iconv-lite');
 var tlvTagsByName = {
@@ -104,7 +103,7 @@ SmppParser.prototype.init = function(config) {
     this.messageFormats = new nconf.Provider({
         stores: [
             {name: 'impl'   , type: 'literal', store: config.messageFormat},
-            {name: 'default', type: 'file', file: path.join(__dirname, 'smpp.messages.json')}
+            {name: 'default', type: 'file', file: require.resolve('./smpp.messages.json')}
         ]
     }).get();
     Object.keys(this.messageFormats).map(function(opcode) {

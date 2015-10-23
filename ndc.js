@@ -4,10 +4,8 @@
      * @author UT Route Team
      * @description Parser module to handle I/O for the NDC protocol
      * @requires nconf
-     * @requires path
      */
     var nconf = require('nconf'); //todo remove nconf instead use _.assign and loading file with require
-    var path = require('path');
 
     /**
      * @class NDC
@@ -30,7 +28,7 @@
         this.messageFormat = new nconf.Provider({
             stores: [
                 {name: 'impl'   , type: 'literal', store: config.messageFormatOverride || {}},
-                {name: 'default', type: 'file', file: path.join(__dirname, 'ndc.messages.json')}
+                {name: 'default', type: 'file', file: require.resolve('./ndc.messages.json')}
             ]
         }).get();
         /**

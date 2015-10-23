@@ -1,3 +1,8 @@
+require('./iso8583');
+require('./ndc');
+require('./payshield');
+require('./smpp');
+
 (function(define) {define(function(require) {
 
     return {
