@@ -122,7 +122,7 @@ SmppParser.prototype.init = function(config) {
  * @returns {JSON}  json object with extracted values from buffer with property names from message pattern
  *  and system field $$:{'trace', 'mtid', 'opcode'}
  */
-SmppParser.prototype.decode = function(buff) {
+SmppParser.prototype.decode = function(buff, $meta) {
     this.log.debug && this.log.debug('SmppParser.decode buffer:' + buff.toString());
     var headObj = bitsyntax.match(this.headerPattern, buff);
     if (!headObj) {
@@ -170,7 +170,7 @@ SmppParser.prototype.decode = function(buff) {
         body.shortMessage = iconv.decode(body.shortMessage, body.dataCoding || encodingsById[encodingsByName['default']]);
     }
     headObj.body = body;
-    headObj.$$ = {trace: headObj.sequenceNumber, mtid : messageFormat.mtid, opcode : opcode};
+    $meta = {trace: headObj.sequenceNumber, mtid : messageFormat.mtid, opcode : opcode};
     return headObj;
 };
 
@@ -180,30 +180,31 @@ SmppParser.prototype.decode = function(buff) {
  * @param {object} context - the connection context
  * @returns {buffer}  encoded buffer
  */
-SmppParser.prototype.encode = function(data, context) {
+SmppParser.prototype.encode = function(data, $meta) {
     // TODO: add validation
     // TODO: revise dataCoding and shortMessage
     data.smLength = 0;
     if (data.dataCoding) {
         data.dataCoding = encodingsByName[data.dataCoding] || encodingsByName['default'];
     }
+
     if (data.shortMessage) {
         data.shortMessage = iconv.encode(data.shortMessage, encodingsById[data.dataCoding || encodingsByName['default']]);
         data.smLength = data.shortMessage.length;
     }
     this.log.debug && this.log.debug('SmppParser.encode data:' + data);
-    var opcode = data.$$.opcode;
+    var opcode = $meta.opcode;
     if (!this.messageFormats[opcode]) {
         throw new Error('Not implemented opcode:' + opcode + '!');
     }
-    var sequenceNumber = data.$$.trace;
+    var sequenceNumber = $meta.context.trace;
     if (!sequenceNumber) {
-        sequenceNumber = ('00000000' + context.trace).slice(-8);
-        if (++context.trace > 999999) {
-            context.trace = 0;
+        sequenceNumber = ('00000000' + $meta.context.trace).slice(-8);
+        if (++$meta.context.trace > 999999) {
+            $meta.context.trace = 0;
         }
     }
-    delete data.$$;
+
     var body = new Buffer('');
     if (this.messageFormats[opcode].pattern) {
         if (!data.tlvs || _.isEmpty(data.tlvs)) {
