@@ -170,7 +170,8 @@ SmppParser.prototype.decode = function(buff, $meta) {
         body.shortMessage = iconv.decode(body.shortMessage, body.dataCoding || encodingsById[encodingsByName['default']]);
     }
     headObj.body = body;
-    $meta = {trace: headObj.sequenceNumber, mtid : messageFormat.mtid, opcode : opcode};
+    $meta.context.trace = headObj.sequenceNumber;
+    $meta.opcode = opcode;
     return headObj;
 };
 
