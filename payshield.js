@@ -87,7 +87,7 @@ PayshieldParser.prototype.init = function(config) {
  * @returns {JSON}  json object with extracted values from buffer with property names from message pattern
  *  and system field $$:{'trace', 'mtid', 'opcode'}
  */
-PayshieldParser.prototype.decode = function(buff) {
+PayshieldParser.prototype.decode = function(buff, $meta) {
     if (this.log.debug) { this.log.debug('PayshieldParser.decode buffer:' + buff.toString()); }
     var headObj = bitsyntax.match(this.headerPattern, buff);
     if (!headObj) {
@@ -113,12 +113,14 @@ PayshieldParser.prototype.decode = function(buff) {
         if (!bodyObj) {
             throw new Error('Unable to match pattern for opcode:' + commandName + '!');
         }
-        bodyObj.$$ = {trace: headObj.headerNo, mtid : cmd.mtid, opcode : commandName};
-
+        $meta.trace = headObj.headerNo;
+        $meta.mtid = cmd.mtid;
+        $meta.opcode = commandName;
     } else {
-        bodyObj = {
-            $$:{trace: headObj.headerNo, opcode : commandName, mtid:'error', errorCode:bodyObj.errorCode}  //todo also return the error message as per payshield documentation
-        }
+        $meta.trace = headObj.headerNo;
+        $meta.mtid = 'error';
+        $meta.errorCode = bodyObj.errorCode; //todo also return the error message as per payshield documentation
+        bodyObj = {};
     }
     return bodyObj;
 };
@@ -129,20 +131,20 @@ PayshieldParser.prototype.decode = function(buff) {
  * @param {object} context - the connection context
  * @returns {buffer}  encoded buffer
  */
-PayshieldParser.prototype.encode = function(data, context) {
+PayshieldParser.prototype.encode = function(data, $meta) {
     //TODO: add validation
     this.log.debug && this.log.debug('PayshieldParser.encode data:' + data);
-    var commandName = data.$$.opcode;
-    var headerNo = data.$$.trace;
+    var commandName = $meta.opcode;
+    var headerNo = $meta.trace;
 
     if (this.commands[commandName] === undefined) {
         throw new Error('Not implemented opcode:' + commandName + '!');
     }
 
     if (headerNo === undefined || headerNo === null) {
-        headerNo = data.$$.trace = ('000000' + context.trace).substr(-6);
-        if (++context.trace > 999999) {
-            context.trace = 0;
+        headerNo = $meta.trace = ('000000' + $meta.context.trace).substr(-6);
+        if (++$meta.context.trace > 999999) {
+            $meta.context.trace = 0;
         }
     }
 

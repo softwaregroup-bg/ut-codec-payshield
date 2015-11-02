@@ -2,21 +2,21 @@
   "echo": {
     "mtid": "notification",
     "Code": "B2",
-    "Pattern": "msgSize:4/string-left-zero, macMessage:msgSize/string-left-zero"
+    "Pattern": "msgSize:4/string-left-zero, message:msgSize/string-left-zero"
   },
-    
+
   "echoResp": {
     "Code": "B3",
     "mtid": "discard",
-    "Pattern": "errorCode:2/string, macMessage:4/string"
+    "Pattern": "errorCode:2/string, message:4/string"
   },
-    
+
   "generateKey": {
     "Code": "A0",
     "mtid": "request",
     "Pattern": "mode:1/string, keyType:3/string, keyScheme:1/string"
   },
-    
+
   "generateKeyTmk": {
     "Code": "A0",
     "mtid": "request",
@@ -46,7 +46,7 @@
     "mtid": "request",
     "Pattern": "tmk:33/string, \";\", keyScheme:1/string, keyScheme1:1/string, \"0\""
   },
-  
+
   "generateTakResp": {
     "Code": "HB",
     "mtid": "response",
@@ -58,7 +58,7 @@
     "mtid": "request",
     "Pattern": "macMode:1/string, macInputFormat:1/string, macAlgorithm:2/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSize:4/string-left-zero, macMessage:msgSize/string"
   },
-  
+
   "generateMacResp": {
     "Code": "M7",
     "mtid": "response",
@@ -82,7 +82,7 @@
     "mtid": "request",
     "Pattern": "numberOfComponents:1/string, keyType:3/string, keyScheme:1/string, keyComponent1:33/string, keyComponent2:33/string"
   },
-  
+
   "formKeyResp": {
     "Code": "A5",
     "mtid": "response",
@@ -94,7 +94,7 @@
     "mtid": "request",
     "Pattern": "keyTypeCode:2/string, keyLengthFlag:1/string, keyA32:33/string"
   },
-  
+
   "generateKeyCheckValueResp": {
     "Code": "BV",
     "mtid": "response",
@@ -110,7 +110,7 @@
   "derivePinIbmResp": {
     "Code": "EF",
     "mtid": "response",
-    "Pattern": "errorCode:2/string, pin:5/string" 
+    "Pattern": "errorCode:2/string, pin:5/string"
   },
 
   "generatePin": {
@@ -118,7 +118,7 @@
     "mtid": "request",
     "Pattern": "account:12/string, checkLength:2/string-left-zero"
   },
-  
+
   "generatePinResp": {
     "Code": "JB",
     "mtid": "response",
@@ -130,7 +130,7 @@
     "mtid": "request",
     "Pattern": "keyType:3/string, keyA32:33/string, pvk:pvk/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string"
   },
-  
+
   "generateOffsetIbmResp": {
     "Code": "BL",
     "mtid": "response",
@@ -142,7 +142,7 @@
     "mtid": "request",
     "Pattern": "tpk:33/string, pvk:pvk/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string"
   },
-  
+
   "verifyTermPinIbmResp": {
     "Code": "DB",
     "mtid": "response",
@@ -154,7 +154,7 @@
     "mtid": "request",
     "Pattern": "keyType:3/string, zmk:33/string, keyA32:33/string, keyScheme:1/string"
   },
-  
+
   "importKeyResp": {
     "Code": "A7",
     "mtid": "response",
@@ -166,25 +166,25 @@
     "mtid": "request",
     "Pattern": "sourceTpk:33/string, destinationZpk:33/string, \"12\", sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, account:12/string"
   },
-  
+
   "translateTpkZpkResp": {
     "Code": "CB",
     "mtid": "response",
     "Pattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string"
   },
 
-  "printPin": { 
+  "printPin": {
     "Code": "PE",
     "mtid": "request",
     "Pattern": "documentType:1/string, account:12/string, pin:16/string, printFields:1/string"
   },
-  
+
   "printPinStart": {
     "Code": "PF",
     "mtid": "notification",
     "Pattern": "errorCode:2/string"
   },
-  
+
   "printPinResp": {
     "Code": "PZ",
     "mtid": "response",
@@ -196,7 +196,7 @@
     "mtid": "request",
     "Pattern": "printFields:1/string"
   },
-  
+
   "printFormatResp": {
     "Code": "PB",
     "mtid": "response",
@@ -208,7 +208,7 @@
     "mtid": "request",
     "Pattern": "sourceTpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string"
   },
-  
+
   "translateTpkLmkResp": {
     "Code": "JD",
     "mtid": "response",
@@ -220,7 +220,7 @@
     "mtid": "request",
     "Pattern": "sourceZpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string"
   },
-  
+
   "translateZpkLmkResp": {
     "Code": "JF",
     "mtid": "response",
@@ -232,7 +232,7 @@
     "mtid": "request",
     "Pattern": "pvk:pvk/string, pin:5/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string"
   },
-  
+
   "generateOffsetIbmLmkResp": {
     "Code": "DF",
     "mtid": "response",
