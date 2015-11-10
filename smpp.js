@@ -71,12 +71,12 @@ var tlvTagsByName = {
 var tlvTagsById = _.invert(tlvTagsByName);
 
 var encodingsByName = {
-    'default'    : 3,
-    'ISO-8859-1' : 3, // Latin 1
-    'ISO-8859-5' : 6, // Cyrillic
-    'ISO-8859-8' : 7, // Latin/Hebrew
-    'utf16le'    : 8, // ISO/IEC-10646
-    'UCS2'       : 8  // Alias of 'utf16le'
+    'default': 3,
+    'ISO-8859-1': 3, // Latin 1
+    'ISO-8859-5': 6, // Cyrillic
+    'ISO-8859-8': 7, // Latin/Hebrew
+    'utf16le': 8, // ISO/IEC-10646
+    'UCS2': 8  // Alias of 'utf16le'
 };
 
 var encodingsById = _.invert(encodingsByName);
@@ -98,11 +98,11 @@ function SmppParser(config, val, log) {
 }
 
 SmppParser.prototype.init = function(config) {
-    this.logFactory && (this.log = this.logFactory.createLog(config.logLevel, {name:config.id, context:'SMPP codec'}));
+    this.logFactory && (this.log = this.logFactory.createLog(config.logLevel, {name: config.id, context: 'SMPP codec'}));
     this.log.info && this.log.info('Initializing SMPP parser!');
     this.messageFormats = new nconf.Provider({
         stores: [
-            {name: 'impl'   , type: 'literal', store: config.messageFormat},
+            {name: 'impl', type: 'literal', store: config.messageFormat},
             {name: 'default', type: 'file', file: require.resolve('./smpp.messages.json')}
         ]
     }).get();
@@ -119,6 +119,7 @@ SmppParser.prototype.init = function(config) {
 /**
  * Decoding Buffer
  * @param {Buffer} buff - buffer for decoding.
+ * @param {object} $meta - metadata
  * @returns {JSON}  json object with extracted values from buffer with property names from message pattern
  *  and system field $$:{'trace', 'mtid', 'opcode'}
  */
@@ -170,7 +171,7 @@ SmppParser.prototype.decode = function(buff, $meta) {
         body.shortMessage = iconv.decode(body.shortMessage, body.dataCoding || encodingsById[encodingsByName['default']]);
     }
     headObj.body = body;
-    $meta.context.trace = headObj.sequenceNumber;
+    $meta.trace = headObj.sequenceNumber;
     $meta.opcode = opcode;
     return headObj;
 };
@@ -178,10 +179,11 @@ SmppParser.prototype.decode = function(buff, $meta) {
 /**
  * Convert object to Buffer
  * @param {object} data - json object with fields:{$$:{opcode - required, trace - required},  rest are field names from message pattern}
+ * @param {object} $meta - metadata
  * @param {object} context - the connection context
  * @returns {buffer}  encoded buffer
  */
-SmppParser.prototype.encode = function(data, $meta) {
+SmppParser.prototype.encode = function(data, $meta, context) {
     // TODO: add validation
     // TODO: revise dataCoding and shortMessage
     data.smLength = 0;
@@ -198,12 +200,13 @@ SmppParser.prototype.encode = function(data, $meta) {
     if (!this.messageFormats[opcode]) {
         throw new Error('Not implemented opcode:' + opcode + '!');
     }
-    var sequenceNumber = $meta.context.trace;
-    if (!sequenceNumber) {
-        sequenceNumber = ('00000000' + $meta.context.trace).slice(-8);
-        if (++$meta.context.trace > 999999) {
-            $meta.context.trace = 0;
+
+    if ($meta.trace !== null && $meta.trace !== undefined) {
+        context.trace += 1;
+        if (context.trace > 999999999) {
+            context.trace = 1;
         }
+        $meta.trace = context.trace;
     }
 
     var body = new Buffer('');
@@ -231,8 +234,7 @@ SmppParser.prototype.encode = function(data, $meta) {
         }
     }
     var commandId = this.messageFormats[opcode].commandId;
-    var result = bitsyntax.build(this.headerPattern, {commandId: parseInt(commandId, 16), commandStatus: 0, sequenceNumber: sequenceNumber, body: body});
-    return result;
+    return bitsyntax.build(this.headerPattern, {commandId: parseInt(commandId, 16), commandStatus: 0, sequenceNumber: $meta.trace, body: body});
 };
 
 module.exports = SmppParser;

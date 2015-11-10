@@ -84,6 +84,7 @@ PayshieldParser.prototype.init = function(config) {
 /**
  * Decoding Buffer
  * @param {Buffer} buff - buffer for decoding.
+ * @param {object} $meta - metadata
  * @returns {JSON}  json object with extracted values from buffer with property names from message pattern
  *  and system field $$:{'trace', 'mtid', 'opcode'}
  */
@@ -128,23 +129,25 @@ PayshieldParser.prototype.decode = function(buff, $meta) {
 /**
  * Convert object to Buffer
  * @param {object} data - json object with fields:{$$:{opcode - required, trace - required},  rest are field names from message pattern}
+ * @param {object} $meta - metadata
  * @param {object} context - the connection context
  * @returns {buffer}  encoded buffer
  */
-PayshieldParser.prototype.encode = function(data, $meta) {
+PayshieldParser.prototype.encode = function(data, $meta, context) {
     //TODO: add validation
     this.log.debug && this.log.debug('PayshieldParser.encode data:' + data);
     var commandName = $meta.opcode;
-    var headerNo = $meta.trace;
 
     if (this.commands[commandName] === undefined) {
         throw new Error('Not implemented opcode:' + commandName + '!');
     }
 
+    var headerNo = $meta.trace;
     if (headerNo === undefined || headerNo === null) {
-        headerNo = $meta.trace = ('000000' + $meta.context.trace).substr(-6);
-        if (++$meta.context.trace > 999999) {
-            $meta.context.trace = 0;
+        headerNo = $meta.trace = ('000000' + context.trace).substr(-6);
+        context.trace += 1;
+        if (context.trace > 999999) {
+            context.trace = 0;
         }
     }
 

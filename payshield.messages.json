@@ -7,7 +7,7 @@
 
   "echoResp": {
     "Code": "B3",
-    "mtid": "discard",
+    "mtid": "response",
     "Pattern": "errorCode:2/string, message:4/string"
   },
 
