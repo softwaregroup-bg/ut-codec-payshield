@@ -22,12 +22,12 @@ function Iso8583(config) {
         var pattern = [];
         for (var i = 1; i <= 64; i += 1) {
             var field = group * 64 + i;
-            if (this.fieldFormat[field].prefixSize) {//if the field is with variable size
+            if (this.fieldFormat[field].prefixSize) { // if the field is with variable size
                 pattern.push('prefix' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].prefixFormat, 'string-left-zero') +
                     ', field' + field + ':prefix' + field + '/' + getFormat(this.fieldFormat[field].format));
                 this.prefixBuilders.push(bitSyntax.parse('prefix:' + this.fieldFormat[field].prefixSize + '/' +
                     getFormat(this.fieldFormat[field].prefixFormat, 'string-left-zero')));
-            } else {//if the field is with fixed size
+            } else { // if the field is with fixed size
                 pattern.push('field' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].format));
                 this.prefixBuilders.push(null);
             }
@@ -74,7 +74,7 @@ Iso8583.prototype.decode = function(buffer, $meta) {
             var rest = frame.rest;
             frame = fieldPattern && fieldPattern(rest, fieldSizes);
             if (!frame && fieldPattern) {
-                for (var failField = (group + 1) * 64; failField >= group * 64 + 1; failField -= 1) { //find at which field we failed by skipping fields from the end
+                for (var failField = (group + 1) * 64; failField >= group * 64 + 1; failField -= 1) { // find at which field we failed by skipping fields from the end
                     fieldSizes['field' + failField + 'Size'] = 0;
                     frame = fieldPattern && fieldPattern(rest, fieldSizes);
                     if (frame) {
@@ -122,16 +122,14 @@ Iso8583.prototype.encode = function(message, $meta, context) {
         }
     }
     message[11] = trace;
-    var bitmaps = Array.apply(null, new Array(8 * this.fieldPatterns.length)).map(Number.prototype.valueOf, 0); //zero filled array
+    var bitmaps = Array.apply(null, new Array(8 * this.fieldPatterns.length)).map(Number.prototype.valueOf, 0); // zero filled array
     for (var i = 64 * this.fieldPatterns.length; i >= 0; i -= 1) {
         if (i === 0) {
             buffers[i] = this.encodeField(i, new Buffer(bitmaps.slice(0, 8)));
         } else if (i % 64 === 1 && i < 64 * (this.fieldPatterns.length - 1)) {
             var index = (i >> 6) << 3;
             var bitmap = bitmaps.slice(index + 8, index + 16);
-            if (bitmap.reduce(function(p, n) {
-                    return p + n;
-                })) {
+            if (bitmap.reduce(function(p, n) { return p + n; })) {
                 bitmaps [(i - 1) >> 3] |= (128 >> (i - 1) % 8);
                 buffers[i] = this.encodeField(i, new Buffer(bitmap));
             } else {

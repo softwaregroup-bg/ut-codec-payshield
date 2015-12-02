@@ -1,5 +1,5 @@
-﻿var bitsyntax = require('ut-bitsyntax');
-var nconf = require('nconf'); //todo remove nconf instead use _.assign and loading file with require
+var bitsyntax = require('ut-bitsyntax');
+var nconf = require('nconf'); // todo remove nconf instead use _.assign and loading file with require
 var _ = require('lodash');
 var iconv = require('iconv-lite');
 var tlvTagsByName = {

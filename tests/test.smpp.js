@@ -1,13 +1,4 @@
-// in ut-codec/intern.js set suites: ['test/test.smpp.js']
-// (from ut-codec folder) run command: intern-client config=test/intern.js
-define([
-    'intern!bdd',
-    'intern/dojo/node!../smpp',
-    'intern/chai!assert',
-    'intern/chai!expect',
-    'intern/dojo/node!ut-validate',
-    'intern/dojo/node!./testData/smpp'
-], function(bdd, SmppParser, assert, expect, Validator, data) {
+function test(bdd, SmppParser, assert, expect, Validator, data) {
     bdd.describe('SMPP messages', function() {
         var parser = new SmppParser({});
         var encodedData = null;
@@ -27,4 +18,6 @@ define([
             });
         });
     });
-});
+};
+
+test();
