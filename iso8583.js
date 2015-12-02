@@ -4,15 +4,15 @@ var defaultFields = require('./iso8583.fields.json');
 var bitSyntax = require('ut-bitsyntax');
 
 function getFormat(format, fallback) {
-    return (format && {'numeric' : 'string', 'string' : 'string', 'amount' : 'string', 'bcdamount' : 'string'}[format]) || format || fallback || 'binary';
+    return (format && {'numeric': 'string', 'string': 'string', 'amount': 'string', 'bcdamount': 'string'}[format]) || format || fallback || 'binary';
 }
 
 function Iso8583(config) {
     this.fieldFormat = _.assign({}, defaultFields[(config.version || '0') + (config.baseEncoding || 'ascii')], config.fieldFormat);
     this.framePattern = bitSyntax.matcher('header:' + this.fieldFormat.header.size + '/' + getFormat(this.fieldFormat.header.format) +
-                                          ', mtid:' + this.fieldFormat.mtid.size + '/' + getFormat(this.fieldFormat.mtid.format) +
-                                          ', field0:' + this.fieldFormat['0'].size + '/' + getFormat(this.fieldFormat['0'].format) +
-                                          ', rest/binary');
+        ', mtid:' + this.fieldFormat.mtid.size + '/' + getFormat(this.fieldFormat.mtid.format) +
+        ', field0:' + this.fieldFormat['0'].size + '/' + getFormat(this.fieldFormat['0'].format) +
+        ', rest/binary');
     this.fieldPatterns = [];
     this.fieldBuilders = [bitSyntax.parse('field:fieldSize/' + getFormat(this.fieldFormat['0'].format))];
     this.fieldBuilders.mtid = bitSyntax.parse('field:fieldSize/' + getFormat(this.fieldFormat.mtid.format));
@@ -21,12 +21,13 @@ function Iso8583(config) {
     while (this.fieldFormat[(group + 1) * 64]) {
         var pattern = [];
         for (var i = 1; i <= 64; i += 1) {
-            var field  = group * 64 + i;
-            if (this.fieldFormat[field].prefixSize) {//if the field is with variable size
+            var field = group * 64 + i;
+            if (this.fieldFormat[field].prefixSize) { // if the field is with variable size
                 pattern.push('prefix' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].prefixFormat, 'string-left-zero') +
-                             ', field' + field + ':prefix' + field + '/' + getFormat(this.fieldFormat[field].format));
-                this.prefixBuilders.push(bitSyntax.parse('prefix:' + this.fieldFormat[field].prefixSize + '/' + getFormat(this.fieldFormat[field].prefixFormat, 'string-left-zero')));
-            } else {//if the field is with fixed size
+                    ', field' + field + ':prefix' + field + '/' + getFormat(this.fieldFormat[field].format));
+                this.prefixBuilders.push(bitSyntax.parse('prefix:' + this.fieldFormat[field].prefixSize + '/' +
+                    getFormat(this.fieldFormat[field].prefixFormat, 'string-left-zero')));
+            } else { // if the field is with fixed size
                 pattern.push('field' + field + ':field' + field + 'Size/' + getFormat(this.fieldFormat[field].format));
                 this.prefixBuilders.push(null);
             }
@@ -52,11 +53,11 @@ Iso8583.prototype.fieldSizes = function(bitmap, start) {
     return result;
 };
 
-Iso8583.prototype.decode = function(buffer) {
+Iso8583.prototype.decode = function(buffer, $meta) {
     var frame = this.framePattern(buffer);
     var bitmapField = 0;
     if (frame) {
-        var message = {'header':frame.header, 'mtid':frame.mtid, '0':frame.field0};
+        var message = {'header': frame.header, 'mtid': frame.mtid, '0': frame.field0};
         var parsedLength = buffer.length - frame.rest.length;
         var group = 0;
         while (frame) {
@@ -73,7 +74,7 @@ Iso8583.prototype.decode = function(buffer) {
             var rest = frame.rest;
             frame = fieldPattern && fieldPattern(rest, fieldSizes);
             if (!frame && fieldPattern) {
-                for (var failField = (group + 1) * 64; failField >= group * 64 + 1; failField -= 1) { //find at which field we failed by skipping fields from the end
+                for (var failField = (group + 1) * 64; failField >= group * 64 + 1; failField -= 1) { // find at which field we failed by skipping fields from the end
                     fieldSizes['field' + failField + 'Size'] = 0;
                     frame = fieldPattern && fieldPattern(rest, fieldSizes);
                     if (frame) {
@@ -91,6 +92,8 @@ Iso8583.prototype.decode = function(buffer) {
             }
             group += 1;
         }
+        $meta.opcode = String(message[3] || '').substr(0, 2);
+        $meta.trace = message[11];
         return message;
     } else {
         throw new Error('Unable to parse message type or first bitmap!');
@@ -103,28 +106,37 @@ Iso8583.prototype.encodeField = function(fieldName, fieldValue) {
         this.fieldBuilders[fieldName],
         {'field': fieldValue, 'fieldSize': prefixBuilder ? fieldValue.length : this.fieldFormat[fieldName].size}
     );
-    return prefixBuilder ? Buffer.concat([bitSyntax.build(prefixBuilder, {'prefix' : field.length}), field]) : field;
+    return prefixBuilder ? Buffer.concat([bitSyntax.build(prefixBuilder, {'prefix': field.length}), field]) : field;
 };
 
-Iso8583.prototype.encode = function(message) {
+Iso8583.prototype.encode = function(message, $meta, context) {
     /* jshint bitwise: false */
     var buffers = new Array(64 * this.fieldPatterns.length);
     var emptyBuffer = new Buffer([]);
-    var bitmaps = Array.apply(null, new Array(8 * this.fieldPatterns.length)).map(Number.prototype.valueOf, 0); //zero filled array
+    var trace = message[11];
+    if (trace === undefined || trace === null) {
+        trace = $meta.trace = ('000000' + context.trace).substr(-6);
+        context.trace += 1;
+        if (context.trace > 999999) {
+            context.trace = 0;
+        }
+    }
+    message[11] = trace;
+    var bitmaps = Array.apply(null, new Array(8 * this.fieldPatterns.length)).map(Number.prototype.valueOf, 0); // zero filled array
     for (var i = 64 * this.fieldPatterns.length; i >= 0; i -= 1) {
         if (i === 0) {
             buffers[i] = this.encodeField(i, new Buffer(bitmaps.slice(0, 8)));
         } else if (i % 64 === 1 && i < 64 * (this.fieldPatterns.length - 1)) {
-            var index = (i >> 6) << 3 ;
+            var index = (i >> 6) << 3;
             var bitmap = bitmaps.slice(index + 8, index + 16);
-            if(bitmap.reduce(function(p, n) {return p + n;})) {
-                bitmaps [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
+            if (bitmap.reduce(function(p, n) { return p + n; })) {
+                bitmaps [(i - 1) >> 3] |= (128 >> (i - 1) % 8);
                 buffers[i] = this.encodeField(i, new Buffer(bitmap));
             } else {
                 buffers[i] = emptyBuffer;
             }
         } else if (message[i] !== undefined) {
-            bitmaps [(i - 1) >> 3 ] |= (128 >> (i - 1) % 8);
+            bitmaps [(i - 1) >> 3] |= (128 >> (i - 1) % 8);
             buffers[i] = this.encodeField(i, message[i]);
         } else {
             buffers[i] = emptyBuffer;

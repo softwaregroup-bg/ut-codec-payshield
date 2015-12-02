@@ -1,4 +1,4 @@
-﻿var bitsyntax = require('ut-bitsyntax');
+var bitsyntax = require('ut-bitsyntax');
 
 /**
  * HSM payShield commands parser
@@ -26,10 +26,10 @@ function PayshieldParser(config, val, log) {
      * }
  */
 PayshieldParser.prototype.init = function(config) {
-    //config.fieldFormat {pvk:33}
-    //config.messageFormat {generate_offset_ibm_lmk:{...}}
-    //config.headerFormat = '4/string'
-    this.logFactory && (this.log = this.logFactory.createLog(config.logLevel, {name:config.id, context:'PayShield codec'}));
+    // config.fieldFormat {pvk:33}
+    // config.messageFormat {generate_offset_ibm_lmk:{...}}
+    // config.headerFormat = '4/string'
+    this.logFactory && (this.log = this.logFactory.createLog(config.logLevel, {name: config.id, context: 'PayShield codec'}));
     if (this.log.info) {
         this.log.info('Initializing Payshield parser! headerFormat: ' + config.headerFormat + ', fieldFormat: ' +
         config.fieldFormat + ',messageFormat:' + config.messageFormat);
@@ -37,18 +37,18 @@ PayshieldParser.prototype.init = function(config) {
 
     this.headerPattern = bitsyntax.parse('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
 
-    var nconf = require('nconf'); //todo remove nconf instead use _.assign and loading file with require
+    var nconf = require('nconf'); // todo remove nconf instead use _.assign and loading file with require
 
     var commandsObj = new nconf.Provider({
         stores: [
-            {name: 'impl'   , type: 'literal', store: config.messageFormat || {}},
+            {name: 'impl', type: 'literal', store: config.messageFormat || {}},
             {name: 'default', type: 'file', file: require.resolve('./payshield.messages.json')}
         ]
     }).get();
 
     var fieldFormat = new nconf.Provider({
         stores: [
-            {name: 'impl'   , type: 'literal', store: config.fieldFormat || {}},
+            {name: 'impl', type: 'literal', store: config.fieldFormat || {}},
             {name: 'default', type: 'file', file: require.resolve('./payshield.fields.json')}
         ]
     }).get();
@@ -70,7 +70,7 @@ PayshieldParser.prototype.init = function(config) {
                         if (isNaN(sizee)) {
                             throw new Error('Invalid value for size field:' + currSize + '!');
                         }
-                        value.size = parseInt(sizee);
+                        value.size = parseInt(sizee, 10);
                     }
                 }
             });
@@ -84,10 +84,11 @@ PayshieldParser.prototype.init = function(config) {
 /**
  * Decoding Buffer
  * @param {Buffer} buff - buffer for decoding.
+ * @param {object} $meta - metadata
  * @returns {JSON}  json object with extracted values from buffer with property names from message pattern
  *  and system field $$:{'trace', 'mtid', 'opcode'}
  */
-PayshieldParser.prototype.decode = function(buff) {
+PayshieldParser.prototype.decode = function(buff, $meta) {
     if (this.log.debug) { this.log.debug('PayshieldParser.decode buffer:' + buff.toString()); }
     var headObj = bitsyntax.match(this.headerPattern, buff);
     if (!headObj) {
@@ -108,17 +109,18 @@ PayshieldParser.prototype.decode = function(buff) {
         throw new Error('Unable to match response errorCode!');
     }
     if (bodyObj.errorCode === '00' || bodyObj.errorCode === '02') {
-
         bodyObj = bitsyntax.match(cmd.pattern, headObj.body);
         if (!bodyObj) {
             throw new Error('Unable to match pattern for opcode:' + commandName + '!');
         }
-        bodyObj.$$ = {trace: headObj.headerNo, mtid : cmd.mtid, opcode : commandName};
-
+        $meta.trace = headObj.headerNo;
+        $meta.mtid = cmd.mtid;
+        $meta.opcode = commandName;
     } else {
-        bodyObj = {
-            $$:{trace: headObj.headerNo, opcode : commandName, mtid:'error', errorCode:bodyObj.errorCode}  //todo also return the error message as per payshield documentation
-        }
+        $meta.trace = headObj.headerNo;
+        $meta.mtid = 'error';
+        $meta.errorCode = bodyObj.errorCode; // todo also return the error message as per payshield documentation
+        bodyObj = {};
     }
     return bodyObj;
 };
@@ -126,22 +128,24 @@ PayshieldParser.prototype.decode = function(buff) {
 /**
  * Convert object to Buffer
  * @param {object} data - json object with fields:{$$:{opcode - required, trace - required},  rest are field names from message pattern}
+ * @param {object} $meta - metadata
  * @param {object} context - the connection context
  * @returns {buffer}  encoded buffer
  */
-PayshieldParser.prototype.encode = function(data, context) {
-    //TODO: add validation
+PayshieldParser.prototype.encode = function(data, $meta, context) {
+    // TODO: add validation
     this.log.debug && this.log.debug('PayshieldParser.encode data:' + data);
-    var commandName = data.$$.opcode;
-    var headerNo = data.$$.trace;
+    var commandName = $meta.opcode;
 
     if (this.commands[commandName] === undefined) {
         throw new Error('Not implemented opcode:' + commandName + '!');
     }
 
+    var headerNo = $meta.trace;
     if (headerNo === undefined || headerNo === null) {
-        headerNo = data.$$.trace = ('000000' + context.trace).substr(-6);
-        if (++context.trace > 999999) {
+        headerNo = $meta.trace = ('000000' + context.trace).substr(-6);
+        context.trace += 1;
+        if (context.trace > 999999) {
             context.trace = 0;
         }
     }

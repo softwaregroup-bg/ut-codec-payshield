@@ -1,13 +1,4 @@
-define([
-    'intern!bdd',
-    'intern/chai!assert',
-    'intern/chai!expect',
-    'intern/dojo/node!ut-bitsyntax',
-    'intern/dojo/node!../ndc',
-    'intern/dojo/node!ut-validate',
-    'intern/dojo/node!./testData/ndc'
-], function(bdd, assert, expect, BitSyntax, NDC, validators, samples) {
-
+function testme(bdd, assert, expect, BitSyntax, NDC, validators, samples) {
     function processBuffer(buffer, pattern, callback) {
         var buf = pattern(buffer);
         while (buf.frame) {
@@ -112,7 +103,6 @@ define([
                 } catch (e) {
                     expect(e.message.replace(/"/g, '')).to.be.equal('Expected , or [ \\t\\n] but i found.');
                 }
-
             });
         });
         bdd.it('transactionReply(opCode=B): should succeed', function() {
@@ -171,7 +161,7 @@ define([
                     expect(out1.length).to.be.equal(out2.length);
                     assert.deepEqual(out1.toString(), out2.toString());
                 });
-            } catch(e) {
+            } catch (e) {
                 expect(e.message).to.be.equal('child "&#x24;&#x24;" fails because [child "mtid" fails because ["mtid" is not allowed to be empty]]');
             }
         });
@@ -234,4 +224,6 @@ define([
             });
         });
     });
-});
+};
+
+testme();

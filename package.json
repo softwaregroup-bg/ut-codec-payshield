@@ -1,6 +1,6 @@
 {
   "name": "ut-codec",
-  "version": "5.0.6",
+  "version": "5.4.1",
   "main": "./index.js",
   "dependencies": {
     "iconv-lite": "~0.4.7",
@@ -13,10 +13,12 @@
     "chai": "~1.10.0",
     "intern": "~2.2.2",
     "jsdoc": "~3.3.0",
-    "mocha": "~2.0.1"
+    "mocha": "~2.0.1",
+    "ut-tools": "~0.5.1"
   },
   "scripts": {
-    "test": "intern-client config=tests/intern"
+    "test": "intern-client config=tests/intern & npm run lint",
+    "lint": "ut-lint ."
   },
   "publishConfig": {
     "registry": "http://npm.softwaregroup-bg.com:5001"
