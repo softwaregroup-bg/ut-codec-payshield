@@ -14,11 +14,14 @@
     "intern": "~2.2.2",
     "jsdoc": "~3.3.0",
     "mocha": "~2.0.1",
-    "ut-tools": "~0.5.1"
+    "ut-tools": "~1.0.0"
   },
   "scripts": {
-    "test": "intern-client config=tests/intern & npm run lint",
-    "lint": "ut-lint ."
+    "lint": "ut-lint .",
+    "pre-commit": "npm run lint",
+    "pre-release": "ut-pre-release",
+    "release": "ut-release",
+    "post-release": "ut-post-release"
   },
   "publishConfig": {
     "registry": "http://npm.softwaregroup-bg.com:5001"
