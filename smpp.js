@@ -173,6 +173,7 @@ SmppParser.prototype.decode = function(buff, $meta) {
     headObj.body = body;
     $meta.trace = headObj.sequenceNumber;
     $meta.opcode = opcode;
+    $meta.mtid = messageFormat.mtid;
     return headObj;
 };
 
