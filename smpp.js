@@ -68,6 +68,25 @@ var tlvTagsByName = {
     'its_reply_type': '1380',
     'its_session_info': '1383'
 };
+var tlvBuilders = {
+    user_message_reference: {
+        fix: function(v) { return parseInt(v, 10); },
+        builder: bitsyntax.parse('t:2/binary, l:16/integer, v:16/integer'),
+        tlv: {t: new Buffer('0204', 'hex'), l: 2, v: 0}
+    }
+};
+function tvlBuild(k, v) {
+    var tlv = tlvBuilders[k];
+    var o = tlv.tlv.v;
+    tlv.tlv.v = v;
+    if (tlv.fix) {
+        tlv.tlv.v = tlv.fix(tlv.tlv.v);
+    }
+    var r = bitsyntax.build(tlv.builder, tlv.tlv);
+    tlv.tlv.v = o;
+    return r;
+}
+
 var tlvTagsById = _.invert(tlvTagsByName);
 
 var encodingsByName = {
@@ -202,7 +221,7 @@ SmppParser.prototype.encode = function(data, $meta, context) {
         throw new Error('Not implemented opcode:' + opcode + '!');
     }
 
-    if ($meta.trace !== null && $meta.trace !== undefined) {
+    if ($meta.trace === null || $meta.trace === undefined) {
         context.trace += 1;
         if (context.trace > 999999999) {
             context.trace = 1;
@@ -219,13 +238,11 @@ SmppParser.prototype.encode = function(data, $meta, context) {
                 throw new Error('data.tvls must be an object of tagName:value pairs');
             }
             var tlvs = '';
-            var vBuffer = null;
             Object.keys(data.tlvs).map(function(tlv) {
                 if (!tlvTagsByName[tlv]) {
                     throw new Error('Unknown TLV tag name: ' + tlv + '!');
                 }
-                vBuffer = new Buffer(data.tlvs[tlv]);
-                tlvs += tlvTagsByName[tlv] + ('0000' + vBuffer.length.toString(16)).slice(-4) + vBuffer.toString('hex');
+                tlvs += tvlBuild(tlv, data.tlvs[tlv]).toString('hex');
             }, this);
             data.tlvs = new Buffer(tlvs, 'hex');
         }
