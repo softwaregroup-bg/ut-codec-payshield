@@ -1,3 +1,5 @@
+/* eslint no-console:0 */
+
 var Iso8583 = require('../iso8583.js');
 var adiff = require('adiff');
 

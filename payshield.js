@@ -1,4 +1,7 @@
 var bitsyntax = require('ut-bitsyntax');
+var assign = require('lodash/object/assign');
+var defaultFormat = require('./payshield.messages.json');
+var defaultFields = require('./payshield.fields.json');
 
 /**
  * HSM payShield commands parser
@@ -37,21 +40,8 @@ PayshieldParser.prototype.init = function(config) {
 
     this.headerPattern = bitsyntax.parse('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
 
-    var nconf = require('nconf'); // todo remove nconf instead use _.assign and loading file with require
-
-    var commandsObj = new nconf.Provider({
-        stores: [
-            {name: 'impl', type: 'literal', store: config.messageFormat || {}},
-            {name: 'default', type: 'file', file: require.resolve('./payshield.messages.json')}
-        ]
-    }).get();
-
-    var fieldFormat = new nconf.Provider({
-        stores: [
-            {name: 'impl', type: 'literal', store: config.fieldFormat || {}},
-            {name: 'default', type: 'file', file: require.resolve('./payshield.fields.json')}
-        ]
-    }).get();
+    var commandsObj = assign({}, defaultFormat, config.messageFormat);
+    var fieldFormat = assign({}, defaultFields, config.fieldFormat);
 
     if (this.headerPattern === false) {
         throw new Error('Cant parse headerPattern pattern!');

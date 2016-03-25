@@ -1,3 +1,5 @@
+/* eslint no-console:0 */
+
 function testme(bdd, assert, expect, BitSyntax, NDC, validators, samples) {
     function processBuffer(buffer, pattern, callback) {
         var buf = pattern(buffer);

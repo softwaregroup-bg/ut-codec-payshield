@@ -1,6 +1,11 @@
 var bitsyntax = require('ut-bitsyntax');
-var nconf = require('nconf'); // todo remove nconf instead use _.assign and loading file with require
-var _ = require('lodash');
+// var nconf = require('nconf'); // todo remove nconf instead use _.assign and loading file with require
+// var _ = require('lodash');
+var assign = require('lodash/object/assign');
+var invert = require('lodash/object/invert');
+var isEmpty = require('lodash/lang/isEmpty');
+var isObject = require('lodash/lang/isObject');
+
 var iconv = require('iconv-lite');
 var tlvTagsByName = {
     'dest_addr_subunit': '0005',
@@ -69,7 +74,7 @@ var tlvTagsByName = {
     'its_session_info': '1383'
 };
 var tlvBuilders = {
-    user_message_reference: {
+    'user_message_reference': {
         fix: function(v) { return parseInt(v, 10); },
         builder: bitsyntax.parse('t:2/binary, l:16/integer, v:16/integer'),
         tlv: {t: new Buffer('0204', 'hex'), l: 2, v: 0}
@@ -87,7 +92,7 @@ function tvlBuild(k, v) {
     return r;
 }
 
-var tlvTagsById = _.invert(tlvTagsByName);
+var tlvTagsById = invert(tlvTagsByName);
 
 var encodingsByName = {
     'default': 3,
@@ -98,7 +103,7 @@ var encodingsByName = {
     'UCS2': 8  // Alias of 'utf16le'
 };
 
-var encodingsById = _.invert(encodingsByName);
+var encodingsById = invert(encodingsByName);
 /**
  * SMPP commands parser
  *
@@ -119,12 +124,7 @@ function SmppParser(config, val, log) {
 SmppParser.prototype.init = function(config) {
     this.logFactory && (this.log = this.logFactory.createLog(config.logLevel, {name: config.id, context: 'SMPP codec'}));
     this.log.info && this.log.info('Initializing SMPP parser!');
-    this.messageFormats = new nconf.Provider({
-        stores: [
-            {name: 'impl', type: 'literal', store: config.messageFormat},
-            {name: 'default', type: 'file', file: require.resolve('./smpp.messages.json')}
-        ]
-    }).get();
+    this.messageFormats = assign({}, require('./smpp.messages.json'), config.messageFormat);
     Object.keys(this.messageFormats).map(function(opcode) {
         if (this.messageFormats[opcode] && this.messageFormats[opcode].commandId) {
             if (this.messageFormats[opcode].pattern) {
@@ -231,10 +231,10 @@ SmppParser.prototype.encode = function(data, $meta, context) {
 
     var body = new Buffer('');
     if (this.messageFormats[opcode].pattern) {
-        if (!data.tlvs || _.isEmpty(data.tlvs)) {
+        if (!data.tlvs || isEmpty(data.tlvs)) {
             data.tlvs = new Buffer(0); // pass empty buffer
         } else {
-            if (!_.isObject(data.tlvs)) {
+            if (!isObject(data.tlvs)) {
                 throw new Error('data.tvls must be an object of tagName:value pairs');
             }
             var tlvs = '';

@@ -4,7 +4,7 @@
     * @description Parser module to handle I/O for the NDC protocol
     * @requires nconf
     */
-var nconf = require('nconf'); // todo remove nconf instead use _.assign and loading file with require
+var assign = require('lodash/object/assign');
 
 /**
     * @class NDC
@@ -24,12 +24,8 @@ function NDC(config, validator, logger) {
         * @param {Object} messageFormat
         * @description List of all fields within a message
         */
-    this.messageFormat = new nconf.Provider({
-        stores: [
-            {name: 'impl', type: 'literal', store: config.messageFormatOverride || {}},
-            {name: 'default', type: 'file', file: require.resolve('./ndc.messages.json')}
-        ]
-    }).get();
+    this.messageFormat = assign({}, require('./ndc.messages.json'), config.messageFormat);
+
     /**
         * @function val
         * @description Empty validation method

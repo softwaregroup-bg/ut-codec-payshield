@@ -10,21 +10,32 @@
     "ut-validate": "~5.0.0"
   },
   "devDependencies": {
+    "adiff": "0.2.13",
     "chai": "~1.10.0",
     "intern": "~2.2.2",
     "jsdoc": "~3.3.0",
     "mocha": "~2.0.1",
-    "ut-tools": "~1.0.0"
+    "ut-tools": "^5.3.1"
   },
   "scripts": {
     "lint": "ut-lint .",
-    "pre-commit": "npm run lint",
-    "pre-release": "ut-pre-release",
     "release": "ut-release",
-    "post-release": "ut-post-release"
+    "changelog": "ut-changelog",
+    "check": "ut-check",
+    "cover": "ut-cover",
+    "lint-js": "ut-lint-js .",
+    "postpublish": "ut-postpublish",
+    "postversion": "ut-postversion",
+    "precommit": "ut-precommit",
+    "prepublish": "ut-prepublish",
+    "prepush": "ut-prepush",
+    "pretest": "ut-pretest",
+    "preversion": "ut-preversion",
+    "test": "ut-test",
+    "version": "ut-version"
   },
   "publishConfig": {
-    "registry": "http://npm.softwaregroup-bg.com:5001"
+    "registry": "https://nexus.softwaregroup-bg.com/repository/npm-internal"
   },
   "description": "UT codec module.",
   "repository": {

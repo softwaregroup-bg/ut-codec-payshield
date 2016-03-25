@@ -1,5 +1,5 @@
 'use strict';
-var _ = require('lodash');
+var assign = require('lodash/object/assign');
 var defaultFields = require('./iso8583.fields.json');
 var bitSyntax = require('ut-bitsyntax');
 
@@ -8,7 +8,7 @@ function getFormat(format, fallback) {
 }
 
 function Iso8583(config) {
-    this.fieldFormat = _.assign({}, defaultFields[(config.version || '0') + (config.baseEncoding || 'ascii')], config.fieldFormat);
+    this.fieldFormat = assign({}, defaultFields[(config.version || '0') + (config.baseEncoding || 'ascii')], config.fieldFormat);
     this.framePattern = bitSyntax.matcher('header:' + this.fieldFormat.header.size + '/' + getFormat(this.fieldFormat.header.format) +
         ', mtid:' + this.fieldFormat.mtid.size + '/' + getFormat(this.fieldFormat.mtid.format) +
         ', field0:' + this.fieldFormat['0'].size + '/' + getFormat(this.fieldFormat['0'].format) +
