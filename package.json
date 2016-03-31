@@ -3,18 +3,13 @@
   "version": "5.4.12",
   "main": "./index.js",
   "dependencies": {
-    "iconv-lite": "~0.4.7",
-    "lodash": "^3.5.0",
-    "nconf": "~0.7.1",
+    "iconv-lite": "0.4.13",
+    "lodash": "3.10.1",
     "ut-bitsyntax": "~5.0.3",
     "ut-validate": "~5.0.0"
   },
   "devDependencies": {
     "adiff": "0.2.13",
-    "chai": "~1.10.0",
-    "intern": "~2.2.2",
-    "jsdoc": "~3.3.0",
-    "mocha": "~2.0.1",
     "ut-tools": "^5.3.1"
   },
   "scripts": {
