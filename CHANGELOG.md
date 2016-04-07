@@ -1,3 +1,13 @@
+<a name="5.4.14"></a>
+## [5.4.14](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.13...v5.4.14) (2016-04-07)
+
+
+### Bug Fixes
+
+* remove dynamic require ([c6d1170](https://git.softwaregroup-bg.com/ut5/ut-codec/commit/c6d1170))
+
+
+
 <a name="5.4.13"></a>
 ## [5.4.13](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.12...v5.4.13) (2016-03-31)
 
