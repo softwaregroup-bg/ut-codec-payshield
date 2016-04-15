@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "adiff": "0.2.13",
-    "ut-tools": "^5.3.1"
+    "ut-tools": "^5.3.13"
   },
   "scripts": {
     "lint": "ut-lint .",
@@ -27,7 +27,9 @@
     "pretest": "ut-pretest",
     "preversion": "ut-preversion",
     "test": "ut-test",
-    "version": "ut-version"
+    "version": "ut-version",
+    "jenkins": "ut-jenkins",
+    "gitlab": "ut-gitlab"
   },
   "publishConfig": {
     "registry": "https://nexus.softwaregroup-bg.com/repository/npm-internal"
