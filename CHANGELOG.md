@@ -1,3 +1,13 @@
+<a name="5.4.15"></a>
+## [5.4.15](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.14...v5.4.15) (2016-04-15)
+
+
+### Features
+
+* add Gitlab-ci and Jenkins scripts ([015a404](https://git.softwaregroup-bg.com/ut5/ut-codec/commit/015a404))
+
+
+
 <a name="5.4.14"></a>
 ## [5.4.14](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.13...v5.4.14) (2016-04-07)
 
