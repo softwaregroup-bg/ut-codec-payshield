@@ -1,3 +1,13 @@
+<a name="5.4.16"></a>
+## [5.4.16](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.15...v5.4.16) (2016-05-14)
+
+
+### Bug Fixes
+
+* do not overwrite messageFormat.pattern ([1932ef1](https://git.softwaregroup-bg.com/ut5/ut-codec/commit/1932ef1))
+
+
+
 <a name="5.4.15"></a>
 ## [5.4.15](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.14...v5.4.15) (2016-04-15)
 
