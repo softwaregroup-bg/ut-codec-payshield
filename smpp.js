@@ -115,6 +115,7 @@ function SmppParser(config, val, log) {
     this.log = {};
     this.val = val;
     this.messageFormats = {};
+    this.patterns = {};
     this.opCodes = {};
     this.headerPattern = bitsyntax.parse('commandId:32/integer, commandStatus:32/integer, sequenceNumber:32/integer, body/binary');
     this.tlvPattern = bitsyntax.parse('t:16/integer, l:16/integer, v:l/string, next/binary');
@@ -128,7 +129,7 @@ SmppParser.prototype.init = function(config) {
     Object.keys(this.messageFormats).map(function(opcode) {
         if (this.messageFormats[opcode] && this.messageFormats[opcode].commandId) {
             if (this.messageFormats[opcode].pattern) {
-                this.messageFormats[opcode].pattern = bitsyntax.parse(this.messageFormats[opcode].pattern.join(', '));
+                this.patterns[opcode] = bitsyntax.parse(this.messageFormats[opcode].pattern.join(', '));
             }
             this.opCodes[this.messageFormats[opcode].commandId] = opcode;
         }
@@ -152,14 +153,15 @@ SmppParser.prototype.decode = function(buff, $meta) {
     headObj.commandId = ('00000000' + headObj.commandId.toString(16).toUpperCase()).slice(-8);
     var opcode = this.opCodes[headObj.commandId];
     var messageFormat = this.messageFormats[opcode];
+    var pattern = this.patterns[opcode];
     var body = {};
     if (!opcode) {
         throw new Error('Not implemented opcode:' + headObj.commandId);
     }
 
-    if (messageFormat.pattern) {
+    if (pattern) {
         if (headObj.body) {
-            body = bitsyntax.match(messageFormat.pattern, headObj.body);
+            body = bitsyntax.match(pattern, headObj.body);
         }
         if (body.tlvs) {
             if (body.tlvs.length) {
@@ -230,7 +232,7 @@ SmppParser.prototype.encode = function(data, $meta, context) {
     }
 
     var body = new Buffer('');
-    if (this.messageFormats[opcode].pattern) {
+    if (this.patterns[opcode]) {
         if (!data.tlvs || isEmpty(data.tlvs)) {
             data.tlvs = new Buffer(0); // pass empty buffer
         } else {
@@ -246,7 +248,7 @@ SmppParser.prototype.encode = function(data, $meta, context) {
             }, this);
             data.tlvs = new Buffer(tlvs, 'hex');
         }
-        body = bitsyntax.build(this.messageFormats[opcode].pattern, data);
+        body = bitsyntax.build(this.patterns[opcode], data);
         if (!body) {
             throw new Error('Unable to build body for opcode:' + opcode + '!');
         }
