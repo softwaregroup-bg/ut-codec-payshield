@@ -1,3 +1,14 @@
+<a name="5.4.18"></a>
+## [5.4.18](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.17...v5.4.18) (2016-06-08)
+
+
+### Bug Fixes
+
+* add missing dependency ([89a27ce](https://git.softwaregroup-bg.com/ut5/ut-codec/commit/89a27ce))
+* upgrade lodash ([7fe1c9e](https://git.softwaregroup-bg.com/ut5/ut-codec/commit/7fe1c9e))
+
+
+
 <a name="5.4.17"></a>
 ## [5.4.17](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.16...v5.4.17) (2016-06-03)
 
