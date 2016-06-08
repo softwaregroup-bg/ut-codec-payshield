@@ -1,10 +1,8 @@
 var bitsyntax = require('ut-bitsyntax');
-// var nconf = require('nconf'); // todo remove nconf instead use _.assign and loading file with require
-// var _ = require('lodash');
-var assign = require('lodash/object/assign');
-var invert = require('lodash/object/invert');
-var isEmpty = require('lodash/lang/isEmpty');
-var isObject = require('lodash/lang/isObject');
+var assign = require('lodash.assign');
+var invert = require('lodash.invert');
+var isEmpty = require('lodash.isempty');
+var isObject = require('lodash.isobject');
 
 var iconv = require('iconv-lite');
 var tlvTagsByName = {

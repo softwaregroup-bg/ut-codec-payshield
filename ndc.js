@@ -4,7 +4,7 @@
     * @description Parser module to handle I/O for the NDC protocol
     * @requires nconf
     */
-var assign = require('lodash/object/assign');
+var assign = require('lodash.assign');
 
 /**
     * @class NDC

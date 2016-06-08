@@ -1,7 +1,7 @@
 'use strict';
 
 var maxInteger = isFinite(Number.MAX_SAFE_INTEGER) ? Number.MAX_SAFE_INTEGER : 2147483647;
-var omit = require('lodash/object/omit');
+var omit = require('lodash.omit');
 
 function JsonRpc(config, validator, logger) {
     this._config = config;

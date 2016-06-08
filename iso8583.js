@@ -1,5 +1,5 @@
 'use strict';
-var assign = require('lodash/object/assign');
+var assign = require('lodash.assign');
 var defaultFields = require('./iso8583.fields.json');
 var bitSyntax = require('ut-bitsyntax');
 

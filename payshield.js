@@ -1,5 +1,5 @@
 var bitsyntax = require('ut-bitsyntax');
-var assign = require('lodash/object/assign');
+var assign = require('lodash.assign');
 var defaultFormat = require('./payshield.messages.json');
 var defaultFields = require('./payshield.fields.json');
 
