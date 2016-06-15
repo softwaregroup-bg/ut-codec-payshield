@@ -1,3 +1,14 @@
+<a name="5.4.19"></a>
+## [5.4.19](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.18...v5.4.19) (2016-06-15)
+
+
+### Bug Fixes
+
+* **jsonrpc:** Fix the message on error/success check. ([f9ec6a9](https://git.softwaregroup-bg.com/ut5/ut-codec/commit/f9ec6a9))
+* **jsonrpc:** Wrong operator for checking response type. ([552e2a3](https://git.softwaregroup-bg.com/ut5/ut-codec/commit/552e2a3))
+
+
+
 <a name="5.4.18"></a>
 ## [5.4.18](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.17...v5.4.18) (2016-06-08)
 
