@@ -167,7 +167,7 @@ function decodeGuess(codec, data, $meta, context) {
         throw new Error('Invalid JSON-RPC request: unsupported version');
     }
     if (data.id == null) {
-        if (data.hasOwnProperty('error') || data.hasOwnProperty('result')) {
+        if (data.hasOwnProperty('error') && data.hasOwnProperty('result')) {
             throw new Error('Invalid JSON-RPC: It looks like request and notification in one');
         }
         $meta.mtid = 'notification';
