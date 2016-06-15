@@ -168,7 +168,7 @@ function decodeGuess(codec, data, $meta, context) {
     }
     if (data.id == null) {
         if (data.hasOwnProperty('error') && data.hasOwnProperty('result')) {
-            throw new Error('Invalid JSON-RPC: It looks like request and notification in one');
+            throw new Error('Invalid JSON-RPC: It looks like error and successful response in one');
         }
         $meta.mtid = 'notification';
         if (typeof data.method !== 'string') {
