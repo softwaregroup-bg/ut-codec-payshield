@@ -104,11 +104,12 @@ function encodeRequest(codec, data, $meta, context) {
     if (typeof $meta.opcode !== 'string') {
         throw new Error('Invalid JSON-RPC request');
     }
+    var trace = $meta.trace = nextTrace(context);
     return {
         jsonrpc: '2.0', // TODO: Add this if and only if config.version specify it with value '2.0' or greater.
         method: $meta.opcode,
         params: data,
-        id: $meta.trace = nextTrace(context)
+        id: trace
     };
 }
 

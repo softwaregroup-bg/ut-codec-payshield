@@ -119,7 +119,7 @@ function testme(bdd, assert, expect, BitSyntax, NDC, validators, samples) {
                 var buffer = ndc.encode({
                     $$: {mtid: 'request', opcode: 'transactionReply'}, luno: '001', nextState: '133', type1Notes: '00', type2Notes: '00', type3Notes: '00',
                     type4Notes: '00', sernum: '0000',
-                    function: '5066066PEUTSwitchCFC_066.BMP\[00;F4;80m[00;F4;80mF11013159529537I13014383698356L14012747875107',
+                    function: '5066066PEUTSwitchCFC_066.BMP\\[00;F4;80m[00;F4;80mF11013159529537I13014383698356L14012747875107',
                     coordination: decodedMsg.trtfMcn.charAt(1), cardReturn: '0', printer: '0'
                 });
                 var pattern = BitSyntax.parse('size:16, bin:size/binary');
@@ -148,7 +148,7 @@ function testme(bdd, assert, expect, BitSyntax, NDC, validators, samples) {
                     var buffer = ndc.encode({
                         $$: {mtid: '', opcode: ''}, luno: '001', nextState: '133', type1Notes: '00', type2Notes: '00', type3Notes: '00',
                         type4Notes: '00', sernum: '0000',
-                        function: '5066066PEUTSwitchCFC_066.BMP\[00;F4;80m[00;F4;80mF11013159529537I13014383698356L14012747875107',
+                        function: '5066066PEUTSwitchCFC_066.BMP\\[00;F4;80m[00;F4;80mF11013159529537I13014383698356L14012747875107',
                         coordination: decodedMsg.trtfMcn.charAt(1), cardReturn: '0', printer: '0'
                     });
                     var pattern = BitSyntax.parse('size:16, bin:size/binary');
@@ -179,7 +179,7 @@ function testme(bdd, assert, expect, BitSyntax, NDC, validators, samples) {
                 });
                 var buffer = ndc.encode({
                     $$: {mtid: 'request', opcode: 'transactionReply'}, luno: '001', nextState: '055', type1Notes: '00', type2Notes: '00',
-                    type3Notes: '00', type4Notes: '00', sernum: '0686', function: '5046046PEUTSwitchCFC_046.BMP\[00;F4;80mHKIK3.03',
+                    type3Notes: '00', type4Notes: '00', sernum: '0686', function: '5046046PEUTSwitchCFC_046.BMP\\[00;F4;80mHKIK3.03',
                     coordination: decodedMsg.trtfMcn.charAt(1), cardReturn: '0',
                     printer: '3[000p[040q(I\n\n\n\n\n\nBALANCE INQUIRY\n\nDATE\t\tTIME\tSEQ#\n\n02-12-2014 14:53:28\t0686\n\nCARD: 5859XXXXXXXX3949\nACCOUNT: 1013159529537\n\nATM ID: Accra\nTRANSACTION#: 8067\n\nAVAILABLE: 3.03'
                 });
@@ -208,7 +208,7 @@ function testme(bdd, assert, expect, BitSyntax, NDC, validators, samples) {
                 });
                 var buffer = ndc.encode({
                     $$: {mtid: 'request', opcode: 'transactionReply'}, luno: '001', nextState: '055', type1Notes: '00', type2Notes: '00',
-                    type3Notes: '00', type4Notes: '00', sernum: '0686', function: '5046046PEUTSwitchCFC_046.BMP\[00;F4;80mHKIK3.03',
+                    type3Notes: '00', type4Notes: '00', sernum: '0686', function: '5046046PEUTSwitchCFC_046.BMP\\[00;F4;80mHKIK3.03',
                     coordination: decodedMsg.trtfMcn.charAt(1), cardReturn: '0',
                     printer: '3[000p[040q(I\n\n\n\n\n\nBALANCE INQUIRY\n\nDATE\t\tTIME\tSEQ#\n\n02-12-2014 14:53:28\t0686\n\nCARD: 5859XXXXXXXX3949\nACCOUNT: 1013159529537\n\nATM ID: Accra\nTRANSACTION#: 8067\n\nAVAILABLE: 3.03'
                 });

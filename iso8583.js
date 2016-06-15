@@ -130,13 +130,13 @@ Iso8583.prototype.encode = function(message, $meta, context) {
             var index = (i >> 6) << 3;
             var bitmap = bitmaps.slice(index + 8, index + 16);
             if (bitmap.reduce(function(p, n) { return p + n; })) {
-                bitmaps [(i - 1) >> 3] |= (128 >> (i - 1) % 8);
+                bitmaps[(i - 1) >> 3] |= (128 >> (i - 1) % 8);
                 buffers[i] = this.encodeField(i, new Buffer(bitmap));
             } else {
                 buffers[i] = emptyBuffer;
             }
         } else if (message[i] !== undefined) {
-            bitmaps [(i - 1) >> 3] |= (128 >> (i - 1) % 8);
+            bitmaps[(i - 1) >> 3] |= (128 >> (i - 1) % 8);
             buffers[i] = this.encodeField(i, message[i]);
         } else {
             buffers[i] = emptyBuffer;
