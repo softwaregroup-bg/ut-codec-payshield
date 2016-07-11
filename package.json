@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "adiff": "0.2.13",
-    "ut-tools": "^5.3.13"
+    "ut-tools": "^5.4.1"
   },
   "scripts": {
     "lint": "ut-lint .",
