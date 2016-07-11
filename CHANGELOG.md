@@ -1,3 +1,13 @@
+<a name="5.4.20"></a>
+## [5.4.20](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.19...v5.4.20) (2016-07-11)
+
+
+### Features
+
+* upgrade dependencies ([7af4c1a](https://git.softwaregroup-bg.com/ut5/ut-codec/commit/7af4c1a))
+
+
+
 <a name="5.4.19"></a>
 ## [5.4.19](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.18...v5.4.19) (2016-06-15)
 
