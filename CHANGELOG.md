@@ -1,3 +1,14 @@
+<a name="5.4.22"></a>
+## [5.4.22](https://github.com/softwaregroup-bg/ut-codec/compare/v5.4.21...v5.4.22) (2016-08-12)
+
+
+### Bug Fixes
+
+* publish to npm ([d568905](https://github.com/softwaregroup-bg/ut-codec/commit/d568905))
+* update dependencies ([169c96c](https://github.com/softwaregroup-bg/ut-codec/commit/169c96c))
+
+
+
 <a name="5.4.21"></a>
 ## [5.4.21](https://git.softwaregroup-bg.com/ut5/ut-codec/compare/v5.4.20...v5.4.21) (2016-08-02)
 
