@@ -4,17 +4,16 @@
   "main": "./index.js",
   "dependencies": {
     "iconv-lite": "0.4.13",
-    "lodash.assign": "4.0.9",
-    "lodash.omit": "4.3.0",
-    "lodash.invert": "4.1.1",
-    "lodash.isempty": "4.2.1",
+    "lodash.assign": "4.1.0",
+    "lodash.omit": "4.4.1",
+    "lodash.invert": "4.2.0",
+    "lodash.isempty": "4.3.1",
     "lodash.isobject": "3.0.2",
-    "ut-bitsyntax": "~5.0.3",
-    "ut-validate": "~5.0.0"
+    "ut-bitsyntax": "~5.4.2"
   },
   "devDependencies": {
     "adiff": "0.2.13",
-    "ut-tools": "^5.6.0"
+    "ut-tools": "^5.6.2"
   },
   "scripts": {
     "lint": "ut-lint .",
