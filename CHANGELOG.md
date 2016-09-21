@@ -1,3 +1,8 @@
+<a name="5.4.23"></a>
+## [5.4.23](https://github.com/softwaregroup-bg/ut-codec/compare/v5.4.22...v5.4.23) (2016-09-21)
+
+
+
 <a name="5.4.22"></a>
 ## [5.4.22](https://github.com/softwaregroup-bg/ut-codec/compare/v5.4.21...v5.4.22) (2016-08-12)
 
