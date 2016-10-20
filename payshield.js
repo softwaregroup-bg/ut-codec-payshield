@@ -1,85 +1,160 @@
 var bitsyntax = require('ut-bitsyntax');
-var assign = require('lodash.assign');
+var merge = require('lodash.merge');
 var defaultFormat = require('./payshield.messages.json');
 var defaultFields = require('./payshield.fields.json');
 
-/**
- * HSM payShield commands parser
- *
- * @module PayshieldParser
- * @version 1.0
- */
-function PayshieldParser(config, val, log) {
+const ERRORCODES = {
+    '00': 'No error',
+    '01': 'Verification failure or warning of imported key parity error',
+    '02': 'Key inappropriate length for algorithm',
+    '04': 'Invalid key type code',
+    '05': 'Invalid key length flag',
+    '10': 'Source key parity error',
+    '11': 'Destination key parity error or key all zeros',
+    '12': 'Contents of user storage not available. Reset, power-down or overwrite',
+    '13': 'Invalid LMK Identifier',
+    '14': 'PIN encrypted under LMK pair 02-03 is invalid',
+    '15': 'Invalid input data (invalid format, invalid characters, or not enough data provided)',
+    '16': 'Console or printer not ready or not connected',
+    '17': 'HSM not in the Authorised state, or not enabled for clear PIN output, or both',
+    '18': 'Document format definition not loaded',
+    '19': 'Specified Diebold Table is invalid',
+    '20': 'PIN block does not contain valid values',
+    '21': 'Invalid index value, or index/block count would cause an overflow condition',
+    '22': 'Invalid account number',
+    '23': 'Invalid PIN block format code',
+    '24': 'PIN is fewer than 4 or more than 12 digits in length',
+    '25': 'Decimalisation Table error',
+    '26': 'Invalid key scheme',
+    '27': 'Incompatible key length',
+    '28': 'Invalid key type',
+    '29': 'Key function not permitted',
+    '30': 'Invalid reference number',
+    '31': 'Insufficient solicitation entries for batch',
+    '33': 'LMK key change storage is corrupted',
+    '39': 'Fraud detection',
+    '40': 'Invalid checksum',
+    '41': 'Internal hardware/software error: bad RAM, invalid error codes, etc.',
+    '42': 'DES failure',
+    '47': 'Algorithm not licensed',
+    '49': 'Private key error, report to supervisor',
+    '51': 'Invalid message header',
+    '65': 'Transaction Key Scheme set to None',
+    '67': 'Command not licensed',
+    '68': 'Command has been disabled',
+    '69': 'PIN block format has been disabled',
+    '74': 'Invalid digest info syntax (no hash mode only)',
+    '75': 'Single length key masquerading as double or triple length key',
+    '76': 'Public key length error',
+    '77': 'Clear data block error',
+    '78': 'Private key length error',
+    '79': 'Hash algorithm object identifier error',
+    '80': 'Data length error. The amount of MAC data (or other data) is greater than or less than the expected amount.',
+    '81': 'Invalid certificate header',
+    '82': 'Invalid check value length',
+    '83': 'Key block format error',
+    '84': 'Key block check value error',
+    '85': 'Invalid OAEP Mask Generation Function',
+    '86': 'Invalid OAEP MGF Hash Function',
+    '87': 'OAEP Parameter Error',
+    '90': 'Data parity error in the request message received by the HSM',
+    '91': 'Longitudinal Redundancy Check (LRC) character does not match the value computed over the input data (when the HSM has received a transparent async packet)',
+    '92': 'The Count value (for the Command/Data field) is not between limits, or is not correct (when the HSM has received a transparent async packet)',
+    'A1': 'Incompatible LMK schemes',
+    'A2': 'Incompatible LMK identifiers',
+    'A3': 'Incompatible keyblock LMK identifiers',
+    'A4': 'Key block authentication failure',
+    'A5': 'Incompatible key length',
+    'A6': 'Invalid key usage',
+    'A7': 'Invalid algorithm',
+    'A8': 'Invalid mode of use',
+    'A9': 'Invalid key version number',
+    'AA': 'Invalid export field',
+    'AB': 'Invalid number of optional blocks',
+    'AC': 'Optional header block error',
+    'AD': 'Key status optional block error',
+    'AE': 'Invalid start date/time',
+    'AF': 'Invalid end date/time',
+    'B0': 'Invalid encryption mode',
+    'B1': 'Invalid authentication mode',
+    'B2': 'Miscellaneous keyblock error',
+    'B3': 'Invalid number of optional blocks',
+    'B4': 'Optional block data error',
+    'B5': 'Incompatible components',
+    'B6': 'Incompatible key status optional blocks',
+    'B7': 'Invalid change field',
+    'B8': 'Invalid old value',
+    'B9': 'Invalid new value',
+    'BA': 'No key status block in the keyblock',
+    'BB': 'Invalid wrapping key',
+    'BC': 'Repeated optional block',
+    'BD': 'Incompatible key types'
+};
+
+function PayshieldCodec(config, val, log) {
     this.logFactory = log;
     this.log = {};
     this.val = val;
-    this.commands = [];
+    this.commands = {};
     this.headerPattern = null;
-    this.commandNames = [];
+    this.commandNames = {};
     this.init(config);
 }
 
-/**
- * Initializing parser defaults
- * @param {JSON} config - json object with initial parameters
- *  config = {
-     *   headerFormat: pattern for header size e.g. '6/string-left-zero';
-     *   fieldFormat: json object with field parameters for overriding default parameters e.g.{pvk:33};
-     *   messageFormat: json object for overriding default messages e.g. {generate_offset_ibm_lmk:{...}};
-     * }
- */
-PayshieldParser.prototype.init = function(config) {
-    // config.fieldFormat {pvk:33}
-    // config.messageFormat {generate_offset_ibm_lmk:{...}}
-    // config.headerFormat = '4/string'
-    this.logFactory && (this.log = this.logFactory.createLog(config.logLevel, {name: config.id, context: 'PayShield codec'}));
+PayshieldCodec.prototype.init = function(config) {
+    this.logFactory && (this.log = this.logFactory.createLog(config.logLevel, {
+        name: config.id,
+        context: 'PayShield codec'
+    }));
     if (this.log.info) {
         this.log.info('Initializing Payshield parser! headerFormat: ' + config.headerFormat + ', fieldFormat: ' +
-        config.fieldFormat + ',messageFormat:' + config.messageFormat);
+            config.fieldFormat + ',messageFormat:' + config.messageFormat);
     }
-
     this.headerPattern = bitsyntax.parse('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
 
-    var commandsObj = assign({}, defaultFormat, config.messageFormat);
-    var fieldFormat = assign({}, defaultFields, config.fieldFormat);
+    var commandsObj = merge({}, defaultFormat, config.messageFormat);
+    this.fieldFormat = merge({}, defaultFields, config.fieldFormat);
 
     if (this.headerPattern === false) {
-        throw new Error('Cant parse headerPattern pattern!');
+        throw new Error('Cant parse header pattern!');
     }
     for (var property in commandsObj) {
         if (commandsObj.hasOwnProperty(property)) {
-            var cmdPattern = bitsyntax.parse(commandsObj[property].Pattern);
-            if (cmdPattern === false) {
-                throw new Error('Cant parse Pattern for command:' + property + '!');
-            }
-            cmdPattern.forEach(function(value) {
-                var currSize = value.size;
-                if (typeof (currSize) === 'string') {
-                    if (fieldFormat[currSize]) {
-                        var sizee = fieldFormat[currSize];
-                        if (isNaN(sizee)) {
-                            throw new Error('Invalid value for size field:' + currSize + '!');
-                        }
-                        value.size = parseInt(sizee, 10);
-                    }
+            if (commandsObj[property].requestPattern) {
+                var requestPattern = bitsyntax.parse(commandsObj[property].requestPattern);
+                if (!requestPattern) {
+                    throw new Error('Cant parse request pattern for command:' + property + '!');
                 }
-            });
+                this.commands[property + ':request'] = {
+                    pattern: requestPattern,
+                    code: commandsObj[property].requestCode,
+                    method: property,
+                    mtid: 'request'
+                };
+                this.commandNames[commandsObj[property].requestCode] = property + ':request';
+            }
 
-            this.commands[property] = {pattern: cmdPattern, code: commandsObj[property].Code, mtid: commandsObj[property].mtid};
-            this.commandNames[commandsObj[property].Code] = property;
+            if (commandsObj[property].responsePattern) {
+                var responsePattern = bitsyntax.parse(commandsObj[property].responsePattern);
+                if (!responsePattern) {
+                    throw new Error('Cant parse response pattern for command:' + property + '!');
+                }
+                this.commands[property + ':response'] = {
+                    pattern: responsePattern,
+                    code: commandsObj[property].responseCode,
+                    method: property,
+                    mtid: 'response'
+                };
+                this.commandNames[commandsObj[property].responseCode] = property + ':response';
+            }
         }
     }
 };
 
-/**
- * Decoding Buffer
- * @param {Buffer} buff - buffer for decoding.
- * @param {object} $meta - metadata
- * @returns {JSON}  json object with extracted values from buffer with property names from message pattern
- *  and system field $$:{'trace', 'mtid', 'opcode'}
- */
-PayshieldParser.prototype.decode = function(buff, $meta) {
-    if (this.log.debug) { this.log.debug('PayshieldParser.decode buffer:' + buff.toString()); }
+PayshieldCodec.prototype.decode = function(buff, $meta) {
+    if (this.log.debug) {
+        this.log.debug('PayshieldParser.decode buffer:' + buff.toString());
+    }
     var headObj = bitsyntax.match(this.headerPattern, buff);
     if (!headObj) {
         throw new Error('Unable to match header to header pattern!');
@@ -105,27 +180,23 @@ PayshieldParser.prototype.decode = function(buff, $meta) {
         }
         $meta.trace = headObj.headerNo;
         $meta.mtid = cmd.mtid;
-        $meta.opcode = commandName;
+        $meta.method = cmd.method;
     } else {
         $meta.trace = headObj.headerNo;
         $meta.mtid = 'error';
-        $meta.errorCode = bodyObj.errorCode; // todo also return the error message as per payshield documentation
-        bodyObj = {};
+        $meta.method = cmd.method;
+        bodyObj = {
+            errorCode: bodyObj.errorCode,
+            errorMessage: ERRORCODES[bodyObj.errorCode]
+        };
     }
     return bodyObj;
 };
 
-/**
- * Convert object to Buffer
- * @param {object} data - json object with fields:{$$:{opcode - required, trace - required},  rest are field names from message pattern}
- * @param {object} $meta - metadata
- * @param {object} context - the connection context
- * @returns {buffer}  encoded buffer
- */
-PayshieldParser.prototype.encode = function(data, $meta, context) {
+PayshieldCodec.prototype.encode = function(data, $meta, context) {
     // TODO: add validation
     this.log.debug && this.log.debug('PayshieldParser.encode data:' + data);
-    var commandName = $meta.opcode;
+    var commandName = $meta.method.split('.').pop() + ':' + $meta.mtid;
 
     if (this.commands[commandName] === undefined) {
         throw new Error('Not implemented opcode:' + commandName + '!');
@@ -147,7 +218,11 @@ PayshieldParser.prototype.encode = function(data, $meta, context) {
 
     var cmdCode = this.commands[commandName].code;
 
-    return bitsyntax.build(this.headerPattern, {headerNo: headerNo, code: cmdCode, body: bodyBuff});
+    return bitsyntax.build(this.headerPattern, {
+        headerNo: headerNo,
+        code: cmdCode,
+        body: bodyBuff
+    });
 };
 
-module.exports = PayshieldParser;
+module.exports = PayshieldCodec;
