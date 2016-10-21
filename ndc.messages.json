@@ -1,176 +1,316 @@
 {
     "transaction": {
-        "_mtid": "notification",
-        "messageClass": "1",
-        "messageSubclass": "1",
-        "fields": "messageSubclass,FS,luno,FS,,FS,timeVariant,FS,trtfMcn,FS,track2,FS,track3,FS,operationCode,FS,amountEntry,FS,pinBlock,FS,bufferB,FS,bufferC,FS,data"
+        "mtid": "notification",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "1"
+        },
+        "fields": "messageSubclass,FS,luno,FS,,FS,timeVariantNumber,FS,trtfMcn,FS,track2,FS,track3,FS,operationCode,FS,amountEntry,FS,pinBlock,FS,bufferB,FS,bufferC,FS,data"
     },
     "unsolicitedStatus": {
-        "_mtid": "notification",
-        "messageClass": "1",
-        "messageSubclass": "2",
+        "mtid": "notification",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "2"
+        },
         "fields": "messageSubclass,FS,luno,FS,,FS,statusInformation,FS,errorSeverity,FS,diagnosticStatus,FS,suppliesStatus"
     },
     "solicitedStatus": {
-        "_mtid": "response",
-        "messageClass": "2",
-        "messageSubclass": "2",
+        "mtid": "response",
+        "values": {
+            "messageClass": "2",
+            "messageSubclass": "2"
+        },
         "fields": "messageSubclass,FS,luno,FS,,FS,statusDescriptor,FS,statusInformation1,FS,statusInformation2,FS,statusInformation3,FS,statusInformation4,FS,statusInformation5,FS,statusInformation6,FS,statusInformation7"
     },
     "encryptorIniData": {
-        "_mtid": "response",
-        "messageClass": "2",
-        "messageSubclass": "3",
+        "mtid": "response",
+        "values": {
+            "messageClass": "2",
+            "messageSubclass": "3"
+        },
         "fields": "messageSubclass,FS,luno,FS,,FS,informationIdentifier,FS,encryptorInformation"
     },
     "tmAlert1": {
-        "_mtid": "request",
-        "messageClass": "3",
-        "messageSubclass": "",
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": ""
+        },
         "fields": ""
     },
     "smInstallStatus": {
-        "_mtid": "request",
-        "messageClass": "4",
-        "messageSubclass": "1",
+        "mtid": "request",
+        "values": {
+            "messageClass": "4",
+            "messageSubclass": "1"
+        },
         "fields": ""
     },
     "exitToHost": {
-        "_mtid": "request",
-        "messageClass": "5",
-        "messageSubclass": "1",
+        "mtid": "request",
+        "values": {
+            "messageClass": "5",
+            "messageSubclass": "1"
+        },
         "fields": ""
     },
     "uploadEjData": {
-        "_mtid": "notification",
-        "messageClass": "6",
-        "messageSubclass": "1",
+        "mtid": "notification",
+        "values": {
+            "messageClass": "6",
+            "messageSubclass": "1"
+        },
         "fields": "messageSubclass,FS,,FS,,FS,,FS,data"
     },
     "ejOptions": {
-        "_mtid": "notification",
-        "messageClass": "6",
-        "messageSubclass": "3",
+        "mtid": "notification",
+        "values": {
+            "messageClass": "6",
+            "messageSubclass": "3"
+        },
         "fields": "FS,FS,FS,commandType,options,FS,timer"
     },
     "ejAck": {
-        "_mtid": "notification",
-        "messageClass": "6",
-        "messageSubclass": "",
+        "mtid": "notification",
+        "values": {
+            "messageClass": "6",
+            "messageSubclass": ""
+        },
         "fields": "FS,FS,FS,commandType,lastChar"
     },
     "terminalCommand": {
-        "_mtid": "request",
-        "messageClass": "1",
-        "messageSubclass": "",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": ""
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
     },
-    "paramsLoad": {
-        "_mtid": "request",
-        "messageClass": "3",
-        "messageSubclass": "1",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,supplyMode,FS,newLuno"
+    "goInService": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "1"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode"
     },
-    "stateTableLoad": {
-        "_mtid": "request",
-        "messageClass": "3",
-        "messageSubclass": "1",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,stateTableData"
+    "goOutOfService": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "2",
+            "commandModifier": "1"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
     },
-    "configIdLoad": {
-        "_mtid": "request",
-        "messageClass": "3",
-        "messageSubclass": "1",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,configId"
+    "sendConfigurationId": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "3",
+            "commandModifier": ""
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendSupplyCounters": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "4",
+            "commandModifier": ""
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendConfiguration": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "7",
+            "commandModifier": ""
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "paramsLoadEnhanced": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "1",
+            "messageIdentifier": "A"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,newLuno,FS,options,FS,timers"
     },
     "screenDataLoad": {
-        "_mtid": "request",
-        "messageClass": "3",
-        "messageSubclass": "1",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,screenData"
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "1",
+            "messageIdentifier": "1"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,screenData"
     },
-    "currencyMappingLoad": {
-        "_mtid": "request",
-        "messageClass": "3",
-        "messageSubclass": "1",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,currencyMappingData"
-    },
-    "datetimeLoad": {
-        "_mtid": "request",
-        "messageClass": "3",
-        "messageSubclass": "1",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,datetime"
+    "stateTableLoad": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "1",
+            "messageIdentifier": "2"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,stateTable"
     },
     "fitDataLoad": {
-        "_mtid": "request",
-        "messageClass": "3",
-        "messageSubclass": "1",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,fitData"
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "1",
+            "messageIdentifier": "5"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,fitData"
+    },
+    "configIdLoad": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "1",
+            "messageIdentifier": "6"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,configId"
+    },
+    "currencyMappingLoad": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "1"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,currencyMappingData"
+    },
+    "dateTimeLoad": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "1",
+            "messageIdentifier": "C"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,dateTime"
     },
     "keyChange": {
-        "_mtid": "request",
-        "messageClass": "3",
-        "messageSubclass": "3",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier,FS,key"
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "3"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier,FS,key"
+    },
+    "keyReadKVV": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "4",
+            "modifier": "H"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier"
+    },
+    "keyChangeMac": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "4",
+            "modifier": "5"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier,FS,key"
+    },
+    "keyChangeTpk": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "4",
+            "modifier": "2"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier,FS,key"
     },
     "interTransResp": {
-        "_mtid": "response",
-        "messageClass": "3",
-        "messageSubclass": "2",
+        "mtid": "response",
+        "values": {
+            "messageClass": "3",
+            "messageSubclass": "2"
+        },
         "fields": ""
     },
     "transactionReply": {
-        "_mtid": "request",
-        "messageClass": "4",
-        "messageSubclass": "",
-        "fields": "responseFlag,FS,luno,FS,seq,FS,nextState,FS,type1Notes,type2Notes,type3Notes,type4Notes,FS,sernum,function,FS,coordination,cardReturn,printer"
+        "mtid": "request",
+        "values": {
+            "messageClass": "4",
+            "messageSubclass": ""
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,timeVariantNumber,FS,nextState,FS,type1Notes,type2Notes,type3Notes,type4Notes,FS,sernum,function,FS,coordination,cardReturn,printer"
     },
     "tmAlert2": {
-        "_mtid": "request",
-        "messageClass": "5",
-        "messageSubclass": "",
+        "mtid": "request",
+        "values": {
+            "messageClass": "5",
+            "messageSubclass": ""
+        },
         "fields": ""
     },
     "hostToExit": {
-        "_mtid": "request",
-        "messageClass": "7",
-        "messageSubclass": "1",
+        "mtid": "request",
+        "values": {
+            "messageClass": "7",
+            "messageSubclass": "1"
+        },
         "fields": ""
     },
     "unknownCommand": {
-        "_mtid": "request",
-        "messageClass": "",
-        "messageSubclass": "",
+        "mtid": "request",
+        "values": {
+            "messageClass": "",
+            "messageSubclass": ""
+        },
         "fields": "body"
     },
     "emvCurrency": {
-        "_mtid": "request",
-        "messageClass": "8",
-        "messageSubclass": "1",
-        "fields": "responseFlag,FS,luno,FS,messageSubclass,FS,data"
+        "mtid": "request",
+        "values": {
+            "messageClass": "8",
+            "messageSubclass": "1"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,messageSubclass,FS,data"
     },
     "emvTransaction": {
-        "_mtid": "request",
-        "messageClass": "8",
-        "messageSubclass": "2",
-        "fields": "responseFlag,FS,luno,FS,messageSubclass,FS,data"
+        "mtid": "request",
+        "values": {
+            "messageClass": "8",
+            "messageSubclass": "2"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,messageSubclass,FS,data"
     },
     "emvLanguage": {
-        "_mtid": "request",
-        "messageClass": "8",
-        "messageSubclass": "3",
-        "fields": "responseFlag,FS,luno,FS,messageSubclass,FS,data"
+        "mtid": "request",
+        "values": {
+            "messageClass": "8",
+            "messageSubclass": "3"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,messageSubclass,FS,data"
     },
     "emvTerminal": {
-        "_mtid": "request",
-        "messageClass": "8",
-        "messageSubclass": "4",
-        "fields": "responseFlag,FS,luno,FS,messageSubclass,FS,data"
+        "mtid": "request",
+        "values": {
+            "messageClass": "8",
+            "messageSubclass": "4"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,messageSubclass,FS,data"
     },
     "emvApplication": {
-        "_mtid": "request",
-        "messageClass": "8",
-        "messageSubclass": "5",
-        "fields": "responseFlag,FS,luno,FS,messageSubclass,FS,data"
+        "mtid": "request",
+        "values": {
+            "messageClass": "8",
+            "messageSubclass": "5"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,messageSubclass,FS,data"
     }
 }
