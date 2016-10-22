@@ -5,7 +5,7 @@
             "messageClass": "1",
             "messageSubclass": "1"
         },
-        "fields": "messageSubclass,FS,luno,FS,,FS,timeVariantNumber,FS,trtfMcn,FS,track2,FS,track3,FS,operationCode,FS,amountEntry,FS,pinBlock,FS,bufferB,FS,bufferC,FS,data"
+        "fields": "messageClass,messageSubclass,FS,luno,FS,,FS,timeVariantNumber,FS,trtfMcn,FS,track2,FS,track3,FS,operationCode,FS,amountEntry,FS,pinBlock,FS,bufferB,FS,bufferC,FS,data"
     },
     "unsolicitedStatus": {
         "mtid": "notification",
@@ -13,7 +13,7 @@
             "messageClass": "1",
             "messageSubclass": "2"
         },
-        "fields": "messageSubclass,FS,luno,FS,,FS,statusInformation,FS,errorSeverity,FS,diagnosticStatus,FS,suppliesStatus"
+        "fields": "messageClass,messageSubclass,FS,luno,FS,,FS,deviceIdentifierAndStatus,FS,errorSeverity,FS,diagnosticStatus,FS,suppliesStatus"
     },
     "solicitedStatus": {
         "mtid": "response",
@@ -21,7 +21,7 @@
             "messageClass": "2",
             "messageSubclass": "2"
         },
-        "fields": "messageSubclass,FS,luno,FS,,FS,statusDescriptor,FS,statusInformation1,FS,statusInformation2,FS,statusInformation3,FS,statusInformation4,FS,statusInformation5,FS,statusInformation6,FS,statusInformation7"
+        "fields": "messageClass,messageSubclass,FS,luno,FS,,FS,statusDescriptor,FS,statusInformation1,FS,statusInformation2,FS,statusInformation3,FS,statusInformation4,FS,statusInformation5,FS,statusInformation6,FS,statusInformation7"
     },
     "encryptorIniData": {
         "mtid": "response",
@@ -29,7 +29,7 @@
             "messageClass": "2",
             "messageSubclass": "3"
         },
-        "fields": "messageSubclass,FS,luno,FS,,FS,informationIdentifier,FS,encryptorInformation"
+        "fields": "messageClass,messageSubclass,FS,luno,FS,,FS,informationIdentifier,FS,encryptorInformation"
     },
     "tmAlert1": {
         "mtid": "request",
@@ -61,7 +61,7 @@
             "messageClass": "6",
             "messageSubclass": "1"
         },
-        "fields": "messageSubclass,FS,,FS,,FS,,FS,data"
+        "fields": "messageClass,messageSubclass,FS,,FS,,FS,,FS,journalData"
     },
     "ejOptions": {
         "mtid": "notification",
@@ -132,6 +132,96 @@
             "messageClass": "1",
             "messageSubclass": "",
             "commandCode": "7",
+            "commandModifier": ""
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendConfigurationHardware": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "7",
+            "commandModifier": "1"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendConfigurationSuplies": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "7",
+            "commandModifier": "2"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendConfigurationFitness": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "7",
+            "commandModifier": "3"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendConfigurationSensor": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "7",
+            "commandModifier": "4"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendConfigurationRelease": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "7",
+            "commandModifier": "5"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendConfigurationEnhanced": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "7",
+            "commandModifier": "6"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendConfigurationOptionDigits": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "7",
+            "commandModifier": "7"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendConfigurationDepositDefinition": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "7",
+            "commandModifier": "8"
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "sendDateTime": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "8",
             "commandModifier": ""
         },
         "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
