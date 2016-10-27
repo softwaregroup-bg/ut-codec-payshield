@@ -50,7 +50,7 @@ module.exports = {
         '0': 'unchanged',
         '1': 'good',
         '2': 'mediaLow',
-        '3': 'mediaOt',
+        '3': 'mediaOut',
         '4': 'overfill'
     },
 
@@ -58,7 +58,7 @@ module.exports = {
         '0': 'notConfigured',
         '1': 'good',
         '2': 'mediaLow',
-        '3': 'mediaOt',
+        '3': 'mediaOut',
         '4': 'overfill'
     },
 

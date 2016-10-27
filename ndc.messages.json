@@ -275,7 +275,8 @@
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "1"
+            "messageSubclass": "1",
+            "messageIdentifier": "E"
         },
         "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,currencyMappingData"
     },
@@ -296,7 +297,7 @@
         },
         "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier,FS,key"
     },
-    "keyReadKVV": {
+    "keyReadKvv": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
@@ -305,7 +306,7 @@
         },
         "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier"
     },
-    "keyChangeMac": {
+    "keyChangeTak": {
         "mtid": "request",
         "values": {
             "messageClass": "3",

@@ -64,35 +64,79 @@ var parsers = {
     // terminal state statuses
     supplyCounters: (supplies) => (supplies && supplies.substring && {
         transactionSerialNumber: supplies.substring(1, 5),
-        transactionCount: supplies.substring(5, 12),
-        notes1: supplies.substring(12, 17),
-        notes2: supplies.substring(17, 22),
-        notes3: supplies.substring(22, 27),
-        notes4: supplies.substring(27, 32),
-        rejected1: supplies.substring(32, 37),
-        rejected2: supplies.substring(37, 42),
-        rejected3: supplies.substring(42, 47),
-        rejected4: supplies.substring(47, 52),
-        dispensed1: supplies.substring(52, 57),
-        dispensed2: supplies.substring(57, 62),
-        dispensed3: supplies.substring(62, 67),
-        dispensed4: supplies.substring(67, 72),
-        last1: supplies.substring(72, 77),
-        last2: supplies.substring(77, 82),
-        last3: supplies.substring(82, 87),
-        last4: supplies.substring(87, 92),
-        captured: supplies.substring(92, 97)
+        transactionCount: Number.parseInt(supplies.substring(5, 12), 10),
+        notes1: Number.parseInt(supplies.substring(12, 17), 10),
+        notes2: Number.parseInt(supplies.substring(17, 22), 10),
+        notes3: Number.parseInt(supplies.substring(22, 27), 10),
+        notes4: Number.parseInt(supplies.substring(27, 32), 10),
+        session: {
+            cassettes: [
+                {count: Number.parseInt(supplies.substring(12, 17), 10)},
+                {count: Number.parseInt(supplies.substring(17, 22), 10)},
+                {count: Number.parseInt(supplies.substring(22, 27), 10)},
+                {count: Number.parseInt(supplies.substring(27, 32), 10)}
+            ]
+        },
+        rejected1: Number.parseInt(supplies.substring(32, 37), 10),
+        rejected2: Number.parseInt(supplies.substring(37, 42), 10),
+        rejected3: Number.parseInt(supplies.substring(42, 47), 10),
+        rejected4: Number.parseInt(supplies.substring(47, 52), 10),
+        dispensed1: Number.parseInt(supplies.substring(52, 57), 10),
+        dispensed2: Number.parseInt(supplies.substring(57, 62), 10),
+        dispensed3: Number.parseInt(supplies.substring(62, 67), 10),
+        dispensed4: Number.parseInt(supplies.substring(67, 72), 10),
+        last1: Number.parseInt(supplies.substring(72, 77), 10),
+        last2: Number.parseInt(supplies.substring(77, 82), 10),
+        last3: Number.parseInt(supplies.substring(82, 87), 10),
+        last4: Number.parseInt(supplies.substring(87, 92), 10),
+        captured: Number.parseInt(supplies.substring(92, 97), 10)
     }),
     datetime: (status) => (status && status.substring && {
         clockStatus: status.substring(0, 1),
         datetime: status.substring(1)
     }),
     configurationId: (config) => ({
-        cofigurationId: config.substring(1)
+        configId: config.substring(1)
     }),
     configuration: (config, hwFitness, hwConfig, supplies, sensors, release, softwareId) => ({
         cofigId: config.substring(1),
-        hwFitness,
+        session: {
+            cassettes: [
+                {fitness: map.severities[hwFitness.substring(15, 16)], supplies: map.suppliesStatus[supplies.substring(15, 16)]},
+                {fitness: map.severities[hwFitness.substring(16, 17)], supplies: map.suppliesStatus[supplies.substring(16, 17)]},
+                {fitness: map.severities[hwFitness.substring(17, 18)], supplies: map.suppliesStatus[supplies.substring(17, 18)]},
+                {fitness: map.severities[hwFitness.substring(18, 19)], supplies: map.suppliesStatus[supplies.substring(18, 19)]}
+            ]
+        },
+        fitness: hwFitness && hwFitness.substring && {
+            clock: map.severities[hwFitness.substring(0, 1)],
+            comms: map.severities[hwFitness.substring(1, 2)],
+            disk: map.severities[hwFitness.substring(2, 3)],
+            cardReader: map.severities[hwFitness.substring(3, 4)],
+            cashHandler: map.severities[hwFitness.substring(4, 5)],
+            depository: map.severities[hwFitness.substring(5, 6)],
+            receiptPrinter: map.severities[hwFitness.substring(6, 7)],
+            journalPrinter: map.severities[hwFitness.substring(7, 8)],
+            nightDepository: map.severities[hwFitness.substring(10, 11)],
+            encryptor: map.severities[hwFitness.substring(11, 12)],
+            camera: map.severities[hwFitness.substring(12, 13)],
+            doorAccess: map.severities[hwFitness.substring(13, 14)],
+            flexDisk: map.severities[hwFitness.substring(14, 15)],
+            cassette1: map.severities[hwFitness.substring(15, 16)],
+            cassette2: map.severities[hwFitness.substring(16, 17)],
+            cassette3: map.severities[hwFitness.substring(17, 18)],
+            cassette4: map.severities[hwFitness.substring(18, 19)],
+            statementPrinter: map.severities[hwFitness.substring(21, 22)],
+            signageDisplay: map.severities[hwFitness.substring(22, 23)],
+            systemDisplay: map.severities[hwFitness.substring(25, 26)],
+            mediaEntry: map.severities[hwFitness.substring(26, 27)],
+            envelopeDispenser: map.severities[hwFitness.substring(27, 28)],
+            documentProcessing: map.severities[hwFitness.substring(28, 29)],
+            coinDispenser: map.severities[hwFitness.substring(29, 30)],
+            voiceGuidance: map.severities[hwFitness.substring(32, 33)],
+            noteAcceptor: map.severities[hwFitness.substring(34, 35)],
+            chequeProcessor: map.severities[hwFitness.substring(35, 36)]
+        },
         hwConfig,
         supplies: supplies && supplies.substring && {
             cardReader: [map.suppliesStatus[supplies.substring(3, 4)]],
@@ -271,28 +315,28 @@ NDC.prototype.decode = function(buffer, $meta, context) {
         var command = this.codes[tokens[0]];
         if (command) {
             $meta.mtid = command.mtid;
-            $meta.method = command.method;
+            $meta.method = (command.mtid === 'response' ? '' : 'aptra.') + command.method;
 
             switch ($meta.method) {
                 case 'solicitedStatus':
                     if (tokens[3] === 'B') {
-                        context.traceTransactionReady |= 1;
-                        $meta.trace = context.traceTransactionReady;
+                        context.traceTransactionReady = context.traceTransactionReady || 1;
+                        $meta.trace = 'trn:' + context.traceTransactionReady;
                         context.traceTransactionReady += 1;
                     } else {
-                        context.traceTerminal |= 1;
-                        $meta.trace = context.traceTerminal;
+                        context.traceTerminal = context.traceTerminal || 1;
+                        $meta.trace = 'req:' + context.traceTerminal;
                         context.traceTerminal += 1;
                     }
                     break;
                 case 'encryptorIniData':
-                    context.traceTerminalKeys |= 1;
-                    $meta.trace = context.traceTerminalKeys;
+                    context.traceTerminalKeys = context.traceTerminalKeys || 1;
+                    $meta.trace = 'keys:' + context.traceTerminalKeys;
                     context.traceTerminalKeys += 1;
                     break;
             }
 
-            message = {};
+            message = {session: context.session};
             var fn = parsers[command.method];
             if (typeof fn === 'function') {
                 try {
@@ -305,8 +349,16 @@ NDC.prototype.decode = function(buffer, $meta, context) {
                         message.stack = e.stack;
                     }
                 }
+            } else {
+                $meta.mtid = 'error';
+                message.type = 'aptra.parser';
+                message.message = 'No parser found for message: ' + command.method;
             }
             message.tokens = tokens;
+        } else {
+            $meta.mtid = 'error';
+            message.type = 'aptra.unknownMessageClass';
+            message.message = 'Received unknown message class: ' + tokens[0];
         }
     }
 
@@ -326,6 +378,7 @@ NDC.prototype.encode = function(message, $meta, context) {
         case 'sendConfigurationId':
         case 'sendSupplyCounters':
         case 'paramsLoadEnhanced':
+        case 'currencyMappingLoad':
         case 'stateTableLoad':
         case 'screenDataLoad':
         case 'fitDataLoad':
@@ -340,21 +393,41 @@ NDC.prototype.encode = function(message, $meta, context) {
         case 'sendConfigurationEnhanced':
         case 'sendConfigurationOptionDigits':
         case 'sendConfigurationDepositDefinition':
-            context.traceCentral |= 1;
-            $meta.trace = context.traceCentral;
+        case 'emvCurrency':
+        case 'emvTransaction':
+        case 'emvLanguage':
+        case 'emvTerminal':
+        case 'emvApplication':
+            context.traceCentral = context.traceCentral || 1;
+            $meta.trace = 'req:' + context.traceCentral;
             context.traceCentral += 1;
             break;
-        case 'keyReadKVV':
-        case 'keyChangeMac':
+        case 'keyReadKvv':
+        case 'keyChangeTak':
         case 'keyChangeTpk':
-            context.traceCentralKeys |= 1;
-            $meta.trace = context.traceCentralKeys;
+            context.traceCentralKeys = context.traceCentralKeys || 1;
+            $meta.trace = 'keys:' + context.traceCentralKeys;
             context.traceCentralKeys += 1;
             break;
         case 'transactionReply':
-            context.traceTransaction |= 1;
-            $meta.trace = context.traceTransaction;
+            context.traceTransaction = context.traceTransaction || 1;
+            $meta.trace = 'trn:' + context.traceTransaction;
             context.traceTransaction += 1;
+            break;
+    }
+
+    switch ($meta.method) {
+        case 'keyChangeTak':
+            context.session = context.session || {};
+            context.session.tak = message.tak;
+            break;
+        case 'keyChangeTpk':
+            context.session = context.session || {};
+            context.session.tpk = message.tpk;
+            break;
+        case 'currencyMappingLoad':
+            context.session = context.session || {};
+            merge(context.session, {cassettes: message.cassettes});
             break;
     }
 
@@ -376,3 +449,8 @@ NDC.prototype.encode = function(message, $meta, context) {
 };
 
 module.exports = NDC;
+
+// todo checkMac
+// todo CashHandlerAlert / CassetteSupplyStatus
+// todo ReceiptPrinterAlert / JournalPrinterAlert / PaperSupplyStatus / PrinterPartStatus
+// todo OtherDeviceFaultAlert
