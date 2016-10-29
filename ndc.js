@@ -17,7 +17,7 @@ NDC.prototype.init = function(config) {
         var mf = this.messageFormat[name];
         mf.fieldsSplit = mf.fields.split(',');
         mf.method = name;
-        this.codes[(mf.values.messageClass || '') + (mf.values.messageSubclass || '')] = mf;
+        this.codes[(mf.values.messageClass || '') + (mf.values.messageSubclass || '') + '|' + (mf.values.commandCode || '') + (mf.values.commandModifier || '')] = mf;
     });
 };
 
@@ -304,7 +304,40 @@ var parsers = {
         }[c] || c)).join(''),
         bufferB,
         bufferC
-    })
+    }),
+    transactionReply: (type, luno, timeVariantNumber, nextState, notes, sernumFunction, coordinationCardPrinter) => ({
+        type,
+        luno,
+        timeVariantNumber,
+        nextState,
+        notes,
+        sernum: sernumFunction && sernumFunction.substring && sernumFunction.substring(0, 4),
+        function: sernumFunction && sernumFunction.substring && sernumFunction.substring(4, 5),
+        screen: sernumFunction && sernumFunction.substring && sernumFunction.substring(5, 8),
+        screenUpdate: sernumFunction && sernumFunction.substring && sernumFunction.substring(8),
+        coordination: coordinationCardPrinter && coordinationCardPrinter.substring && coordinationCardPrinter.substring(0, 1),
+        cardReturn: coordinationCardPrinter && coordinationCardPrinter.substring && coordinationCardPrinter.substring(1, 2),
+        printer: coordinationCardPrinter && coordinationCardPrinter.substring && coordinationCardPrinter.substring(2, 3),
+        printerData: coordinationCardPrinter && coordinationCardPrinter.substring && coordinationCardPrinter.substring(3),
+    }), // sim
+    keyReadKvv: () => ({}), // sim
+    keyChangeTak: () => ({}), // sim
+    keyChangeTpk: () => ({}), // sim
+    currencyMappingLoad: () => ({}), // sim
+    sendConfigurationId: () => ({}), // sim
+    paramsLoadEnhanced: () => ({}), // sim
+    dateTimeLoad: () => ({}), // sim
+    sendConfiguration: () => ({}), // sim
+    sendConfigurationHardware: () => ({}), // sim
+    sendConfigurationSuplies: () => ({}), // sim
+    sendConfigurationFitness: () => ({}), // sim
+    sendConfigurationSensor: () => ({}), // sim
+    sendConfigurationRelease: () => ({}), // sim
+    sendConfigurationOptionDigits: () => ({}), // sim
+    sendConfigurationDepositDefinition: () => ({}), // sim
+    sendSupplyCounters: () => ({}), // sim
+    goInService: () => ({}), // sim
+    goOutOfService: () => ({}) // sim
 };
 
 NDC.prototype.decode = function(buffer, $meta, context) {
@@ -312,7 +345,7 @@ NDC.prototype.decode = function(buffer, $meta, context) {
     var bufferString = buffer.toString();
     if (buffer.length > 0) {
         var tokens = bufferString.split(this.fieldSeparator);
-        var command = this.codes[tokens[0]];
+        var command = this.codes[tokens[0] + '|' + ((tokens[0] === '1' || tokens[0] === '3') ? tokens[3] : '')];
         if (command) {
             $meta.mtid = command.mtid;
             $meta.method = (command.mtid === 'response' ? '' : 'aptra.') + command.method;
@@ -333,6 +366,12 @@ NDC.prototype.decode = function(buffer, $meta, context) {
                     context.traceTerminalKeys = context.traceTerminalKeys || 1;
                     $meta.trace = 'keys:' + context.traceTerminalKeys;
                     context.traceTerminalKeys += 1;
+                    break;
+                case 'aptra.transactionReply': // sim
+                    $meta.mtid = 'response';
+                    context.traceTransactionReady = context.traceTransactionReady || 1;
+                    $meta.trace = 'trn:' + context.traceTransactionReady;
+                    context.traceTransactionReady += 1;
                     break;
             }
 
@@ -409,6 +448,7 @@ NDC.prototype.encode = function(message, $meta, context) {
             $meta.trace = 'keys:' + context.traceCentralKeys;
             context.traceCentralKeys += 1;
             break;
+        case 'transaction': // sim
         case 'transactionReply':
             context.traceTransaction = context.traceTransaction || 1;
             $meta.trace = 'trn:' + context.traceTransaction;

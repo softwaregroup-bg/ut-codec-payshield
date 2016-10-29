@@ -31,14 +31,6 @@
         },
         "fields": "messageClass,messageSubclass,FS,luno,FS,,FS,informationIdentifier,FS,encryptorInformation"
     },
-    "tmAlert1": {
-        "mtid": "request",
-        "values": {
-            "messageClass": "3",
-            "messageSubclass": ""
-        },
-        "fields": ""
-    },
     "smInstallStatus": {
         "mtid": "request",
         "values": {
@@ -230,99 +222,99 @@
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "1",
-            "messageIdentifier": "A"
+            "commandCode": "1",
+            "commandModifier": "A"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,newLuno,FS,options,FS,timers"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier,FS,newLuno,FS,options,FS,timers"
     },
     "screenDataLoad": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "1",
-            "messageIdentifier": "1"
+            "commandCode": "1",
+            "commandModifier": "1"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,screenData"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier,FS,screenData"
     },
     "stateTableLoad": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "1",
-            "messageIdentifier": "2"
+            "commandCode": "1",
+            "commandModifier": "2"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,stateTable"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier,FS,stateTable"
     },
     "fitDataLoad": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "1",
-            "messageIdentifier": "5"
+            "commandCode": "1",
+            "commandModifier": "5"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,fitData"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier,FS,fitData"
     },
     "configIdLoad": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "1",
-            "messageIdentifier": "6"
+            "commandCode": "1",
+            "commandModifier": "6"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,configId"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier,FS,configId"
     },
     "currencyMappingLoad": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "1",
-            "messageIdentifier": "E"
+            "commandCode": "1",
+            "commandModifier": "E"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,currencyMappingData"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier,FS,currencyMappingData"
     },
     "dateTimeLoad": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "1",
-            "messageIdentifier": "C"
+            "commandCode": "1",
+            "commandModifier": "C"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,messageIdentifier,FS,dateTime"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier,FS,dateTime"
     },
     "keyChange": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "3"
+            "commandCode": "3"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier,FS,key"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier,FS,key"
     },
     "keyReadKvv": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "4",
-            "modifier": "H"
+            "commandCode": "4",
+            "commandModifier": "H"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
     },
     "keyChangeTak": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "4",
-            "modifier": "5"
+            "commandCode": "4",
+            "commandModifier": "5"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier,FS,key"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier,FS,key"
     },
     "keyChangeTpk": {
         "mtid": "request",
         "values": {
             "messageClass": "3",
-            "messageSubclass": "4",
-            "modifier": "2"
+            "commandCode": "4",
+            "commandModifier": "2"
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,messageSubclass,modifier,FS,key"
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier,FS,key"
     },
     "interTransResp": {
         "mtid": "response",
