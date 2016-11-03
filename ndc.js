@@ -17,7 +17,8 @@ NDC.prototype.init = function(config) {
         var mf = this.messageFormat[name];
         mf.fieldsSplit = mf.fields.split(',');
         mf.method = name;
-        this.codes[(mf.values.messageClass || '') + (mf.values.messageSubclass || '') + '|' + (mf.values.commandCode || '') + (mf.values.commandModifier || '')] = mf;
+        var code = (mf.values.messageClass || '') + (mf.values.messageSubclass || '') + '|' + (mf.values.commandCode || '') + (mf.values.commandModifier || '');
+        this.codes[code] = mf;
     });
 };
 
@@ -318,7 +319,7 @@ var parsers = {
         coordination: coordinationCardPrinter && coordinationCardPrinter.substring && coordinationCardPrinter.substring(0, 1),
         cardReturn: coordinationCardPrinter && coordinationCardPrinter.substring && coordinationCardPrinter.substring(1, 2),
         printer: coordinationCardPrinter && coordinationCardPrinter.substring && coordinationCardPrinter.substring(2, 3),
-        printerData: coordinationCardPrinter && coordinationCardPrinter.substring && coordinationCardPrinter.substring(3),
+        printerData: coordinationCardPrinter && coordinationCardPrinter.substring && coordinationCardPrinter.substring(3)
     }), // sim
     keyReadKvv: () => ({}), // sim
     keyChangeTak: () => ({}), // sim
@@ -410,7 +411,7 @@ NDC.prototype.encode = function(message, $meta, context) {
     }
     var bufferString = '';
 
-    switch ($meta.method) {
+    switch ($meta.opcode) {
         case 'terminalCommand':
         case 'goInService':
         case 'goOutOfService':
@@ -456,22 +457,9 @@ NDC.prototype.encode = function(message, $meta, context) {
             break;
     }
 
-    switch ($meta.method) {
-        case 'keyChangeTak':
-            context.session = context.session || {};
-            context.session.tak = message.tak;
-            break;
-        case 'keyChangeTpk':
-            context.session = context.session || {};
-            context.session.tpk = message.tpk;
-            break;
-        case 'currencyMappingLoad':
-            context.session = context.session || {};
-            merge(context.session, {cassettes: message.cassettes});
-            break;
-    }
+    message.session && merge(context, {session: message.session});
 
-    var command = this.messageFormat[$meta.method];
+    var command = this.messageFormat[$meta.opcode];
     if (command) {
         merge(message, command.values);
         // bufferString += command.messageClass;
