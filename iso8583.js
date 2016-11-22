@@ -1,14 +1,14 @@
 'use strict';
-var assign = require('lodash.assign');
+var merge = require('lodash.merge');
 var defaultFields = require('./iso8583.fields.json');
 var bitSyntax = require('ut-bitsyntax');
 
 function getFormat(format, fallback) {
-    return (format && {'numeric': 'string', 'string': 'string', 'amount': 'string', 'bcdamount': 'string'}[format]) || format || fallback || 'binary';
+    return (format && {'numeric': 'string-left-zero', 'string': 'string-right-space', 'amount': 'string-left-zero', 'bcdamount': 'string'}[format]) || format || fallback || 'binary';
 }
 
 function Iso8583(config) {
-    this.fieldFormat = assign({}, defaultFields[(config.version || '0') + (config.baseEncoding || 'ascii')], config.fieldFormat);
+    this.fieldFormat = merge({}, defaultFields[(config.version || '0') + (config.baseEncoding || 'ascii')], config.fieldFormat);
     this.framePattern = bitSyntax.matcher('header:' + this.fieldFormat.header.size + '/' + getFormat(this.fieldFormat.header.format) +
         ', mtid:' + this.fieldFormat.mtid.size + '/' + getFormat(this.fieldFormat.mtid.format) +
         ', field0:' + this.fieldFormat['0'].size + '/' + getFormat(this.fieldFormat['0'].format) +
@@ -94,6 +94,17 @@ Iso8583.prototype.decode = function(buffer, $meta) {
         }
         $meta.opcode = String(message[3] || '').substr(0, 2);
         $meta.trace = message[11];
+        if (message.mtid && message.mtid.slice) {
+            $meta.mtid = {
+                '0': 'request',
+                '1': (parseInt(message[39]) === 0) ? 'response' : 'error',
+                '2': 'request',
+                '3': (parseInt(message[39]) === 0) ? 'response' : 'error',
+                '4': 'notification',
+                '5': 'notification'
+            }[(message.mtid.slice(-2).substr(0, 1))] || 'error';
+        }
+        $meta.method = message.mtid + '-' + $meta.opcode;
         return message;
     } else {
         throw new Error('Unable to parse message type or first bitmap!');
@@ -135,7 +146,7 @@ Iso8583.prototype.encode = function(message, $meta, context) {
             } else {
                 buffers[i] = emptyBuffer;
             }
-        } else if (message[i] !== undefined) {
+        } else if (message[i] != null) {
             bitmaps[(i - 1) >> 3] |= (128 >> (i - 1) % 8);
             buffers[i] = this.encodeField(i, message[i]);
         } else {
