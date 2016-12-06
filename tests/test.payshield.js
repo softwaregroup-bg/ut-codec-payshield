@@ -1,12 +1,27 @@
 function test(bdd, PayshieldParser, assert, Validator) {
     var encodeTestData = {
         echo: {
-            data: {$$: {opcode: 'echo', trace: 234}, msgSize: '4', macMessage: 'ping'},
+            data: {
+                $$: {
+                    opcode: 'echo',
+                    trace: 234
+                },
+                msgSize: '4',
+                macMessage: 'ping'
+            },
             buf: new Buffer('000234B20004ping')
         },
 
         generateKey: {
-            data: {$$: {opcode: 'generateKey', trace: 234}, mode: '0', keyType: '003', keyScheme: 'U'},
+            data: {
+                $$: {
+                    opcode: 'generateKey',
+                    trace: 234
+                },
+                mode: '0',
+                keyType: '003',
+                keyScheme: 'U'
+            },
             buf: new Buffer('000234A00003U')
         },
 
@@ -16,18 +31,37 @@ function test(bdd, PayshieldParser, assert, Validator) {
         },
 
         generateTpk: {
-            data: {$$: {opcode: 'generateTpk', trace: 234}, tmk: 'UB15E645AFC1A3F4444A48D58EE983BD3', keyScheme: 'X', keyScheme1: '0'},
+            data: {
+                $$: {
+                    opcode: 'generateTpk',
+                    trace: 234
+                },
+                tmk: 'UB15E645AFC1A3F4444A48D58EE983BD3',
+                keyScheme: 'X',
+                keyScheme1: '0'
+            },
             buf: new Buffer('000234HCUB15E645AFC1A3F4444A48D58EE983BD3;X00')
         },
 
         generateTak: {
-            data: {$$: {opcode: 'generateTak', trace: 234}, tmk: 'UB15E645AFC1A3F4444A48D58EE983BD3', keyScheme: 'U', keyScheme1: '0'},
+            data: {
+                $$: {
+                    opcode: 'generateTak',
+                    trace: 234
+                },
+                tmk: 'UB15E645AFC1A3F4444A48D58EE983BD3',
+                keyScheme: 'U',
+                keyScheme1: '0'
+            },
             buf: new Buffer('000234HAUB15E645AFC1A3F4444A48D58EE983BD3;U00')
         },
 
         generateMac: {
             data: {
-                $$: {opcode: 'generateMac', trace: 234},
+                $$: {
+                    opcode: 'generateMac',
+                    trace: 234
+                },
                 macMode: '0',
                 macInputFormat: '2',
                 macAlgorithm: '03',
@@ -42,7 +76,10 @@ function test(bdd, PayshieldParser, assert, Validator) {
 
         verifyMac: {
             data: {
-                $$: {opcode: 'verifyMac', trace: 234},
+                $$: {
+                    opcode: 'verifyMac',
+                    trace: 234
+                },
                 macMode: '0',
                 macInputFormat: '2',
                 macAlgorithm: '03',
@@ -58,7 +95,10 @@ function test(bdd, PayshieldParser, assert, Validator) {
 
         formKey: {
             data: {
-                $$: {opcode: 'formKey', trace: 234},
+                $$: {
+                    opcode: 'formKey',
+                    trace: 234
+                },
                 numberOfComponents: '2',
                 keyType: '003',
                 keyScheme: 'U',
@@ -69,13 +109,24 @@ function test(bdd, PayshieldParser, assert, Validator) {
         },
 
         generateKeycheckvalue: {
-            data: {$$: {opcode: 'generateKeycheckvalue', trace: 234}, keyTypeCode: '02', keyLengthFlag: '1', keyA32: 'X614BCB4CE30FE4FF13C9CFDD180AA182'},
+            data: {
+                $$: {
+                    opcode: 'generateKeycheckvalue',
+                    trace: 234
+                },
+                keyTypeCode: '02',
+                keyLengthFlag: '1',
+                keyA32: 'X614BCB4CE30FE4FF13C9CFDD180AA182'
+            },
             buf: new Buffer('000234BU021X614BCB4CE30FE4FF13C9CFDD180AA182')
         },
 
         derivePinIbm: {
             data: {
-                $$: {opcode: 'derivePinIbm', trace: 234},
+                $$: {
+                    opcode: 'derivePinIbm',
+                    trace: 234
+                },
                 pvk: 'X614BCB4CE30FE4FF13C9CFDD180AA182',
                 offset: '0000FFFFFFFF',
                 checkLength: '4',
@@ -87,13 +138,23 @@ function test(bdd, PayshieldParser, assert, Validator) {
         },
 
         generatePin: {
-            data: {$$: {opcode: 'generatePin', trace: 234}, account: '123456789012', checkLength: 4},
+            data: {
+                $$: {
+                    opcode: 'generatePin',
+                    trace: 234
+                },
+                account: '123456789012',
+                checkLength: 4
+            },
             buf: new Buffer('000234JA12345678901204')
         },
 
         generateOffsetIbm: {
             data: {
-                $$: {opcode: 'generateOffsetIbm', trace: 234},
+                $$: {
+                    opcode: 'generateOffsetIbm',
+                    trace: 234
+                },
                 keyType: '002',
                 keyA32: 'X614BCB4CE30FE4FF13C9CFDD180AA182',
                 pvk: 'X614BCB4CE30FE4FF13C9CFDD180AA182',
@@ -104,12 +165,17 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 decimalisationTable: '1234567812345678',
                 pinValidationData: '23456N543210'
             },
-            buf: new Buffer('000234BK002X614BCB4CE30FE4FF13C9CFDD180AA182X614BCB4CE30FE4FF13C9CFDD180AA1820592789FFFEDCBA90104123456789012123456781234567823456N543210')
+            buf: new Buffer(
+                '000234BK002X614BCB4CE30FE4FF13C9CFDD180AA182X614BCB4CE30FE4FF13C9CFDD180AA1820592789FFFEDCBA90104123456789012123456781234567823456N543210'
+            )
         },
 
         verifyTermPinIbm: {
             data: {
-                $$: {opcode: 'verifyTermPinIbm', trace: 234},
+                $$: {
+                    opcode: 'verifyTermPinIbm',
+                    trace: 234
+                },
                 tpk: 'X725D74BD3FDC0AA910EB213487423466',
                 pvk: 'X614BCB4CE30FE4FF13C9CFDD180AA182',
                 maximumPinLength: 12,
@@ -121,17 +187,31 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 pinValidationData: '23456N543210',
                 offset: 'FFFF34523421'
             },
-            buf: new Buffer('000234DAX725D74BD3FDC0AA910EB213487423466X614BCB4CE30FE4FF13C9CFDD180AA182120592789FFFEDCBA90104123456789012123456781234567823456N543210FFFF34523421')
+            buf: new Buffer(
+                '000234DAX725D74BD3FDC0AA910EB213487423466X614BCB4CE30FE4FF13C9CFDD180AA182120592789FFFEDCBA90104123456789012123456781234567823456N543210FFFF34523421'
+            )
         },
 
         importKey: {
-            data: {$$: {opcode: 'importKey', trace: 234}, keyType: '001', zmk: 'U71979DEB8587E2734F1E99D5DCAEF9AC', keyA32: 'U482C4E722BB0CF1845E1E5BD16310119', keyScheme: 'U'},
+            data: {
+                $$: {
+                    opcode: 'importKey',
+                    trace: 234
+                },
+                keyType: '001',
+                zmk: 'U71979DEB8587E2734F1E99D5DCAEF9AC',
+                keyA32: 'U482C4E722BB0CF1845E1E5BD16310119',
+                keyScheme: 'U'
+            },
             buf: new Buffer('000234A6001U71979DEB8587E2734F1E99D5DCAEF9ACU482C4E722BB0CF1845E1E5BD16310119U')
         },
 
         translateTpkZpk: {
             data: {
-                $$: {opcode: 'translateTpkZpk', trace: 234},
+                $$: {
+                    opcode: 'translateTpkZpk',
+                    trace: 234
+                },
                 sourceTpk: 'U8463435FC4B4DAA0C49025272C29B12C',
                 destinationZpk: 'U1EF828AA8F6B80EB83E19FBC373F3A85',
                 sourcePinBlock: '6428EB94035AF53B',
@@ -143,18 +223,36 @@ function test(bdd, PayshieldParser, assert, Validator) {
         },
 
         printPin: {
-            data: {$$: {opcode: 'printPin', trace: 234}, documentType: 'A', account: '123456789012', pin: '0592789FFFEDCBA9', printFields: '1'},
+            data: {
+                $$: {
+                    opcode: 'printPin',
+                    trace: 234
+                },
+                documentType: 'A',
+                account: '123456789012',
+                pin: '0592789FFFEDCBA9',
+                printFields: '1'
+            },
             buf: new Buffer('000234PEA1234567890120592789FFFEDCBA91')
         },
 
         printFormat: {
-            data: {$$: {opcode: 'printFormat', trace: 234}, printFields: '1'},
+            data: {
+                $$: {
+                    opcode: 'printFormat',
+                    trace: 234
+                },
+                printFields: '1'
+            },
             buf: new Buffer('000234PA1')
         },
 
         translateTpkLmk: {
             data: {
-                $$: {opcode: 'translateTpkLmk', trace: 234},
+                $$: {
+                    opcode: 'translateTpkLmk',
+                    trace: 234
+                },
                 sourceTpk: 'U8463435FC4B4DAA0C49025272C29B12C',
                 sourcePinBlock: '6428EB94035AF53B',
                 sourcePinBlockFormat: '01',
@@ -165,7 +263,10 @@ function test(bdd, PayshieldParser, assert, Validator) {
 
         translateZpkLmk: {
             data: {
-                $$: {opcode: 'translateZpkLmk', trace: 234},
+                $$: {
+                    opcode: 'translateZpkLmk',
+                    trace: 234
+                },
                 sourceZpk: 'U1EF828AA8F6B80EB83E19FBC373F3A85',
                 sourcePinBlock: '91DDDA0A7C12CFAA',
                 sourcePinBlockFormat: '01',
@@ -176,7 +277,10 @@ function test(bdd, PayshieldParser, assert, Validator) {
 
         generateOffsetIbmLmk: {
             data: {
-                $$: {opcode: 'generateOffsetIbmLmk', trace: 234},
+                $$: {
+                    opcode: 'generateOffsetIbmLmk',
+                    trace: 234
+                },
                 pvk: 'X614BCB4CE30FE4FF13C9CFDD180AA182',
                 pin: '07692',
                 checkLength: 4,
@@ -192,15 +296,27 @@ function test(bdd, PayshieldParser, assert, Validator) {
     var decodeTestData = {
 
         echoResp: {
-            data: {errorCode: '00', macMessage: 'ping', $$: {trace: '000234', mtid: 'discard', opcode: 'echoResp'}},
+            data: {
+                errorCode: '00',
+                macMessage: 'ping',
+                $$: {
+                    trace: '000234',
+                    mtid: 'discard',
+                    opcode: 'echoResp'
+                }
+            },
             buf: new Buffer('000234B300ping')
         },
 
         generateKeyResp: {
             data: {
-                errorCode: '00', keyA32: 'UD1D3196BE8CE804392F764CDC2ABD75E', keyCheckValue: 'F232C4', $$: {
+                errorCode: '00',
+                keyA32: 'UD1D3196BE8CE804392F764CDC2ABD75E',
+                keyCheckValue: 'F232C4',
+                $$: {
                     trace: '000234',
-                    mtid: 'response', opcode: 'generateKeyResp'
+                    mtid: 'response',
+                    opcode: 'generateKeyResp'
                 }
             },
             buf: new Buffer('000234A100UD1D3196BE8CE804392F764CDC2ABD75EF232C4')
@@ -235,32 +351,80 @@ function test(bdd, PayshieldParser, assert, Validator) {
         },
 
         generateMacResp: {
-            data: {errorCode: '00', mac: '0008341C677E', $$: {trace: '000234', mtid: 'response', opcode: 'generateMacResp'}},
+            data: {
+                errorCode: '00',
+                mac: '0008341C677E',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'generateMacResp'
+                }
+            },
             buf: new Buffer('000234M7000008341C677E')
         },
 
         verifyMacResp: {
-            data: {errorCode: '00', $$: {trace: '000234', mtid: 'response', opcode: 'verifyMacResp'}},
+            data: {
+                errorCode: '00',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'verifyMacResp'
+                }
+            },
             buf: new Buffer('000234M900')
         },
 
         formKeyResp: {
-            data: {errorCode: '00', keyA32: 'U5D3BF8844DC17252864ABBF21BF42999', keyCheckValue: '000000', $$: {trace: '000234', mtid: 'response', opcode: 'formKeyResp'}},
+            data: {
+                errorCode: '00',
+                keyA32: 'U5D3BF8844DC17252864ABBF21BF42999',
+                keyCheckValue: '000000',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'formKeyResp'
+                }
+            },
             buf: new Buffer('000234A500U5D3BF8844DC17252864ABBF21BF42999000000')
         },
 
         generateKeycheckvalueResp: {
-            data: {errorCode: '00', keyCheckValue16: '1519597E659476B0', $$: {trace: '000234', mtid: 'response', opcode: 'generateKeycheckvalueResp'}},
+            data: {
+                errorCode: '00',
+                keyCheckValue16: '1519597E659476B0',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'generateKeycheckvalueResp'
+                }
+            },
             buf: new Buffer('000234BV001519597E659476B0')
         },
 
         derivePinIbmResp: {
-            data: {errorCode: '00', pin: '00034', $$: {trace: '000234', mtid: 'response', opcode: 'derivePinIbmResp'}},
+            data: {
+                errorCode: '00',
+                pin: '00034',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'derivePinIbmResp'
+                }
+            },
             buf: new Buffer('000234EF0000034')
         },
 
         generatePinResp: {
-            data: {errorCode: '00', pin: '03218', $$: {trace: '000234', mtid: 'response', opcode: 'generatePinResp'}},
+            data: {
+                errorCode: '00',
+                pin: '03218',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'generatePinResp'
+                }
+            },
             buf: new Buffer('000234JB0003218')
         },
 
@@ -270,12 +434,29 @@ function test(bdd, PayshieldParser, assert, Validator) {
         },
 
         verifyTermPinIbmResp: {
-            data: {errorCode: '10', rest: new Buffer(0), $$: {trace: '000234', mtid: 'response', opcode: 'verifyTermPinIbmResp'}},
+            data: {
+                errorCode: '10',
+                rest: new Buffer(0),
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'verifyTermPinIbmResp'
+                }
+            },
             buf: new Buffer('000234DB10')
         },
 
         importKeyResp: {
-            data: {errorCode: '00', keyA32: 'U0E07CDC0161A0DE3B5AA44DF227EC9DE', keyCheckValue: 'ABDEBC', $$: {trace: '000234', mtid: 'response', opcode: 'importKeyResp'}},
+            data: {
+                errorCode: '00',
+                keyA32: 'U0E07CDC0161A0DE3B5AA44DF227EC9DE',
+                keyCheckValue: 'ABDEBC',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'importKeyResp'
+                }
+            },
             buf: new Buffer('000234A700U0E07CDC0161A0DE3B5AA44DF227EC9DEABDEBC')
         },
 
@@ -295,43 +476,86 @@ function test(bdd, PayshieldParser, assert, Validator) {
         },
 
         printPinStart: {
-            data: {errorCode: '00', $$: {trace: '000234', mtid: 'notification', opcode: 'printPinStart'}},
+            data: {
+                errorCode: '00',
+                $$: {
+                    trace: '000234',
+                    mtid: 'notification',
+                    opcode: 'printPinStart'
+                }
+            },
             buf: new Buffer('000234PF00')
         },
 
         printPinResp: {
-            data: {errorCode: '00', $$: {trace: '000234', mtid: 'response', opcode: 'printPinResp'}},
+            data: {
+                errorCode: '00',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'printPinResp'
+                }
+            },
             buf: new Buffer('000234PZ00')
         },
 
         printFormatResp: {
-            data: {errorCode: '00', $$: {trace: '000234', mtid: 'response', opcode: 'printFormatResp'}},
+            data: {
+                errorCode: '00',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'printFormatResp'
+                }
+            },
             buf: new Buffer('000234PB00')
         },
 
         translateTpkLmkResp: {
-            data: {errorCode: '00', pin: '01234', $$: {trace: '000234', mtid: 'response', opcode: 'translateTpkLmkResp'}},
+            data: {
+                errorCode: '00',
+                pin: '01234',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'translateTpkLmkResp'
+                }
+            },
             buf: new Buffer('000234JD0001234')
         },
 
         translateZpkLmkResp: {
-            data: {errorCode: '00', pin: '01234', $$: {trace: '000234', mtid: 'response', opcode: 'translateZpkLmkResp'}},
+            data: {
+                errorCode: '00',
+                pin: '01234',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'translateZpkLmkResp'
+                }
+            },
             buf: new Buffer('000234JF0001234')
         },
 
         generateOffsetIbmLmkResp: {
-            data: {errorCode: '00', offset: '7668FFFFFFFF', $$: {trace: '000234', mtid: 'response', opcode: 'generateOffsetIbmLmkResp'}},
+            data: {
+                errorCode: '00',
+                offset: '7668FFFFFFFF',
+                $$: {
+                    trace: '000234',
+                    mtid: 'response',
+                    opcode: 'generateOffsetIbmLmkResp'
+                }
+            },
             buf: new Buffer('000234DF007668FFFFFFFF')
         }
     };
 
-    var log = function() {
-    };
+    var log = function() {};
     log.createLog = function(v) {
         return {
-            info: function(v) {
-            }, debug: function(v) {
-            }
+            info: function(v) {},
+            debug: function(v) {}
         };
     };
 
@@ -340,11 +564,19 @@ function test(bdd, PayshieldParser, assert, Validator) {
         var messageFormat = {};
 
         bdd.it(' ##Initial template parsing', function() {
-            var parser = new PayshieldParser({headerFormat: '6/string-left-zero', fieldFormat: fieldFormat, messageFormat: messageFormat}, log, null);
+            var parser = new PayshieldParser({
+                headerFormat: '6/string-left-zero',
+                fieldFormat: fieldFormat,
+                messageFormat: messageFormat
+            }, log, null);
             var defaultPvk = parser.commands.generateOffsetIbmLmk.pattern[0].size;
             assert.equal(defaultPvk, 33, 'Default pvk size of opCode: generateOffsetIbmLmk NOT OK!');
         });
-        var parser = new PayshieldParser({headerFormat: '6/string-left-zero', fieldFormat: fieldFormat, messageFormat: messageFormat}, log, null);
+        var parser = new PayshieldParser({
+            headerFormat: '6/string-left-zero',
+            fieldFormat: fieldFormat,
+            messageFormat: messageFormat
+        }, log, null);
         bdd.describe('#Testing [Encode] on every initialized operation codes', function() {
             var commandArr = parser.commands;
 
@@ -403,7 +635,15 @@ function test(bdd, PayshieldParser, assert, Validator) {
             }
 
             bdd.it('#Buffer with error code', function() {
-                var data = {errorCode: '10', rest: new Buffer(0), $$: {trace: '000234', mtid: 'response', opcode: 'importKeyResp'}};
+                var data = {
+                    errorCode: '10',
+                    rest: new Buffer(0),
+                    $$: {
+                        trace: '000234',
+                        mtid: 'response',
+                        opcode: 'importKeyResp'
+                    }
+                };
                 var actualData = parser.decode(new Buffer('000234A710'));
                 assert.deepEqual(actualData, data, 'invalid decoded object');
             });
@@ -411,9 +651,15 @@ function test(bdd, PayshieldParser, assert, Validator) {
 
         bdd.describe('#Testing custom formats', function() {
             bdd.it(' ##custom fieldFormat ', function() {
-                var fieldFormat = {pvk: 16};
+                var fieldFormat = {
+                    pvk: 16
+                };
                 var messageFormat = {};
-                var parser = new PayshieldParser({headerFormat: '6/string-left-zero', fieldFormat: fieldFormat, messageFormat: messageFormat}, log, null);
+                var parser = new PayshieldParser({
+                    headerFormat: '6/string-left-zero',
+                    fieldFormat: fieldFormat,
+                    messageFormat: messageFormat
+                }, log, null);
                 var commandArr = parser.commands;
                 var custPvk = commandArr.generateOffsetIbmLmk.pattern[0].size;
                 assert.equal(custPvk, 16, 'Custom pvk size of opCode: generateOffsetIbmLmk NOT OK!');
@@ -427,7 +673,11 @@ function test(bdd, PayshieldParser, assert, Validator) {
                         Pattern: 'tmk:21/string, ";", keyScheme:1/string, keyScheme1:1/string, "0"'
                     }
                 };
-                var parser = new PayshieldParser({headerFormat: '6/string-left-zero', fieldFormat: fieldFormat, messageFormat: messageFormat}, log, null);
+                var parser = new PayshieldParser({
+                    headerFormat: '6/string-left-zero',
+                    fieldFormat: fieldFormat,
+                    messageFormat: messageFormat
+                }, log, null);
                 assert.equal(parser.commands.generateTpk.code, 'zzz', 'Custom message code NOT OK!');
                 assert.equal(parser.commands.generateTpk.pattern[0].size, 21, 'Custom pattern NOT OK!');
             });

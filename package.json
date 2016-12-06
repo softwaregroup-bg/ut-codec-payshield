@@ -5,6 +5,7 @@
   "dependencies": {
     "iconv-lite": "0.4.13",
     "lodash.assign": "4.1.0",
+    "lodash.merge": "4.1.0",
     "lodash.omit": "4.4.1",
     "lodash.invert": "4.2.0",
     "lodash.isempty": "4.3.1",
