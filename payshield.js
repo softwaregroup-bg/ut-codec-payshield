@@ -1,7 +1,6 @@
 var bitsyntax = require('ut-bitsyntax');
 var merge = require('lodash.merge');
 var defaultFormat = require('./payshield.messages.json');
-var defaultFields = require('./payshield.fields.json');
 
 const ERRORCODES = {
     '00': 'No error',
@@ -107,13 +106,11 @@ PayshieldCodec.prototype.init = function(config) {
         context: 'PayShield codec'
     }));
     if (this.log.info) {
-        this.log.info('Initializing Payshield parser! headerFormat: ' + config.headerFormat + ', fieldFormat: ' +
-            config.fieldFormat + ',messageFormat:' + config.messageFormat);
+        this.log.info('Initializing Payshield parser! headerFormat: ' + config.headerFormat + ',messageFormat:' + config.messageFormat);
     }
     this.headerPattern = bitsyntax.parse('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
 
     var commandsObj = merge({}, defaultFormat, config.messageFormat);
-    this.fieldFormat = merge({}, defaultFields, config.fieldFormat);
 
     if (this.headerPattern === false) {
         throw new Error('Cant parse header pattern!');

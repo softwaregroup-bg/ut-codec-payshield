@@ -59,17 +59,17 @@
         "mtid": "notification",
         "values": {
             "messageClass": "6",
-            "messageSubclass": "3"
+            "commandType": "3"
         },
-        "fields": "FS,FS,FS,commandType,options,FS,timer"
+        "fields": "messageClass,FS,FS,FS,commandType,options,FS,timer"
     },
     "ejAck": {
         "mtid": "notification",
         "values": {
             "messageClass": "6",
-            "messageSubclass": ""
+            "commandType": "1"
         },
-        "fields": "FS,FS,FS,commandType,lastChar"
+        "fields": "messageClass,FS,FS,FS,commandType,lastChar"
     },
     "terminalCommand": {
         "mtid": "request",

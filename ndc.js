@@ -220,10 +220,10 @@ var parsers = {
     sensors: (status) => (status && status.substring && {
         deviceStatusDescription: map.sensorStatuses[status.substring(0, 1)],
         supervisorMode: map.sensors[status.substring(1, 2)],
-        vibrationSensor: (status.substring(0, 1) !== '2') && map.sensors[status.substring(2, 3)],
-        doorSensor: map.sensors[status.substring(3, 4)],
-        silentSignalSensor: map.sensors[status.substring(4, 5)],
-        electronicsEnclosureSensor: map.sensors[status.substring(5, 6)],
+        vibration: (status.substring(0, 1) !== '2') && map.sensors[status.substring(2, 3)],
+        door: map.sensors[status.substring(3, 4)],
+        silentSignal: map.sensors[status.substring(4, 5)],
+        electronicsEnclosure: map.sensors[status.substring(5, 6)],
         depositBin: map.sensors[status.substring(6, 7)],
         cardBin: map.sensors[status.substring(7, 8)],
         rejectBin: map.sensors[status.substring(8, 9)],
@@ -328,6 +328,10 @@ var parsers = {
     sendConfigurationId: () => ({}), // sim
     paramsLoadEnhanced: () => ({}), // sim
     dateTimeLoad: () => ({}), // sim
+    screenDataLoad: () => ({}), // sim
+    stateTableLoad: () => ({}), // sim
+    fitDataLoad: () => ({}), // sim
+    configIdLoad: () => ({}), // sim
     sendConfiguration: () => ({}), // sim
     sendConfigurationHardware: () => ({}), // sim
     sendConfigurationSuplies: () => ({}), // sim
@@ -472,6 +476,9 @@ NDC.prototype.encode = function(message, $meta, context) {
                 }
             }
         });
+        if (message.mac) {
+            bufferString += this.fieldSeparator + message.mac;
+        }
         return new Buffer(bufferString);
     }
 };
