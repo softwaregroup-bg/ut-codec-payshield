@@ -1,3 +1,27 @@
+<a name="5.5.0"></a>
+# [5.5.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.4.24...v5.5.0) (2016-12-06)
+
+
+### Bug Fixes
+
+* **ndc:** improve parsing ([47ab850](https://github.com/softwaregroup-bg/ut-codec/commit/47ab850))
+* codec improvements ([cfc6be1](https://github.com/softwaregroup-bg/ut-codec/commit/cfc6be1))
+* fix lint errors ([6f435dc](https://github.com/softwaregroup-bg/ut-codec/commit/6f435dc))
+* improve NDC parsing ([3dff942](https://github.com/softwaregroup-bg/ut-codec/commit/3dff942))
+* improve parsing ([d0797e9](https://github.com/softwaregroup-bg/ut-codec/commit/d0797e9))
+* linting ([5cfc85e](https://github.com/softwaregroup-bg/ut-codec/commit/5cfc85e))
+* more generic session handling ([002f6a0](https://github.com/softwaregroup-bg/ut-codec/commit/002f6a0))
+* proper version ([06c076b](https://github.com/softwaregroup-bg/ut-codec/commit/06c076b))
+* refactor and finish NDC codec ([43e8faf](https://github.com/softwaregroup-bg/ut-codec/commit/43e8faf))
+* refactor and finish payshield codec ([6af9798](https://github.com/softwaregroup-bg/ut-codec/commit/6af9798))
+
+
+### Features
+
+* parse terminal side NDC ([3c8ee18](https://github.com/softwaregroup-bg/ut-codec/commit/3c8ee18))
+
+
+
 <a name="5.4.24"></a>
 ## [5.4.24](https://github.com/softwaregroup-bg/ut-codec/compare/v5.4.23...v5.4.24) (2016-10-02)
 
