@@ -611,7 +611,6 @@ function test(bdd, PayshieldParser, assert, Validator) {
         bdd.describe('#Testing [Decode] on every initialized operation codes', function() {
             var commandArr = parser.commands;
 
-            var countt = 0;
             for (var cmdName in commandArr) {
                 if (!decodeTestData[cmdName]) {
                     // console.log(cmdName);
@@ -630,8 +629,6 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     };
                 };
                 bdd.it('#operation code:' + cmdName, testWithData(cmdName));
-
-                countt++;
             }
 
             bdd.it('#Buffer with error code', function() {

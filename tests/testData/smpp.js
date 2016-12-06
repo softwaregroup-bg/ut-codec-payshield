@@ -466,6 +466,6 @@ module.exports = {
          'opcode': 'cancelSm'
          }
          }
-         }*/
+         } */
     }
 };
