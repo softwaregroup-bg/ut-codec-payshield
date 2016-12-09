@@ -99,63 +99,65 @@ var parsers = {
     configurationId: (config) => ({
         configId: config.substring(1)
     }),
-    configuration: (config, hwFitness, hwConfig, supplies, sensors, release, softwareId) => ({
-        cofigId: config.substring(1),
-        session: {
-            cassettes: [
-                {fitness: map.severities[hwFitness.substring(15, 16)], supplies: map.suppliesStatus[supplies.substring(15, 16)]},
-                {fitness: map.severities[hwFitness.substring(16, 17)], supplies: map.suppliesStatus[supplies.substring(16, 17)]},
-                {fitness: map.severities[hwFitness.substring(17, 18)], supplies: map.suppliesStatus[supplies.substring(17, 18)]},
-                {fitness: map.severities[hwFitness.substring(18, 19)], supplies: map.suppliesStatus[supplies.substring(18, 19)]}
-            ]
-        },
-        fitness: hwFitness && hwFitness.substring && {
-            clock: map.severities[hwFitness.substring(0, 1)],
-            comms: map.severities[hwFitness.substring(1, 2)],
-            disk: map.severities[hwFitness.substring(2, 3)],
-            cardReader: map.severities[hwFitness.substring(3, 4)],
-            cashHandler: map.severities[hwFitness.substring(4, 5)],
-            depository: map.severities[hwFitness.substring(5, 6)],
-            receiptPrinter: map.severities[hwFitness.substring(6, 7)],
-            journalPrinter: map.severities[hwFitness.substring(7, 8)],
-            nightDepository: map.severities[hwFitness.substring(10, 11)],
-            encryptor: map.severities[hwFitness.substring(11, 12)],
-            camera: map.severities[hwFitness.substring(12, 13)],
-            doorAccess: map.severities[hwFitness.substring(13, 14)],
-            flexDisk: map.severities[hwFitness.substring(14, 15)],
-            cassette1: map.severities[hwFitness.substring(15, 16)],
-            cassette2: map.severities[hwFitness.substring(16, 17)],
-            cassette3: map.severities[hwFitness.substring(17, 18)],
-            cassette4: map.severities[hwFitness.substring(18, 19)],
-            statementPrinter: map.severities[hwFitness.substring(21, 22)],
-            signageDisplay: map.severities[hwFitness.substring(22, 23)],
-            systemDisplay: map.severities[hwFitness.substring(25, 26)],
-            mediaEntry: map.severities[hwFitness.substring(26, 27)],
-            envelopeDispenser: map.severities[hwFitness.substring(27, 28)],
-            documentProcessing: map.severities[hwFitness.substring(28, 29)],
-            coinDispenser: map.severities[hwFitness.substring(29, 30)],
-            voiceGuidance: map.severities[hwFitness.substring(32, 33)],
-            noteAcceptor: map.severities[hwFitness.substring(34, 35)],
-            chequeProcessor: map.severities[hwFitness.substring(35, 36)]
-        },
-        hwConfig,
-        supplies: supplies && supplies.substring && {
-            cardReader: [map.suppliesStatus[supplies.substring(3, 4)]],
-            depository: [map.suppliesStatus[supplies.substring(5, 6)]],
-            receiptPrinter: [map.suppliesStatus[supplies.substring(6, 7)]],
-            journalPrinter: [map.suppliesStatus[supplies.substring(7, 8)]],
-            cashHandler: [
-                map.suppliesStatus[supplies.substring(4, 5)],
-                map.suppliesStatus[supplies.substring(15, 16)],
-                map.suppliesStatus[supplies.substring(16, 17)],
-                map.suppliesStatus[supplies.substring(17, 18)],
-                map.suppliesStatus[supplies.substring(18, 19)]
-            ]
-        },
-        sensors: parsers.sensors(' ' + sensors),
-        release,
-        softwareId
-    }),
+    configuration: (config, hwFitness, hwConfig, supplies, sensors, release, softwareId) => {
+        var sensorValues = parsers.sensors(' ' + sensors, true)
+        return {cofigId: config.substring(1),
+            session: {
+                cassettes: [
+                    {sensor: sensorValues.cassette1, fitness: map.severities[hwFitness.substring(15, 16)], supplies: map.suppliesStatus[supplies.substring(15, 16)]},
+                    {sensor: sensorValues.cassette2, fitness: map.severities[hwFitness.substring(16, 17)], supplies: map.suppliesStatus[supplies.substring(16, 17)]},
+                    {sensor: sensorValues.cassette3, fitness: map.severities[hwFitness.substring(17, 18)], supplies: map.suppliesStatus[supplies.substring(17, 18)]},
+                    {sensor: sensorValues.cassette4, fitness: map.severities[hwFitness.substring(18, 19)], supplies: map.suppliesStatus[supplies.substring(18, 19)]}
+                ]
+            },
+            fitness: hwFitness && hwFitness.substring && {
+                clock: map.severities[hwFitness.substring(0, 1)],
+                comms: map.severities[hwFitness.substring(1, 2)],
+                disk: map.severities[hwFitness.substring(2, 3)],
+                cardReader: map.severities[hwFitness.substring(3, 4)],
+                cashHandler: map.severities[hwFitness.substring(4, 5)],
+                depository: map.severities[hwFitness.substring(5, 6)],
+                receiptPrinter: map.severities[hwFitness.substring(6, 7)],
+                journalPrinter: map.severities[hwFitness.substring(7, 8)],
+                nightDepository: map.severities[hwFitness.substring(10, 11)],
+                encryptor: map.severities[hwFitness.substring(11, 12)],
+                camera: map.severities[hwFitness.substring(12, 13)],
+                doorAccess: map.severities[hwFitness.substring(13, 14)],
+                flexDisk: map.severities[hwFitness.substring(14, 15)],
+                cassette1: map.severities[hwFitness.substring(15, 16)],
+                cassette2: map.severities[hwFitness.substring(16, 17)],
+                cassette3: map.severities[hwFitness.substring(17, 18)],
+                cassette4: map.severities[hwFitness.substring(18, 19)],
+                statementPrinter: map.severities[hwFitness.substring(21, 22)],
+                signageDisplay: map.severities[hwFitness.substring(22, 23)],
+                systemDisplay: map.severities[hwFitness.substring(25, 26)],
+                mediaEntry: map.severities[hwFitness.substring(26, 27)],
+                envelopeDispenser: map.severities[hwFitness.substring(27, 28)],
+                documentProcessing: map.severities[hwFitness.substring(28, 29)],
+                coinDispenser: map.severities[hwFitness.substring(29, 30)],
+                voiceGuidance: map.severities[hwFitness.substring(32, 33)],
+                noteAcceptor: map.severities[hwFitness.substring(34, 35)],
+                chequeProcessor: map.severities[hwFitness.substring(35, 36)]
+            },
+            hwConfig,
+            supplies: supplies && supplies.substring && {
+                cardReader: [map.suppliesStatus[supplies.substring(3, 4)]],
+                depository: [map.suppliesStatus[supplies.substring(5, 6)]],
+                receiptPrinter: [map.suppliesStatus[supplies.substring(6, 7)]],
+                journalPrinter: [map.suppliesStatus[supplies.substring(7, 8)]],
+                cashHandler: [
+                    map.suppliesStatus[supplies.substring(4, 5)],
+                    map.suppliesStatus[supplies.substring(15, 16)],
+                    map.suppliesStatus[supplies.substring(16, 17)],
+                    map.suppliesStatus[supplies.substring(17, 18)],
+                    map.suppliesStatus[supplies.substring(18, 19)]
+                ]
+            },
+            sensors: sensorValues,
+            release,
+            softwareId
+        };
+    },
     hardware: (configuration, product, hardwareConfiguration) => ({
         configId: configuration.substring(2),
         product: product && product.substring && (map.products[product.substring(1)] || ('product' + product.substring(1))),
@@ -217,7 +219,7 @@ var parsers = {
         deviceStatusDescription: map.encryptorStatuses[status.substring(0, 1)]
     }),
     camera: (status) => ({}),
-    sensors: (status) => (status && status.substring && {
+    sensors: (status, skipSession) => (status && status.substring && {
         deviceStatusDescription: map.sensorStatuses[status.substring(0, 1)],
         supervisorMode: map.sensors[status.substring(1, 2)],
         vibration: (status.substring(0, 1) !== '2') && map.sensors[status.substring(2, 3)],
@@ -231,6 +233,14 @@ var parsers = {
         cassette2: map.sensors[status.substring(10, 11)],
         cassette3: map.sensors[status.substring(11, 12)],
         cassette4: map.sensors[status.substring(12, 13)],
+        session: skipSession ? undefined : {
+            cassettes: [
+                {sensor: map.sensors[status.substring(9, 10)]},
+                {sensor: map.sensors[status.substring(10, 11)]},
+                {sensor: map.sensors[status.substring(11, 12)]},
+                {sensor: map.sensors[status.substring(12, 13)]}
+            ]
+        },
         coinDispenser: map.sensors[status.substring(13, 14)],
         coinHopper1: map.sensors[status.substring(14, 15)],
         coinHopper2: map.sensors[status.substring(15, 16)],
@@ -342,6 +352,7 @@ var parsers = {
     sendConfigurationDepositDefinition: () => ({}), // sim
     sendSupplyCounters: () => ({}), // sim
     goInService: () => ({}), // sim
+    goOutOfServiceTemp: () => ({}), // sim
     goOutOfService: () => ({}) // sim
 };
 
@@ -354,10 +365,15 @@ NDC.prototype.decode = function(buffer, $meta, context) {
         if (command) {
             $meta.mtid = command.mtid;
             $meta.method = (command.mtid === 'response' ? '' : 'aptra.') + command.method;
+            message = {session: context.session};
 
             switch ($meta.method) {
                 case 'solicitedStatus':
-                    if (tokens[3] === 'B') {
+                    if (tokens[3] != null && (tokens[3].length === 8 || tokens[3].length === 0)) { // mac is active
+                        message.timeVariantNumber = tokens[3];
+                        tokens.splice(3, 1);
+                    };
+                    if (tokens[3] === 'B' || tokens[3] === '8') {
                         context.traceTransactionReady = context.traceTransactionReady || 1;
                         $meta.trace = 'trn:' + context.traceTransactionReady;
                         context.traceTransactionReady += 1;
@@ -380,7 +396,6 @@ NDC.prototype.decode = function(buffer, $meta, context) {
                     break;
             }
 
-            message = {session: context.session};
             var fn = parsers[command.method];
             if (typeof fn === 'function') {
                 try {
@@ -419,6 +434,7 @@ NDC.prototype.encode = function(message, $meta, context) {
         case 'terminalCommand':
         case 'goInService':
         case 'goOutOfService':
+        case 'goOutOfServiceTemp':
         case 'sendConfigurationId':
         case 'sendSupplyCounters':
         case 'paramsLoadEnhanced':
@@ -489,3 +505,4 @@ module.exports = NDC;
 // todo CashHandlerAlert / CassetteSupplyStatus
 // todo ReceiptPrinterAlert / JournalPrinterAlert / PaperSupplyStatus / PrinterPartStatus
 // todo OtherDeviceFaultAlert
+// todo handle when solicited status is not matched to request
