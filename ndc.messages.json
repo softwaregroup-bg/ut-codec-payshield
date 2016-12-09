@@ -94,6 +94,16 @@
             "messageClass": "1",
             "messageSubclass": "",
             "commandCode": "2",
+            "commandModifier": ""
+        },
+        "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
+    },
+    "goOutOfServiceTemp": {
+        "mtid": "request",
+        "values": {
+            "messageClass": "1",
+            "messageSubclass": "",
+            "commandCode": "2",
             "commandModifier": "1"
         },
         "fields": "messageClass,responseFlag,FS,luno,FS,seq,FS,commandCode,commandModifier"
