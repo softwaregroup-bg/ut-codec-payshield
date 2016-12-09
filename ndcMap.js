@@ -93,12 +93,12 @@ module.exports = {
             'Intervention may be required to reconcile the cash amount totals. The following counts contain requested dispense values',
         '4': 'No notes dispensed or card not ejected. ' +
             'This status is returned on a card before cash transaction if the stack operation fails and the notes are purged prior to card eject',
-        '5': 'Some notes have been retracted when the notes were not taken following a Present time‐out. The number of notes retracted is unknown'
+        '5': 'Some notes have been retracted when the notes were not taken following a Present time-out. The number of notes retracted is unknown'
     },
 
     depositoryStatuses: {
         '0': 'Successful operation, but an exception has occurred as detailed in subsequent fields',
-        '1': 'Time‐out on cardholder deposit',
+        '1': 'Time-out on cardholder deposit',
         '2': 'Failure to enable mechanism for a deposit',
         '3': 'Envelope/document jam or envelope/document deposit failed. The cardholder has access. ' +
             'This status is also returned if there is any doubt about cardholder access',
@@ -151,7 +151,7 @@ module.exports = {
         '1': 'Print/cut not successful',
         '2': 'Device not configured',
         '3': 'Statement present in transport',
-        '4': 'Cardholder pressed Cancel during a ‘print statement and wait’ function',
+        '4': 'Cardholder pressed Cancel during a "print statement and wait" function',
         '5': 'Reserved',
         '6': 'Reserved'
     },
@@ -172,12 +172,12 @@ module.exports = {
 
     noteAcceptorStatuses: {
         '0': 'Successful operation, but an exception has occurred or notes have been moved in the device outside a Transaction Reply function. Up to date counts are included, which will be in the escrow notes field (refundable deposits) or the vaulted notes field (direct deposits). In this case, both counts are cumulative within the transaction. It is also possible for a w0 code to be returned when notes are refunded for example, in the Close state. In this case, counts are reported in the Refunded counts fields',
-        '1': 'Cancel selected, Refund selected or a time‐out occurs during the Cash Accept state. Note counts will be in the escrow notes field (refundable deposit) or the vaulted notes field (direct deposit). N/A ‘2’ Reserved for legacy implementations',
+        '1': 'Cancel selected, Refund selected or a time-out occurs during the Cash Accept state. Note counts will be in the escrow notes field (refundable deposit) or the vaulted notes field (direct deposit). N/A "2" Reserved for legacy implementations',
         '2': 'Reserved for lagacy implementations',
-        '3': 'Error ‐ if counts are included, they are as accurate as the available information allows, except for notes left in the escrow in the Close state when the note counts are accurate',
-        '4': 'Device inoperative ‐ notes are left at the exit slot; counts are included. Usually this is returned counts in the w4 message as notes are at the exit slot',
+        '3': 'Error - if counts are included, they are as accurate as the available information allows, except for notes left in the escrow in the Close state when the note counts are accurate',
+        '4': 'Device inoperative - notes are left at the exit slot; counts are included. Usually this is returned counts in the w4 message as notes are at the exit slot',
         '5': 'No notes in the escrow when the Transaction Reply function attempts to vault escrowed notes or return cash, indicating an error at the host',
-        '6': 'Notes detected at power‐up; if automatic error recovery is disabled counts are included in the escrow counts field; if automatic error recovery is enabled and the notes are successfully moved, the counts will be in the vaulted counts field',
+        '6': 'Notes detected at power-up; if automatic error recovery is disabled counts are included in the escrow counts field; if automatic error recovery is enabled and the notes are successfully moved, the counts will be in the vaulted counts field',
         '7': 'Notes not taken, but retracted; counts are included in the Vaulted Counts field. (not reported on cash acceptors that do not support retract operations or with retract disabled)',
         '8': 'Unable to be vaulted',
         '9': 'Reserved for legacy implementations',
@@ -250,12 +250,12 @@ module.exports = {
         'A08': 'XML does not conform to XML schema',
         'A09': 'Inconsistent XML Configuration download',
         'B01': 'Illegal Message Class',
-        'B02': 'Illegal Message Sub‐Class or Identifier',
+        'B02': 'Illegal Message Sub-Class or Identifier',
         'B03': 'Illegal Encryption Key Change or Extended Encryption Key Change Message Modifier',
         'B04': 'Illegal Terminal Command Code',
         'B05': 'Illegal Terminal Command Modifier',
         'B06': 'Illegal Transaction Reply Function Identifier',
-        'B07': 'Data field contains non‐decimal digit',
+        'B07': 'Data field contains non-decimal digit',
         'B08': 'Data field value out of range',
         'B09': 'Invalid Message Coordination number',
         'B10': 'Illegal FIT number',
@@ -281,10 +281,10 @@ module.exports = {
         'B33': 'Invalid Cassette Type',
         'B34': 'Invalid/Incomplete Cheque Identifier(s)',
         'B35': 'Passbook update not supported in specified Transaction Reply Function',
-        'C01': 'Message type only accepted while SST is In‐Service and expecting a Transaction Reply',
+        'C01': 'Message type only accepted while SST is In-Service and expecting a Transaction Reply',
         'C02': 'Message not accepted while diagnostics is in progress. This is returned when the application has passed control to VDM',
-        'C03': 'Message not accepted while in Out‐of‐Service or Supply mode',
-        'C04': 'Message not accepted while in In‐Service mode',
+        'C03': 'Message not accepted while in Out-of-Service or Supply mode',
+        'C04': 'Message not accepted while in In-Service mode',
         'C05': 'Message not allowed while configured for NCR status message mode',
         'C06': 'Message not allowed while SST is configured for Diebold status message mode',
         'C10': 'Message not accepted while processing a Transaction Reply',
@@ -292,10 +292,10 @@ module.exports = {
         'C15': 'Encryption Key Change or Extended Encryption Key Change message not accepted during a cardholder transaction, ' +
             'or while the SST is in suspend mode, or while the operator is initiating the execution of supervisory/ settlement transactions',
         'C17': 'Key change operation cannot be accepted in restricted encryption mode. ' +
-            'This applies when an Extended Encryption Key Change message with modifier ‘3’, ‘4’, ‘6’ or ‘7’ is received in restricted mode',
+            'This applies when an Extended Encryption Key Change message with modifier "3", "4", "6" or "7" is received in restricted mode',
         'C18': 'Key entry mode not authorised',
         'D01': 'Encryption failure during Encryption Key Change or Extended Encryption Key Change message',
-        'D02': 'Time‐of‐Day Clock failure or invalid data sent during Date/Time Set command',
+        'D02': 'Time-of-Day Clock failure or invalid data sent during Date/Time Set command',
         'D06': 'Insufficient disk space',
         'D07': 'File IO error',
         'D08': 'File not found',
