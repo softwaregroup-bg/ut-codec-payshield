@@ -100,7 +100,7 @@ var parsers = {
         configId: config.substring(1)
     }),
     configuration: (config, hwFitness, hwConfig, supplies, sensors, release, softwareId) => {
-        var sensorValues = parsers.sensors(' ' + sensors, true)
+        var sensorValues = parsers.sensors(' ' + sensors, true);
         return {cofigId: config.substring(1),
             session: {
                 cassettes: [
@@ -294,28 +294,43 @@ var parsers = {
         luno,
         journalData
     }),
-    transaction: (type, luno, reserved, timeVariantNumber, trtfmcn, track2, track3, opcode, amount, pin, bufferB, bufferC) => ({
-        type,
-        luno,
-        reserved,
-        timeVariantNumber,
-        topOfReceipt: trtfmcn && trtfmcn.substring && trtfmcn.substring(0, 1),
-        coordination: trtfmcn && trtfmcn.substring && trtfmcn.substring(1, 2),
-        track2,
-        track3,
-        opcode: opcode && opcode.split && opcode.split(''),
-        amount,
-        pinBlock: pin && pin.split && pin.split('').map((c) => ({
-            ':': 'A',
-            ';': 'B',
-            '<': 'C',
-            '=': 'D',
-            '>': 'E',
-            '?': 'F'
-        }[c] || c)).join(''),
-        bufferB,
-        bufferC
-    }),
+    lastTransaction: fields => {
+        var result = fields.find(field => field.substring(0, 1) === '2');
+        result = result && result.match(/^2(\d{4})(\d)(\d{5})(\d{5})(\d{5})(\d{5})/);
+        return result && {
+            sernum: result[1],
+            status: result[2],
+            notes1: parseInt(result[3]),
+            notes2: parseInt(result[4]),
+            notes3: parseInt(result[5]),
+            notes4: parseInt(result[6])
+        };
+    },
+    transaction: function(type, luno, reserved, timeVariantNumber, trtfmcn, track2, track3, opcode, amount, pin, bufferB, bufferC) {
+        return {
+            type,
+            luno,
+            reserved,
+            timeVariantNumber,
+            topOfReceipt: trtfmcn && trtfmcn.substring && trtfmcn.substring(0, 1),
+            coordination: trtfmcn && trtfmcn.substring && trtfmcn.substring(1, 2),
+            track2,
+            track3,
+            opcode: opcode && opcode.split && opcode.split(''),
+            amount,
+            pinBlock: pin && pin.split && pin.split('').map((c) => ({
+                ':': 'A',
+                ';': 'B',
+                '<': 'C',
+                '=': 'D',
+                '>': 'E',
+                '?': 'F'
+            }[c] || c)).join(''),
+            bufferB,
+            bufferC,
+            lastTransactionData: parsers.lastTransaction(Array.prototype.slice.call(arguments, 12))
+        };
+    },
     transactionReply: (type, luno, timeVariantNumber, nextState, notes, sernumFunction, coordinationCardPrinter) => ({
         type,
         luno,
