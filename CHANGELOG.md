@@ -1,3 +1,16 @@
+<a name="5.5.1"></a>
+## [5.5.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.5.0...v5.5.1) (2016-12-10)
+
+
+### Bug Fixes
+
+* add sensors to the session, handle mac ([c9c8b40](https://github.com/softwaregroup-bg/ut-codec/commit/c9c8b40))
+* fix encoding ([105f544](https://github.com/softwaregroup-bg/ut-codec/commit/105f544))
+* fix go out of service ([037e043](https://github.com/softwaregroup-bg/ut-codec/commit/037e043))
+* fix lint error ([6bc9e06](https://github.com/softwaregroup-bg/ut-codec/commit/6bc9e06))
+
+
+
 <a name="5.5.0"></a>
 # [5.5.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.4.24...v5.5.0) (2016-12-06)
 
