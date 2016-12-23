@@ -3,18 +3,18 @@
   "version": "5.5.1",
   "main": "./index.js",
   "dependencies": {
-    "iconv-lite": "0.4.13",
-    "lodash.assign": "4.1.0",
+    "iconv-lite": "0.4.15",
+    "lodash.assign": "4.2.0",
     "lodash.merge": "4.6.0",
-    "lodash.omit": "4.4.1",
-    "lodash.invert": "4.2.0",
-    "lodash.isempty": "4.3.1",
+    "lodash.omit": "4.5.0",
+    "lodash.invert": "4.3.0",
+    "lodash.isempty": "4.4.0",
     "lodash.isobject": "3.0.2",
-    "ut-bitsyntax": "~5.4.2"
+    "ut-bitsyntax": "~6.0.5"
   },
   "devDependencies": {
     "adiff": "0.2.13",
-    "ut-tools": "^5.6.2"
+    "ut-tools": "^5.11.1"
   },
   "scripts": {
     "lint": "ut-lint .",
