@@ -1,3 +1,14 @@
+<a name="5.6.1"></a>
+## [5.6.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.6.0...v5.6.1) (2017-01-17)
+
+
+### Bug Fixes
+
+* pin data field format ([4d707bd](https://github.com/softwaregroup-bg/ut-codec/commit/4d707bd))
+* split transaction reply to more fields ([d97066e](https://github.com/softwaregroup-bg/ut-codec/commit/d97066e))
+
+
+
 <a name="5.6.0"></a>
 # [5.6.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.5.1...v5.6.0) (2016-12-23)
 
