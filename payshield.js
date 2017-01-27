@@ -183,7 +183,7 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
         $meta.mtid = 'error';
         $meta.method = cmd.method;
         bodyObj = {
-            errorCode: bodyObj.errorCode,
+            errorCode: 'payshield.' + bodyObj.errorCode,
             errorMessage: ERRORCODES[bodyObj.errorCode]
         };
     }
