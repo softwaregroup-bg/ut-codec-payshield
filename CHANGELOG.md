@@ -1,3 +1,18 @@
+<a name="5.7.0"></a>
+# [5.7.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.6.1...v5.7.0) (2017-01-27)
+
+
+### Bug Fixes
+
+* put namespace for errors ([d1ed967](https://github.com/softwaregroup-bg/ut-codec/commit/d1ed967))
+
+
+### Features
+
+* add generate cvv message ([58a0b35](https://github.com/softwaregroup-bg/ut-codec/commit/58a0b35))
+
+
+
 <a name="5.6.1"></a>
 ## [5.6.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.6.0...v5.6.1) (2017-01-17)
 
