@@ -2,6 +2,7 @@
 var merge = require('lodash.merge');
 var defaultFields = require('./iso8583.fields.json');
 var bitSyntax = require('ut-bitsyntax');
+var errors = require('./isoErrors');
 
 function getFormat(format, fallback) {
     return (format && {'numeric': 'string-left-zero', 'string': 'string-right-space', 'amount': 'string-left-zero', 'bcdamount': 'string'}[format]) || format || fallback || 'binary';
@@ -105,6 +106,10 @@ Iso8583.prototype.decode = function(buffer, $meta) {
             }[(message.mtid.slice(-2).substr(0, 1))] || 'error';
         }
         $meta.method = message.mtid + '-' + $meta.opcode;
+        if ($meta.mtid === 'error') {
+            var err = errors['' + message[39]] || errors.generic;
+            message = err(message);
+        }
         return message;
     } else {
         throw new Error('Unable to parse message type or first bitmap!');
