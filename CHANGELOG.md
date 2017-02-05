@@ -1,3 +1,13 @@
+<a name="5.8.0"></a>
+# [5.8.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.7.0...v5.8.0) (2017-02-05)
+
+
+### Features
+
+* implement ISO errors ([7ea3fa8](https://github.com/softwaregroup-bg/ut-codec/commit/7ea3fa8))
+
+
+
 <a name="5.7.0"></a>
 # [5.7.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.6.1...v5.7.0) (2017-01-27)
 
