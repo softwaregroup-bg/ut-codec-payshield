@@ -1,3 +1,13 @@
+<a name="5.8.1"></a>
+## [5.8.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.8.0...v5.8.1) (2017-02-10)
+
+
+### Bug Fixes
+
+* use . separator for iso ([c55d386](https://github.com/softwaregroup-bg/ut-codec/commit/c55d386))
+
+
+
 <a name="5.8.0"></a>
 # [5.8.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.7.0...v5.8.0) (2017-02-05)
 
