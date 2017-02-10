@@ -105,7 +105,7 @@ Iso8583.prototype.decode = function(buffer, $meta) {
                 '5': 'notification'
             }[(message.mtid.slice(-2).substr(0, 1))] || 'error';
         }
-        $meta.method = message.mtid + '-' + $meta.opcode;
+        $meta.method = message.mtid + ($meta.opcode ? '.' + $meta.opcode : '');
         if ($meta.mtid === 'error') {
             var err = errors['' + message[39]] || errors.generic;
             message = err(message);
