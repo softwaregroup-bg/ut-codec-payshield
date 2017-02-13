@@ -1,3 +1,13 @@
+<a name="5.8.2"></a>
+## [5.8.2](https://github.com/softwaregroup-bg/ut-codec/compare/v5.8.1...v5.8.2) (2017-02-13)
+
+
+### Bug Fixes
+
+* **ndc:** parse new PIN ([485cd27](https://github.com/softwaregroup-bg/ut-codec/commit/485cd27))
+
+
+
 <a name="5.8.1"></a>
 ## [5.8.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.8.0...v5.8.1) (2017-02-10)
 
