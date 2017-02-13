@@ -306,7 +306,19 @@ var parsers = {
             notes4: parseInt(result[6])
         };
     },
-    transaction: function(type, luno, reserved, timeVariantNumber, trtfmcn, track2, track3, opcode, amount, pin, bufferB, bufferC) {
+    pinBlock: pin => pin && pin.split && pin.split('').map((c) => ({
+        ':': 'A',
+        ';': 'B',
+        '<': 'C',
+        '=': 'D',
+        '>': 'E',
+        '?': 'F'
+    }[c] || c)).join(''),
+    pinBlockNew: fields => {
+        var result = fields.find(field => field.substring(0, 1) === 'U');
+        return result && parsers.pinBlock(result.substr(1, 16));
+    },
+    transaction: function(type, luno, reserved, timeVariantNumber, trtfmcn, track2, track3, opcode, amount, pinBlock, bufferB, bufferC) {
         return {
             type,
             luno,
@@ -318,14 +330,8 @@ var parsers = {
             track3,
             opcode: opcode && opcode.split && opcode.split(''),
             amount,
-            pinBlock: pin && pin.split && pin.split('').map((c) => ({
-                ':': 'A',
-                ';': 'B',
-                '<': 'C',
-                '=': 'D',
-                '>': 'E',
-                '?': 'F'
-            }[c] || c)).join(''),
+            pinBlock: parsers.pinBlock(pinBlock),
+            pinBlockNew: parsers.pinBlockNew(Array.prototype.slice.call(arguments, 12)),
             bufferB,
             bufferC,
             lastTransactionData: parsers.lastTransaction(Array.prototype.slice.call(arguments, 12))
