@@ -1,3 +1,13 @@
+<a name="5.8.3"></a>
+## [5.8.3](https://github.com/softwaregroup-bg/ut-codec/compare/v5.8.2...v5.8.3) (2017-02-14)
+
+
+### Bug Fixes
+
+* supply status handling ([225c15f](https://github.com/softwaregroup-bg/ut-codec/commit/225c15f))
+
+
+
 <a name="5.8.2"></a>
 ## [5.8.2](https://github.com/softwaregroup-bg/ut-codec/compare/v5.8.1...v5.8.2) (2017-02-13)
 
