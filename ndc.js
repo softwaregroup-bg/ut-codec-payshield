@@ -63,34 +63,34 @@ var parsers = {
     },
 
     // terminal state statuses
-    supplyCounters: (supplies) => (supplies && supplies.substring && {
-        transactionSerialNumber: supplies.substring(1, 5),
-        transactionCount: Number.parseInt(supplies.substring(5, 12), 10),
-        notes1: Number.parseInt(supplies.substring(12, 17), 10),
-        notes2: Number.parseInt(supplies.substring(17, 22), 10),
-        notes3: Number.parseInt(supplies.substring(22, 27), 10),
-        notes4: Number.parseInt(supplies.substring(27, 32), 10),
+    supplyCounters: (counters) => (counters && counters.substring && {
+        transactionSerialNumber: counters.substring(1, 5),
+        transactionCount: Number.parseInt(counters.substring(5, 12), 10),
+        notes1: Number.parseInt(counters.substring(12, 17), 10),
+        notes2: Number.parseInt(counters.substring(17, 22), 10),
+        notes3: Number.parseInt(counters.substring(22, 27), 10),
+        notes4: Number.parseInt(counters.substring(27, 32), 10),
         session: {
             cassettes: [
-                {count: Number.parseInt(supplies.substring(12, 17), 10)},
-                {count: Number.parseInt(supplies.substring(17, 22), 10)},
-                {count: Number.parseInt(supplies.substring(22, 27), 10)},
-                {count: Number.parseInt(supplies.substring(27, 32), 10)}
+                {count: Number.parseInt(counters.substring(12, 17), 10)},
+                {count: Number.parseInt(counters.substring(17, 22), 10)},
+                {count: Number.parseInt(counters.substring(22, 27), 10)},
+                {count: Number.parseInt(counters.substring(27, 32), 10)}
             ]
         },
-        rejected1: Number.parseInt(supplies.substring(32, 37), 10),
-        rejected2: Number.parseInt(supplies.substring(37, 42), 10),
-        rejected3: Number.parseInt(supplies.substring(42, 47), 10),
-        rejected4: Number.parseInt(supplies.substring(47, 52), 10),
-        dispensed1: Number.parseInt(supplies.substring(52, 57), 10),
-        dispensed2: Number.parseInt(supplies.substring(57, 62), 10),
-        dispensed3: Number.parseInt(supplies.substring(62, 67), 10),
-        dispensed4: Number.parseInt(supplies.substring(67, 72), 10),
-        last1: Number.parseInt(supplies.substring(72, 77), 10),
-        last2: Number.parseInt(supplies.substring(77, 82), 10),
-        last3: Number.parseInt(supplies.substring(82, 87), 10),
-        last4: Number.parseInt(supplies.substring(87, 92), 10),
-        captured: Number.parseInt(supplies.substring(92, 97), 10)
+        rejected1: Number.parseInt(counters.substring(32, 37), 10),
+        rejected2: Number.parseInt(counters.substring(37, 42), 10),
+        rejected3: Number.parseInt(counters.substring(42, 47), 10),
+        rejected4: Number.parseInt(counters.substring(47, 52), 10),
+        dispensed1: Number.parseInt(counters.substring(52, 57), 10),
+        dispensed2: Number.parseInt(counters.substring(57, 62), 10),
+        dispensed3: Number.parseInt(counters.substring(62, 67), 10),
+        dispensed4: Number.parseInt(counters.substring(67, 72), 10),
+        last1: Number.parseInt(counters.substring(72, 77), 10),
+        last2: Number.parseInt(counters.substring(77, 82), 10),
+        last3: Number.parseInt(counters.substring(82, 87), 10),
+        last4: Number.parseInt(counters.substring(87, 92), 10),
+        captured: Number.parseInt(counters.substring(92, 97), 10)
     }),
     datetime: (status) => (status && status.substring && {
         clockStatus: status.substring(0, 1),
@@ -140,18 +140,16 @@ var parsers = {
                 chequeProcessor: map.severities[hwFitness.substring(35, 36)]
             },
             hwConfig,
-            supplies: supplies && supplies.substring && {
-                cardReader: [map.suppliesStatus[supplies.substring(3, 4)]],
-                depository: [map.suppliesStatus[supplies.substring(5, 6)]],
-                receiptPrinter: [map.suppliesStatus[supplies.substring(6, 7)]],
-                journalPrinter: [map.suppliesStatus[supplies.substring(7, 8)]],
-                cashHandler: [
-                    map.suppliesStatus[supplies.substring(4, 5)],
-                    map.suppliesStatus[supplies.substring(15, 16)],
-                    map.suppliesStatus[supplies.substring(16, 17)],
-                    map.suppliesStatus[supplies.substring(17, 18)],
-                    map.suppliesStatus[supplies.substring(18, 19)]
-                ]
+            supplyStatus: supplies && supplies.substring && {
+                cardReader: map.suppliesStatus[supplies.substring(3, 4)],
+                depository: map.suppliesStatus[supplies.substring(5, 6)],
+                receiptPrinter: map.suppliesStatus[supplies.substring(6, 7)],
+                journalPrinter: map.suppliesStatus[supplies.substring(7, 8)],
+                rejectBin: map.suppliesStatus[supplies.substring(4, 5)],
+                cassette1: map.suppliesStatus[supplies.substring(15, 16)],
+                cassette2: map.suppliesStatus[supplies.substring(16, 17)],
+                cassette3: map.suppliesStatus[supplies.substring(17, 18)],
+                cassette4: map.suppliesStatus[supplies.substring(18, 19)]
             },
             sensors: sensorValues,
             release,
