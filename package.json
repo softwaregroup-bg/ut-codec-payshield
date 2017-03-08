@@ -10,11 +10,11 @@
     "lodash.invert": "4.3.0",
     "lodash.isempty": "4.4.0",
     "lodash.isobject": "3.0.2",
-    "ut-bitsyntax": "~6.0.5"
+    "ut-bitsyntax": "^6.0.7"
   },
   "devDependencies": {
     "adiff": "0.2.13",
-    "ut-tools": "^5.11.1"
+    "ut-tools": "^5.13.5"
   },
   "scripts": {
     "lint": "ut-lint .",
