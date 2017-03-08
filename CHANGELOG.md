@@ -1,3 +1,13 @@
+<a name="5.8.5"></a>
+## [5.8.5](https://github.com/softwaregroup-bg/ut-codec/compare/v5.8.4...v5.8.5) (2017-03-08)
+
+
+### Bug Fixes
+
+* dependencies ([168a5a0](https://github.com/softwaregroup-bg/ut-codec/commit/168a5a0))
+
+
+
 <a name="5.8.4"></a>
 ## [5.8.4](https://github.com/softwaregroup-bg/ut-codec/compare/v5.8.3...v5.8.4) (2017-02-17)
 
