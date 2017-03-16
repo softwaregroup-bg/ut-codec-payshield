@@ -1,3 +1,13 @@
+<a name="5.9.0"></a>
+# [5.9.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.8.5...v5.9.0) (2017-03-16)
+
+
+### Features
+
+* ejAck & ejOptions ([#1](https://github.com/softwaregroup-bg/ut-codec/issues/1)) ([77b10ce](https://github.com/softwaregroup-bg/ut-codec/commit/77b10ce))
+
+
+
 <a name="5.8.5"></a>
 ## [5.8.5](https://github.com/softwaregroup-bg/ut-codec/compare/v5.8.4...v5.8.5) (2017-03-08)
 
