@@ -89,7 +89,9 @@ Iso8583.prototype.decode = function(buffer, $meta) {
             parsedLength += rest.length - frame.rest.length;
             bitmapField = group * 64 + 1;
             for (var fieldNo = group * 64 + 1; fieldNo <= (group + 1) * 64; fieldNo += 1) {
-                fieldSizes['field' + fieldNo + 'Size'] ? message[fieldNo] = frame['field' + fieldNo] : null;
+                if (fieldSizes['field' + fieldNo + 'Size']) {
+                    message[fieldNo] = frame['field' + fieldNo];
+                }
             }
             group += 1;
         }

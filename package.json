@@ -5,16 +5,17 @@
   "dependencies": {
     "iconv-lite": "0.4.15",
     "lodash.assign": "4.2.0",
-    "lodash.merge": "4.6.0",
-    "lodash.omit": "4.5.0",
     "lodash.invert": "4.3.0",
     "lodash.isempty": "4.4.0",
     "lodash.isobject": "3.0.2",
-    "ut-bitsyntax": "^6.0.7"
+    "lodash.merge": "4.6.0",
+    "lodash.omit": "4.5.0",
+    "ut-bitsyntax": "^6.0.7",
+    "ut-error": "^5.4.0"
   },
   "devDependencies": {
     "adiff": "0.2.13",
-    "ut-tools": "^5.13.5"
+    "ut-tools": "^5.14.4"
   },
   "scripts": {
     "lint": "ut-lint .",

@@ -372,7 +372,9 @@ var parsers = {
     sendSupplyCounters: () => ({}), // sim
     goInService: () => ({}), // sim
     goOutOfServiceTemp: () => ({}), // sim
-    goOutOfService: () => ({}) // sim
+    goOutOfService: () => ({}), // sim
+    ejOptions: () => ({}), // sim
+    ejAck: () => ({}) // sim
 };
 
 NDC.prototype.decode = function(buffer, $meta, context) {
@@ -380,7 +382,19 @@ NDC.prototype.decode = function(buffer, $meta, context) {
     var bufferString = buffer.toString();
     if (buffer.length > 0) {
         var tokens = bufferString.split(this.fieldSeparator);
-        var command = this.codes[tokens[0] + '|' + ((tokens[0] === '1' || tokens[0] === '3') ? tokens[3] : '')];
+        var command;
+        switch (tokens[0]) {
+            case '1':
+            case '3':
+                command = this.codes[`${tokens[0]}|${tokens[3]}`];
+                break;
+            case '6':
+                command = this.codes[`${tokens[0]}|${tokens[3].charAt(0)}`];
+                break;
+            default:
+                command = this.codes[`${tokens[0]}|`];
+                break;
+        }
         if (command) {
             $meta.mtid = command.mtid;
             $meta.method = (command.mtid === 'response' ? '' : 'aptra.') + command.method;
