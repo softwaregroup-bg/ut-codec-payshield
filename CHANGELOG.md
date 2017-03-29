@@ -1,3 +1,13 @@
+<a name="5.9.1"></a>
+## [5.9.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.0...v5.9.1) (2017-03-29)
+
+
+### Bug Fixes
+
+* pin format ([#2](https://github.com/softwaregroup-bg/ut-codec/issues/2)) ([265ea71](https://github.com/softwaregroup-bg/ut-codec/commit/265ea71))
+
+
+
 <a name="5.9.0"></a>
 # [5.9.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.8.5...v5.9.0) (2017-03-16)
 
