@@ -62,13 +62,13 @@
         "requestCode": "EE",
         "responseCode": "EF",
         "requestPattern": "pvk:pvkLength/string, offset:12/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
-        "responsePattern": "errorCode:2/string, pin:5/string"
+        "responsePattern": "errorCode:2/string, pin/binary"
     },
     "generatePin": {
         "requestCode": "JA",
         "responseCode": "JB",
         "requestPattern": "account:12/string, checkLength:2/string-left-zero",
-        "responsePattern": "errorCode:2/string, pin:5/string"
+        "responsePattern": "errorCode:2/string, pin/binary"
     },
     "generateOffsetIbm": {
         "requestCode": "BK",
@@ -97,7 +97,7 @@
     "printPin": {
         "requestCode": "PE",
         "responseCode": "PF",
-        "requestPattern": "documentType:1/string, account:12/string, pin:16/string, printFields:printFieldsLength/string",
+        "requestPattern": "documentType:1/string, account:12/string, pin:cryptedPinLength/string, printFields:printFieldsLength/string",
         "responsePattern": "errorCode:2/string"
     },
     "printPinEnd": {
@@ -114,18 +114,18 @@
         "requestCode": "JC",
         "responseCode": "JD",
         "requestPattern": "sourceTpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string",
-        "responsePattern": "errorCode:2/string, pin:5/string"
+        "responsePattern": "errorCode:2/string, pin/binary"
     },
     "translateZpkLmk": {
         "requestCode": "JE",
         "responseCode": "JF",
         "requestPattern": "sourceZpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string",
-        "responsePattern": "errorCode:2/string, pin:5/string"
+        "responsePattern": "errorCode:2/string, pin/binary"
     },
     "generateOffsetIbmLmk": {
         "requestCode": "DE",
         "responseCode": "DF",
-        "requestPattern": "pvk:pvkLength/string, pin:5/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
+        "requestPattern": "pvk:pvkLength/string, pin:cryptedPinLength/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
         "responsePattern": "errorCode:2/string, offset:12/string"
     }
 }
