@@ -1,3 +1,13 @@
+<a name="5.9.2"></a>
+## [5.9.2](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.1...v5.9.2) (2017-04-12)
+
+
+### Bug Fixes
+
+* tlv field parser ([#3](https://github.com/softwaregroup-bg/ut-codec/issues/3)) ([3e40afa](https://github.com/softwaregroup-bg/ut-codec/commit/3e40afa))
+
+
+
 <a name="5.9.1"></a>
 ## [5.9.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.0...v5.9.1) (2017-03-29)
 
