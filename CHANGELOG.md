@@ -1,3 +1,13 @@
+<a name="5.9.3"></a>
+## [5.9.3](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.2...v5.9.3) (2017-04-19)
+
+
+### Bug Fixes
+
+* add error codes ([a46b003](https://github.com/softwaregroup-bg/ut-codec/commit/a46b003))
+
+
+
 <a name="5.9.2"></a>
 ## [5.9.2](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.1...v5.9.2) (2017-04-12)
 
