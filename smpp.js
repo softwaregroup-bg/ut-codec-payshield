@@ -69,7 +69,26 @@ var tlvTagsByName = {
     'ms_validity': '1204',
     'alert_on_message_delivery': '130C',
     'its_reply_type': '1380',
-    'its_session_info': '1383'
+    'its_session_info': '1383',
+    'original_network_name': '1412',
+    'original_network_prefix': '140B',
+    'original_country': '1422',
+    'original_country_code': '1423',
+    'original_country_prefix': '1424',
+    'ported_network_name': '1413',
+    'ported_country_prefix': '1442',
+    'ported_network_prefix': '143E',
+    'ported_network_country_name': '143F',
+    'is_number_ported': '1421',
+    'roaming_network_name': '1414',
+    'roaming_network_prefix': '1419',
+    'roaming_country_name': '1415',
+    'roaming_country_code': '1417',
+    'roaming_country_prefix': '1420',
+    'mccmnc': '1416',
+    'price_per_message': '1418',
+    'serving_hlr': '1409',
+    'is_number_correct': '1425'
 };
 var tlvBuilders = {
     'user_message_reference': {
@@ -169,9 +188,8 @@ SmppParser.prototype.decode = function(buff, $meta) {
                     throw new Error('Unable to match TLV!');
                 }
                 do {
-                    if (!(tlv.t = tlvTagsById[('0000' + tlv.t.toString(16).toUpperCase()).slice(-4)])) {
-                        throw new Error('Unknown TLV tag id: ' + tlv.t);
-                    }
+                    var hex = ('0000' + tlv.t.toString(16).toUpperCase()).slice(-4);
+                    tlv.t = tlvTagsById[hex] || 'tlv_' + hex.toLowerCase();
                     tlvs[tlv.t] = tlv.v;
                     tlv = bitsyntax.match(this.tlvPattern, tlv.next);
                 } while (tlv);
