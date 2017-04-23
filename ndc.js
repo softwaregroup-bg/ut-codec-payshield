@@ -369,6 +369,11 @@ var parsers = {
     sendConfigurationRelease: () => ({}), // sim
     sendConfigurationOptionDigits: () => ({}), // sim
     sendConfigurationDepositDefinition: () => ({}), // sim
+    emvCurrency: () => ({}), // sim
+    emvTransaction: () => ({}), // sim
+    emvLanguage: () => ({}), // sim
+    emvTerminal: () => ({}), // sim
+    emvApplication: () => ({}), // sim
     sendSupplyCounters: () => ({}), // sim
     goInService: () => ({}), // sim
     goOutOfServiceTemp: () => ({}), // sim
@@ -387,6 +392,9 @@ NDC.prototype.decode = function(buffer, $meta, context) {
             case '1':
             case '3':
                 command = this.codes[`${tokens[0]}|${tokens[3]}`];
+                break;
+            case '8':
+                command = this.codes[`${tokens[0]}${tokens[2]}|`];
                 break;
             case '6':
                 command = this.codes[`${tokens[0]}|${tokens[3].charAt(0)}`];
