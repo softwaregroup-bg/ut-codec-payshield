@@ -1,3 +1,13 @@
+<a name="5.9.4"></a>
+## [5.9.4](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.3...v5.9.4) (2017-04-23)
+
+
+### Bug Fixes
+
+* handle EMV messages ([64e1224](https://github.com/softwaregroup-bg/ut-codec/commit/64e1224))
+
+
+
 <a name="5.9.3"></a>
 ## [5.9.3](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.2...v5.9.3) (2017-04-19)
 
