@@ -418,6 +418,8 @@ NDC.prototype.decode = function(buffer, $meta, context) {
                         context.traceTransactionReady = context.traceTransactionReady || 1;
                         $meta.trace = 'trn:' + context.traceTransactionReady;
                         context.traceTransactionReady += 1;
+                        context.traceTerminal = 1;
+                        context.traceCentral = 1;
                     } else {
                         context.traceTerminal = context.traceTerminal || 1;
                         $meta.trace = 'req:' + context.traceTerminal;
