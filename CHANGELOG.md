@@ -1,3 +1,13 @@
+<a name="5.9.5"></a>
+## [5.9.5](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.4...v5.9.5) (2017-05-03)
+
+
+### Bug Fixes
+
+* reset counters afer tx ready ([a696cf2](https://github.com/softwaregroup-bg/ut-codec/commit/a696cf2))
+
+
+
 <a name="5.9.4"></a>
 ## [5.9.4](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.3...v5.9.4) (2017-04-23)
 
