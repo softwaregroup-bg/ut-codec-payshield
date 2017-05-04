@@ -98,7 +98,7 @@
         "requestCode": "PE",
         "responseCode": "PF",
         "requestPattern": "documentType:1/string, account:12/string, pin:cryptedPinLength/string, printFields:printFieldsLength/string",
-        "responsePattern": "errorCode:2/string"
+        "responsePattern": "errorCode:2/string, checkValue/binary"
     },
     "printPinEnd": {
         "responseCode": "PZ",
