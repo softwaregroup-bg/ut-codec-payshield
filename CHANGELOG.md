@@ -1,3 +1,13 @@
+<a name="5.9.6"></a>
+## [5.9.6](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.5...v5.9.6) (2017-05-05)
+
+
+### Bug Fixes
+
+* printPin responsePattern ([e605051](https://github.com/softwaregroup-bg/ut-codec/commit/e605051))
+
+
+
 <a name="5.9.5"></a>
 ## [5.9.5](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.4...v5.9.5) (2017-05-03)
 
