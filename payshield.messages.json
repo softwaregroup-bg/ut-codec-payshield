@@ -54,8 +54,8 @@
     "generateKeyCheckValue": {
         "requestCode": "BU",
         "responseCode": "BV",
-        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, keyA32:33/string",
-        "responsePattern": "errorCode:2/string, keyCheckValue16:16/string"
+        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, keyA32:33/string, \";\", \"0\", \"0\", kcvType:1/string",
+        "responsePattern": "errorCode:2/string, keyCheckValue/binary"
     },
 
     "derivePinIbm": {
