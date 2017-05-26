@@ -1,3 +1,13 @@
+<a name="5.9.12"></a>
+## [5.9.12](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.11...v5.9.12) (2017-05-26)
+
+
+### Bug Fixes
+
+* generateKeyCheckValue - kcvType added to request pattern ([#5](https://github.com/softwaregroup-bg/ut-codec/issues/5)) ([aee9d63](https://github.com/softwaregroup-bg/ut-codec/commit/aee9d63))
+
+
+
 <a name="5.9.11"></a>
 ## [5.9.11](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.10...v5.9.11) (2017-05-22)
 
