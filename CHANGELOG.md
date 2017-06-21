@@ -1,3 +1,13 @@
+<a name="5.9.14"></a>
+## [5.9.14](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.13...v5.9.14) (2017-06-21)
+
+
+### Bug Fixes
+
+* jsonrpc full rewrite ([#6](https://github.com/softwaregroup-bg/ut-codec/issues/6)) ([76f97c8](https://github.com/softwaregroup-bg/ut-codec/commit/76f97c8))
+
+
+
 <a name="5.9.13"></a>
 ## [5.9.13](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.12...v5.9.13) (2017-06-05)
 
