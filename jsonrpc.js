@@ -40,8 +40,6 @@ module.exports = class JsonRpc {
             throw errors.invalidMessageID('Received fractional number as id. fractionalId option is set to false');
         } else if (json.id === '') {
             throw errors.invalidMessageID('Received empty id');
-        } else if (typeof json.method !== 'string' || json.method === '') {
-            throw errors.invalidMethod('Received nvalid method type or empty');
         } else if (json.id === undefined && typeof json.params !== 'object') {
             throw errors.invalidPayload('Received notification with missing or invalid payload member');
         } else if (typeof json.params !== 'object' && typeof json.result !== 'object' && typeof json.error !== 'object') {
@@ -51,7 +49,6 @@ module.exports = class JsonRpc {
         }
 
         const payloadMember = ['params', 'result', 'error'].find(key => key in json);
-        $meta.method = $meta.opcode = json.method;
         $meta.trace = json.id;
         $meta.mtid = {
             error: 'error',
@@ -59,6 +56,12 @@ module.exports = class JsonRpc {
             params: 'request',
             notification: 'notification'
         }[json.id ? payloadMember : 'notification'];
+        if ($meta.mtid === 'request') {
+            if (json.method !== 'string' || json.method === '') {
+                throw errors.invalidMethod('Received invalid method type or empty');
+            }
+            $meta.method = $meta.opcode = json.method;
+        }
         return json[payloadMember];
     }
 

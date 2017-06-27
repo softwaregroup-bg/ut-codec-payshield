@@ -1,6 +1,6 @@
 {
   "name": "ut-codec",
-  "version": "5.9.14",
+  "version": "5.9.15-jsonrpc.0",
   "main": "./index.js",
   "dependencies": {
     "iconv-lite": "0.4.15",
