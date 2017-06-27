@@ -1,3 +1,13 @@
+<a name="5.9.15"></a>
+## [5.9.15](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.14...v5.9.15) (2017-06-27)
+
+
+### Bug Fixes
+
+* dont expect method in response ([#7](https://github.com/softwaregroup-bg/ut-codec/issues/7)) ([b4d841a](https://github.com/softwaregroup-bg/ut-codec/commit/b4d841a))
+
+
+
 <a name="5.9.14"></a>
 ## [5.9.14](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.13...v5.9.14) (2017-06-21)
 
