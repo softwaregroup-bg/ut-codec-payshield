@@ -42,7 +42,7 @@
     "generateArqc": {
         "requestCode": "KW",
         "responseCode": "KX",
-        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, ivac:ivacLength/binary, panLength:panLengthLength/string, panSeqNo:panSeqNoLength/binary, delimiter1:delimiter1Length/string, branchHeightParams:branchHeightParamsLength/string, atc:2/binary, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/binary, delimiter2:delimiter2Length/string, arqc:8/binary, arc:arcLength/binary, csu:csuLength/string, padLength:padLengthLength/string, pad:padLength/string",
+        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, ivac:ivacLength/string-binhex, panLength:panLengthLength/string, panSeqNo:panSeqNoLength/string-binhex, delimiter1:delimiter1Length/string, branchHeightParams:branchHeightParamsLength/string, atc:2/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter2:delimiter2Length/string, arqc:8/string-binhex, arc:arcLength/string-binhex, csu:csuLength/string-binhex, padLength:padLengthLength/string, pad:padLength/string-binhex",
         "responsePattern": "errorCode:2/string, responseData/binary"
     },
     "verifyMac": {
