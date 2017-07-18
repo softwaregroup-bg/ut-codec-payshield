@@ -170,7 +170,10 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
     if (!bodyObj) {
         throw new Error('Unable to match response errorCode!');
     }
-    if (bodyObj.errorCode === '00' || bodyObj.errorCode === '02') {
+    // 00 = No error
+    // 01 = Verification failure or warning of imported key parity error (in some cases is warning)
+    // 02 = Key inappropriate length for algorithm (in some cases is warning)
+    if (['00', '01', '02'].includes(bodyObj.errorCode)) {
         bodyObj = bitsyntax.match(cmd.pattern, headObj.body);
         if (!bodyObj) {
             throw new Error('Unable to match pattern for opcode:' + commandName + '!');

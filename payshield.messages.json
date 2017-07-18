@@ -39,6 +39,12 @@
         "requestPattern": "cvk:33/string, account:12/string, \";\", expirationDate:4/string, serviceCode:3/string",
         "responsePattern": "errorCode:2/string, cvv:3/string"
     },
+    "generateArqc": {
+        "requestCode": "KW",
+        "responseCode": "KX",
+        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, ivac:ivacLength/binary, panLength:panLengthLength/string, panSeqNo:panSeqNoLength/binary, delimiter1:delimiter1Length/string, branchHeightParams:branchHeightParamsLength/string, atc:2/binary, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/binary, delimiter2:delimiter2Length/string, arqc:8/binary, arc:arcLength/binary, csu:csuLength/string, padLength:padLengthLength/string, pad:padLength/string",
+        "responsePattern": "errorCode:2/string, responseData/binary"
+    },
     "verifyMac": {
         "requestCode": "M8",
         "responseCode": "M9",
@@ -127,5 +133,18 @@
         "responseCode": "DF",
         "requestPattern": "pvk:pvkLength/string, pin:cryptedPinLength/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
         "responsePattern": "errorCode:2/string, offset:12/string"
+    },
+
+    "transladeBdkZmkLmk": {
+        "requestCode": "DW",
+        "responseCode": "DX",
+        "requestPattern": "zmk:33/string, bdk:33/string, \";0X1\"",
+        "responsePattern": "errorCode:2/string"
+    },
+    "transladeBdkLmkZmk": {
+        "requestCode": "DY",
+        "responseCode": "DZ",
+        "requestPattern": "zmk:33/string, bdk:33/string",
+        "responsePattern": "errorCode:2/string"
     }
 }
