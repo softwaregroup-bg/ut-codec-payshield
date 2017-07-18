@@ -1,3 +1,13 @@
+<a name="5.10.0"></a>
+# [5.10.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.15...v5.10.0) (2017-07-18)
+
+
+### Features
+
+* zmk_arqc_arpc ([#8](https://github.com/softwaregroup-bg/ut-codec/issues/8)) ([1783665](https://github.com/softwaregroup-bg/ut-codec/commit/1783665))
+
+
+
 <a name="5.9.15"></a>
 ## [5.9.15](https://github.com/softwaregroup-bg/ut-codec/compare/v5.9.14...v5.9.15) (2017-06-27)
 
