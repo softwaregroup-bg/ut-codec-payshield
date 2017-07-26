@@ -1,3 +1,13 @@
+<a name="5.11.0"></a>
+# [5.11.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.10.1...v5.11.0) (2017-07-26)
+
+
+### Features
+
+* support multiple printers ([cbd1a98](https://github.com/softwaregroup-bg/ut-codec/commit/cbd1a98))
+
+
+
 <a name="5.10.1"></a>
 ## [5.10.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.10.0...v5.10.1) (2017-07-18)
 
