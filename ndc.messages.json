@@ -340,7 +340,7 @@
             "messageClass": "4",
             "messageSubclass": ""
         },
-        "fields": "messageClass,responseFlag,FS,luno,FS,timeVariantNumber,FS,nextState,FS,type1Notes,type2Notes,type3Notes,type4Notes,FS,sernum,function,screen,screenUpdate,screenMessage,FS,coordination,cardReturn,printer,printerData"
+        "fields": "messageClass,responseFlag,FS,luno,FS,timeVariantNumber,FS,nextState,FS,type1Notes,type2Notes,type3Notes,type4Notes,FS,sernum,function,screen,screenUpdate,screenMessage,FS,coordination,cardReturn,printers"
     },
     "tmAlert2": {
         "mtid": "request",

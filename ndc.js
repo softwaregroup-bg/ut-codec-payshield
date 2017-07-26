@@ -4,6 +4,7 @@ var defaultFormat = require('./ndc.messages');
 
 function NDC(config, validator, logger) {
     this.fieldSeparator = config.fieldSeparator || '\u001c';
+    this.groupSeparator = config.groupSeparator || '\u001d';
     this.val = validator || null;
     this.log = logger || {};
     this.codes = {};
@@ -528,10 +529,18 @@ NDC.prototype.encode = function(message, $meta, context) {
         // bufferString += command.messageClass;
         command.fieldsSplit.forEach((field) => {
             if (field.length) {
-                if (field === 'FS') {
-                    bufferString += this.fieldSeparator;
-                } else {
-                    bufferString += message[field] || '';
+                switch (field) {
+                    case 'FS':
+                        bufferString += this.fieldSeparator;
+                        break;
+                    case 'GS':
+                        bufferString += this.groupSeparator;
+                        break;
+                    case 'printers':
+                        bufferString += (message[field] || []).map(printer => printer.printer + printer.printerData).join(this.groupSeparator);
+                        break;
+                    default:
+                        bufferString += message[field] || '';
                 }
             }
         });
