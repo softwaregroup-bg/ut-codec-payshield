@@ -135,13 +135,13 @@
         "responsePattern": "errorCode:2/string, offset:12/string"
     },
 
-    "transladeBdkZmkLmk": {
+    "translateBdkZmkLmk": {
         "requestCode": "DW",
         "responseCode": "DX",
         "requestPattern": "zmk:33/string, bdk:33/string, \";0X1\"",
         "responsePattern": "errorCode:2/string"
     },
-    "transladeBdkLmkZmk": {
+    "translateBdkLmkZmk": {
         "requestCode": "DY",
         "responseCode": "DZ",
         "requestPattern": "zmk:33/string, bdk:33/string",
