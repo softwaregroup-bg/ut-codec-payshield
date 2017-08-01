@@ -1,3 +1,13 @@
+<a name="5.12.0"></a>
+# [5.12.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.11.1...v5.12.0) (2017-08-01)
+
+
+### Features
+
+* emv parsing ([d85f336](https://github.com/softwaregroup-bg/ut-codec/commit/d85f336))
+
+
+
 <a name="5.11.1"></a>
 ## [5.11.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.11.0...v5.11.1) (2017-07-28)
 
