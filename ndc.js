@@ -1,6 +1,89 @@
 var merge = require('lodash.merge');
 var map = require('./ndcMap');
 var defaultFormat = require('./ndc.messages');
+var emvTagsConfig = require('./ndc.emv.tags');
+var emvTagsMap = emvTagsConfig.map;
+var emvLongTags = emvTagsConfig.longTags;
+var emvDolNumericTypes = emvTagsConfig.dolNumericTypes;
+
+function emvEncodeMapTags() {
+    emvTagsConfig.map.encode = Object.keys(emvTagsConfig.map.decode)
+        .map((e) => {
+            let o = {};
+            o[emvTagsConfig.map.decode[e]] = e;
+            return o;
+        })
+        .reduce((accum, cur) => Object.assign(accum, cur), {});
+}
+
+function packCamFlags(data) {
+    return data.reduce((buf, byte, idx) => {
+        buf[idx] = byte.reduce((b, bit, idx) => {
+            return (b << 1) | bit;
+        }, buf[idx]);
+        return buf;
+    }, new Buffer([0, 0])).toString('hex');
+}
+function translateTag(tag) {
+    return emvTagsMap.encode[tag] || tag;
+}
+function packEmvTags(data) {
+    var dolOrder = ['CDOL1', 'CDOL2', 'TDOL', 'PDOL', 'DDOL'];
+    let result = '';
+    // transform data in dols
+    data = Object.keys(data)
+        .filter((k) => (~k.indexOf('DOL')))
+        .map((k) => ({
+            tag: k,
+            data: data[k]
+                .map((e) => {
+                    let k = Object.keys(e).pop();
+                    let tagTranslated = translateTag(k);
+                    return [tagTranslated, e[k]].join('');
+                })
+        }))
+        .reduce((data, dol) => {
+            data[dol.tag] = dol.data.join('');
+            return data;
+        }, data);
+
+    let allTags = Object.keys(data);
+    // make sure that dols are constructed in order
+    let allDols = dolOrder
+        .map((dol) => (~allTags.indexOf(dol) ? dol : 0))
+        .filter((e) => e);
+    // append dols to result
+    result = allDols
+        .reduce((r, dol) => {
+            let tagTranslated = translateTag(dol);
+            let d = data[dol];
+            return `${r}${tagTranslated}${d.length / 2}${d}`;
+        }, '');
+    // cleanup dols
+    data = allDols
+        .reduce((r, dol) => {
+            delete r[dol];
+            return r;
+        }, data);
+    // append all fields left to result
+    return result + Object.keys(data).map((e) => {
+        let tagTranslated = translateTag(e);
+        let val = data[e];
+        var len = val.length / 2;
+        return `${tagTranslated}${len}${val}`;
+    }).join('');
+}
+
+function packSmartCardData(camFlags, emvTags) {
+    let result = '5CAM';
+    if (camFlags) {
+        result += packCamFlags(camFlags);
+    }
+    if (emvTags) {
+        result += packEmvTags(emvTags);
+    }
+    return result;
+}
 
 function NDC(config, validator, logger) {
     this.fieldSeparator = config.fieldSeparator || '\u001c';
@@ -21,6 +104,7 @@ NDC.prototype.init = function(config) {
         var code = (mf.values.messageClass || '') + (mf.values.messageSubclass || '') + '|' + (mf.values.commandCode || '') + (mf.values.commandModifier || '');
         this.codes[code] = mf;
     });
+    emvEncodeMapTags();
 };
 
 var parsers = {
@@ -294,16 +378,161 @@ var parsers = {
         journalData
     }),
     lastTransaction: fields => {
-        var result = fields.find(field => field.substring(0, 1) === '2');
-        result = result && result.match(/^2(\d{4})(\d)(\d{5})(\d{5})(\d{5})(\d{5})/);
-        return result && {
-            sernum: result[1],
-            status: result[2],
-            notes1: parseInt(result[3]),
-            notes2: parseInt(result[4]),
-            notes3: parseInt(result[5]),
-            notes4: parseInt(result[6])
+        var field2 = fields.find(field => field.substring(0, 1) === '2');
+        field2 = field2 && field2.match(/^2(\d{4})(\d)(\d{5})(\d{5})(\d{5})(\d{5})/);
+        return field2 && {
+            sernum: field2[1],
+            status: field2[2],
+            notes1: parseInt(field2[3]),
+            notes2: parseInt(field2[4]),
+            notes3: parseInt(field2[5]),
+            notes4: parseInt(field2[6])
         };
+    },
+    smartCardData: (fields) => {
+        // There are 16 available CAM flags.These are encoded as the bits in two bytes, and are converted to ASCII hex(four bytes) for transmission. Each can have the value 0x0 or 0x1
+        var smartCardData = fields.find(field => field.substring(0, 4) === '5CAM');
+        smartCardData = (smartCardData && smartCardData.substring(4)) || '';
+        var camFlags = smartCardData.substring(0, 4);
+        var emvTags = smartCardData.substring(4);
+        return Object.assign({}, parsers.camFlagsDecode(new Buffer(camFlags, 'hex')), {emvTags: parsers.emvDolsDecode(parsers.emvTagsDecode(emvTags, {}))});
+    },
+    camFlagsDecode: (buffer) => {
+        let b1 = buffer.slice(0, 1).readInt8();
+        let b2 = buffer.slice(1, 2).readInt8();
+        let a = [];
+        let b = [];
+
+        a.push(0);
+        a.push(((b1 & 2) === 2) ? 1 : 0);
+        a.push(((b1 & 4) === 4) ? 1 : 0);
+        a.push(((b1 & 8) === 8) ? 1 : 0);
+        a.push(((b1 & 16) === 16) ? 1 : 0);
+        a.push(((b1 & 32) === 32) ? 1 : 0);
+        a.push(0);
+        a.push(0);
+        b.push(0);
+        b.push(0);
+        b.push(0);
+        b.push(((b2 & 8) === 8) ? 1 : 0);
+        b.push(0);
+        b.push(((b2 & 32) === 32) ? 1 : 0);
+        b.push(((b2 & 64) === 64) ? 1 : 0);
+        b.push(((b2 & 128) === 128) ? 1 : 0);
+        return {camFlags: [a, b]};
+    },
+    emvTagsDecode: (data, o, dolIdx) => {
+        var tag;
+        var len;
+        var val;
+        var isDol = false;
+        if (emvLongTags.indexOf(data.substr(0, 2).toLowerCase()) >= 0) { // 2 bytes tag
+            tag = data.substr(0, 4);
+            data = data.substr(4);
+        } else {
+            tag = data.substr(0, 2);
+            data = data.substr(2);
+        }
+        var tagTranslated = emvTagsMap.decode[tag.toUpperCase()] || tag;
+        o[tagTranslated] = {tag};
+        if (~tagTranslated.indexOf('DOL')) {
+            isDol = true;
+        }
+        if (dolIdx) {
+            o[tagTranslated].idx = dolIdx - 1;
+        }
+        var lenStr = data.substr(0, 2);
+        len = (lenStr === '') ? 0 : parseInt(data.substr(0, 2), 16);
+        data = data.substr(2);
+        if (!dolIdx && len > data.length * 2) {
+            throw new Error('Data integrity error');
+        }
+        if (len >= 128) { // size is big
+            var byteNumSize = 0;
+            var cur = 128;
+            while (cur >= 1) { // calculate big size
+                cur = cur >> 1;
+                if ((len & cur) === cur) {
+                    byteNumSize = byteNumSize | cur;
+                }
+            }
+            len = parseInt(data.substr(0, byteNumSize * 2), 16);
+            data = data.substr(byteNumSize * 2);
+        }
+        o[tagTranslated].len = len;
+        if (!len) {
+            len = 0;
+            val = '';
+        } else {
+            if (dolIdx) {
+                val = '';
+            } else {
+                val = data.substr(0, len * 2);
+                data = data.substr(len * 2);
+            }
+        }
+        let constructedTagByte = (new Buffer(tag, 'hex')).slice(0, 1);
+        if ((constructedTagByte & 32) === 32) {
+            o[tagTranslated].val = (isDol ? parsers.emvTagsDecode(val, {}, 1) : parsers.emvTagsDecode(val, {}, (dolIdx ? dolIdx + 1 : dolIdx)));
+        } else {
+            o[tagTranslated].val = (isDol ? parsers.emvTagsDecode(val, {}, 1) : val);
+        }
+        if (data.length) {
+            return parsers.emvTagsDecode(data, o, (dolIdx ? dolIdx + 1 : dolIdx));
+        }
+        return o;
+    },
+    getNumVal: (val, len, dolLenDiff, compressedNumeric) => {
+        if (dolLenDiff < 0) { // left truncated
+            return val.slice(len * -2);
+        } else {
+            if (!compressedNumeric) {
+                return ((new Array(len)).fill('00').join('') + val).slice(len * -2);
+            }
+            return (val + (new Array(dolLenDiff)).fill('FF').join(''));
+        }
+    },
+    getNonNumVal: (val, len, dolLenDiff) => {
+        if (dolLenDiff < 0) { // right truncated
+            return val.slice(len * 2);
+        } else {
+            return (val + (new Array(len)).fill('00').join('')).slice(len * 2);
+        }
+    },
+    /*
+    EMV 4.3 Book 3                              5 Data Elements and Files
+    Application Specification                   5.4 Rules for Using a Data Object List (DOL)
+    */
+    emvDolsDecode: (emvTags) => {
+        let mainTags = Object.keys(emvTags);
+        let dolTags = mainTags.filter((t) => (~t.indexOf('DOL')));
+        if (dolTags.length) {
+            emvTags = dolTags
+                .map((t) => ({tag: t, data: emvTags[t].val, internalTags: Object.keys(emvTags[t].val)}))
+                .reduce((allTags, dol) => {
+                    allTags[dol.tag].val = dol.internalTags.reduce((dolTags, dolInt) => {
+                        let extTag = allTags[dolInt];
+                        let dolTag = dolTags[dolInt];
+                        if (!extTag) { // no tag found in root tags list
+                            dolTags[dolInt].val = (new Array(dolTags[dolInt].len)).fill('00').join('');
+                        } else if (extTag.len === dolTag.len) {
+                            dolTags[dolInt].val = extTag.val;
+                        } else {
+                            let extNumType = emvDolNumericTypes[dolTag.tag];
+                            if (extNumType === 'n') { // non numeric value
+                                dolTags[dolInt].val = parsers.getNonNumVal(extTag.val, dolTag.len, dolTag.len - extTag.len, false);
+                            } else if (extNumType === 'nc') { // non numeric value
+                                dolTags[dolInt].val = parsers.getNonNumVal(extTag.val, dolTag.len, dolTag.len - extTag.len, true);
+                            } else { // numeric value
+                                dolTags[dolInt].val = parsers.getNumVal(extTag.val, dolTag.len, dolTag.len - extTag.len);
+                            }
+                        }
+                        return dolTags;
+                    }, dol.data);
+                    return allTags;
+                }, emvTags);
+        }
+        return emvTags;
     },
     pinBlock: pin => pin && pin.split && pin.split('').map((c) => ({
         ':': 'A',
@@ -318,7 +547,8 @@ var parsers = {
         return result && parsers.pinBlock(result.substr(1, 16));
     },
     transaction: function(type, luno, reserved, timeVariantNumber, trtfmcn, track2, track3, opcode, amount, pinBlock, bufferB, bufferC) {
-        return {
+        var args1 = Array.prototype.slice.call(arguments, 12);
+        return Object.assign({
             type,
             luno,
             reserved,
@@ -330,11 +560,11 @@ var parsers = {
             opcode: opcode && opcode.split && opcode.split(''),
             amount,
             pinBlock: parsers.pinBlock(pinBlock),
-            pinBlockNew: parsers.pinBlockNew(Array.prototype.slice.call(arguments, 12)),
+            pinBlockNew: parsers.pinBlockNew(args1),
             bufferB,
             bufferC,
-            lastTransactionData: parsers.lastTransaction(Array.prototype.slice.call(arguments, 12))
-        };
+            lastTransactionData: parsers.lastTransaction(args1)
+        }, parsers.smartCardData(args1));
     },
     transactionReply: (type, luno, timeVariantNumber, nextState, notes, sernumFunction, coordinationCardPrinter) => ({
         type,
@@ -546,6 +776,9 @@ NDC.prototype.encode = function(message, $meta, context) {
         });
         if (message.mac) {
             bufferString += this.fieldSeparator + message.mac;
+        }
+        if (message.emvTags || message.camFlags) {
+            bufferString += packSmartCardData(message.camFlags, message.emvTags);
         }
         return new Buffer(bufferString);
     }

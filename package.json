@@ -1,6 +1,6 @@
 {
   "name": "ut-codec",
-  "version": "5.11.1",
+  "version": "5.12.0-smartCardData.8",
   "main": "./index.js",
   "dependencies": {
     "iconv-lite": "0.4.15",
@@ -11,7 +11,8 @@
     "lodash.merge": "4.6.0",
     "lodash.omit": "4.5.0",
     "ut-bitsyntax": "^6.0.7",
-    "ut-error": "^5.4.0"
+    "ut-error": "^5.4.0",
+    "blue-tape": "0.2.0"
   },
   "devDependencies": {
     "adiff": "0.2.13",

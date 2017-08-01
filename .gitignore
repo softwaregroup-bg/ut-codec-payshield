@@ -3,3 +3,5 @@ docs/**/*
 *sublime-*
 .projectile
 .tern-project
+.history/**/*
+yarn.lock
