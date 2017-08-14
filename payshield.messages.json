@@ -7,13 +7,13 @@
     },
     "generateKey": {
         "requestCode": "A0",
-        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string"
+        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keyScheme1:keyScheme1Length/string"
     },
     "generateKeyTmk": {
         "requestCode": "A0",
         "responseCode": "A1",
         "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, \";\", zmkTmkFlag:1/string, tmk:33/string, keyScheme1:1/string",
-        "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string"
+        "responsePattern": "errorCode:2/string, keyA32:33/string, rest/binary"
     },
     "generateTpk": {
         "requestCode": "HC",
