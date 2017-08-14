@@ -1,3 +1,13 @@
+<a name="5.12.1"></a>
+## [5.12.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.12.0...v5.12.1) (2017-08-14)
+
+
+### Bug Fixes
+
+* arqc format ([77ffba3](https://github.com/softwaregroup-bg/ut-codec/commit/77ffba3))
+
+
+
 <a name="5.12.0"></a>
 # [5.12.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.11.1...v5.12.0) (2017-08-01)
 
