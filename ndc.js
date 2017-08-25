@@ -1,20 +1,8 @@
 var merge = require('lodash.merge');
 var map = require('./ndcMap');
 var defaultFormat = require('./ndc.messages');
-var emvTagsConfig = require('./ndc.emv.tags');
-var emvTagsMap = emvTagsConfig.map;
-var emvLongTags = emvTagsConfig.longTags;
-var emvDolNumericTypes = emvTagsConfig.dolNumericTypes;
 
-function emvEncodeMapTags() {
-    emvTagsConfig.map.encode = Object.keys(emvTagsConfig.map.decode)
-        .map((e) => {
-            let o = {};
-            o[emvTagsConfig.map.decode[e]] = e;
-            return o;
-        })
-        .reduce((accum, cur) => Object.assign(accum, cur), {});
-}
+var emv = require('./emv');
 
 function packCamFlags(data) {
     return data.reduce((buf, byte, idx) => {
@@ -24,55 +12,6 @@ function packCamFlags(data) {
         return buf;
     }, new Buffer([0, 0])).toString('hex');
 }
-function translateTag(tag) {
-    return emvTagsMap.encode[tag] || tag;
-}
-function packEmvTags(data) {
-    var dolOrder = ['CDOL1', 'CDOL2', 'TDOL', 'PDOL', 'DDOL'];
-    let result = '';
-    // transform data in dols
-    data = Object.keys(data)
-        .filter((k) => (~k.indexOf('DOL')))
-        .map((k) => ({
-            tag: k,
-            data: data[k]
-                .map((e) => {
-                    let k = Object.keys(e).pop();
-                    let tagTranslated = translateTag(k);
-                    return [tagTranslated, e[k]].join('');
-                })
-        }))
-        .reduce((data, dol) => {
-            data[dol.tag] = dol.data.join('');
-            return data;
-        }, data);
-
-    let allTags = Object.keys(data);
-    // make sure that dols are constructed in order
-    let allDols = dolOrder
-        .map((dol) => (~allTags.indexOf(dol) ? dol : 0))
-        .filter((e) => e);
-    // append dols to result
-    result = allDols
-        .reduce((r, dol) => {
-            let tagTranslated = translateTag(dol);
-            let d = data[dol];
-            return `${r}${tagTranslated}${d.length / 2}${d}`;
-        }, '');
-    // cleanup dols
-    data = allDols
-        .reduce((r, dol) => {
-            delete r[dol];
-            return r;
-        }, data);
-    // append all fields left to result
-    return result + Object.keys(data).map((e) => {
-        let tagTranslated = translateTag(e);
-        let val = data[e];
-        var len = val.length / 2;
-        return `${tagTranslated}${len}${val}`;
-    }).join('');
-}
 
 function packSmartCardData(camFlags, emvTags) {
     let result = '5CAM';
@@ -80,7 +19,7 @@ function packSmartCardData(camFlags, emvTags) {
         result += packCamFlags(camFlags);
     }
     if (emvTags) {
-        result += packEmvTags(emvTags);
+        result += emv.tagsEncode(emvTags);
     }
     return result;
 }
@@ -104,7 +43,6 @@ NDC.prototype.init = function(config) {
         var code = (mf.values.messageClass || '') + (mf.values.messageSubclass || '') + '|' + (mf.values.commandCode || '') + (mf.values.commandModifier || '');
         this.codes[code] = mf;
     });
-    emvEncodeMapTags();
 };
 
 var parsers = {
@@ -395,7 +333,7 @@ var parsers = {
         smartCardData = (smartCardData && smartCardData.substring(4)) || '';
         var camFlags = smartCardData.substring(0, 4);
         var emvTags = smartCardData.substring(4);
-        return Object.assign({}, parsers.camFlagsDecode(new Buffer(camFlags, 'hex')), {emvTags: parsers.emvDolsDecode(parsers.emvTagsDecode(emvTags, {}))});
+        return Object.assign({}, parsers.camFlagsDecode(new Buffer(camFlags, 'hex')), {emvTags: emv.tagsDecode(emvTags, {})});
     },
     camFlagsDecode: (buffer) => {
         let b1 = buffer.slice(0, 1).readInt8();
@@ -420,119 +358,6 @@ var parsers = {
         b.push(((b2 & 64) === 64) ? 1 : 0);
         b.push(((b2 & 128) === 128) ? 1 : 0);
         return {camFlags: [a, b]};
-    },
-    emvTagsDecode: (data, o, dolIdx) => {
-        var tag;
-        var len;
-        var val;
-        var isDol = false;
-        if (emvLongTags.indexOf(data.substr(0, 2).toLowerCase()) >= 0) { // 2 bytes tag
-            tag = data.substr(0, 4);
-            data = data.substr(4);
-        } else {
-            tag = data.substr(0, 2);
-            data = data.substr(2);
-        }
-        var tagTranslated = emvTagsMap.decode[tag.toUpperCase()] || tag;
-        o[tagTranslated] = {tag};
-        if (~tagTranslated.indexOf('DOL')) {
-            isDol = true;
-        }
-        if (dolIdx) {
-            o[tagTranslated].idx = dolIdx - 1;
-        }
-        var lenStr = data.substr(0, 2);
-        len = (lenStr === '') ? 0 : parseInt(data.substr(0, 2), 16);
-        data = data.substr(2);
-        if (!dolIdx && len > data.length * 2) {
-            throw new Error('Data integrity error');
-        }
-        if (len >= 128) { // size is big
-            var byteNumSize = 0;
-            var cur = 128;
-            while (cur >= 1) { // calculate big size
-                cur = cur >> 1;
-                if ((len & cur) === cur) {
-                    byteNumSize = byteNumSize | cur;
-                }
-            }
-            len = parseInt(data.substr(0, byteNumSize * 2), 16);
-            data = data.substr(byteNumSize * 2);
-        }
-        o[tagTranslated].len = len;
-        if (!len) {
-            len = 0;
-            val = '';
-        } else {
-            if (dolIdx) {
-                val = '';
-            } else {
-                val = data.substr(0, len * 2);
-                data = data.substr(len * 2);
-            }
-        }
-        let constructedTagByte = (new Buffer(tag, 'hex')).slice(0, 1);
-        if ((constructedTagByte & 32) === 32) {
-            o[tagTranslated].val = (isDol ? parsers.emvTagsDecode(val, {}, 1) : parsers.emvTagsDecode(val, {}, (dolIdx ? dolIdx + 1 : dolIdx)));
-        } else {
-            o[tagTranslated].val = (isDol ? parsers.emvTagsDecode(val, {}, 1) : val);
-        }
-        if (data.length) {
-            return parsers.emvTagsDecode(data, o, (dolIdx ? dolIdx + 1 : dolIdx));
-        }
-        return o;
-    },
-    getNumVal: (val, len, dolLenDiff, compressedNumeric) => {
-        if (dolLenDiff < 0) { // left truncated
-            return val.slice(len * -2);
-        } else {
-            if (!compressedNumeric) {
-                return ((new Array(len)).fill('00').join('') + val).slice(len * -2);
-            }
-            return (val + (new Array(dolLenDiff)).fill('FF').join(''));
-        }
-    },
-    getNonNumVal: (val, len, dolLenDiff) => {
-        if (dolLenDiff < 0) { // right truncated
-            return val.slice(len * 2);
-        } else {
-            return (val + (new Array(len)).fill('00').join('')).slice(len * 2);
-        }
-    },
-    /*
-    EMV 4.3 Book 3                              5 Data Elements and Files
-    Application Specification                   5.4 Rules for Using a Data Object List (DOL)
-    */
-    emvDolsDecode: (emvTags) => {
-        let mainTags = Object.keys(emvTags);
-        let dolTags = mainTags.filter((t) => (~t.indexOf('DOL')));
-        if (dolTags.length) {
-            emvTags = dolTags
-                .map((t) => ({tag: t, data: emvTags[t].val, internalTags: Object.keys(emvTags[t].val)}))
-                .reduce((allTags, dol) => {
-                    allTags[dol.tag].val = dol.internalTags.reduce((dolTags, dolInt) => {
-                        let extTag = allTags[dolInt];
-                        let dolTag = dolTags[dolInt];
-                        if (!extTag) { // no tag found in root tags list
-                            dolTags[dolInt].val = (new Array(dolTags[dolInt].len)).fill('00').join('');
-                        } else if (extTag.len === dolTag.len) {
-                            dolTags[dolInt].val = extTag.val;
-                        } else {
-                            let extNumType = emvDolNumericTypes[dolTag.tag];
-                            if (extNumType === 'n') { // non numeric value
-                                dolTags[dolInt].val = parsers.getNonNumVal(extTag.val, dolTag.len, dolTag.len - extTag.len, false);
-                            } else if (extNumType === 'nc') { // non numeric value
-                                dolTags[dolInt].val = parsers.getNonNumVal(extTag.val, dolTag.len, dolTag.len - extTag.len, true);
-                            } else { // numeric value
-                                dolTags[dolInt].val = parsers.getNumVal(extTag.val, dolTag.len, dolTag.len - extTag.len);
-                            }
-                        }
-                        return dolTags;
-                    }, dol.data);
-                    return allTags;
-                }, emvTags);
-        }
-        return emvTags;
     },
     pinBlock: pin => pin && pin.split && pin.split('').map((c) => ({
         ':': 'A',
@@ -774,11 +599,11 @@ NDC.prototype.encode = function(message, $meta, context) {
                 }
             }
         });
+        if (message.emvTags || message.camFlags) {
+            bufferString += this.fieldSeparator + packSmartCardData(message.camFlags, message.emvTags);
+        }
         if (message.mac) {
             bufferString += this.fieldSeparator + message.mac;
-        }
-        if (message.emvTags || message.camFlags) {
-            bufferString += packSmartCardData(message.camFlags, message.emvTags);
         }
         return new Buffer(bufferString);
     }
