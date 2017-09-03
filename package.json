@@ -1,6 +1,6 @@
 {
   "name": "ut-codec",
-  "version": "5.12.2",
+  "version": "5.13.0-emvTagsList.0",
   "main": "./index.js",
   "dependencies": {
     "iconv-lite": "0.4.15",
