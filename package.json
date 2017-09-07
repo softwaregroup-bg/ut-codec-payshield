@@ -1,6 +1,6 @@
 {
   "name": "ut-codec",
-  "version": "5.13.0",
+  "version": "5.14.0-rc.0",
   "main": "./index.js",
   "dependencies": {
     "iconv-lite": "0.4.15",
