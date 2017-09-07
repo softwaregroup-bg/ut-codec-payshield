@@ -331,9 +331,13 @@ var parsers = {
         // There are 16 available CAM flags.These are encoded as the bits in two bytes, and are converted to ASCII hex(four bytes) for transmission. Each can have the value 0x0 or 0x1
         var smartCardData = fields.find(field => field.substring(0, 4) === '5CAM');
         smartCardData = (smartCardData && smartCardData.substring(4)) || '';
-        var camFlags = smartCardData.substring(0, 4);
+        var camFlags = new Buffer(smartCardData.substring(0, 4), 'hex');
         var emvTags = smartCardData.substring(4);
-        return Object.assign({}, parsers.camFlagsDecode(new Buffer(camFlags, 'hex')), {emvTags: emv.tagsDecode(emvTags, {})});
+        return Object.assign(
+            {},
+            (!camFlags.length ? {} : parsers.camFlagsDecode(camFlags)),
+            (!emvTags.length ? {} : {emvTags: emv.tagsDecode(emvTags, {})})
+        );
     },
     camFlagsDecode: (buffer) => {
         let b1 = buffer.slice(0, 1).readInt8();
