@@ -3,12 +3,14 @@ var merge = require('lodash.merge');
 var defaultFields = require('./iso8583.fields.json');
 var bitSyntax = require('ut-bitsyntax');
 var errors = require('./isoErrors');
+var emv = require('./emv');
 
 function getFormat(format, fallback) {
     return (format && {'numeric': 'string-left-zero', 'string': 'string-right-space', 'amount': 'string-left-zero', 'bcdamount': 'string'}[format]) || format || fallback || 'binary';
 }
 
 function Iso8583(config) {
+    this.emvTagsField = config.emvTagsField || 55;
     this.fieldFormat = merge({}, defaultFields[(config.version || '0') + (config.baseEncoding || 'ascii')], config.fieldFormat);
     this.framePattern = bitSyntax.matcher('header:' + this.fieldFormat.header.size + '/' + getFormat(this.fieldFormat.header.format) +
         ', mtid:' + this.fieldFormat.mtid.size + '/' + getFormat(this.fieldFormat.mtid.format) +
@@ -112,6 +114,9 @@ Iso8583.prototype.decode = function(buffer, $meta) {
             var err = errors['' + message[39]] || errors.generic;
             message = err(message);
         }
+        if (message[this.emvTagsField]) {
+            message = Object.assign(message, {emvTags: emv.tagsDecode(message[this.emvTagsField])});
+        }
         return message;
     } else {
         throw new Error('Unable to parse message type or first bitmap!');
@@ -132,6 +137,9 @@ Iso8583.prototype.encode = function(message, $meta, context) {
     var buffers = new Array(64 * this.fieldPatterns.length);
     var emptyBuffer = new Buffer([]);
     var trace = message[11];
+    if (message.emvTags) {
+        message[this.emvTagsField] = emv.encode(message.emvTags);
+    }
     if (trace === undefined || trace === null) {
         trace = $meta.trace = ('000000' + context.trace).substr(-6);
         context.trace += 1;
