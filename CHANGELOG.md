@@ -1,3 +1,13 @@
+<a name="5.14.0"></a>
+# [5.14.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.13.0...v5.14.0) (2017-09-07)
+
+
+### Bug Fixes
+
+* separate emv logic ([807522d](https://github.com/softwaregroup-bg/ut-codec/commit/807522d))
+
+
+
 <a name="5.13.0"></a>
 # [5.13.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.12.2...v5.13.0) (2017-09-03)
 
