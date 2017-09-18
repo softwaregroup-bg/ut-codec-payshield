@@ -340,27 +340,33 @@ var parsers = {
         );
     },
     camFlagsDecode: (buffer) => {
-        let b1 = buffer.slice(0, 1).readInt8();
-        let b2 = buffer.slice(1, 2).readInt8();
-        let a = [];
-        let b = [];
+        var b1 = buffer.slice(0, 1);
+        var a = [];
+        if (b1.length) {
+            b1 = b1.readInt8();
+            a.push(0);
+            a.push(((b1 & 2) === 2) ? 1 : 0);
+            a.push(((b1 & 4) === 4) ? 1 : 0);
+            a.push(((b1 & 8) === 8) ? 1 : 0);
+            a.push(((b1 & 16) === 16) ? 1 : 0);
+            a.push(((b1 & 32) === 32) ? 1 : 0);
+            a.push(0);
+            a.push(0);
+        }
+        var b2 = buffer.slice(1, 2);
+        var b = [];
+        if (b2.length) {
+            b2 = b2.readInt8();
+            b.push(0);
+            b.push(0);
+            b.push(0);
+            b.push(((b2 & 8) === 8) ? 1 : 0);
+            b.push(0);
+            b.push(((b2 & 32) === 32) ? 1 : 0);
+            b.push(((b2 & 64) === 64) ? 1 : 0);
+            b.push(((b2 & 128) === 128) ? 1 : 0);
+        }
 
-        a.push(0);
-        a.push(((b1 & 2) === 2) ? 1 : 0);
-        a.push(((b1 & 4) === 4) ? 1 : 0);
-        a.push(((b1 & 8) === 8) ? 1 : 0);
-        a.push(((b1 & 16) === 16) ? 1 : 0);
-        a.push(((b1 & 32) === 32) ? 1 : 0);
-        a.push(0);
-        a.push(0);
-        b.push(0);
-        b.push(0);
-        b.push(0);
-        b.push(((b2 & 8) === 8) ? 1 : 0);
-        b.push(0);
-        b.push(((b2 & 32) === 32) ? 1 : 0);
-        b.push(((b2 & 64) === 64) ? 1 : 0);
-        b.push(((b2 & 128) === 128) ? 1 : 0);
         return {camFlags: [a, b]};
     },
     pinBlock: pin => pin && pin.split && pin.split('').map((c) => ({
