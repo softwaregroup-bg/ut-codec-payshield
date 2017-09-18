@@ -683,20 +683,11 @@ NDC.prototype.decode = function(buffer, $meta, context) {
 
             var fn = parsers[command.method];
             if (typeof fn === 'function') {
-                try {
-                    merge(message, fn.apply(parsers, tokens));
-                } catch (e) {
-                    $meta.mtid = 'error';
-                    message.type = e.type;
-                    message.message = e.message;
-                    if (!e.type) { // capture stack for unexpected errors
-                        message.stack = e.stack;
-                    }
-                }
+                merge(message, fn.apply(parsers, tokens));
             } else {
-                $meta.mtid = 'error';
-                message.type = 'aptra.parser';
-                message.message = 'No parser found for message: ' + command.method;
+                var e = new Error('No parser found for message: ' + command.method);
+                e.type = 'aptra.decode';
+                throw e;
             }
             message.tokens = tokens;
         } else {
