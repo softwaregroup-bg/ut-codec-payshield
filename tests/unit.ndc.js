@@ -16,40 +16,6 @@ var emv = {
             bufferC: '',
             camFlags: [[0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]],
             coordination: '9',
-            emvTags: {
-                '9F53': {len: 1, tag: '9F53', val: '5A'},
-                CDOL1: {
-                    len: 21,
-                    tag: '8C',
-                    val: {
-                        '95': {idx: 3, len: 5, tag: '95', val: '0000000000'},
-                        amountAuthorised: {idx: 0, len: 6, tag: '9F02', val: '000000000000'},
-                        amountOther: {idx: 1, len: 6, tag: '9F03', val: '000000000000'},
-                        terminalCountryCode: {idx: 2, len: 2, tag: '9F1A', val: '0608'},
-                        transactionCurrencyCode: {idx: 4, len: 2, tag: '5F2A', val: '0608'},
-                        transactionDate: {idx: 5, len: 3, tag: '9A', val: '170718'},
-                        transactionType: {idx: 6, len: 1, tag: '9C', val: '01'},
-                        unpredictableNumber: {idx: 7, len: 4, tag: '9F37', val: '00001557'}
-                    }
-                },
-                amountAuthorised: {len: 6, tag: '9F02', val: '000000000000'},
-                amountOther: {len: 6, tag: '9F03', val: '000000000000'},
-                applicationCryptogram: {len: 8, tag: '9F26', val: '322566E3E44A3DEA'},
-                applicationVersionNumber: {len: 2, tag: '9F09', val: '0000'},
-                atc: {len: 2, tag: '9F36', val: '00B6'},
-                cryptogramInformationData: {len: 1, tag: '9F27', val: '80'},
-                pan: {len: 9, tag: '5A', val: '502265400000000007'},
-                panSeqNum: {len: 1, tag: '5F34', val: '01'},
-                terminalCapabilities: {len: 3, tag: '9F33', val: '604020'},
-                terminalCountryCode: {len: 2, tag: '9F1A', val: '0608'},
-                terminalType: {len: 1, tag: '9F35', val: '14'},
-                track2EquivalentData: {len: 15, tag: '57', val: '5022654000000000070D2705620940'},
-                transactionCurrencyCode: {len: 2, tag: '5F2A', val: '0608'},
-                transactionDate: {len: 3, tag: '9A', val: '170718'},
-                transactionSequenceCounter: {len: 2, tag: '9F41', val: '1557'},
-                transactionType: {len: 1, tag: '9C', val: '01'},
-                unpredictableNumber: {len: 4, tag: '9F37', val: '00001557'}
-            },
             lastTransactionData: {notes1: 0, notes2: 0, notes3: 0, notes4: 0, sernum: '0021', status: '1'},
             luno: '002000001',
             opcode: [' ', 'D', 'B', ' ', ' ', ' ', 'A', 'D'],
@@ -58,11 +24,6 @@ var emv = {
             reserved: '',
             session: undefined,
             timeVariantNumber: '18100922',
-            tokens: ['11', '002000001', '', '18100922', '19', ';5022654000000000=2705620940?', '', ' DB   AD', '000000000000',
-                '19642=4?49439;1:', '', '', '', '20021100000000000000000000', 'U',
-                '5CAM04008C159F02069F03069F1A0295055F2A029A039C019F37049F02060000000000009F03060000000000005A095022654000000000075F3401019F360200B6' +
-                '9F2608322566E3E44A3DEA9F2701809F090200009F33036040209F1A0206089F350114570F5022654000000000070D27056209405F2A0206089A031707189F4102' +
-                '15579C01019F3704000015579F53015A', '583F298E\x03'],
             topOfReceipt: '1',
             track2: ';5022654000000000=2705620940?',
             track3: '',
@@ -92,17 +53,19 @@ var emv = {
             },
             camFlags: [[0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]],
             emvTags: {
-                CDOL1: [
-                    {'95': 5},
-                    {'amountAuthorised': 6},
-                    {'amountOther': 6},
-                    {'terminalCountryCode': 2},
-                    {'transactionCurrencyCode': 2},
-                    {'transactionDate': 3},
-                    {'transactionType': 1},
-                    {'unpredictableNumber': 3}
-                ],
-                CDOL2: [{'transactionType': 1}, {'unpredictableNumber': 3}],
+                CDOL1: {
+                    tag: '8C',
+                    val: {
+                        '95': {idx: 3, len: 5, tag: '95', val: '0000000000'},
+                        amountAuthorised: {idx: 0, len: 6, tag: '9F02', val: '000000000000'},
+                        amountOther: {idx: 1, len: 6, tag: '9F03', val: '000000000000'},
+                        terminalCountryCode: {idx: 2, len: 2, tag: '9F1A', val: '0608'},
+                        transactionCurrencyCode: {idx: 4, len: 2, tag: '5F2A', val: '0608'},
+                        transactionDate: {idx: 5, len: 3, tag: '9A', val: '170718'},
+                        transactionType: {idx: 6, len: 1, tag: '9C', val: '01'},
+                        unpredictableNumber: {idx: 7, len: 4, tag: '9F37', val: '00001557'}
+                    }
+                },
                 amountAuthorised: '000000000000',
                 amountOther: '000000000000',
                 pan: '502265400000000007',
@@ -148,8 +111,8 @@ var testTimeout = timeout => (resolve, reject) => {
     }, 1500);
 };
 
-test('Emv encode decode', (t) => {
-    t.plan(5);
+test('NDC timeout', (t) => {
+    t.plan(3);
     let context = {};
     let resultReq = ndc.decode(emv.request.msg, {}, context);
     emv.request.result.transactionRequestId = resultReq.transactionRequestId;
@@ -158,10 +121,7 @@ test('Emv encode decode', (t) => {
         transactionRequestId: resultReq.transactionRequestId,
         transactionTimeout: resultReq.transactionTimeout
     }, emv.response.msg);
-    let resultResp = ndc.encode(response, {opcode: 'transactionReply'}, context);
 
-    t.deepEqual(emv.request.result, resultReq, 'encode');
-    t.deepEqual(emv.response.result, resultResp.toString('hex'), 'decode');
     t.throws(() => {
         resultReq = ndc.decode(emv.request.msg, {}, context);
         response = Object.assign({}, emv.response.msg);

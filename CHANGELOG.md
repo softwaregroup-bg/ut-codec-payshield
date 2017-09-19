@@ -1,3 +1,23 @@
+<a name="5.13.0"></a>
+# [5.13.0](https://github.com/softwaregroup-bg/ut-codec/compare/v5.12.2...v5.13.0) (2017-09-03)
+
+
+### Features
+
+* emv tags list ([#16](https://github.com/softwaregroup-bg/ut-codec/issues/16)) ([3d33170](https://github.com/softwaregroup-bg/ut-codec/commit/3d33170))
+
+
+
+<a name="5.12.2"></a>
+## [5.12.2](https://github.com/softwaregroup-bg/ut-codec/compare/v5.12.1...v5.12.2) (2017-08-25)
+
+
+### Bug Fixes
+
+* separate emv logic ([010869f](https://github.com/softwaregroup-bg/ut-codec/commit/010869f))
+
+
+
 <a name="5.12.1"></a>
 ## [5.12.1](https://github.com/softwaregroup-bg/ut-codec/compare/v5.12.0...v5.12.1) (2017-08-14)
 
