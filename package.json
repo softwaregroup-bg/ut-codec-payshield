@@ -3,6 +3,7 @@
   "version": "5.14.0-rc.2",
   "main": "./index.js",
   "dependencies": {
+    "browser-process-hrtime": "0.1.2",
     "iconv-lite": "0.4.15",
     "lodash.assign": "4.2.0",
     "lodash.invert": "4.3.0",
