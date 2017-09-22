@@ -492,6 +492,11 @@ NDC.prototype.decode = function(buffer, $meta, context) {
                         context.traceTransactionReady += 1;
                         context.traceTerminal = 1;
                         context.traceCentral = 1;
+                        if (tokens[3] === '8') {
+                            message.transactionTimeout = (context.session && context.session.transactionTimeout) || 55;
+                            context.transactionReplyTime = hrtime()[0] + message.transactionTimeout;
+                            message.transactionRequestId = context.transactionRequestId = (context.transactionRequestId || 0) + 1;
+                        }
                     } else {
                         context.traceTerminal = context.traceTerminal || 1;
                         $meta.trace = 'req:' + context.traceTerminal;
