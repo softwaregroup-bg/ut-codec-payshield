@@ -1,6 +1,7 @@
 {
   "0ascii": {
     "header":{"size":0  , "name": "Header", "format":"string"},
+    "footer":{"size":0  , "name": "Footer", "format":"string"},
     "mtid": {"size": 4  , "name": "MESSAGE TYPE INDICATOR", "format": "string"},
     "0":    {"size": 16 , "name": "BIT MAP 0", "format": "string-hexbin"},
     "1":    {"size": 16 , "name": "BIT MAP 1", "format": "string-hexbin"},
@@ -134,6 +135,7 @@
   },
   "0binary": {
     "header":{"size":0  , "name": "Header", "format":"string"},
+    "footer":{"size":0  , "name": "Footer", "format":"string"},
     "mtid": {"size": 4  , "name": "MESSAGE TYPE INDICATOR", "format": "bcd"},
     "0":    {"size": 8  , "name": "BIT MAP 0", "format": "binary"},
     "1":    {"size": 8  , "name": "BIT MAP 1", "format": "binary"},
@@ -267,6 +269,7 @@
   },
   "1ascii": {
     "header":{"size":0  , "name": "Header", "format":"string"},
+    "footer":{"size":0  , "name": "Footer", "format":"string"},
     "mtid": {"size": 4  , "name": "Message Type Indicator", "format": "numeric"},
     "0":    {"size": 16 , "name": "Bitmap 0", "format": "string-hexbin"},
     "1":    {"size": 16 , "name": "Bitmap 1", "format": "string-hexbin"},
@@ -400,6 +403,7 @@
   },
   "1binary": {
     "header":{"size":0  , "name": "Header", "format":"string"},
+    "footer":{"size":0  , "name": "Footer", "format":"string"},
     "mtid": {"size": 4  , "name": "Message Type Indicator", "format": "bcd"},
     "0":    {"size": 8  , "name": "Bitmap 0", "format": "binary"},
     "1":    {"size": 8  , "name": "Bitmap 1", "format": "binary"},
