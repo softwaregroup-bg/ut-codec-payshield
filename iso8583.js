@@ -76,11 +76,10 @@ Iso8583.prototype.decode = function(buffer, $meta) {
                     }
                     if (frame.rest && frame.rest.length) {
                         throw new Error('Not all data was parsed. Remaining ' + frame.rest.length + ' bytes at offset ' + parsedLength +
-                            ' starting with 0x' + frame.rest.toString('hex') + '\r\nmessage:' + JSON.stringify(message));
+                        ' starting with 0x' + frame.rest.toString('hex') + '\r\nmessage:' + JSON.stringify(message));
                     }
-                } else {
-                    break;
                 }
+                break;
             }
             var fieldSizes = this.fieldSizes(frame['field' + bitmapField], group * 64 + 1);
             var rest = frame.rest;
