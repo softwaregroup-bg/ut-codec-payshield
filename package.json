@@ -1,6 +1,6 @@
 {
   "name": "ut-codec",
-  "version": "5.14.0-rc.5",
+  "version": "5.16.0-rc.5",
   "main": "./index.js",
   "dependencies": {
     "browser-process-hrtime": "0.1.2",
