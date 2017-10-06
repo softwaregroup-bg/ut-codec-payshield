@@ -191,7 +191,7 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
         }
         bodyObj.type = 'payshield.' + bodyObj.errorCode;
         bodyObj.errorCode = 'payshield.' + bodyObj.errorCode;
-        bodyObj.errorMessage = ERRORCODES[bodyObj.errorCode];
+        bodyObj.errorMessage = cmd.method + ':' + (ERRORCODES[bodyObj.errorCode] || bodyObj.errorCode);
     }
     return bodyObj;
 };
