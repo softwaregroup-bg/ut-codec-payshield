@@ -39,17 +39,19 @@
         "requestPattern": "cvk:33/string, account:12/string, \";\", expirationDate:4/string, serviceCode:3/string",
         "responsePattern": "errorCode:2/string, cvv:3/string"
     },
-    "generateArqcKW": {
+    "generateArqc4": {
         "requestCode": "KW",
         "responseCode": "KX",
         "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, ivac:ivacLength/string-binhex, panLength:panLengthLength/string, panSeqNo:panSeqNoLength/string-binhex, delimiter1:delimiter1Length/string, branchHeightParams:branchHeightParamsLength/string, atc:2/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter2:delimiter2Length/string, arqc:8/string-binhex, arc:arcLength/string-binhex, csu:csuLength/string-binhex, padLength:padLengthLength/string, pad:padLength/string-binhex",
-        "responsePattern": "errorCode:2/string, responseData/binary"
+        "responsePattern": "errorCode:2/string, arpc/binary",
+        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex"
     },
-    "generateArqcKQ": {
+    "generateArqc3": {
         "requestCode": "KQ",
         "responseCode": "KR",
         "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter:delimiterLength/string, arqc:8/string-binhex, arc:arcLength/string-binhex",
-        "responsePattern": "errorCode:2/string, responseData/binary"
+        "responsePattern": "errorCode:2/string, arpc/binary",
+        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex"
     },
     "verifyMac": {
         "requestCode": "M8",

@@ -109,6 +109,7 @@ PayshieldCodec.prototype.init = function(config) {
         this.log.info('Initializing Payshield parser! headerFormat: ' + config.headerFormat + ',messageFormat:' + config.messageFormat);
     }
     this.headerPattern = bitsyntax.parse('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
+    this.errorPattern = bitsyntax.parse('errorCode:2/string, rest/binary');
 
     var commandsObj = merge({}, defaultFormat, config.messageFormat);
 
@@ -138,6 +139,7 @@ PayshieldCodec.prototype.init = function(config) {
                 }
                 this.commands[property + ':response'] = {
                     pattern: responsePattern,
+                    errorPattern: commandsObj[property].errorPattern && bitsyntax.parse(commandsObj[property].errorPattern),
                     code: commandsObj[property].responseCode,
                     method: property,
                     mtid: 'response'
@@ -166,14 +168,13 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
         throw new Error('Not implemented opcode:' + commandName + '!');
     }
 
-    var bodyObj = bitsyntax.match(bitsyntax.parse('errorCode:2/string, rest/binary'), headObj.body);
+    var bodyObj = bitsyntax.match(this.errorPattern, headObj.body);
     if (!bodyObj) {
         throw new Error('Unable to match response errorCode!');
     }
     // 00 = No error
-    // 01 = Verification failure or warning of imported key parity error (in some cases is warning)
     // 02 = Key inappropriate length for algorithm (in some cases is warning)
-    if (['00', '01', '02'].includes(bodyObj.errorCode)) {
+    if (['00', '02'].includes(bodyObj.errorCode)) {
         bodyObj = bitsyntax.match(cmd.pattern, headObj.body);
         if (!bodyObj) {
             throw new Error('Unable to match pattern for opcode:' + commandName + '!');
@@ -185,10 +186,12 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
         $meta.trace = headObj.headerNo;
         $meta.mtid = 'error';
         $meta.method = cmd.method;
-        bodyObj = {
-            errorCode: 'payshield.' + bodyObj.errorCode,
-            errorMessage: ERRORCODES[bodyObj.errorCode]
-        };
+        if (cmd.errorPattern) { // try to match errorPattern if it exists
+            bodyObj = bitsyntax.match(cmd.errorPattern, headObj.body) || bodyObj;
+        }
+        bodyObj.type = 'payshield.' + bodyObj.errorCode;
+        bodyObj.errorCode = 'payshield.' + bodyObj.errorCode;
+        bodyObj.errorMessage = cmd.method + ':' + (ERRORCODES[bodyObj.errorCode] || bodyObj.errorCode);
     }
     return bodyObj;
 };
