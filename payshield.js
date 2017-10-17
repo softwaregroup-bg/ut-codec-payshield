@@ -109,7 +109,8 @@ PayshieldCodec.prototype.init = function(config) {
         this.log.info('Initializing Payshield parser! headerFormat: ' + config.headerFormat + ',messageFormat:' + config.messageFormat);
     }
     this.headerPattern = bitsyntax.parse('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
-    this.errorPattern = bitsyntax.parse('errorCode:2/string, rest/binary');
+    this.headerMatcher = bitsyntax.matcher('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
+    this.errorMatcher = bitsyntax.matcher('errorCode:2/string, rest/binary');
 
     var commandsObj = merge({}, defaultFormat, config.messageFormat);
 
@@ -125,6 +126,7 @@ PayshieldCodec.prototype.init = function(config) {
                 }
                 this.commands[property + ':request'] = {
                     pattern: requestPattern,
+                    matcher: bitsyntax.matcher(commandsObj[property].requestPattern),
                     code: commandsObj[property].requestCode,
                     method: property,
                     mtid: 'request'
@@ -139,7 +141,8 @@ PayshieldCodec.prototype.init = function(config) {
                 }
                 this.commands[property + ':response'] = {
                     pattern: responsePattern,
-                    errorPattern: commandsObj[property].errorPattern && bitsyntax.parse(commandsObj[property].errorPattern),
+                    matcher: bitsyntax.matcher(commandsObj[property].responsePattern),
+                    errorMatcher: commandsObj[property].errorPattern && bitsyntax.matcher(commandsObj[property].errorPattern),
                     code: commandsObj[property].responseCode,
                     method: property,
                     mtid: 'response'
@@ -154,7 +157,7 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
     if (this.log.debug) {
         this.log.debug('PayshieldParser.decode buffer:' + buff.toString());
     }
-    var headObj = bitsyntax.match(this.headerPattern, buff);
+    var headObj = this.headerMatcher(buff);
     if (!headObj) {
         throw new Error('Unable to match header to header pattern!');
     }
@@ -168,14 +171,14 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
         throw new Error('Not implemented opcode:' + commandName + '!');
     }
 
-    var bodyObj = bitsyntax.match(this.errorPattern, headObj.body);
+    var bodyObj = this.errorMatcher(headObj.body);
     if (!bodyObj) {
         throw new Error('Unable to match response errorCode!');
     }
     // 00 = No error
     // 02 = Key inappropriate length for algorithm (in some cases is warning)
     if (['00', '02'].includes(bodyObj.errorCode)) {
-        bodyObj = bitsyntax.match(cmd.pattern, headObj.body);
+        bodyObj = cmd.matcher(headObj.body);
         if (!bodyObj) {
             throw new Error('Unable to match pattern for opcode:' + commandName + '!');
         }
@@ -186,8 +189,8 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
         $meta.trace = headObj.headerNo;
         $meta.mtid = 'error';
         $meta.method = cmd.method;
-        if (cmd.errorPattern) { // try to match errorPattern if it exists
-            bodyObj = bitsyntax.match(cmd.errorPattern, headObj.body) || bodyObj;
+        if (cmd.errorMatcher) { // try to match errorPattern if it exists
+            bodyObj = cmd.errorMatcher(headObj.body) || bodyObj;
         }
         bodyObj.type = 'payshield.' + bodyObj.errorCode;
         bodyObj.errorCode = 'payshield.' + bodyObj.errorCode;
