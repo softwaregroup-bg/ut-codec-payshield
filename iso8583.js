@@ -10,6 +10,14 @@ function getFormat(format, fallback) {
 }
 
 function Iso8583(config) {
+    this.networkCodes = Object.assign({
+        '001': 'keyChange',
+        '002': 'signOff',
+        '061': 'echo',
+        '161': 'keyChange',
+        '201': 'cutOver',
+        '301': 'echo'
+    }, config.networkCodes);
     this.emvTagsField = config.emvTagsField || 55;
     this.fieldFormat = merge({}, defaultFields[(config.version || '0') + (config.baseEncoding || 'ascii')], config.fieldFormat);
     this.framePattern = bitSyntax.matcher('header:' + this.fieldFormat.header.size + '/' + getFormat(this.fieldFormat.header.format) +
@@ -109,8 +117,9 @@ Iso8583.prototype.decode = function(buffer, $meta) {
             }
             group += 1;
         }
-        if (message.mtid === '0800') {
-            $meta.opcode = String(message[70] || '').substr(0, 3);
+        if (message.mtid === '0800' || message.mtid === '0810') {
+            $meta.opcode = String(message[70] || '');
+            $meta.opcode = this.networkCodes[$meta.opcode] || $meta.opcode;
         } else {
             $meta.opcode = String(message[3] || '').substr(0, 2);
         }
