@@ -68,12 +68,12 @@ module.exports = class JsonRpc {
     encode(msg = {}, $meta, context) {
         if (($meta.mtid === 'error' || $meta.mtid === 'response') && !$meta.trace) {
             throw errors.invalidMessageID('Cannot send response without trace');
-        } else if (!$meta.opcode) {
+        } else if (!$meta.opcode && !$meta.method) {
             throw errors.invalidMethod('Missing opcode');
         }
         const json = {
             jsonrpc: this.version,
-            method: $meta.opcode
+            method: $meta.opcode || $meta.method
         };
         switch ($meta.mtid) {
             case 'request':
