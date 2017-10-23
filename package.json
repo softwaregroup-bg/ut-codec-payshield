@@ -1,23 +1,13 @@
 {
-  "name": "ut-codec",
-  "version": "5.16.0-rc.12",
+  "name": "ut-codec-payshield",
+  "version": "6.0.0",
   "main": "./index.js",
   "dependencies": {
-    "browser-process-hrtime": "0.1.2",
-    "iconv-lite": "0.4.15",
-    "lodash.assign": "4.2.0",
-    "lodash.invert": "4.3.0",
-    "lodash.isempty": "4.4.0",
-    "lodash.isobject": "3.0.2",
     "lodash.merge": "4.6.0",
-    "lodash.omit": "4.5.0",
-    "ut-bitsyntax": "^6.0.7",
-    "ut-error": "^5.4.0",
-    "blue-tape": "0.2.0"
+    "ut-bitsyntax": "^6.0.7"
   },
   "devDependencies": {
-    "adiff": "0.2.13",
-    "ut-tools": "^5.14.4"
+    "ut-tools": "^5.23.2"
   },
   "scripts": {
     "lint": "ut-lint .",
@@ -38,10 +28,10 @@
     "jenkins": "ut-jenkins",
     "gitlab": "ut-gitlab"
   },
-  "description": "UT codec module.",
+  "description": "Payshield codec",
   "repository": {
     "type": "git",
-    "url": "git@github.com:softwaregroup-bg/ut-codec.git"
+    "url": "git@github.com:softwaregroup-bg/ut-codec-payshield.git"
   },
   "license": "Apache-2.0"
 }
