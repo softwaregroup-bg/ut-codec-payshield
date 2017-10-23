@@ -102,6 +102,12 @@
         "requestPattern": "keyType:3/string, zmk:33/string, keyA32:33/string, keyScheme:1/string",
         "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string"
     },
+    "exportKey": {
+        "requestCode": "A8",
+        "responseCode": "A9",
+        "requestPattern": "keyType:3/string, zmk:33/string, keyA32:33/string, keyScheme:1/string",
+        "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string"
+    },
     "translateTpkZpk": {
         "requestCode": "CA",
         "responseCode": "CB",
