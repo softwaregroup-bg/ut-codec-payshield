@@ -1,3 +1,13 @@
+<a name="6.1.1"></a>
+## [6.1.1](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.1.0...v6.1.1) (2017-10-23)
+
+
+### Bug Fixes
+
+* add method ([906f3f0](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/906f3f0))
+
+
+
 <a name="6.1.0"></a>
 # 6.1.0 (2017-10-23)
 
