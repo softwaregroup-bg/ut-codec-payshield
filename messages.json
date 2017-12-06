@@ -36,8 +36,14 @@
     "generateCvv": {
         "requestCode": "CW",
         "responseCode": "CX",
-        "requestPattern": "cvk:33/string, account:12/string, \";\", expirationDate:4/string, serviceCode:3/string",
+        "requestPattern": "cvk:33/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string",
         "responsePattern": "errorCode:2/string, cvv:3/string"
+    },
+    "verifyCvv": {
+        "requestCode": "CY",
+        "responseCode": "CZ",
+        "requestPattern": "cvk:33/string, cvv:3/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string",
+        "responsePattern": "errorCode:2/string"
     },
     "generateArqc4": {
         "requestCode": "KW",
