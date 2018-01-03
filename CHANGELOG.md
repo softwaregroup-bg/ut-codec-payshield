@@ -1,3 +1,23 @@
+<a name="6.1.3"></a>
+## [6.1.3](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.1.2...v6.1.3) (2017-12-06)
+
+
+### Bug Fixes
+
+* verifyCvv ([f9b17f4](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/f9b17f4))
+
+
+
+<a name="6.1.2"></a>
+## [6.1.2](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.1.1...v6.1.2) (2017-12-01)
+
+
+### Bug Fixes
+
+* do mapping earlier ([e5f6a73](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/e5f6a73))
+
+
+
 <a name="6.1.1"></a>
 ## [6.1.1](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.1.0...v6.1.1) (2017-10-23)
 

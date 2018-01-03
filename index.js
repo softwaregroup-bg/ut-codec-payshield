@@ -193,8 +193,8 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
             bodyObj = cmd.errorMatcher(headObj.body) || bodyObj;
         }
         bodyObj.type = 'payshield.' + bodyObj.errorCode;
-        bodyObj.errorCode = 'payshield.' + bodyObj.errorCode;
         bodyObj.errorMessage = cmd.method + ':' + (ERRORCODES[bodyObj.errorCode] || bodyObj.errorCode);
+        bodyObj.errorCode = 'payshield.' + bodyObj.errorCode;
     }
     return bodyObj;
 };
