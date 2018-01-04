@@ -1,3 +1,13 @@
+<a name="6.1.4"></a>
+## [6.1.4](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.1.3...v6.1.4) (2018-01-04)
+
+
+### Bug Fixes
+
+* generateArqc4 pan length ([c028448](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/c028448))
+
+
+
 <a name="6.1.3"></a>
 ## [6.1.3](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.1.2...v6.1.3) (2017-12-06)
 
