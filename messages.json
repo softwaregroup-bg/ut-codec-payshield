@@ -30,8 +30,8 @@
     "generateMac": {
         "requestCode": "M6",
         "responseCode": "M7",
-        "requestPattern": "macMode:1/string, macInputFormat:1/string, macAlgorithm:2/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSizeHex:4/string-left-zero, macMessage:msgSize/string",
-        "responsePattern": "errorCode:2/string, mac:8/string"
+        "requestPattern": "macMode:1/string, macInputFormat:1/string, macSize:1/string, macAlgorithm:1/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSizeHex:4/string-left-zero, macMessage:msgSize/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "generateCvv": {
         "requestCode": "CW",
@@ -62,8 +62,8 @@
     "verifyMac": {
         "requestCode": "M8",
         "responseCode": "M9",
-        "requestPattern": "macMode:1/string, macInputFormat:1/string, macAlgorithm:2/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSizeHex:4/string-left-zero, macMessage:msgSize/string, mac:8/string",
-        "responsePattern": "errorCode:2/string"
+        "requestPattern": "macMode:1/string, macInputFormat:1/string, macSize:1/string, macAlgorithm:1/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSizeHex:4/string-left-zero, macMessage:msgSize/string, mac:8/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "formKey": {
         "requestCode": "A4",
