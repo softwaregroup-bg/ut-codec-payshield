@@ -1,3 +1,13 @@
+<a name="6.2.1"></a>
+## [6.2.1](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.2.0...v6.2.1) (2018-02-06)
+
+
+### Bug Fixes
+
+* MAC commands revised for firmware v3.2 ([b152168](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/b152168))
+
+
+
 <a name="6.2.0"></a>
 # [6.2.0](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.1.4...v6.2.0) (2018-02-06)
 
