@@ -1,3 +1,13 @@
+<a name="6.2.0"></a>
+# [6.2.0](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.1.4...v6.2.0) (2018-02-06)
+
+
+### Features
+
+* zek && zak translation ([6240111](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/6240111))
+
+
+
 <a name="6.1.4"></a>
 ## [6.1.4](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.1.3...v6.1.4) (2018-01-04)
 
