@@ -148,6 +148,12 @@
         "requestPattern": "sourceZpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string",
         "responsePattern": "errorCode:2/string, pin/binary"
     },
+    "translateZekZakLmkZmk": {
+        "requestCode": "FM",
+        "responseCode": "FN",
+        "requestPattern": "flag:1/string, zmk:33/string, zek:zekLength/string, zak:zakLength/string, atallaVariant:atallaVariantLength/string, delimiter:delimiterLength/string, keySchemeZmk:keySchemeZmkLength/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string",
+        "responsePattern": "errorCode:2/string, responseData/binary"
+    },
     "generateOffsetIbmLmk": {
         "requestCode": "DE",
         "responseCode": "DF",
