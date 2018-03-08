@@ -1,24 +1,26 @@
-const errorList = require('./list.json');
+const errorList = Object.keys(require('./list.json'));
+const messages = Object.keys(require('../messages.json'));
 const defineError = require('ut-error').define;
 const Payshield = defineError('payshield');
-const Generic = defineError('generic', Payshield, 'generic error');
 const Parser = defineError('parser', Payshield, 'parser error');
 
-const errors = Object
-    .keys(errorList)
-    .reduce((a, c) => {
-        var Err = defineError(c, Payshield, errorList[c]);
-        a[c] = (cause) => (new Err(cause));
-        return a;
-    }, {
-        generic: Generic,
-        parser: Parser,
-        unableMatchingHeaderPattern: defineError('unableMatchingHeaderPattern', Generic, 'Unable to match header to header pattern!'),
-        unknownResponseCode: defineError('unknownResponseCode', Generic, 'Unknown response code'),
-        notimplemented: defineError('notimplemented', Generic, 'Not implemented'),
-        unableMatchingResponseCode: defineError('unableMatchingResponseCode', Generic, 'Unable to match response errorCode!'),
-        unableMatchingPattern: defineError('unableMatchingPattern', Generic, 'Unable to match pattern')
+var errors = {
+    parser: Parser,
+    unableMatchingHeaderPattern: defineError('unableMatchingHeaderPattern', Payshield, 'Unable to match header to header pattern!'),
+    unknownResponseCode: defineError('unknownResponseCode', Payshield, 'Unknown response code'),
+    notimplemented: defineError('notimplemented', Payshield, 'Not implemented'),
+    unableMatchingResponseCode: defineError('unableMatchingResponseCode', Payshield, 'Unable to match response errorCode!'),
+    unableMatchingPattern: defineError('unableMatchingPattern', Payshield, 'Unable to match pattern')
 
-    });
+};
+
+errors = messages.reduce((a1, c1) => {
+    const MsgErr = defineError(c1, Payshield, `Error in method: ${c1}`);
+    return errorList.reduce((a2, c2) => {
+        var Err = defineError(c2, MsgErr, errorList[c2]);
+        a2[`${c1}.${c2}`] = (cause) => (new Err(cause));
+        return a2;
+    }, a1);
+}, errors);
 
 module.exports = errors;
