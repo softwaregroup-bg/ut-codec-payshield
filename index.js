@@ -106,7 +106,9 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
         if (cmd.errorMatcher) { // try to match errorPattern if it exists
             defErrCode = (cmd.errorMatcher(headObj.body) || bodyObj).errorCode || defErrCode;
         }
-        return errors[`${cmd.method}.${defErrCode}`](bodyObj);
+        let e = errors[`${cmd.method}.${defErrCode}`](bodyObj);
+        this.log.error && this.log.error(e);
+        return e;
     }
     return bodyObj;
 };
