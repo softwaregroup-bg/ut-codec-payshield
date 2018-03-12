@@ -1,3 +1,18 @@
+<a name="6.2.3"></a>
+## [6.2.3](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.2.2...v6.2.3) (2018-03-12)
+
+
+### Bug Fixes
+
+* better error handling ([97dd1c3](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/97dd1c3))
+* dep. inject ([4de52fb](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/4de52fb))
+* deps ([806137d](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/806137d))
+* logging ([3387ddb](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/3387ddb))
+* move to ut-error ([e759f7f](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/e759f7f))
+* trigger ([af872a2](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/af872a2))
+
+
+
 <a name="6.2.2"></a>
 ## [6.2.2](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.2.1...v6.2.2) (2018-02-15)
 
