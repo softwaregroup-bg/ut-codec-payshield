@@ -1,4 +1,5 @@
-const errorList = Object.keys(require('./list.json'));
+const errorDesc = require('./list.json');
+const errorList = Object.keys(errorDesc);
 const messages = Object.keys(require('../messages.json'));
 
 module.exports = (defineError) => {
@@ -17,7 +18,7 @@ module.exports = (defineError) => {
     return messages.reduce((a1, c1) => {
         const MsgErr = defineError(c1, Payshield, `Error in method: ${c1}`);
         return errorList.reduce((a2, c2) => {
-            var Err = defineError(c2, MsgErr, errorList[c2]);
+            var Err = defineError(c2, MsgErr, errorDesc[c2]);
             a2[`${c1}.${c2}`] = (cause) => (new Err(cause));
             return a2;
         }, a1);
