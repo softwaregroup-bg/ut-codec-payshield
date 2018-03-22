@@ -1,3 +1,13 @@
+<a name="6.2.4"></a>
+## [6.2.4](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.2.3...v6.2.4) (2018-03-19)
+
+
+### Bug Fixes
+
+* goot description ([22ae500](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/22ae500))
+
+
+
 <a name="6.2.3"></a>
 ## [6.2.3](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.2.2...v6.2.3) (2018-03-12)
 
