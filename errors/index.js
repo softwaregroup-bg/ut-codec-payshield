@@ -20,6 +20,8 @@ module.exports = (defineError) => {
 
     return messages.reduce((a1, c1) => {
         const MsgErr = defineError(c1, payshield, `Error in method: ${c1}`);
+        var ErrGen = defineError('generic', MsgErr, 'Generic Error');
+        a1[`${c1}.generic`] = (cause) => (ErrGen(cause));
         return errorList.reduce((a2, c2) => {
             var Err = defineError(c2, MsgErr, errorDesc[c2]);
             a2[`${c1}.${c2}`] = (cause) => (Err(cause));
