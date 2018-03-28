@@ -1,6 +1,6 @@
 {
   "name": "ut-codec-payshield",
-  "version": "6.2.2",
+  "version": "6.2.7",
   "main": "./index.js",
   "dependencies": {
     "lodash.merge": "4.6.0",
@@ -22,6 +22,7 @@
     "prepublish": "ut-prepublish",
     "prepush": "ut-prepush",
     "pretest": "ut-pretest",
+    "precover": "ut-precover",
     "preversion": "ut-preversion",
     "test": "ut-test",
     "version": "ut-version",
