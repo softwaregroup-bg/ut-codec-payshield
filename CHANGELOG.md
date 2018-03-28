@@ -1,3 +1,13 @@
+<a name="6.2.6"></a>
+## [6.2.6](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.2.5...v6.2.6) (2018-03-23)
+
+
+### Bug Fixes
+
+* fix error handling ([171547b](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/171547b))
+
+
+
 <a name="6.2.5"></a>
 ## [6.2.5](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.2.4...v6.2.5) (2018-03-22)
 
