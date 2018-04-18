@@ -210,9 +210,12 @@ PayshieldCodec.prototype.encode = function(data, $meta, context) {
 
     var headerNo = $meta.trace;
     if (headerNo === undefined || headerNo === null) {
-        headerNo = $meta.trace = ('000000' + context.trace).substr(-6);
+        var headerNoSize = this.headerPattern.filter(function(value) {
+            return value.name === 'headerNo';
+        }).pop().size;
+        headerNo = $meta.trace = ('0'.repeat(headerNoSize) + context.trace).substr(-headerNoSize);
         context.trace += 1;
-        if (context.trace > 999999) {
+        if (context.trace > parseInt('9'.repeat(headerNoSize))) {
             context.trace = 0;
         }
     }
