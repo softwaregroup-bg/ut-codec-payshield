@@ -30,6 +30,12 @@ PayshieldCodec.prototype.init = function(config) {
     if (this.headerPattern === false) {
         throw this.errors.parserHeader();
     }
+
+    this.headerNoSize = this.headerPattern.filter(function(value) {
+        return value.name === 'headerNo';
+    }).pop().size;
+    this.maxTrace = parseInt('9'.repeat(this.headerNoSize));
+
     for (var property in commandsObj) {
         if (commandsObj.hasOwnProperty(property)) {
             if (commandsObj[property].requestPattern) {
@@ -126,9 +132,9 @@ PayshieldCodec.prototype.encode = function(data, $meta, context) {
 
     var headerNo = $meta.trace;
     if (headerNo === undefined || headerNo === null) {
-        headerNo = $meta.trace = ('000000' + context.trace).substr(-6);
+        headerNo = $meta.trace = ('0'.repeat(this.headerNoSize) + context.trace).substr(-this.headerNoSize);
         context.trace += 1;
-        if (context.trace > 999999) {
+        if (context.trace > this.maxTrace) {
             context.trace = 0;
         }
     }
