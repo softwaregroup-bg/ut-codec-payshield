@@ -1,3 +1,13 @@
+<a name="6.4.1"></a>
+## [6.4.1](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.4.0...v6.4.1) (2018-04-20)
+
+
+### Bug Fixes
+
+* Header size definition ([#9](https://github.com/softwaregroup-bg/ut-codec-payshield/issues/9)) ([501eb2f](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/501eb2f))
+
+
+
 <a name="6.2.7"></a>
 ## [6.2.7](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.2.6...v6.2.7) (2018-03-28)
 
