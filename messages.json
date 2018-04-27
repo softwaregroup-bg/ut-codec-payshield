@@ -172,5 +172,29 @@
         "responseCode": "DZ",
         "requestPattern": "zmk:33/string, bdk:33/string",
         "responsePattern": "errorCode:2/string"
+    },
+    "encryptDataBlockECB": {
+        "requestCode": "M0",
+        "responseCode": "M1",
+        "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string, message:messageLen/string",
+        "responsePattern": "errorCode:2/string, messageLenHex:4/string, message:32/string"
+    },
+    "generateIPEK": {
+        "requestCode": "A0",
+        "responseCode": "A1",
+        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, deriveKeyMode:1/string, dukptMasterKeyType:1/string, dukptMasterKey:33/string, ksn:15/string, \";\", zmkTmkFlag:1/string, tmk:33/string, keyScheme1:1/string",
+        "responsePattern": "errorCode:2/string, keyA32:33/string,  keyLmkA32:33/string,  keyCheckValue:6/string"
+    },
+    "generateIPEKTr31": {
+        "requestCode": "A0",
+        "responseCode": "A1",
+        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, deriveKeyMode:1/string, dukptMasterKeyType:1/string, dukptMasterKey:33/string, ksn:15/string, \";\", zmkTmkFlag:1/string, tmk:33/string, keyScheme1:1/string, \"&B1X00S012018\", ksn:15/string, \"00000!B\"",
+        "responsePattern": "errorCode:2/string, keyA32:33/string,  rest/binary"
+    },
+    "verifyOffsetIbmDukpt": {
+        "requestCode": "GO",
+        "responseCode": "GP",
+        "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksndescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
+        "responsePattern": "errorCode:2/string"
     }
 }
