@@ -47,6 +47,7 @@ PayshieldCodec.prototype.init = function(config) {
                     pattern: requestPattern,
                     matcher: bitsyntax.matcher(commandsObj[property].requestPattern),
                     code: commandsObj[property].requestCode,
+                    warnings: commandsObj[property].warnings,
                     method: property,
                     mtid: 'request'
                 };
@@ -96,7 +97,8 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
     }
     // 00 = No error
     // 02 = Key inappropriate length for algorithm (in some cases is warning)
-    if (['00', '02'].includes(bodyObj.errorCode)) {
+    var warningsList = (cmd.warnings && ['00', '02'].concat(cmd.warnings)) || ['00', '02'];
+    if (warningsList.includes(bodyObj.errorCode)) {
         bodyObj = cmd.matcher(headObj.body);
         if (!bodyObj) {
             throw this.errors.unableMatchingPattern({params: {opcode: commandName}});

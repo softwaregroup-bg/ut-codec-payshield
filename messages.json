@@ -106,7 +106,8 @@
         "requestCode": "A6",
         "responseCode": "A7",
         "requestPattern": "keyType:3/string, zmk:33/string, keyA32:33/string, keyScheme:1/string",
-        "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string"
+        "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string",
+        "warnings": ["01"]
     },
     "exportKey": {
         "requestCode": "A8",
@@ -195,6 +196,9 @@
         "requestCode": "GO",
         "responseCode": "GP",
         "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksndescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
-        "responsePattern": "errorCode:2/string"
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "01": "PIN Verification failure"
+        }
     }
 }
