@@ -64,6 +64,7 @@ PayshieldCodec.prototype.init = function(config) {
                     matcher: bitsyntax.matcher(commandsObj[property].responsePattern),
                     errorMatcher: commandsObj[property].errorPattern && bitsyntax.matcher(commandsObj[property].errorPattern),
                     code: commandsObj[property].responseCode,
+                    warnings: commandsObj[property].warnings,
                     method: property,
                     mtid: 'response'
                 };
