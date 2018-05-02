@@ -7,7 +7,7 @@
     },
     "generateKey": {
         "requestCode": "A0",
-        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keyScheme1:keyScheme1Length/string"
+        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLen/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keyScheme1:keyScheme1Length/string, tr31BlockData:tr31BlockDataLen/string"
     },
     "generateKeyTmk": {
         "requestCode": "A0",
@@ -179,18 +179,6 @@
         "responseCode": "M1",
         "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string, message:messageLen/string",
         "responsePattern": "errorCode:2/string, messageLenHex:4/string, message:32/string"
-    },
-    "generateIPEK": {
-        "requestCode": "A0",
-        "responseCode": "A1",
-        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, deriveKeyMode:1/string, dukptMasterKeyType:1/string, dukptMasterKey:33/string, ksn:15/string, \";\", zmkTmkFlag:1/string, tmk:33/string, keyScheme1:1/string",
-        "responsePattern": "errorCode:2/string, keyA32:33/string,  keyLmkA32:33/string,  keyCheckValue:6/string"
-    },
-    "generateIPEKTr31": {
-        "requestCode": "A0",
-        "responseCode": "A1",
-        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, deriveKeyMode:1/string, dukptMasterKeyType:1/string, dukptMasterKey:33/string, ksn:15/string, \";\", zmkTmkFlag:1/string, tmk:33/string, keyScheme1:1/string, \"&B1X00S012018\", ksn:15/string, \"00000!B\"",
-        "responsePattern": "errorCode:2/string, keyA32:33/string,  rest/binary"
     },
     "verifyOffsetIbmDukpt": {
         "requestCode": "GO",
