@@ -1,6 +1,7 @@
 const errorDesc = require('./list.json');
 const errorList = Object.keys(errorDesc);
-const messages = Object.keys(require('../messages.json'));
+const messages = require('../messages.json');
+const messagesKeys = Object.keys(messages);
 
 module.exports = (defineError) => {
     const payshield = defineError('payshield');
@@ -20,12 +21,13 @@ module.exports = (defineError) => {
         unableMatchingPattern: defineError('unableMatchingPattern', payshield, 'Unable to match pattern for opcode: {opcode}')
     };
 
-    return messages.reduce((a1, c1) => {
+    var defErr = messagesKeys.reduce((a1, c1) => {
         const MsgErr = defineError(c1, payshield, `Error in method: ${c1}`);
         a1[`${c1}.generic`] = defineError('generic', MsgErr, 'Generic Error');
         return errorList.reduce((a2, c2) => {
-            a2[`${c1}.${c2}`] = defineError(c2, MsgErr, errorDesc[c2]);
+            a2[`${c1}.${c2}`] = defineError(c2, MsgErr, (messages[c1].customResponseError && messages[c1].customResponseError[c2]) || errorDesc[c2]);
             return a2;
         }, a1);
     }, errors);
+    return defErr;
 };
