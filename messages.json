@@ -74,7 +74,7 @@
     "generateKeyCheckValue": {
         "requestCode": "BU",
         "responseCode": "BV",
-        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, keyA32:33/string, \";\", \"0\", \"0\", kcvType:1/string",
+        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key:keyLength/string, delimiter1:delimiter1Length/string, keyType:keyTypeLength/string, delimiter2:delimiter2Length/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string, hashId:hashIdLength/string, hmacKeyLength:hmacKeyLengthLength/string, hmac:hmacLength/string-binhex, delimiter3:delimiter3Length/string",
         "responsePattern": "errorCode:2/string, keyCheckValue/binary"
     },
 
