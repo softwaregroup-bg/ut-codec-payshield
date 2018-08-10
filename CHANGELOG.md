@@ -1,3 +1,14 @@
+<a name="6.5.1"></a>
+## [6.5.1](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.5.0...v6.5.1) (2018-08-10)
+
+
+### Bug Fixes
+
+* PS-33 ([004fddd](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/004fddd))
+* PS-33 ([4f4b84a](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/4f4b84a))
+
+
+
 <a name="6.5.0"></a>
 # [6.5.0](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.5.0-rc-diesel.1...v6.5.0) (2018-07-10)
 
