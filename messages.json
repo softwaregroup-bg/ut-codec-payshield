@@ -15,18 +15,6 @@
         "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, \";\", zmkTmkFlag:1/string, tmk:33/string, keyScheme1:1/string",
         "responsePattern": "errorCode:2/string, keyA32:33/string, rest/binary"
     },
-    "generateTpk": {
-        "requestCode": "HC",
-        "responseCode": "HD",
-        "requestPattern": "tmk:33/string, \";\", keyScheme:1/string, keyScheme1:1/string, \"0\"",
-        "responsePattern": "errorCode:2/string, tpk:33/string, keyA32:33/string"
-    },
-    "generateTak": {
-        "requestCode": "HA",
-        "responseCode": "HB",
-        "requestPattern": "tmk:33/string, \";\", keyScheme:1/string, keyScheme1:1/string, \"0\"",
-        "responsePattern": "errorCode:2/string, tpk:33/string, keyA32:33/string"
-    },
     "generateMac": {
         "requestCode": "M6",
         "responseCode": "M7",
