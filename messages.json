@@ -1,106 +1,15 @@
 ﻿{
-    "echo": {
-        "requestCode": "B2",
-        "responseCode": "B3",
-        "requestPattern": "msgSize:4/string-left-zero, message:msgSize/string-left-zero",
-        "responsePattern": "errorCode:2/string, message:4/string"
-    },
     "generateKey": {
         "requestCode": "A0",
-        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLen/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keyScheme1:keyScheme1Length/string, tr31BlockData:tr31BlockDataLen/string"
-    },
-    "generateKeyTmk": {
-        "requestCode": "A0",
         "responseCode": "A1",
-        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, \";\", zmkTmkFlag:1/string, tmk:33/string, keyScheme1:1/string",
+        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLen/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keyScheme1:keyScheme1Length/string, tr31BlockData:tr31BlockDataLen/string",
         "responsePattern": "errorCode:2/string, keyA32:33/string, rest/binary"
     },
-    "generateTpk": {
-        "requestCode": "HC",
-        "responseCode": "HD",
-        "requestPattern": "tmk:33/string, \";\", keyScheme:1/string, keyScheme1:1/string, \"0\"",
-        "responsePattern": "errorCode:2/string, tpk:33/string, keyA32:33/string"
-    },
-    "generateTak": {
-        "requestCode": "HA",
-        "responseCode": "HB",
-        "requestPattern": "tmk:33/string, \";\", keyScheme:1/string, keyScheme1:1/string, \"0\"",
-        "responsePattern": "errorCode:2/string, tpk:33/string, keyA32:33/string"
-    },
-    "generateMac": {
-        "requestCode": "M6",
-        "responseCode": "M7",
-        "requestPattern": "macMode:1/string, macInputFormat:1/string, macSize:1/string, macAlgorithm:1/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSizeHex:4/string-left-zero, macMessage:msgSize/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
-    },
-    "generateCvv": {
-        "requestCode": "CW",
-        "responseCode": "CX",
-        "requestPattern": "cvk:33/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string",
-        "responsePattern": "errorCode:2/string, cvv:3/string"
-    },
-    "verifyCvv": {
-        "requestCode": "CY",
-        "responseCode": "CZ",
-        "requestPattern": "cvk:33/string, cvv:3/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string",
-        "responsePattern": "errorCode:2/string"
-    },
-    "generateArqc4": {
-        "requestCode": "KW",
-        "responseCode": "KX",
-        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, ivac:ivacLength/string-binhex, panLength:panSeqNoLengthLength/string, panSeqNo:panSeqNoLength/string-binhex, delimiter1:delimiter1Length/string, branchHeightParams:branchHeightParamsLength/string, atc:2/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter2:delimiter2Length/string, arqc:8/string-binhex, arc:arcLength/string-binhex, csu:csuLength/string-binhex, padLength:padLengthLength/string, pad:padLength/string-binhex",
-        "responsePattern": "errorCode:2/string, arpc/binary",
-        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex"
-    },
-    "generateArqc3": {
-        "requestCode": "KQ",
-        "responseCode": "KR",
-        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter:delimiterLength/string, arqc:8/string-binhex, arc:arcLength/string-binhex",
-        "responsePattern": "errorCode:2/string, arpc/binary",
-        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex"
-    },
-    "verifyMac": {
-        "requestCode": "M8",
-        "responseCode": "M9",
-        "requestPattern": "macMode:1/string, macInputFormat:1/string, macSize:1/string, macAlgorithm:1/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSizeHex:4/string-left-zero, macMessage:msgSize/string, mac:8/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
-    },
-    "formKey": {
+    "formKeyFromComponents": {
         "requestCode": "A4",
         "responseCode": "A5",
-        "requestPattern": "numberOfComponents:1/string, keyType:3/string, keyScheme:1/string, keyComponent1:33/string, keyComponent2:33/string",
+        "requestPattern": "numberOfComponents:1/string, keyType:3/string, keySchemeLmk:1/string, keyComponents:keyComponentsLength/string",
         "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string"
-    },
-    "generateKeyCheckValue": {
-        "requestCode": "BU",
-        "responseCode": "BV",
-        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, keyA32:33/string, \";\", \"0\", \"0\", kcvType:1/string",
-        "responsePattern": "errorCode:2/string, keyCheckValue/binary"
-    },
-
-    "derivePinIbm": {
-        "requestCode": "EE",
-        "responseCode": "EF",
-        "requestPattern": "pvk:pvkLength/string, offset:12/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
-    },
-    "generatePin": {
-        "requestCode": "JA",
-        "responseCode": "JB",
-        "requestPattern": "account:12/string, checkLength:2/string-left-zero",
-        "responsePattern": "errorCode:2/string, pin/binary"
-    },
-    "generateOffsetIbm": {
-        "requestCode": "BK",
-        "responseCode": "BL",
-        "requestPattern": "keyType:3/string, keyA32:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
-        "responsePattern": "errorCode:2/string, offset:12/string"
-    },
-    "verifyTermPinIbm": {
-        "requestCode": "DA",
-        "responseCode": "DB",
-        "requestPattern": "tpk:33/string, pvk:pvkLength/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
-        "responsePattern": "errorCode:2/string"
     },
     "importKey": {
         "requestCode": "A6",
@@ -115,11 +24,137 @@
         "requestPattern": "keyType:3/string, zmk:33/string, keyA32:33/string, keyScheme:1/string",
         "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string"
     },
-    "translateTpkZpk": {
+    "echo": {
+        "requestCode": "B2",
+        "responseCode": "B3",
+        "requestPattern": "msgSize:4/string-left-zero, message:msgSize/string-left-zero",
+        "responsePattern": "errorCode:2/string, message:4/string"
+    },
+    "generateOffsetIbm": {
+        "requestCode": "BK",
+        "responseCode": "BL",
+        "requestPattern": "keyType:3/string, keyA32:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
+        "responsePattern": "errorCode:2/string, offset:12/string"
+    },
+    "generateKeyCheckValue": {
+        "requestCode": "BU",
+        "responseCode": "BV",
+        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, keyA32:33/string, \";\", \"0\", \"0\", kcvType:1/string",
+        "responsePattern": "errorCode:2/string, keyCheckValue/binary"
+    },
+    "translatePinTpkZpk": {
         "requestCode": "CA",
         "responseCode": "CB",
         "requestPattern": "sourceTpk:33/string, destinationZpk:33/string, \"12\", sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, account:12/string",
         "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string"
+    },
+    "generateCvv": {
+        "requestCode": "CW",
+        "responseCode": "CX",
+        "requestPattern": "cvk:33/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string",
+        "responsePattern": "errorCode:2/string, cvv:3/string"
+    },
+    "verifyCvv": {
+        "requestCode": "CY",
+        "responseCode": "CZ",
+        "requestPattern": "cvk:33/string, cvv:3/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string",
+        "responsePattern": "errorCode:2/string"
+    },
+    "verifyTermPinIbm": {
+        "requestCode": "DA",
+        "responseCode": "DB",
+        "requestPattern": "tpk:33/string, pvk:pvkLength/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
+        "responsePattern": "errorCode:2/string",
+        "warnings": ["02"]
+    },
+    "generateOffsetIbmLmk": {
+        "requestCode": "DE",
+        "responseCode": "DF",
+        "requestPattern": "pvk:pvkLength/string, pin:cryptedPinLength/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
+        "responsePattern": "errorCode:2/string, offset:12/string"
+    },
+    "derivePinIbm": {
+        "requestCode": "EE",
+        "responseCode": "EF",
+        "requestPattern": "pvk:pvkLength/string, offset:12/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
+        "responsePattern": "errorCode:2/string, pin/binary"
+    },
+    "translateZekZakLmkZmk": {
+        "requestCode": "FM",
+        "responseCode": "FN",
+        "requestPattern": "flag:1/string, zmk:33/string, zek:zekLength/string, zak:zakLength/string, atallaVariant:atallaVariantLength/string, delimiter:delimiterLength/string, keySchemeZmk:keySchemeZmkLength/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string",
+        "responsePattern": "errorCode:2/string, responseData/binary"
+    },
+    "verifyOffsetIbmDukpt": {
+        "requestCode": "GO",
+        "responseCode": "GP",
+        "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksndescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "01": "PIN Verification failure"
+        }
+    },
+    "generateTak": {
+        "requestCode": "HA",
+        "responseCode": "HB",
+        "requestPattern": "tmk:33/string, \";\", keyScheme:1/string, keyScheme1:1/string, \"0\"",
+        "responsePattern": "errorCode:2/string, tpk:33/string, keyA32:33/string"
+    },
+    "generatePin": {
+        "requestCode": "JA",
+        "responseCode": "JB",
+        "requestPattern": "account:12/string, checkLength:2/string-left-zero",
+        "responsePattern": "errorCode:2/string, pin/binary"
+    },
+    "translatePinTpkLmk": {
+        "requestCode": "JC",
+        "responseCode": "JD",
+        "requestPattern": "sourceTpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string",
+        "responsePattern": "errorCode:2/string, pin/binary"
+    },
+    "translatePinZpkLmk": {
+        "requestCode": "JE",
+        "responseCode": "JF",
+        "requestPattern": "sourceZpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string",
+        "responsePattern": "errorCode:2/string, pin/binary"
+    },
+    "generateArqc3": {
+        "requestCode": "KQ",
+        "responseCode": "KR",
+        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter:delimiterLength/string, arqc:8/string-binhex, arc:arcLength/string-binhex",
+        "responsePattern": "errorCode:2/string, arpc/binary",
+        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex"
+    },
+    "generateArqc4": {
+        "requestCode": "KW",
+        "responseCode": "KX",
+        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, ivac:ivacLength/string-binhex, panLength:panSeqNoLengthLength/string, panSeqNo:panSeqNoLength/string-binhex, delimiter1:delimiter1Length/string, branchHeightParams:branchHeightParamsLength/string, atc:2/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter2:delimiter2Length/string, arqc:8/string-binhex, arc:arcLength/string-binhex, csu:csuLength/string-binhex, padLength:padLengthLength/string, pad:padLength/string-binhex",
+        "responsePattern": "errorCode:2/string, arpc/binary",
+        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex"
+    },
+    "encryptDataBlockECB": {
+        "requestCode": "M0",
+        "responseCode": "M1",
+        "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string, message:messageLen/string",
+        "responsePattern": "errorCode:2/string, messageLenHex:4/string, message:32/string"
+    },
+    "generateMac": {
+        "requestCode": "M6",
+        "responseCode": "M7",
+        "requestPattern": "macMode:1/string, macInputFormat:1/string, macSize:1/string, macAlgorithm:1/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSizeHex:4/string-left-zero, macMessage:msgSize/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
+    },
+    "verifyMac": {
+        "requestCode": "M8",
+        "responseCode": "M9",
+        "requestPattern": "macMode:1/string, macInputFormat:1/string, macSize:1/string, macAlgorithm:1/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSizeHex:4/string-left-zero, macMessage:msgSize/string, mac:8/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
+    },
+    "printFormat": {
+        "requestCode": "PA",
+        "responseCode": "PB",
+        "requestPattern": "printFields:printFieldsLength/string",
+        "responsePattern": "errorCode:2/string"
     },
     "printPin": {
         "requestCode": "PE",
@@ -130,63 +165,5 @@
     "printPinEnd": {
         "responseCode": "PZ",
         "responsePattern": "errorCode:2/string"
-    },
-    "printFormat": {
-        "requestCode": "PA",
-        "responseCode": "PB",
-        "requestPattern": "printFields:printFieldsLength/string",
-        "responsePattern": "errorCode:2/string"
-    },
-    "translateTpkLmk": {
-        "requestCode": "JC",
-        "responseCode": "JD",
-        "requestPattern": "sourceTpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
-    },
-    "translateZpkLmk": {
-        "requestCode": "JE",
-        "responseCode": "JF",
-        "requestPattern": "sourceZpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
-    },
-    "translateZekZakLmkZmk": {
-        "requestCode": "FM",
-        "responseCode": "FN",
-        "requestPattern": "flag:1/string, zmk:33/string, zek:zekLength/string, zak:zakLength/string, atallaVariant:atallaVariantLength/string, delimiter:delimiterLength/string, keySchemeZmk:keySchemeZmkLength/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string",
-        "responsePattern": "errorCode:2/string, responseData/binary"
-    },
-    "generateOffsetIbmLmk": {
-        "requestCode": "DE",
-        "responseCode": "DF",
-        "requestPattern": "pvk:pvkLength/string, pin:cryptedPinLength/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
-        "responsePattern": "errorCode:2/string, offset:12/string"
-    },
-
-    "translateBdkZmkLmk": {
-        "requestCode": "DW",
-        "responseCode": "DX",
-        "requestPattern": "zmk:33/string, bdk:33/string, \";0X1\"",
-        "responsePattern": "errorCode:2/string"
-    },
-    "translateBdkLmkZmk": {
-        "requestCode": "DY",
-        "responseCode": "DZ",
-        "requestPattern": "zmk:33/string, bdk:33/string",
-        "responsePattern": "errorCode:2/string"
-    },
-    "encryptDataBlockECB": {
-        "requestCode": "M0",
-        "responseCode": "M1",
-        "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string, message:messageLen/string",
-        "responsePattern": "errorCode:2/string, messageLenHex:4/string, message:32/string"
-    },
-    "verifyOffsetIbmDukpt": {
-        "requestCode": "GO",
-        "responseCode": "GP",
-        "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksndescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
-        "responsePattern": "errorCode:2/string",
-        "customResponseError": {
-            "01": "PIN Verification failure"
-        }
     }
 }
