@@ -39,7 +39,7 @@
     "generateKeyCheckValue": {
         "requestCode": "BU",
         "responseCode": "BV",
-        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, keyA32:33/string, \";\", \"0\", \"0\", kcvType:1/string",
+        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key:keyLength/string, delimiter1:delimiter1Length/string, keyType:keyTypeLength/string, delimiter2:delimiter2Length/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string, hashId:hashIdLength/string, hmacKeyLength:hmacKeyLengthLength/string, hmac:hmacLength/string-binhex, delimiter3:delimiter3Length/string",
         "responsePattern": "errorCode:2/string, keyCheckValue/binary"
     },
     "translatePinTpkZpk": {
@@ -137,6 +137,24 @@
         "responseCode": "M1",
         "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string, message:messageLen/string",
         "responsePattern": "errorCode:2/string, messageLenHex:4/string, message:32/string"
+    },
+    "encryptDataBlock": {
+        "requestCode": "M0",
+        "responseCode": "M1",
+        "requestPattern": "modeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string, message:messageLen/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
+    },
+    "decryptDataBlock": {
+        "requestCode": "M2",
+        "responseCode": "M3",
+        "requestPattern": "modeFlag:2/string, bpsRadixFlag:bpsRadixFlagLength/string, bpsRadixValue:bpsRadixValueLength/string, bpsTweak:bpsTweakLength/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string, message:messageLen/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
+    },
+    "translateDataBlock": {
+        "requestCode": "M4",
+        "responseCode": "M5",
+        "requestPattern": "sourceModeFlag:2/string, destinationModeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, sourceKeyType:3/string, sourceKey:33/string, sourceKsnDescriptor:sourceKsnDescriptorLength/string, sourceKsn:sourceKsnLength/string, destinationKeyType:3/string, destinationKey:33/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourceIv:sourceIvLength/string, destinationIv:destinationIvLength/string, messageLenHex:4/string, message:messageLen/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "generateMac": {
         "requestCode": "M6",
