@@ -165,13 +165,13 @@
     "generateMac": {
         "requestCode": "M6",
         "responseCode": "M7",
-        "requestPattern": "macMode:1/string, macInputFormat:1/string, macSize:1/string, macAlgorithm:1/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSizeHex:4/string-left-zero, macMessage:msgSize/string",
+        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, iv:ivLength/string, messageLengthHex:4/string-left-zero, message:messageLength/string",
         "responsePattern": "errorCode:2/string, rest/binary"
     },
     "verifyMac": {
         "requestCode": "M8",
         "responseCode": "M9",
-        "requestPattern": "macMode:1/string, macInputFormat:1/string, macSize:1/string, macAlgorithm:1/string, macPaddingMethod:1/string, macKeyType:3/string, macKey:33/string, msgSizeHex:4/string-left-zero, macMessage:msgSize/string, mac:8/string",
+        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, messageLengthHex:4/string-left-zero, message:messageLength/string, mac:macLength/string",
         "responsePattern": "errorCode:2/string, rest/binary"
     },
     "printFormat": {
