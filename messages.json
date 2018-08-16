@@ -85,6 +85,12 @@
         "requestPattern": "flag:1/string, zmk:33/string, zek:zekLength/string, zak:zakLength/string, atallaVariant:atallaVariantLength/string, delimiter:delimiterLength/string, keySchemeZmk:keySchemeZmkLength/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string",
         "responsePattern": "errorCode:2/string, responseData/binary"
     },
+    "hashDataBlock": {
+        "requestCode": "GM",
+        "responseCode": "GN",
+        "requestPattern": "hashId:2/string, dataLength:5/string, messageData:messageDataLength/string-binhex",
+        "responsePattern": "errorCode:2/string, hash/binary"
+    },
     "verifyOffsetIbmDukpt": {
         "requestCode": "GO",
         "responseCode": "GP",
@@ -100,7 +106,7 @@
         "requestPattern": "tmk:33/string, \";\", keyScheme:1/string, keyScheme1:1/string, \"0\"",
         "responsePattern": "errorCode:2/string, tpk:33/string, keyA32:33/string"
     },
-    "generatePin": {
+    "generateRandomPin": {
         "requestCode": "JA",
         "responseCode": "JB",
         "requestPattern": "account:12/string, checkLength:2/string-left-zero",
@@ -174,6 +180,12 @@
         "requestPattern": "printFields:printFieldsLength/string",
         "responsePattern": "errorCode:2/string"
     },
+    "printFormatAdditional": {
+        "requestCode": "PC",
+        "responseCode": "PD",
+        "requestPattern": "",
+        "responsePattern": ""
+    },
     "printPin": {
         "requestCode": "PE",
         "responseCode": "PF",
@@ -182,6 +194,16 @@
     },
     "printPinEnd": {
         "responseCode": "PZ",
+        "responsePattern": "errorCode:2/string"
+    },
+    "printTmkMailer": {
+        "requestCode": "TA",
+        "responseCode": "TB",
+        "requestPattern": "tmk:33/string, printFields:printFieldsLength/string",
+        "responsePattern": "errorCode:2/string"
+    },
+    "printTmkMailerEnd": {
+        "responseCode": "TZ",
         "responsePattern": "errorCode:2/string"
     }
 }
