@@ -9,7 +9,7 @@ function PayshieldCodec(config, val, log) {
     this.commands = {};
     this.headerPattern = null;
     this.commandNames = {};
-    this.errors = require('./errors')(config.defineError);
+    this.errors = require('./errors')(config);
     this.init(config);
 }
 
@@ -28,7 +28,7 @@ PayshieldCodec.prototype.init = function(config) {
     var commandsObj = merge({}, defaultFormat, config.messageFormat);
 
     if (this.headerPattern === false) {
-        throw this.errors.parserHeader();
+        throw this.errors['payshield.parser.header']({});
     }
 
     this.headerNoSize = this.headerPattern.filter(function(value) {
@@ -41,7 +41,7 @@ PayshieldCodec.prototype.init = function(config) {
             if (commandsObj[property].requestPattern) {
                 var requestPattern = bitsyntax.parse(commandsObj[property].requestPattern);
                 if (!requestPattern) {
-                    throw this.errors.parserRequest({params: {command: property}});
+                    throw this.errors['payshield.parser.request']({params: {command: property}});
                 }
                 this.commands[property + ':request'] = {
                     pattern: requestPattern,
@@ -57,7 +57,7 @@ PayshieldCodec.prototype.init = function(config) {
             if (commandsObj[property].responsePattern) {
                 var responsePattern = bitsyntax.parse(commandsObj[property].responsePattern);
                 if (!responsePattern) {
-                    throw this.errors.parserResponse({params: {command: property}});
+                    throw this.errors['payshield.parser.parserResponse']({params: {command: property}});
                 }
                 this.commands[property + ':response'] = {
                     pattern: responsePattern,
@@ -80,21 +80,21 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
     }
     var headObj = this.headerMatcher(buff);
     if (!headObj) {
-        throw this.errors.unableMatchingHeaderPattern();
+        throw this.errors['payshield.unableMatchingHeaderPattern']({});
     }
 
     var commandName = this.commandNames[headObj.code];
     if (!commandName) {
-        throw this.errors.unknownResponseCode({params: {code: headObj.code}});
+        throw this.errors['payshield.unknownResponseCode']({params: {code: headObj.code}});
     }
     var cmd = this.commands[commandName];
     if (!cmd) {
-        throw this.errors.notimplemented({params: {opcode: commandName}});
+        throw this.errors['payshield.notimplemented']({params: {opcode: commandName}});
     }
 
     var bodyObj = this.errorMatcher(headObj.body);
     if (!bodyObj) {
-        throw this.errors.unableMatchingResponseECode();
+        throw this.errors['payshield.unableMatchingResponseECode']({});
     }
     // 00 = No error
     // 02 = Key inappropriate length for algorithm (in some cases is warning)
@@ -102,7 +102,7 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
     if (warningsList.includes(bodyObj.errorCode)) {
         bodyObj = cmd.matcher(headObj.body);
         if (!bodyObj) {
-            throw this.errors.unableMatchingPattern({params: {opcode: commandName}});
+            throw this.errors['payshield.unableMatchingPattern']({params: {opcode: commandName}});
         }
         $meta.trace = headObj.headerNo;
         $meta.mtid = cmd.mtid;
@@ -117,7 +117,7 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
         } else if (bodyObj && bodyObj.errorCode) {
             defErrCode = bodyObj.errorCode;
         }
-        let e = this.errors[`${cmd.method}.${defErrCode}`]();
+        let e = this.errors[`payshield.${cmd.method}.${defErrCode}`]({});
         this.log.error && this.log.error(e);
         return e;
     }
@@ -130,7 +130,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context) {
     var commandName = $meta.method.split('.').pop() + ':' + $meta.mtid;
 
     if (this.commands[commandName] === undefined) {
-        throw this.errors.notimplemented({params: {opcode: commandName}});
+        throw this.errors['payshield.notimplemented']({params: {opcode: commandName}});
     }
 
     var headerNo = $meta.trace;
@@ -144,7 +144,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context) {
 
     var bodyBuff = bitsyntax.build(this.commands[commandName].pattern, data);
     if (!bodyBuff) {
-        throw this.errors.parserBody({params: {command: commandName}});
+        throw this.errors['payshield.parser.body']({params: {command: commandName}});
     }
 
     var cmdCode = this.commands[commandName].code;
