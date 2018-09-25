@@ -73,6 +73,12 @@
         "requestPattern": "pvk:pvkLength/string, pin:cryptedPinLength/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
         "responsePattern": "errorCode:2/string, offset:12/string"
     },
+    "getPVV": {
+        "requestCode": "DG",
+        "responseCode": "DH",
+        "requestPattern": "pvk:pvkLength/string, pin:cryptedPinLength/string, account:12/string, pvki:1/string",
+        "responsePattern": "errorCode:2/string, pvv:4/string"
+    },
     "derivePinIbm": {
         "requestCode": "EE",
         "responseCode": "EF",
