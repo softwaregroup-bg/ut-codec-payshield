@@ -177,8 +177,7 @@
     "encryptDataBlockECB": {
         "requestCode": "M0",
         "responseCode": "M1",
-        "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string, message:messageLen/string",
-        "responsePattern": "errorCode:2/string, messageLenHex:4/string, message:32/string"
+        "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string, message:messageLen/string"
     },
     "encryptDataBlock": {
         "requestCode": "M0",
@@ -201,8 +200,18 @@
     "verifyOffsetIbmDukpt": {
         "requestCode": "GO",
         "responseCode": "GP",
-        "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksndescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
+        "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
         "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "01": "PIN Verification failure"
+        }
+    },
+    "verifyOffsetIbm": {
+        "requestCode": "DA",
+        "responseCode": "DB",
+        "requestPattern": "tpk:33/string, pvk:pvkLength/string, maxPinLen:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
+        "responsePattern": "errorCode:2/string",
+        "warnings": ["02"],
         "customResponseError": {
             "01": "PIN Verification failure"
         }
