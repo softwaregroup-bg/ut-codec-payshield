@@ -1,3 +1,8 @@
+<a name="6.5.2"></a>
+## [6.5.2](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.5.1...v6.5.2) (2018-09-25)
+
+
+
 <a name="6.5.1"></a>
 ## [6.5.1](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v6.5.0...v6.5.1) (2018-08-10)
 
