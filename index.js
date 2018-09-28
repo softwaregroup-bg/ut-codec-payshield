@@ -2,10 +2,7 @@ var bitsyntax = require('ut-bitsyntax');
 var merge = require('lodash.merge');
 var defaultFormat = require('./messages');
 
-function PayshieldCodec(config, val, log) {
-    this.logFactory = log;
-    this.log = {};
-    this.val = val;
+function PayshieldCodec(config) {
     this.commands = {};
     this.headerPattern = null;
     this.commandNames = {};
@@ -14,13 +11,6 @@ function PayshieldCodec(config, val, log) {
 }
 
 PayshieldCodec.prototype.init = function(config) {
-    this.logFactory && (this.log = this.logFactory.createLog(config.logLevel, {
-        name: config.id,
-        context: 'PayShield codec'
-    }));
-    if (this.log.info) {
-        this.log.info('Initializing Payshield parser! headerFormat: ' + config.headerFormat + ',messageFormat:' + config.messageFormat);
-    }
     this.headerPattern = bitsyntax.parse('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
     this.headerMatcher = bitsyntax.matcher('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
     this.errorMatcher = bitsyntax.matcher('errorCode:2/string, rest/binary');
@@ -74,9 +64,10 @@ PayshieldCodec.prototype.init = function(config) {
     }
 };
 
-PayshieldCodec.prototype.decode = function(buff, $meta) {
-    if (this.log.debug) {
-        this.log.debug('PayshieldParser.decode buffer:' + buff.toString());
+PayshieldCodec.prototype.decode = function(buff, $meta, context, log) {
+    if (log && log.trace) {
+        // todo mask
+        log.trace({$meta: {mtid: 'frame', method: 'iso8583.decode'}, message: buff, log: context && context.session && context.session.log});
     }
     var headObj = this.headerMatcher(buff);
     if (!headObj) {
@@ -118,15 +109,14 @@ PayshieldCodec.prototype.decode = function(buff, $meta) {
             defErrCode = bodyObj.errorCode;
         }
         let e = this.errors[`payshield.${cmd.method}.${defErrCode}`]({});
-        this.log.error && this.log.error(e);
+        log && log.error && log.error(e);
         return e;
     }
     return bodyObj;
 };
 
-PayshieldCodec.prototype.encode = function(data, $meta, context) {
+PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
     // TODO: add validation
-    this.log.debug && this.log.debug('PayshieldParser.encode data:' + data);
     var commandName = $meta.method.split('.').pop() + ':' + $meta.mtid;
 
     if (this.commands[commandName] === undefined) {
@@ -149,11 +139,16 @@ PayshieldCodec.prototype.encode = function(data, $meta, context) {
 
     var cmdCode = this.commands[commandName].code;
 
-    return bitsyntax.build(this.headerPattern, {
+    let buffer = bitsyntax.build(this.headerPattern, {
         headerNo: headerNo,
         code: cmdCode,
         body: bodyBuff
     });
+    if (log && log.trace) {
+        // todo mask
+        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: buffer, log: context && context.session && context.session.log});
+    }
+    return buffer;
 };
 
 module.exports = PayshieldCodec;
