@@ -65,7 +65,10 @@
         "responseCode": "DB",
         "requestPattern": "tpk:33/string, pvk:pvkLength/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
         "responsePattern": "errorCode:2/string",
-        "warnings": ["02"]
+        "warnings": ["02"],
+        "customResponseError": {
+            "01": "PIN Verification failure"
+        }
     },
     "generateOffsetIbmLmk": {
         "requestCode": "DE",
@@ -167,14 +170,6 @@
         "requestPattern": "sourceModeFlag:2/string, destinationModeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, sourceKeyType:3/string, sourceKey:33/string, sourceKsnDescriptor:sourceKsnDescriptorLength/string, sourceKsn:sourceKsnLength/string, destinationKeyType:3/string, destinationKey:33/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourceIv:sourceIvLength/string, destinationIv:destinationIvLength/string, messageLenHex:4/string, message:messageLen/string",
         "responsePattern": "errorCode:2/string, rest/binary"
     },
-    "verifyOffsetIbmDukpt": {
-        "requestCode": "GO",
-        "responseCode": "GP",
-        "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
-        "responsePattern": "errorCode:2/string",
-        "customResponseError": {
-            "01": "PIN Verification failure"
-        }
     "generateMac": {
         "requestCode": "M6",
         "responseCode": "M7",
@@ -218,15 +213,5 @@
     "printTmkMailerEnd": {
         "responseCode": "TZ",
         "responsePattern": "errorCode:2/string"
-    },
-    "verifyOffsetIbm": {
-        "requestCode": "DA",
-        "responseCode": "DB",
-        "requestPattern": "tpk:33/string, pvk:pvkLength/string, maxPinLen:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
-        "responsePattern": "errorCode:2/string",
-        "warnings": ["02"],
-        "customResponseError": {
-            "01": "PIN Verification failure"
-        }
     }
 }
