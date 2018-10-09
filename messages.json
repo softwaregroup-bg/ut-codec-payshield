@@ -7,13 +7,13 @@
     },
     "generateKey": {
         "requestCode": "A0",
-        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLen/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keyScheme1:keyScheme1Length/string, tr31BlockData:tr31BlockDataLen/string"
+        "responseCode": "A1",
+        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLen/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keyScheme1:keyScheme1Length/string, tr31BlockData:tr31BlockDataLen/string",
+        "responsePattern": "errorCode:2/string, keyA32:33/string, rest/binary"
     },
     "generateKeyTmk": {
         "requestCode": "A0",
-        "responseCode": "A1",
-        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, \";\", zmkTmkFlag:1/string, tmk:33/string, keyScheme1:1/string",
-        "responsePattern": "errorCode:2/string, keyA32:33/string, rest/binary"
+        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, \";\", zmkTmkFlag:1/string, tmk:33/string, keyScheme1:1/string"
     },
     "generateTpk": {
         "requestCode": "HC",
@@ -55,9 +55,21 @@
     "generateArqc3": {
         "requestCode": "KQ",
         "responseCode": "KR",
-        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter:delimiterLength/string, arqc:8/string-binhex, arc:arcLength/string-binhex",
+        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, mksmi:mksmiLength/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter:delimiterLength/string, arqc:8/string-binhex, arc:arcLength/string-binhex, discretionaryDataMac:discretionaryDataMacLength/string-binhex, discretionaryDataBytes:discretionaryDataBytesLength/string, discretionaryData:discretionaryDataLength/string-binhex",
         "responsePattern": "errorCode:2/string, arpc/binary",
-        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex"
+        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex",
+        "customResponseError": {
+            "01": "ARQC/TC/AAC verification failed",
+            "03": "Mode = 3 or 4 but Scheme ID ≠ 0",
+            "04": "Invalid Mode value",
+            "05": "Unrecognized Scheme ID",
+            "06": "Discretionary MAC verification failed",
+            "10": "MK-AC parity error",
+            "11": "MK-SMI parity error",
+            "80": "Transaction Data length error",
+            "81": "Zero length Transaction Data",
+            "82": "Invalid Discretionary MAC Data length"
+        }
     },
     "verifyMac": {
         "requestCode": "M8",
@@ -176,7 +188,6 @@
     },
     "encryptDataBlockECB": {
         "requestCode": "M0",
-        "responseCode": "M1",
         "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string, message:messageLen/string"
     },
     "encryptDataBlock": {
