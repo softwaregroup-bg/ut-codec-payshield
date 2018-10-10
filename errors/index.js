@@ -18,15 +18,16 @@ module.exports = ({defineError, getError, fetchErrors}) => {
         defineError('notimplemented', Payshield, 'Not implemented opcode: {opcode}');
         defineError('unableMatchingPattern', Payshield, 'Unable to match pattern for opcode: {opcode}');
 
-        messagesKeys.forEach(messageKey => {
-            const MsgErr = defineError(messageKey, Payshield, `Error in method: ${messageKey}`);
-            defineError('generic', MsgErr, 'Generic error');
-            errorList.forEach(errorKey => {
-                const message = (messages[messageKey].customResponseError && messages[messageKey].customResponseError[errorKey]) || errorDesc[errorKey];
-                defineError(errorKey, MsgErr, message);
-            });
+        messagesKeys.map((method) => {
+            const MethodError = defineError(method, Payshield, `Error in method: ${method}`);
+            defineError(`${method}.generic`, MethodError, 'Generic Error');
+            const customErrors = messages[method].customResponseError || {empty: true};
+            // generate predefined list error
+            errorList.map((code) => !customErrors[code] && defineError(code, MethodError, errorDesc[code]));
+
+            // generate custom per message error
+            !customErrors.empty && Object.keys(customErrors).map((code) => (defineError(code, MethodError, customErrors[code])));
         });
     }
-
     return fetchErrors('payshield');
 };
