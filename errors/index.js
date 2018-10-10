@@ -21,12 +21,12 @@ module.exports = ({defineError, getError, fetchErrors}) => {
         messagesKeys.map((method) => {
             const MethodError = defineError(method, Payshield, `Error in method: ${method}`);
             defineError(`${method}.generic`, MethodError, 'Generic Error');
-            const customErrors = messages[method].customResponseError;
+            const customErrors = messages[method].customResponseError || {empty: true};
             // generate predefined list error
-            errorList.map((code) => !customErrors && !customErrors[code] && defineError(code, MethodError, errorDesc[code]));
+            errorList.map((code) => !customErrors[code] && defineError(code, MethodError, errorDesc[code]));
 
             // generate custom per message error
-            customErrors && Object.keys(customErrors).map((code) => (defineError(code, MethodError, customErrors[code])));
+            !customErrors.empty && Object.keys(customErrors).map((code) => (defineError(code, MethodError, customErrors[code])));
         });
     }
     return fetchErrors('payshield');
