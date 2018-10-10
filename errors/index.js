@@ -20,7 +20,7 @@ module.exports = ({defineError, getError, fetchErrors}) => {
 
         messagesKeys.map((method) => {
             const MethodError = defineError(method, Payshield, `Error in method: ${method}`);
-            defineError(`${method}.generic`, MethodError, 'Generic Error');
+            defineError('generic', MethodError, 'Generic Error');
             const customErrors = messages[method].customResponseError || {empty: true};
             // generate predefined list error
             errorList.map((code) => !customErrors[code] && defineError(code, MethodError, errorDesc[code]));
