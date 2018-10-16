@@ -48,6 +48,12 @@
         "requestPattern": "sourceTpk:33/string, destinationZpk:33/string, \"12\", sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, account:12/string",
         "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string"
     },
+    "translatePinZpkZpk": {
+        "requestCode": "CC",
+        "responseCode": "CD",
+        "requestPattern": "sourceZpk:33/string, destinationZpk:33/string, \"12\", sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, account:12/string",
+        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string"
+    },
     "generateCvv": {
         "requestCode": "CW",
         "responseCode": "CX",
