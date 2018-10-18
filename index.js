@@ -27,7 +27,7 @@ function maskLogRecord(buffer, data, pattern, maskedKeys) {
             for (var index = value.startIndex; index <= value.endIndex; index++) {
                 returnBuffer[index] = asterisk;
             }
-        })
+        });
     return returnBuffer;
 }
 
