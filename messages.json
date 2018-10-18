@@ -2,26 +2,26 @@
     "generateKey": {
         "requestCode": "A0",
         "responseCode": "A1",
-        "requestPattern": "mode:1/string, keyType:3/string, keyScheme:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLen/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keyScheme1:keyScheme1Length/string, tr31BlockData:tr31BlockDataLen/string",
-        "responsePattern": "errorCode:2/string, keyA32:33/string, rest/binary"
+        "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLen/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keySchemeZmkTmk:keySchemeZmkTmkLength/string, tr31BlockData:tr31BlockDataLen/string",
+        "responsePattern": "errorCode:2/string, key:33/string, rest/binary"
     },
     "formKeyFromComponents": {
         "requestCode": "A4",
         "responseCode": "A5",
         "requestPattern": "numberOfComponents:1/string, keyType:3/string, keySchemeLmk:1/string, keyComponents:keyComponentsLength/string",
-        "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string"
+        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string"
     },
     "importKey": {
         "requestCode": "A6",
         "responseCode": "A7",
-        "requestPattern": "keyType:3/string, zmk:33/string, keyA32:33/string, keyScheme:1/string",
-        "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string",
+        "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string",
+        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
         "warnings": ["01"]
     },
     "exportKey": {
         "requestCode": "A8",
         "responseCode": "A9",
-        "requestPattern": "keyType:3/string, zmk:33/string, keyA32:33/string, keyScheme:1/string",
+        "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string",
         "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string"
     },
     "echo": {
@@ -33,7 +33,7 @@
     "generateOffsetIbm": {
         "requestCode": "BK",
         "responseCode": "BL",
-        "requestPattern": "keyType:3/string, keyA32:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
+        "requestPattern": "keyType:3/string, pinKey:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string",
         "responsePattern": "errorCode:2/string, offset:12/string"
     },
     "generateKeyCheckValue": {
@@ -45,13 +45,13 @@
     "translatePinTpkZpk": {
         "requestCode": "CA",
         "responseCode": "CB",
-        "requestPattern": "sourceTpk:33/string, destinationZpk:33/string, \"12\", sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, account:12/string",
+        "requestPattern": "sourceTpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
         "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string"
     },
     "translatePinZpkZpk": {
         "requestCode": "CC",
         "responseCode": "CD",
-        "requestPattern": "sourceZpk:33/string, destinationZpk:33/string, \"12\", sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, account:12/string",
+        "requestPattern": "sourceZpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
         "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string"
     },
     "generateCvv": {
@@ -79,13 +79,13 @@
     "generateOffsetIbmLmk": {
         "requestCode": "DE",
         "responseCode": "DF",
-        "requestPattern": "pvk:pvkLength/string, pin:cryptedPinLength/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
+        "requestPattern": "pvk:pvkLength/string, pin:encryptedPinLength/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
         "responsePattern": "errorCode:2/string, offset:12/string"
     },
     "getPvv": {
         "requestCode": "DG",
         "responseCode": "DH",
-        "requestPattern": "pvk:pvkLength/string, pin:cryptedPinLength/string, account:12/string, pvki:1/string",
+        "requestPattern": "pvk:pvkLength/string, pin:encryptedPinLength/string, account:12/string, pvki:1/string",
         "responsePattern": "errorCode:2/string, pvv:4/string"
     },
     "derivePinIbm": {
@@ -103,7 +103,7 @@
     "hashDataBlock": {
         "requestCode": "GM",
         "responseCode": "GN",
-        "requestPattern": "hashId:2/string, dataLength:5/string, messageData:messageDataLength/string-binhex",
+        "requestPattern": "hashId:2/string, dataLength:5/string-left-zero, messageData:messageDataLength/string-binhex",
         "responsePattern": "errorCode:2/string, hash/binary"
     },
     "verifyOffsetIbmDukpt": {
@@ -167,24 +167,24 @@
     },
     "encryptDataBlockECB": {
         "requestCode": "M0",
-        "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string, message:messageLen/string"
+        "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string-left-zero, message:messageLen/string"
     },
     "encryptDataBlock": {
         "requestCode": "M0",
         "responseCode": "M1",
-        "requestPattern": "modeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string, message:messageLen/string",
+        "requestPattern": "modeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
         "responsePattern": "errorCode:2/string, rest/binary"
     },
     "decryptDataBlock": {
         "requestCode": "M2",
         "responseCode": "M3",
-        "requestPattern": "modeFlag:2/string, bpsRadixFlag:bpsRadixFlagLength/string, bpsRadixValue:bpsRadixValueLength/string, bpsTweak:bpsTweakLength/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string, message:messageLen/string",
+        "requestPattern": "modeFlag:2/string, bpsRadixFlag:bpsRadixFlagLength/string, bpsRadixValue:bpsRadixValueLength/string, bpsTweak:bpsTweakLength/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
         "responsePattern": "errorCode:2/string, rest/binary"
     },
     "translateDataBlock": {
         "requestCode": "M4",
         "responseCode": "M5",
-        "requestPattern": "sourceModeFlag:2/string, destinationModeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, sourceKeyType:3/string, sourceKey:33/string, sourceKsnDescriptor:sourceKsnDescriptorLength/string, sourceKsn:sourceKsnLength/string, destinationKeyType:3/string, destinationKey:33/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourceIv:sourceIvLength/string, destinationIv:destinationIvLength/string, messageLenHex:4/string, message:messageLen/string",
+        "requestPattern": "sourceModeFlag:2/string, destinationModeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, sourceKeyType:3/string, sourceKey:33/string, sourceKsnDescriptor:sourceKsnDescriptorLength/string, sourceKsn:sourceKsnLength/string, destinationKeyType:3/string, destinationKey:33/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourceIv:sourceIvLength/string, destinationIv:destinationIvLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
         "responsePattern": "errorCode:2/string, rest/binary"
     },
     "generateMac": {
@@ -214,7 +214,7 @@
     "printPin": {
         "requestCode": "PE",
         "responseCode": "PF",
-        "requestPattern": "documentType:1/string, account:12/string, pin:cryptedPinLength/string, printFields:printFieldsLength/string",
+        "requestPattern": "documentType:1/string, account:12/string, pin:encryptedPinLength/string, printFields:printFieldsLength/string",
         "responsePattern": "errorCode:2/string, checkValue/binary"
     },
     "printPinEnd": {
