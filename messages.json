@@ -230,5 +230,11 @@
     "printTmkMailerEnd": {
         "responseCode": "TZ",
         "responsePattern": "errorCode:2/string"
+    },
+    "test": {
+        "requestCode": "TT",
+        "responseCode": "TU",
+        "requestPattern": "value:8/string-z, st:4/string",
+        "responsePattern": "errorCode:2/string"
     }
 }

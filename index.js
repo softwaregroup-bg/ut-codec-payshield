@@ -3,32 +3,58 @@ var merge = require('lodash.merge');
 var defaultFormat = require('./messages');
 
 function maskLogRecord(buffer, data, pattern, maskedKeys) {
-    let endIndex = 0;
-    let size;
-    let asterisk = '*'.charCodeAt(0);
-    let returnBuffer = Buffer.from(buffer);
+    let asterisk = '*'.charCodeAt(0).toString(16);
+    let maskedKeysProps = {};
+    let maskedKeysFiltered = [];
     pattern
-        .map((v, i) => {
-            let currentElement = {
-                name: v.name
-            };
-            if (isNaN(v.size)) {
-                size = parseInt(data[v.size]);
-            } else {
-                size = v.size;
-            }
-            currentElement.startIndex = endIndex ? endIndex + 1 : 0;
-            currentElement.endIndex = endIndex ? endIndex + size : size - 1;
-            endIndex = currentElement.endIndex;
-            return currentElement;
-        })
-        .filter((toFilter) => (maskedKeys.includes(toFilter.name)))
-        .forEach((value) => {
-            for (var index = value.startIndex; index <= value.endIndex; index++) {
-                returnBuffer[index] = asterisk;
+        .filter((value) => (maskedKeys.includes(value.name)))
+        .map((filteredPattern) => {
+            maskedKeysFiltered.push(filteredPattern.name);
+            switch (filteredPattern.type) {
+                case 'string':
+                    if (filteredPattern.binhex) {
+                        maskedKeysProps[filteredPattern.name] = 'binhex';
+                        return filteredPattern;
+                    } else if (filteredPattern.hexbin) {
+                        maskedKeysProps[filteredPattern.name] = 'hexbin';
+                        return filteredPattern;
+                    } else if (filteredPattern.binary) {
+                        maskedKeysProps[filteredPattern.name] = 'binary';
+                        return filteredPattern;
+                    } else if (filteredPattern.z) {
+                        maskedKeysProps[filteredPattern.name] = 'z';
+                        return filteredPattern;
+                    } else {
+                        maskedKeysProps[filteredPattern.name] = 'string';
+                        return filteredPattern;
+                    }
+                default:
+                    return filteredPattern;
             }
         });
-    return returnBuffer;
+    return maskedKeysFiltered
+        .map((k) => {
+            switch (maskedKeysProps[k]) {
+                case 'string':
+                    return (data[k] && {key: k, value: Buffer.from(data[k]).toString('hex'), replaceValue: asterisk.repeat(data[k].length)}) || false;
+                case 'binhex':
+                    return (data[k] && {key: k, value: data[k], replaceValue: asterisk.repeat(data[k].length * 2)}) || false;
+                case 'hexbin':
+                    return (data[k] && {key: k, value: Buffer.from(Buffer.from(data[k]).toString('hex')).toString('hex'), replaceValue: asterisk.repeat(data[k].length * 2)}) || false;
+                case 'binary':
+                    return false;
+                case 'z':
+                    return false;
+                default:
+                    return false;
+            }
+        })
+        .filter((f) => f)
+        .reduce((buf, maskThis) => (
+            buf.split(maskThis.value).join(maskThis.replaceValue)
+        ),
+        buffer.toString('hex'))
+        .toUpperCase();
 }
 
 function PayshieldCodec(config) {
@@ -177,7 +203,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
     });
     if (log && log.trace) {
         // todo mask
-        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, data, [].concat(this.headerPattern[0], this.headerPattern[1], this.commands[commandName].pattern), this.maskedKeys), log: context && context.session && context.session.log});
+        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, data, this.commands[commandName].pattern, this.maskedKeys), log: context && context.session && context.session.log});
     }
     return buffer;
 };
