@@ -5,11 +5,9 @@ var defaultFormat = require('./messages');
 function maskLogRecord(buffer, data, pattern, maskedKeys) {
     let asterisk = '*'.charCodeAt(0).toString(16);
     let maskedKeysProps = {};
-    let maskedKeysFiltered = [];
     pattern
         .filter((value) => (maskedKeys.includes(value.name)))
         .map((filteredPattern) => {
-            maskedKeysFiltered.push(filteredPattern.name);
             switch (filteredPattern.type) {
                 case 'string':
                     if (filteredPattern.binhex) {
@@ -32,7 +30,8 @@ function maskLogRecord(buffer, data, pattern, maskedKeys) {
                     return filteredPattern;
             }
         });
-    return maskedKeysFiltered
+    return maskedKeys
+        .filter((key) => (pattern.find((element) => (element.name === key))))
         .map((k) => {
             switch (maskedKeysProps[k]) {
                 case 'string':
@@ -49,7 +48,7 @@ function maskLogRecord(buffer, data, pattern, maskedKeys) {
                     return false;
             }
         })
-        .filter((f) => f)
+        .filter(f => f)
         .reduce((buf, maskThis) => (
             buf.split(maskThis.value).join(maskThis.replaceValue)
         ),
