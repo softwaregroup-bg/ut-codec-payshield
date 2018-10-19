@@ -4,46 +4,23 @@ var defaultFormat = require('./messages');
 
 function maskLogRecord(buffer, data, pattern, maskedKeys) {
     let asterisk = '*'.charCodeAt(0).toString(16);
-    let maskedKeysProps = {};
-    pattern
-        .filter((value) => (maskedKeys.includes(value.name)))
-        .map((filteredPattern) => {
-            switch (filteredPattern.type) {
-                case 'string':
-                    if (filteredPattern.binhex) {
-                        maskedKeysProps[filteredPattern.name] = 'binhex';
-                        return filteredPattern;
-                    } else if (filteredPattern.hexbin) {
-                        maskedKeysProps[filteredPattern.name] = 'hexbin';
-                        return filteredPattern;
-                    } else if (filteredPattern.binary) {
-                        maskedKeysProps[filteredPattern.name] = 'binary';
-                        return filteredPattern;
-                    } else if (filteredPattern.z) {
-                        maskedKeysProps[filteredPattern.name] = 'z';
-                        return filteredPattern;
-                    } else {
-                        maskedKeysProps[filteredPattern.name] = 'string';
-                        return filteredPattern;
-                    }
-                default:
-                    return filteredPattern;
-            }
-        });
     return maskedKeys
         .filter((key) => (pattern.find((element) => (element.name === key))))
         .map((k) => {
-            switch (maskedKeysProps[k]) {
+            let patternElement = pattern.find((v) => (k === v.name));
+            switch (patternElement.type) {
                 case 'string':
-                    return (data[k] && {key: k, value: Buffer.from(data[k]).toString('hex'), replaceValue: asterisk.repeat(data[k].length)}) || false;
-                case 'binhex':
-                    return (data[k] && {key: k, value: data[k], replaceValue: asterisk.repeat(data[k].length * 2)}) || false;
-                case 'hexbin':
-                    return (data[k] && {key: k, value: Buffer.from(Buffer.from(data[k]).toString('hex')).toString('hex'), replaceValue: asterisk.repeat(data[k].length * 2)}) || false;
-                case 'binary':
-                    return false;
-                case 'z':
-                    return false;
+                    if (patternElement.binhex) {
+                        return (data[k] && {key: k, value: data[k], replaceValue: asterisk.repeat(data[k].length * 2)}) || false;
+                    } else if (patternElement.hexbin) {
+                        return (data[k] && {key: k, value: Buffer.from(Buffer.from(data[k]).toString('hex')).toString('hex'), replaceValue: asterisk.repeat(data[k].length * 2)}) || false;
+                    } else if (patternElement.binary) {
+                        return false;
+                    } else if (patternElement.z) {
+                        return false;
+                    } else {
+                        return (data[k] && {key: k, value: Buffer.from(data[k]).toString('hex'), replaceValue: asterisk.repeat(data[k].length)}) || false;
+                    }
                 default:
                     return false;
             }
@@ -201,7 +178,6 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
         body: bodyBuff
     });
     if (log && log.trace) {
-        // todo mask
         log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, data, this.commands[commandName].pattern, this.maskedKeys), log: context && context.session && context.session.log});
     }
     return buffer;

@@ -234,7 +234,7 @@
     "test": {
         "requestCode": "TT",
         "responseCode": "TU",
-        "requestPattern": "value:8/string-z, st:4/string",
+        "requestPattern": "value:4/string-binhex, st:4/string",
         "responsePattern": "errorCode:2/string"
     }
 }
