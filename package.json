@@ -3,14 +3,14 @@
   "version": "7.0.0-rc-dss.2",
   "main": "./index.js",
   "dependencies": {
-    "lodash.merge": "4.6.0",
+    "lodash.merge": "4.6.1",
     "ut-bitsyntax": "^6.0.15"
   },
   "devDependencies": {
     "tap": "^10.7.3",
     "ut-error": "^5.6.2",
 
-    "ut-tools": "^5.32.5"
+    "ut-tools": "^6.2.3"
   },
   "scripts": {
     "lint": "ut-lint .",
