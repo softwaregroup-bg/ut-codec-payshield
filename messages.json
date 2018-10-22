@@ -3,7 +3,10 @@
         "requestCode": "A0",
         "responseCode": "A1",
         "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLen/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keySchemeZmkTmk:keySchemeZmkTmkLength/string, tr31BlockData:tr31BlockDataLen/string",
-        "responsePattern": "errorCode:2/string, key:33/string, rest/binary"
+        "responsePattern": "errorCode:2/string, key:33/string, rest/binary",
+        "customResponseError": {
+            "10": "ZMK or TMK Parity error"
+        }
     },
     "formKeyFromComponents": {
         "requestCode": "A4",
@@ -16,13 +19,20 @@
         "responseCode": "A7",
         "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string",
         "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
-        "warnings": ["01"]
+        "warnings": ["01"],
+        "customResponseError": {
+            "10": "ZMK Parity error"
+        }
     },
     "exportKey": {
         "requestCode": "A8",
         "responseCode": "A9",
         "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string",
-        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string"
+        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
+        "customResponseError": {
+            "10": "ZMK or TMK Parity error",
+            "11": "Key parity error"
+        }
     },
     "echo": {
         "requestCode": "B2",
