@@ -173,7 +173,18 @@
         "requestCode": "M0",
         "responseCode": "M1",
         "requestPattern": "modeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "02": "Invalid Mode Flag field",
+            "03": "Invalid Input Format Flag field",
+            "04": "Invalid Output Format Flag field",
+            "05": "Invalid Key Type field",
+            "06": "Invalid Message Length field",
+            "10": "Encryption Key Parity Error",
+            "35": "Illegal Message Format",
+            "67": "Command not licensed",
+            "68": "Command disabled"
+        }
     },
     "decryptDataBlock": {
         "requestCode": "M2",
