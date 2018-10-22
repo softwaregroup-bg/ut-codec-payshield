@@ -22,7 +22,7 @@
         "requestCode": "A8",
         "responseCode": "A9",
         "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string",
-        "responsePattern": "errorCode:2/string, keyA32:33/string, keyCheckValue:6/string"
+        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string"
     },
     "echo": {
         "requestCode": "B2",
@@ -119,7 +119,7 @@
         "requestCode": "HA",
         "responseCode": "HB",
         "requestPattern": "tmk:33/string, \";\", keyScheme:1/string, keyScheme1:1/string, \"0\"",
-        "responsePattern": "errorCode:2/string, tpk:33/string, keyA32:33/string"
+        "responsePattern": "errorCode:2/string, tpk:33/string, key:33/string"
     },
     "generateRandomPin": {
         "requestCode": "JA",
