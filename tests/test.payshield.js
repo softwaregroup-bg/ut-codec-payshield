@@ -9,7 +9,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 msgSize: '4',
                 macMessage: 'ping'
             },
-            buf: new Buffer('000234B20004ping')
+            buf: Buffer.from('000234B20004ping')
         },
 
         generateKey: {
@@ -22,12 +22,12 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 keyType: '003',
                 keyScheme: 'U'
             },
-            buf: new Buffer('000234A00003U')
+            buf: Buffer.from('000234A00003U')
         },
 
         generateKeyTmk: {
             data: {},
-            buf: new Buffer('')
+            buf: Buffer.from('')
         },
 
         generateTpk: {
@@ -40,7 +40,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 keyScheme: 'X',
                 keyScheme1: '0'
             },
-            buf: new Buffer('000234HCUB15E645AFC1A3F4444A48D58EE983BD3;X00')
+            buf: Buffer.from('000234HCUB15E645AFC1A3F4444A48D58EE983BD3;X00')
         },
 
         generateTak: {
@@ -53,7 +53,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 keyScheme: 'U',
                 keyScheme1: '0'
             },
-            buf: new Buffer('000234HAUB15E645AFC1A3F4444A48D58EE983BD3;U00')
+            buf: Buffer.from('000234HAUB15E645AFC1A3F4444A48D58EE983BD3;U00')
         },
 
         generateMac: {
@@ -71,7 +71,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 msgSize: 8,
                 macMessage: 'testtesttest'
             },
-            buf: new Buffer('000234M602030003U78C6FD3889386436C41F3874A5DE1F480008testtest')
+            buf: Buffer.from('000234M602030003U78C6FD3889386436C41F3874A5DE1F480008testtest')
         },
 
         verifyMac: {
@@ -90,7 +90,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 macMessage: 'testtest',
                 mac: '341C677E'
             },
-            buf: new Buffer('000234M802030003U78C6FD3889386436C41F3874A5DE1F480008testtest341C677E')
+            buf: Buffer.from('000234M802030003U78C6FD3889386436C41F3874A5DE1F480008testtest341C677E')
         },
 
         formKey: {
@@ -105,7 +105,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 keyComponent1: 'U78C6FD3889386436C41F3874A5DE1F48',
                 keyComponent2: 'U78C6FD3889386436C41F3874A5DE1F48'
             },
-            buf: new Buffer('000234A42003UU78C6FD3889386436C41F3874A5DE1F48U78C6FD3889386436C41F3874A5DE1F48')
+            buf: Buffer.from('000234A42003UU78C6FD3889386436C41F3874A5DE1F48U78C6FD3889386436C41F3874A5DE1F48')
         },
 
         generateKeycheckvalue: {
@@ -118,7 +118,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 keyLengthFlag: '1',
                 keyA32: 'X614BCB4CE30FE4FF13C9CFDD180AA182'
             },
-            buf: new Buffer('000234BU021X614BCB4CE30FE4FF13C9CFDD180AA182')
+            buf: Buffer.from('000234BU021X614BCB4CE30FE4FF13C9CFDD180AA182')
         },
 
         derivePinIbm: {
@@ -134,7 +134,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 decimalisationTable: '1234567812345678',
                 pinValidationData: '23456N543210'
             },
-            buf: new Buffer('000234EEX614BCB4CE30FE4FF13C9CFDD180AA1820000FFFFFFFF04123456789012123456781234567823456N543210')
+            buf: Buffer.from('000234EEX614BCB4CE30FE4FF13C9CFDD180AA1820000FFFFFFFF04123456789012123456781234567823456N543210')
         },
 
         generatePin: {
@@ -146,7 +146,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 account: '123456789012',
                 checkLength: 4
             },
-            buf: new Buffer('000234JA12345678901204')
+            buf: Buffer.from('000234JA12345678901204')
         },
 
         generateOffsetIbm: {
@@ -165,7 +165,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 decimalisationTable: '1234567812345678',
                 pinValidationData: '23456N543210'
             },
-            buf: new Buffer(
+            buf: Buffer.from(
                 '000234BK002X614BCB4CE30FE4FF13C9CFDD180AA182X614BCB4CE30FE4FF13C9CFDD180AA1820592789FFFEDCBA90104123456789012123456781234567823456N543210'
             )
         },
@@ -187,7 +187,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 pinValidationData: '23456N543210',
                 offset: 'FFFF34523421'
             },
-            buf: new Buffer(
+            buf: Buffer.from(
                 '000234DAX725D74BD3FDC0AA910EB213487423466X614BCB4CE30FE4FF13C9CFDD180AA182120592789FFFEDCBA90104123456789012123456781234567823456N543210FFFF34523421'
             )
         },
@@ -203,7 +203,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 keyA32: 'U482C4E722BB0CF1845E1E5BD16310119',
                 keyScheme: 'U'
             },
-            buf: new Buffer('000234A6001U71979DEB8587E2734F1E99D5DCAEF9ACU482C4E722BB0CF1845E1E5BD16310119U')
+            buf: Buffer.from('000234A6001U71979DEB8587E2734F1E99D5DCAEF9ACU482C4E722BB0CF1845E1E5BD16310119U')
         },
 
         translateTpkZpk: {
@@ -219,7 +219,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 destinationPinBlockFormat: '01',
                 account: '550000025321'
             },
-            buf: new Buffer('000234CAU8463435FC4B4DAA0C49025272C29B12CU1EF828AA8F6B80EB83E19FBC373F3A85126428EB94035AF53B0101550000025321')
+            buf: Buffer.from('000234CAU8463435FC4B4DAA0C49025272C29B12CU1EF828AA8F6B80EB83E19FBC373F3A85126428EB94035AF53B0101550000025321')
         },
 
         printPin: {
@@ -233,7 +233,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 pin: '0592789FFFEDCBA9',
                 printFields: '1'
             },
-            buf: new Buffer('000234PEA1234567890120592789FFFEDCBA91')
+            buf: Buffer.from('000234PEA1234567890120592789FFFEDCBA91')
         },
 
         printFormat: {
@@ -244,7 +244,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 },
                 printFields: '1'
             },
-            buf: new Buffer('000234PA1')
+            buf: Buffer.from('000234PA1')
         },
 
         translateTpkLmk: {
@@ -258,7 +258,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 sourcePinBlockFormat: '01',
                 account: '550000025321'
             },
-            buf: new Buffer('000234JCU8463435FC4B4DAA0C49025272C29B12C6428EB94035AF53B01550000025321')
+            buf: Buffer.from('000234JCU8463435FC4B4DAA0C49025272C29B12C6428EB94035AF53B01550000025321')
         },
 
         translateZpkLmk: {
@@ -272,7 +272,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 sourcePinBlockFormat: '01',
                 account: '550000025321'
             },
-            buf: new Buffer('000234JEU1EF828AA8F6B80EB83E19FBC373F3A8591DDDA0A7C12CFAA01550000025321')
+            buf: Buffer.from('000234JEU1EF828AA8F6B80EB83E19FBC373F3A8591DDDA0A7C12CFAA01550000025321')
         },
 
         generateOffsetIbmLmk: {
@@ -288,7 +288,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                 decimalisationTable: '1234567812345678',
                 pinValidationData: '23456N543210'
             },
-            buf: new Buffer('000234DEX614BCB4CE30FE4FF13C9CFDD180AA1820769204123456789012123456781234567823456N543210')
+            buf: Buffer.from('000234DEX614BCB4CE30FE4FF13C9CFDD180AA1820769204123456789012123456781234567823456N543210')
         }
 
     };
@@ -305,7 +305,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'echoResp'
                 }
             },
-            buf: new Buffer('000234B300ping')
+            buf: Buffer.from('000234B300ping')
         },
 
         generateKeyResp: {
@@ -319,7 +319,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'generateKeyResp'
                 }
             },
-            buf: new Buffer('000234A100UD1D3196BE8CE804392F764CDC2ABD75EF232C4')
+            buf: Buffer.from('000234A100UD1D3196BE8CE804392F764CDC2ABD75EF232C4')
         },
 
         generateTpkResp: {
@@ -333,7 +333,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'generateTpkResp'
                 }
             },
-            buf: new Buffer('000234HD00X6F6FFAD40F6B6B72A5764A5DE9AB7FB53E24796511C304FC99935DD4A24C9F1F')
+            buf: Buffer.from('000234HD00X6F6FFAD40F6B6B72A5764A5DE9AB7FB53E24796511C304FC99935DD4A24C9F1F')
         },
 
         generateTakResp: {
@@ -347,7 +347,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'generateTakResp'
                 }
             },
-            buf: new Buffer('000234HB00UFC66FDA4146813DDD555649C8ED2C6DE86CD971D58CB0CF630C6796F56EBEDA4')
+            buf: Buffer.from('000234HB00UFC66FDA4146813DDD555649C8ED2C6DE86CD971D58CB0CF630C6796F56EBEDA4')
         },
 
         generateMacResp: {
@@ -360,7 +360,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'generateMacResp'
                 }
             },
-            buf: new Buffer('000234M7000008341C677E')
+            buf: Buffer.from('000234M7000008341C677E')
         },
 
         verifyMacResp: {
@@ -372,7 +372,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'verifyMacResp'
                 }
             },
-            buf: new Buffer('000234M900')
+            buf: Buffer.from('000234M900')
         },
 
         formKeyResp: {
@@ -386,7 +386,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'formKeyResp'
                 }
             },
-            buf: new Buffer('000234A500U5D3BF8844DC17252864ABBF21BF42999000000')
+            buf: Buffer.from('000234A500U5D3BF8844DC17252864ABBF21BF42999000000')
         },
 
         generateKeycheckvalueResp: {
@@ -399,7 +399,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'generateKeycheckvalueResp'
                 }
             },
-            buf: new Buffer('000234BV001519597E659476B0')
+            buf: Buffer.from('000234BV001519597E659476B0')
         },
 
         derivePinIbmResp: {
@@ -412,7 +412,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'derivePinIbmResp'
                 }
             },
-            buf: new Buffer('000234EF0000034')
+            buf: Buffer.from('000234EF0000034')
         },
 
         generatePinResp: {
@@ -425,25 +425,25 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'generatePinResp'
                 }
             },
-            buf: new Buffer('000234JB0003218')
+            buf: Buffer.from('000234JB0003218')
         },
 
         generateOffsetIbmResp: {
             data: {},
-            buf: new Buffer('')
+            buf: Buffer.from('')
         },
 
         verifyTermPinIbmResp: {
             data: {
                 errorCode: '10',
-                rest: new Buffer(0),
+                rest: Buffer.from(0),
                 $$: {
                     trace: '000234',
                     mtid: 'response',
                     opcode: 'verifyTermPinIbmResp'
                 }
             },
-            buf: new Buffer('000234DB10')
+            buf: Buffer.from('000234DB10')
         },
 
         importKeyResp: {
@@ -457,7 +457,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'importKeyResp'
                 }
             },
-            buf: new Buffer('000234A700U0E07CDC0161A0DE3B5AA44DF227EC9DEABDEBC')
+            buf: Buffer.from('000234A700U0E07CDC0161A0DE3B5AA44DF227EC9DEABDEBC')
         },
 
         translateTpkZpkResp: {
@@ -472,7 +472,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'translateTpkZpkResp'
                 }
             },
-            buf: new Buffer('000234CB000491DDDA0A7C12CFAA01')
+            buf: Buffer.from('000234CB000491DDDA0A7C12CFAA01')
         },
 
         printPinStart: {
@@ -484,7 +484,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'printPinStart'
                 }
             },
-            buf: new Buffer('000234PF00')
+            buf: Buffer.from('000234PF00')
         },
 
         printPinResp: {
@@ -496,7 +496,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'printPinResp'
                 }
             },
-            buf: new Buffer('000234PZ00')
+            buf: Buffer.from('000234PZ00')
         },
 
         printFormatResp: {
@@ -508,7 +508,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'printFormatResp'
                 }
             },
-            buf: new Buffer('000234PB00')
+            buf: Buffer.from('000234PB00')
         },
 
         translateTpkLmkResp: {
@@ -521,7 +521,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'translateTpkLmkResp'
                 }
             },
-            buf: new Buffer('000234JD0001234')
+            buf: Buffer.from('000234JD0001234')
         },
 
         translateZpkLmkResp: {
@@ -534,7 +534,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'translateZpkLmkResp'
                 }
             },
-            buf: new Buffer('000234JF0001234')
+            buf: Buffer.from('000234JF0001234')
         },
 
         generateOffsetIbmLmkResp: {
@@ -547,7 +547,7 @@ function test(bdd, PayshieldParser, assert, Validator) {
                     opcode: 'generateOffsetIbmLmkResp'
                 }
             },
-            buf: new Buffer('000234DF007668FFFFFFFF')
+            buf: Buffer.from('000234DF007668FFFFFFFF')
         }
     };
 
@@ -634,14 +634,14 @@ function test(bdd, PayshieldParser, assert, Validator) {
             bdd.it('#Buffer with error code', function() {
                 var data = {
                     errorCode: '10',
-                    rest: new Buffer(0),
+                    rest: Buffer.from(0),
                     $$: {
                         trace: '000234',
                         mtid: 'response',
                         opcode: 'importKeyResp'
                     }
                 };
-                var actualData = parser.decode(new Buffer('000234A710'));
+                var actualData = parser.decode(Buffer.from('000234A710'));
                 assert.deepEqual(actualData, data, 'invalid decoded object');
             });
         });

@@ -2,11 +2,43 @@ var bitsyntax = require('ut-bitsyntax');
 var merge = require('lodash.merge');
 var defaultFormat = require('./messages');
 
+function maskLogRecord(buffer, data, pattern, maskedKeys) {
+    let asterisk = '*'.charCodeAt(0).toString(16);
+    return maskedKeys
+        .filter((key) => (pattern.find((element) => (element.name === key))))
+        .map((k) => {
+            let patternElement = pattern.find((v) => (k === v.name));
+            switch (patternElement.type) {
+                case 'string':
+                    if (patternElement.binhex) {
+                        return (data[k] && {key: k, value: data[k], replaceValue: asterisk.repeat(data[k].length * 2)}) || false;
+                    } else if (patternElement.hexbin) {
+                        return (data[k] && {key: k, value: Buffer.from(Buffer.from(data[k]).toString('hex')).toString('hex'), replaceValue: asterisk.repeat(data[k].length * 2)}) || false;
+                    } else if (patternElement.binary) {
+                        return false;
+                    } else if (patternElement.z) {
+                        return false;
+                    } else {
+                        return (data[k] && {key: k, value: Buffer.from(data[k]).toString('hex'), replaceValue: asterisk.repeat(data[k].length)}) || false;
+                    }
+                default:
+                    return false;
+            }
+        })
+        .filter(f => f)
+        .reduce((buf, maskThis) => (
+            buf.split(maskThis.value).join(maskThis.replaceValue)
+        ),
+        buffer.toString('hex'))
+        .toUpperCase();
+}
+
 function PayshieldCodec(config) {
     this.commands = {};
     this.headerPattern = null;
     this.commandNames = {};
     this.errors = require('./errors')(config);
+    this.maskedKeys = null;
     this.init(config);
 }
 
@@ -14,6 +46,7 @@ PayshieldCodec.prototype.init = function(config) {
     this.headerPattern = bitsyntax.parse('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
     this.headerMatcher = bitsyntax.matcher('headerNo:' + config.headerFormat + ', code:2/string, body/binary');
     this.errorMatcher = bitsyntax.matcher('errorCode:2/string, rest/binary');
+    this.maskedKeys = config.maskedKeys || [];
 
     var commandsObj = merge({}, defaultFormat, config.messageFormat);
 
@@ -67,7 +100,7 @@ PayshieldCodec.prototype.init = function(config) {
 PayshieldCodec.prototype.decode = function(buff, $meta, context, log) {
     if (log && log.trace) {
         // todo mask
-        log.trace({$meta: {mtid: 'frame', method: 'iso8583.decode'}, message: buff, log: context && context.session && context.session.log});
+        log.trace({$meta: {mtid: 'frame', method: 'payshield.decode'}, message: buff, log: context && context.session && context.session.log});
     }
     var headObj = this.headerMatcher(buff);
     if (!headObj) {
@@ -145,8 +178,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
         body: bodyBuff
     });
     if (log && log.trace) {
-        // todo mask
-        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: buffer, log: context && context.session && context.session.log});
+        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, data, this.commands[commandName].pattern, this.maskedKeys), log: context && context.session && context.session.log});
     }
     return buffer;
 };
