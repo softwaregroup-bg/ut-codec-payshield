@@ -9,7 +9,6 @@
   "devDependencies": {
     "tap": "^10.7.3",
     "ut-error": "^5.6.2",
-
     "ut-tools": "^6.2.3"
   },
   "scripts": {
