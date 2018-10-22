@@ -1,6 +1,4 @@
-const tap = require('tap');
-
-module.exports = (lib) => {
+module.exports = (tap, lib) => {
     const method = 'generateKey';
     const inst = lib.mainLib.payshield;
     const testData = lib.config.test[method];
@@ -18,5 +16,5 @@ module.exports = (lib) => {
         t.same(inst.encode(testData[1].request, $meta, context).toString('hex').toUpperCase(), testResults[1].response, 'generateKey under ZMK');
 
         t.end();
-    })
-}
+    });
+};

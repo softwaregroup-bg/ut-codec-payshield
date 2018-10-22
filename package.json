@@ -7,6 +7,9 @@
     "ut-bitsyntax": "^6.0.15"
   },
   "devDependencies": {
+    "tap": "^10.7.3",
+    "ut-error": "^5.6.2",
+
     "ut-tools": "^5.32.5"
   },
   "scripts": {
@@ -14,7 +17,7 @@
     "release": "ut-release",
     "changelog": "ut-changelog",
     "check": "ut-check",
-    "cover": "ut-cover",
+    "cover": "ut-cover-parallel",
     "lint-js": "ut-lint-js .",
     "postpublish": "ut-postpublish",
     "postversion": "ut-postversion",
@@ -24,7 +27,7 @@
     "pretest": "ut-pretest",
     "precover": "ut-precover",
     "preversion": "ut-preversion",
-    "test": "ut-test",
+    "test": "ut-test-parallel",
     "version": "ut-version",
     "jenkins": "ut-jenkins",
     "gitlab": "ut-gitlab"
