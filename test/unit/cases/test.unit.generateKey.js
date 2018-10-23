@@ -3,7 +3,7 @@ const config = require('../config/test');
 const {get, fetch, define} = require('ut-unittest/errorApi')();
 const errorApi = { getError: get, fetchErrors: fetch, defineError: define };
 
-const Payshield = require('../../index');
+const Payshield = require('../../../index');
 const payshield = new Payshield(Object.assign({}, config, errorApi));
 
 const method = 'generateKey';
