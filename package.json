@@ -8,8 +8,8 @@
   },
   "devDependencies": {
     "tap": "^10.7.3",
-    "ut-error": "^5.6.2",
-    "ut-tools": "^6.2.3"
+    "ut-tools": "^6.3.0",
+    "ut-unittest": "^1.0.2"
   },
   "scripts": {
     "lint": "ut-lint .",
