@@ -12,7 +12,11 @@
         "requestCode": "A4",
         "responseCode": "A5",
         "requestPattern": "numberOfComponents:1/string, keyType:3/string, keySchemeLmk:1/string, keyComponents:keyComponentsLength/string",
-        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string"
+        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
+        "customResponseError": {
+            "03": "Invalid number of components",
+            "10": "Component parity error"
+        }
     },
     "importKey": {
         "requestCode": "A6",
@@ -44,25 +48,43 @@
         "requestCode": "BK",
         "responseCode": "BL",
         "requestPattern": "keyType:3/string, pinKey:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string",
-        "responsePattern": "errorCode:2/string, offset:12/string"
+        "responsePattern": "errorCode:2/string, offset:12/string",
+        "customResponseError": {
+            "03": "Excluded PIN count incorrect",
+            "10": "TPK or ZPK parity error",
+            "11": "PVK parity error",
+            "81": "PIN length mismatch",
+            "86": "PIN exists in either global or local Excluded PIN Table"
+        }
     },
     "generateKeyCheckValue": {
         "requestCode": "BU",
         "responseCode": "BV",
         "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key:keyLength/string, delimiter1:delimiter1Length/string, keyType:keyTypeLength/string, delimiter2:delimiter2Length/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string, hashId:hashIdLength/string, hmacKeyLength:hmacKeyLengthLength/string, hmac:hmacLength/string-binhex, delimiter3:delimiter3Length/string",
-        "responsePattern": "errorCode:2/string, keyCheckValue/binary"
+        "responsePattern": "errorCode:2/string, keyCheckValue/binary",
+        "customResponseError": {
+            "10": "Key parity error"
+        }
     },
     "translatePinTpkZpk": {
         "requestCode": "CA",
         "responseCode": "CB",
         "requestPattern": "sourceTpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string"
+        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
+        "customResponseError": {
+            "10": "Source TPK parity error",
+            "11": "Destination ZPK parity error"
+        }
     },
     "translatePinZpkZpk": {
         "requestCode": "CC",
         "responseCode": "CD",
         "requestPattern": "sourceZpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string"
+        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
+        "customResponseError": {
+            "10": "Source ZPK parity error",
+            "11": "Destination ZPK parity error"
+        }
     },
     "generateCvv": {
         "requestCode": "CW",

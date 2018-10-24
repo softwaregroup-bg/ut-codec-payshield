@@ -1,6 +1,6 @@
 const buferize = function(request) {
     return Buffer.from(request, 'hex');
-}
+};
 
 module.exports = {
     headerFormat: '4/string-left-zero',
@@ -73,7 +73,7 @@ module.exports = {
                 response: {
                     errorCode: '00',
                     key: 'U8D6E42E33CCDD7C1ABB2F4C74E3B3DE8',
-                    rest: buferize([65 ,50 ,52 ,54 ,54 ,55])
+                    rest: buferize([65, 50, 52, 54, 54, 55])
                 }
             },
             1: {
@@ -91,6 +91,58 @@ module.exports = {
             3: {
                 request: buferize('3033393241313135'),
                 response: 'payshield.generateKey.15'
+            }
+        },
+        formKeyFromComponentsEncode: {
+            0: {
+                request: {
+                    'numberOfComponents': 3,
+                    'keyType': '402',
+                    'keySchemeLmk': 'U',
+                    'keyComponentsLength': 99,
+                    'keyComponents': 'U78D68FB4966305485C74466DACDE4E65UA128A7F7102F48B8582065D7B411A558UE8DA2D69626452A0CB47C6C4C142F17B'
+                },
+                response: '3030303641343334303255553738443638464234393636333035343835433734343636444143444534453635554131323841374637313032463438423835383230363544374234313141353538554538444132443639363236343532413043423437433643344331343246313742'
+            },
+            1: {
+                request: {
+                    'numberOfComponents': 2,
+                    'keyType': '402',
+                    'keySchemeLmk': 'U',
+                    'keyComponentsLength': 66,
+                    'keyComponents': 'U78D68FB4966305485C74466DACDE4E65UA128A7F7102F48B8582065D7B411A558'
+                },
+                response: '3030303641343234303255553738443638464234393636333035343835433734343636444143444534453635554131323841374637313032463438423835383230363544374234313141353538'
+            }
+        },
+        formKeyFromComponentsDecode: {
+            0: {
+                request: buferize('30303032383141353030554332424434433942453341423339353745323346313135344438394244353332443035333837'),
+                response: {
+                    'errorCode': '00',
+                    'key': 'UC2BD4C9BE3AB3957E23F1154D89BD532',
+                    'keyCheckValue': 'D05387'
+                }
+            },
+            1: {
+                request: buferize('30303031323341353030554537464436304244453632363042464138423736423741374433313234433835304338304631'),
+                response: {
+                    'errorCode': '00',
+                    'key': 'UE7FD60BDE6260BFA8B76B7A7D3124C85',
+                    'keyCheckValue': '0C80F1'
+                }
+            },
+            2: {
+                request: buferize('30303032393141353130'),
+                response: 'payshield.formKeyFromComponents.10'
+            },
+            3: {
+                request: buferize('30303037313641353033'),
+                response: 'payshield.formKeyFromComponents.03'
+            },
+            4: {
+                request: buferize('30303037323941353135'),
+                response: 'payshield.formKeyFromComponents.15'
             }
         },
         importKeyEncode: {
@@ -195,6 +247,315 @@ module.exports = {
             5: {
                 request: buferize('3131353741393135'),
                 response: 'payshield.exportKey.15'
+            }
+        },
+        generateOffsetIbmEncode: {
+            0: {
+                request: {
+                    'keyType': '002',
+                    'pinKey': 'U3027C895181D912A91D7DF0ED78AC6FB',
+                    'pvk': 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    'pvkLength': 33,
+                    'pinBlock': 'A69F9E7646904B68',
+                    'pinBlockFormat': '01',
+                    'maximumPinLength': '12',
+                    'checkLength': '04',
+                    'pan': '540008900009',
+                    'decimalisationTable': '0123456789123456',
+                    'pinValidationData': '5022654000N2'
+                },
+                response: '30303039424B303032553330323743383935313831443931324139314437444630454437384143364642553830414533463844363342303846394331333635324535343136443736453844413639463945373634363930344236383031303435343030303839303030303930313233343536373839313233343536353032323635343030304E32'
+            },
+            1: {
+                request: {
+                    'keyType': '002',
+                    'pinKey': 'U3027C895181D912A91D7DF0ED78AC6FB',
+                    'pvk': 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    'pvkLength': 33,
+                    'pinBlock': 'A69F9E7646904B68',
+                    'pinBlockFormat': '01',
+                    'maximumPinLength': '12',
+                    'checkLength': '06',
+                    'pan': '540008900009',
+                    'decimalisationTable': '5432109876543210',
+                    'pinValidationData': '5022654000N2'
+                },
+                response: '30303039424B303032553330323743383935313831443931324139314437444630454437384143364642553830414533463844363342303846394331333635324535343136443736453844413639463945373634363930344236383031303635343030303839303030303935343332313039383736353433323130353032323635343030304E32'
+            }
+        },
+        generateOffsetIbmDecode: {
+            0: {
+                request: buferize('30313630424C3032373537373938464646464646'),
+                response: {
+                    'errorCode': '02',
+                    'offset': '757798FFFFFF'
+                }
+            },
+            1: {
+                request: buferize('30333036424C3032383836303635464646464646'),
+                response: {
+                    'errorCode': '02',
+                    'offset': '886065FFFFFF'
+                }
+            },
+            2: {
+                request: buferize('30303036424C3130'),
+                response: 'payshield.generateOffsetIbm.10'
+            },
+            3: {
+                request: buferize('30303235424C3131'),
+                response: 'payshield.generateOffsetIbm.11'
+            },
+            4: {
+                request: buferize('30303433424C3235'),
+                response: 'payshield.generateOffsetIbm.25'
+            },
+            5: {
+                request: buferize('30303332424C3135'),
+                response: 'payshield.generateOffsetIbm.15'
+            }
+        },
+        generateKeyCheckValueEncode: {
+            0: {
+                request: {
+                    'keyTypeCode': 'FF',
+                    'keyLengthFlag': '1',
+                    'key': 'U77338F74A19E3BB39062A5A479473FC8',
+                    'keyLength': 33,
+                    'delimiter1': ';',
+                    'delimiter1Length': 1,
+                    'keyType': '002',
+                    'keyTypeLength': 3,
+                    'delimiter2': ';',
+                    'delimiter2Length': 1,
+                    'reserved': '00',
+                    'reservedLength': 2,
+                    'kcvType': '1',
+                    'kcvTypeLength': 1,
+                    'hashId': '',
+                    'hashIdLength': 0,
+                    'hmacKeyLength': 0,
+                    'hmacKeyLengthLength': 0,
+                    'hmac': '',
+                    'hmacLength':0,
+                    'delimiter3': '',
+                    'delimiter3Length': 0
+                },
+                response: '3030313142554646315537373333384637344131394533424233393036324135413437393437334643383B3030323B303031'
+            },
+            1: {
+                request: {
+                    'keyTypeCode': 'FF',
+                    'keyLengthFlag': '1',
+                    'key': 'UC13E9E92DBA05F2DF2379B821C5766A3',
+                    'keyLength': 33,
+                    'delimiter1': ';',
+                    'delimiter1Length': 1,
+                    'keyType': '109',
+                    'keyTypeLength': 3,
+                    'delimiter2': ';',
+                    'delimiter2Length': 1,
+                    'reserved': '00',
+                    'reservedLength': 2,
+                    'kcvType': '0',
+                    'kcvTypeLength': 1,
+                    'hashId': '',
+                    'hashIdLength': 0,
+                    'hmacKeyLength': 0,
+                    'hmacKeyLengthLength': 0,
+                    'hmac': '',
+                    'hmacLength': 0,
+                    'delimiter3': '',
+                    'delimiter3Length': 0
+                },
+                response: '3030313142554646315543313345394539324442413035463244463233373942383231433537363641333B3130393B303030'
+            },
+            2: {
+                request: {
+                    'keyTypeCode': '02',
+                    'keyLengthFlag': '1',
+                    'key': 'U77338F74A19E3BB39062A5A479473FC8',
+                    'keyLength': 33,
+                    'delimiter1': '',
+                    'delimiter1Length': 0,
+                    'keyType': '',
+                    'keyTypeLength': 0,
+                    'delimiter2': ';',
+                    'delimiter2Length': 1,
+                    'reserved': '00',
+                    'reservedLength': 2,
+                    'kcvType': '1',
+                    'kcvTypeLength': 1,
+                    'hashId': '',
+                    'hashIdLength': 0,
+                    'hmacKeyLength': 0,
+                    'hmacKeyLengthLength': 0,
+                    'hmac': '',
+                    'hmacLength': 0,
+                    'delimiter3': '',
+                    'delimiter3Length': 0
+                },
+                response: '3030313142553032315537373333384637344131394533424233393036324135413437393437334643383B303031'
+            }
+        },
+        generateKeyCheckValueDecode: {
+            0: {
+                request: buferize('3030313342563030384646454431'),
+                response: {
+                    errorCode: '00',
+                    keyCheckValue: buferize([56, 70, 70, 69, 68, 49])
+                }
+            },
+            1: {
+                request: buferize('303031304256303036414537434433444642364637384630'),
+                response: {
+                    errorCode: '00',
+                    keyCheckValue: buferize([54, 65, 69, 55, 67, 68, 51, 68, 70, 66, 54, 70, 55, 56, 70, 48])
+                }
+            },
+            2: {
+                request: buferize('3031303542563130'),
+                response: 'payshield.generateKeyCheckValue.10'
+            },
+            3: {
+                request: buferize('3030363342563238'),
+                response: 'payshield.generateKeyCheckValue.28'
+            },
+            4: {
+                request: buferize('3030373042563035'),
+                response: 'payshield.generateKeyCheckValue.05'
+            },
+            5: {
+                request: buferize('3030373542563135'),
+                response: 'payshield.generateKeyCheckValue.15'
+            }
+        },
+        translatePinTpkZpkEncode: {
+            0: {
+                request: {
+                    'sourceTpk': 'U6C091AE30ABB19B3EB6C4C3B8D08C071',
+                    'destinationZpk': 'UBB224A0D70899E7D216A4DDDA615C078',
+                    'maximumPinLength': '12',
+                    'sourcePinBlock': '3C7C732E667A9BC6',
+                    'sourcePinBlockFormat': '01',
+                    'destinationPinBlockFormat': '01',
+                    'pan': '540028800010'
+                },
+                response: '30303131434155364330393141453330414242313942334542364334433342384430384330373155424232323441304437303839394537443231364134444444413631354330373831323343374337333245363637413942433630313031353430303238383030303130'
+            },
+            1: {
+                request: {
+                    'sourceTpk': 'U6C091AE30ABB19B3EB6C4C3B8D08C071',
+                    'destinationZpk': 'UBB224A0D70899E7D216A4DDDA615C078',
+                    'maximumPinLength': '12',
+                    'sourcePinBlock': 'C5ED6A332BAD3FE7',
+                    'sourcePinBlockFormat': '01',
+                    'destinationPinBlockFormat': '01',
+                    'pan': '239010000012'
+                },
+                response: '30303131434155364330393141453330414242313942334542364334433342384430384330373155424232323441304437303839394537443231364134444444413631354330373831324335454436413333324241443346453730313031323339303130303030303132'
+            }
+        },
+        translatePinTpkZpkDecode: {
+            0: {
+                request: buferize('30383531434230303036313444334530394344334236343536453031'),
+                response: {
+                    'errorCode': '00',
+                    'checkLength': '06',
+                    'destinationPinBlock': '14D3E09CD3B6456E',
+                    'pinBlockFormat': '01'
+                }
+            },
+            1: {
+                request: buferize('30363139434230303034453837304344433845303637454232453031'),
+                response: {
+                    'errorCode': '00',
+                    'checkLength': '04',
+                    'destinationPinBlock': 'E870CDC8E067EB2E',
+                    'pinBlockFormat': '01'
+                }
+            },
+            2: {
+                request: buferize('3039393143423130'),
+                response: 'payshield.translatePinTpkZpk.10'
+            },
+            3: {
+                request: buferize('3130303143423131'),
+                response: 'payshield.translatePinTpkZpk.11'
+            },
+            4: {
+                request: buferize('3130313043423233'),
+                response: 'payshield.translatePinTpkZpk.23'
+            },
+            5: {
+                request: buferize('3130323543423230'),
+                response: 'payshield.translatePinTpkZpk.20'
+            }
+        },
+        translatePinZpkZpkEncode: {
+            0: {
+                request: {
+                    'sourceZpk': 'UBB224A0D70899E7D216A4DDDA615C078',
+                    'destinationZpk': 'UEE424E608E9CF0071E239F9E15032C81',
+                    'maximumPinLength': '12',
+                    'sourcePinBlock': '14D3E09CD3B6456E',
+                    'sourcePinBlockFormat': '01',
+                    'destinationPinBlockFormat': '01',
+                    'pan': '540028800010'
+                },
+                response: '30303131434355424232323441304437303839394537443231364134444444413631354330373855454534323445363038453943463030373145323339463945313530333243383131323134443345303943443342363435364530313031353430303238383030303130'
+            },
+            1: {
+                request: {
+                    'sourceZpk': 'UBB224A0D70899E7D216A4DDDA615C078',
+                    'destinationZpk': 'UEE424E608E9CF0071E239F9E15032C81',
+                    'maximumPinLength': '12',
+                    'sourcePinBlock': 'E870CDC8E067EB2E',
+                    'sourcePinBlockFormat': '01',
+                    'destinationPinBlockFormat': '01',
+                    'pan': '239010000012'
+                },
+                response: '30303131434355424232323441304437303839394537443231364134444444413631354330373855454534323445363038453943463030373145323339463945313530333243383131324538373043444338453036374542324530313031323339303130303030303132'
+            }
+        },
+        translatePinZpkZpkDecode: {
+            0: {
+                request: buferize('30323438434430303036304534413242464137384532343446463031'),
+                response: {
+                    'errorCode': '00',
+                    'checkLength': '06',
+                    'destinationPinBlock': '0E4A2BFA78E244FF',
+                    'pinBlockFormat': '01'
+                }
+            },
+            1: {
+                request: buferize('30313930434430303034424542433338454235383646453432353031'),
+                response: {
+                    'errorCode': '00',
+                    'checkLength': '04',
+                    'destinationPinBlock': 'BEBC38EB586FE425',
+                    'pinBlockFormat': '01'
+                }
+            },
+            2: {
+                request: buferize('3032373143443130'),
+                response: 'payshield.translatePinZpkZpk.10'
+            },
+            3: {
+                request: buferize('3032373643443131'),
+                response: 'payshield.translatePinZpkZpk.11'
+            },
+            4: {
+                request: buferize('3033303143443233'),
+                response: 'payshield.translatePinZpkZpk.23'
+            },
+            5: {
+                request: buferize('3033313043443230'),
+                response: 'payshield.translatePinZpkZpk.20'
+            },
+            6: {
+                request: {},
+                response: {}
             }
         }
     }
