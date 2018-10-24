@@ -1,6 +1,6 @@
 {
   "name": "ut-codec-payshield",
-  "version": "7.0.0-rc-dss.3",
+  "version": "7.0.0-rc-dss.5",
   "main": "./index.js",
   "dependencies": {
     "lodash.merge": "4.6.1",
@@ -8,8 +8,8 @@
   },
   "devDependencies": {
     "tap": "^12.0.1",
-    "ut-error": "^5.6.2",
-    "ut-tools": "^6.2.3"
+    "ut-tools": "^6.3.0",
+    "ut-unittest": "^1.0.2"
   },
   "scripts": {
     "lint": "ut-lint .",

@@ -141,7 +141,7 @@
     "verifyOffsetIbmDukpt": {
         "requestCode": "GO",
         "responseCode": "GP",
-        "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksndescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
+        "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
         "responsePattern": "errorCode:2/string",
         "customResponseError": {
             "01": "PIN Verification failure"

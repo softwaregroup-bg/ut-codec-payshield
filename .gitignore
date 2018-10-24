@@ -5,3 +5,4 @@ docs
 .tern-project
 .history
 yarn.lock
+package-lock.json
