@@ -337,7 +337,7 @@ module.exports = {
                     hmacKeyLength: 0,
                     hmacKeyLengthLength: 0,
                     hmac: '',
-                    hmacLength:0,
+                    hmacLength: 0,
                     delimiter3: '',
                     delimiter3Length: 0
                 },
