@@ -7,7 +7,8 @@ const Payshield = require('../../../index');
 const payshield = new Payshield(Object.assign({}, config, errorApi));
 
 const method = 'generateKey';
-const testData = config.test[method];
+const testData = config.test[`${method}Encode`];
+const testResults = config.test[`${method}Encode`];
 const $meta = {
     method: method,
     mtid: 'request',
@@ -16,10 +17,9 @@ const $meta = {
 const context = {
     trace: 0
 };
-
-tap.test(method, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, context).toString('hex').toUpperCase(), testData[0].response, 'generateKey simple');
-    t.same(payshield.encode(testData[1].request, $meta, context).toString('hex').toUpperCase(), testData[1].response, 'generateKey under ZMK');
+tap.test(`${method}Encode`, (t) => {
+    t.same(payshield.encode(testData[0].request, $meta, context).toString('hex').toUpperCase(), testResults[0].response, 'generateKey encode, simple');
+    t.same(payshield.encode(testData[1].request, $meta, context).toString('hex').toUpperCase(), testResults[1].response, 'generateKey encode, under ZMK');
 
     t.end();
 });

@@ -14,7 +14,7 @@
                 "-J",
                 "-T",
                 "--node-arg=--preserve-symlinks",
-                "test/unit"
+                "test/unit/cases"
             ],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": null,
