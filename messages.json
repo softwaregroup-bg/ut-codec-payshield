@@ -90,13 +90,22 @@
         "requestCode": "CW",
         "responseCode": "CX",
         "requestPattern": "cvk:33/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string",
-        "responsePattern": "errorCode:2/string, cvv:3/string"
+        "responsePattern": "errorCode:2/string, cvv:3/string",
+        "customResponseError": {
+            "10": "CVK A or CVK B parity error",
+            "27": "CVK not double length"
+        }
     },
     "verifyCvv": {
         "requestCode": "CY",
         "responseCode": "CZ",
         "requestPattern": "cvk:33/string, cvv:3/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string",
-        "responsePattern": "errorCode:2/string"
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "01": "CVV failed verification",
+            "10": "CVK A or B parity error",
+            "27": "CVK not double length"
+        }
     },
     "verifyTermPinIbm": {
         "requestCode": "DA",
@@ -105,7 +114,9 @@
         "responsePattern": "errorCode:2/string",
         "warnings": ["02"],
         "customResponseError": {
-            "01": "PIN Verification failure"
+            "01": "PIN Verification failure",
+            "10": "TPK parity error",
+            "11": "PVK parity error"
         }
     },
     "generateOffsetIbmLmk": {
