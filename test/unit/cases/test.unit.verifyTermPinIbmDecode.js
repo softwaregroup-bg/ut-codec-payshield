@@ -20,9 +20,10 @@ const context = {
 tap.test(`${method}Decode`, (t) => {
     t.same(payshield.decode(testData[0].request, $meta, context), testResults[0].response, 'verifyTermPinIbm decode, set 1, success');
     t.same(payshield.decode(testData[1].request, $meta, context), testResults[1].response, 'verifyTermPinIbm decode, set 2, success');
-    // t.same(payshield.decode(testData[2].request, $meta, context).type, testResults[2].response, 'verifyTermPinIbm decode, CVV failed verification');
-    // t.same(payshield.decode(testData[3].request, $meta, context).type, testResults[3].response, 'verifyTermPinIbm decode, CVK A or CVK B parity error');
-    // t.same(payshield.decode(testData[4].request, $meta, context).type, testResults[4].response, 'verifyTermPinIbm decode, invalid input data');
+    t.same(payshield.decode(testData[2].request, $meta, context).type, testResults[2].response, 'verifyTermPinIbm decode, PIN verification failure');
+    t.same(payshield.decode(testData[3].request, $meta, context).type, testResults[3].response, 'verifyTermPinIbm decode, PVK parity error');
+    t.same(payshield.decode(testData[4].request, $meta, context).type, testResults[4].response, 'verifyTermPinIbm decode, TPK parity error');
+    t.same(payshield.decode(testData[5].request, $meta, context).type, testResults[5].response, 'verifyTermPinIbm decode, invalid input data');
 
     t.end();
 });

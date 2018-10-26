@@ -123,7 +123,13 @@
         "requestCode": "DE",
         "responseCode": "DF",
         "requestPattern": "pvk:pvkLength/string, pin:encryptedPinLength/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
-        "responsePattern": "errorCode:2/string, offset:12/string"
+        "responsePattern": "errorCode:2/string, offset:12/string",
+        "warnings": ["02"],
+        "customResponseError": {
+            "10": "PVK parity error",
+            "81": "PIN length mismatch",
+            "86": "PIN exists in either global or local Excluded PIN Table"
+        }
     },
     "getPvv": {
         "requestCode": "DG",
@@ -135,7 +141,13 @@
         "requestCode": "EE",
         "responseCode": "EF",
         "requestPattern": "pvk:pvkLength/string, offset:12/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
+        "responsePattern": "errorCode:2/string, pin/binary",
+        "warnings": ["02"],
+        "customResponseError": {
+            "10": "PVK parity error",
+            "81": "PIN length mismatch",
+            "86": "PIN exists in either global or local Excluded PIN Table"
+        }
     },
     "translateZekZakLmkZmk": {
         "requestCode": "FM",

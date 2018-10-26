@@ -698,6 +698,158 @@ module.exports = {
                 }
             },
             2: {
+                request: bufferize('3030333944423031'),
+                response: 'payshield.verifyTermPinIbm.01'
+            },
+            3: {
+                request: bufferize('3030353444423131'),
+                response: 'payshield.verifyTermPinIbm.11'
+            },
+            4: {
+                request: bufferize('3030363244423130'),
+                response: 'payshield.verifyTermPinIbm.10'
+            },
+            5: {
+                request: bufferize('3030363744423135'),
+                response: 'payshield.verifyTermPinIbm.15'
+            }
+        },
+        generateOffsetIbmLmkEncode: {
+            0: {
+                request: {
+                    account: '654000890009',
+                    checkLength: '6',
+                    decimalisationTable: '0123456789012345',
+                    encryptedPinLength: 8,
+                    pin: '73638636',
+                    pinValidationData: '5022654000N2',
+                    pvk: 'U77338F74A19E3BB39062A5A479473FC8',
+                    pvkLength: 33
+                },
+                response: '3030313144455537373333384637344131394533424233393036324135413437393437334643383733363338363336303636353430303038393030303930313233343536373839303132333435353032323635343030304E32'
+            },
+            1: {
+                request: {
+                    account: '502265000092',
+                    checkLength: '4',
+                    decimalisationTable: '6543210987654321',
+                    encryptedPinLength: 8,
+                    pin: '58652088',
+                    pinValidationData: '5022650000N2',
+                    pvk: 'U77338F74A19E3BB39062A5A479473FC8',
+                    pvkLength: 33
+                },
+                response: '3030313144455537373333384637344131394533424233393036324135413437393437334643383538363532303838303435303232363530303030393236353433323130393837363534333231353032323635303030304E32'
+            }
+        },
+        generateOffsetIbmLmkDecode: {
+            0: {
+                request: bufferize('3031353944463032303030303030464646464646'),
+                response: {
+                    'errorCode': '02',
+                    'offset': '000000FFFFFF'
+                }
+            },
+            1: {
+                request: bufferize('3031363344463032303030304646464646464646'),
+                response: {
+                    'errorCode': '02',
+                    'offset': '0000FFFFFFFF'
+                }
+            },
+            2: {
+                request: bufferize('3030303144463130'),
+                response: 'payshield.generateOffsetIbmLmk.10'
+            },
+            3: {
+                request: bufferize('3030303844463235'),
+                response: 'payshield.generateOffsetIbmLmk.25'
+            },
+            4: {
+                request: bufferize('3030313344463135'),
+                response: 'payshield.generateOffsetIbmLmk.15'
+            }
+        },
+        getPvvEncode: {
+
+        },
+        getPvvDecode: {
+
+        },
+        derivePinIbmEncode: {
+            0: {
+                request: {
+                    pvk: 'U77338F74A19E3BB39062A5A479473FC8',
+                    pvkLength: 33,
+                    offset: '000000FFFFFF',
+                    checkLength: '6',
+                    account: '654000890009',
+                    decimalisationTable: '0123456789012345',
+                    pinValidationData: '5022654000N2'
+                },
+                response: '303031314545553737333338463734413139453342423339303632413541343739343733464338303030303030464646464646303636353430303038393030303930313233343536373839303132333435353032323635343030304E32'
+            },
+            1: {
+                request: {
+                    'pvk': 'U77338F74A19E3BB39062A5A479473FC8',
+                    'pvkLength': 33,
+                    'offset': '0000FFFFFFFF',
+                    'checkLength': '4',
+                    'account': '502265000092',
+                    'decimalisationTable': '6543210987654321',
+                    'pinValidationData': '5022650000N2'
+                },
+                response: '303031314545553737333338463734413139453342423339303632413541343739343733464338303030304646464646464646303435303232363530303030393236353433323130393837363534333231353032323635303030304E32'
+            }
+        },
+        derivePinIbmDecode: {
+            0: {
+                request: bufferize('30303531454630323733363338363336'),
+                response: {
+                    'errorCode': '02',
+                    'pin': bufferize([55, 51, 54, 51, 56, 54, 51, 54])
+                }
+            },
+            1: {
+                request: bufferize('30303838454630323538363532303838'),
+                response: {
+                    'errorCode': '02',
+                    'pin': bufferize([53, 56, 54, 53, 50, 48, 56, 56])
+                }
+            },
+            2: {
+                request: bufferize('3030393145463130'),
+                response: 'payshield.derivePinIbm.10'
+            },
+            3: {
+                request: bufferize('3030393945463235'),
+                response: 'payshield.derivePinIbm.25'
+            },
+            4: {
+                request: bufferize('3031313445463135'),
+                response: 'payshield.derivePinIbm.15'
+            }
+        },
+        hashDataBlockEncode: {
+            0: {
+                request: {},
+                response: {}
+            },
+            1: {
+                request: {},
+                response: {}
+            }
+        },
+        hashDataBlockDecode: {
+            0: {
+                request: {},
+                response: {}
+            },
+            1: {
+                request: {},
+                response: {}
+            },
+            2: {
                 request: {},
                 response: {}
             },
@@ -706,10 +858,6 @@ module.exports = {
                 response: {}
             },
             4: {
-                request: {},
-                response: {}
-            },
-            5: {
                 request: {},
                 response: {}
             }
