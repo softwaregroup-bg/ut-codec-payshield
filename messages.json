@@ -135,7 +135,13 @@
         "requestCode": "DG",
         "responseCode": "DH",
         "requestPattern": "pvk:pvkLength/string, pin:encryptedPinLength/string, account:12/string, pvki:1/string",
-        "responsePattern": "errorCode:2/string, pvv:4/string"
+        "responsePattern": "errorCode:2/string, pvv:4/string",
+        "customResponseError": {
+            "10": "PVK parity error",
+            "27": "PVK not double length",
+            "81": "PIN length mismatch",
+            "86": "PIN exists in either global or local Excluded PIN Table"
+        }
     },
     "derivePinIbm": {
         "requestCode": "EE",
@@ -158,8 +164,11 @@
     "hashDataBlock": {
         "requestCode": "GM",
         "responseCode": "GN",
-        "requestPattern": "hashId:2/string, dataLength:5/string-left-zero, messageData:messageDataLength/string-binhex",
-        "responsePattern": "errorCode:2/string, hash/binary"
+        "requestPattern": "hashId:2/string, messageDataLength:5/string-left-zero, messageData:messageDataLength/string-binhex",
+        "responsePattern": "errorCode:2/string, hash/binary",
+        "customResponseError": {
+            "05": "Invalid hash identifier"
+        }
     },
     "verifyOffsetIbmDukpt": {
         "requestCode": "GO",
@@ -167,7 +176,11 @@
         "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
         "responsePattern": "errorCode:2/string",
         "customResponseError": {
-            "01": "PIN Verification failure"
+            "01": "PIN Verification failure",
+            "10": "BDK parity error",
+            "11": "PVK error",
+            "27": "BDK not double length",
+            "68": "Command disabled"
         }
     },
     "generateTak": {
@@ -197,7 +210,7 @@
     "generateArqc3": {
         "requestCode": "KQ",
         "responseCode": "KR",
-        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter:delimiterLength/string, arqc:8/string-binhex, arc:arcLength/string-binhex",
+        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, mksmi:mksmiLength/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter:delimiterLength/string, arqc:8/string-binhex, arc:arcLength/string-binhex, discretionaryDataMac:discretionaryDataMacLength/string-binhex, discretionaryDataBytes:discretionaryDataBytesLength/string, discretionaryData:discretionaryDataLength/string-binhex",
         "responsePattern": "errorCode:2/string, arpc/binary",
         "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex",
         "customResponseError": {
