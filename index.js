@@ -122,7 +122,7 @@ PayshieldCodec.prototype.decode = function(buff, $meta, context, log) {
     }
     // 00 = No error
     // 02 = Key inappropriate length for algorithm (in some cases is warning)
-    var warningsList = (cmd.warnings && ['00', '02'].concat(cmd.warnings)) || ['00', '02'];
+    var warningsList = (cmd.warnings && ['00'].concat(cmd.warnings)) || ['00'];
     if (warningsList.includes(bodyObj.errorCode)) {
         bodyObj = cmd.matcher(headObj.body);
         if (!bodyObj) {

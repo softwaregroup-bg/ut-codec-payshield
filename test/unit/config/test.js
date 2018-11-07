@@ -1077,7 +1077,423 @@ module.exports = {
                 request: bufferize('303332384B523131'),
                 response: 'payshield.generateArqc3.11'
             }
+        },
+        generateArqc4Encode: {
+            0: {
+                request: {
+                    modeFlag: 0,
+                    schemeId: 2,
+                    mkac: 'U418E7E54279CEA4D298485F9F8F4AFD2',
+                    ivacLength: 0,
+                    ivac: '',
+                    panSeqNoLengthLength: 0,
+                    panLength: '',
+                    panSeqNoLength: 8,
+                    panSeqNo: '7804020000001800',
+                    delimiter1Length: 0,
+                    delimiter1: '',
+                    branchHeightParamsLength: 0,
+                    branchHeightParams: '',
+                    atc: '0003',
+                    transactionDataLengthLength: 2,
+                    transactionDataLengthDec: 72,
+                    transactionDataLengthHex: '48',
+                    transactionData: '00000001000000000000000006088010040000060818010201B21BB356180000030FA501803000000000000000000000000F00000000000000000000000000000000000000000000',
+                    delimiter2Length: 1,
+                    delimiter2: ';',
+                    arqc: 'F67B7E07A55DF243',
+                    arcLength: 0,
+                    arc: '',
+                    csuLength: 0,
+                    csu: '',
+                    padLengthLength: 0,
+                    padLength: '',
+                    pad: ''
+                },
+                response: '303030324B57303255343138453745353432373943454134443239383438354639463846344146443278040200000018000003343800000001000000000000000006088010040000060818010201B21BB356180000030FA501803000000000000000000000000F000000000000000000000000000000000000000000003BF67B7E07A55DF243'
+            },
+            1: {
+                request: {
+                    modeFlag: 0,
+                    schemeId: 2,
+                    mkac: 'U518763AC61FB53E22306C1D85978C39C',
+                    ivacLength: 0,
+                    ivac: '',
+                    panSeqNoLengthLength: 0,
+                    panLength: '',
+                    panSeqNoLength: 8,
+                    panSeqNo: '3239010000012101',
+                    delimiter1Length: 0,
+                    delimiter1: '',
+                    branchHeightParamsLength: 0,
+                    branchHeightParams: '',
+                    atc: '005B',
+                    transactionDataLengthLength: 2,
+                    transactionDataLengthDec: 32,
+                    transactionDataLengthHex: '20',
+                    transactionData: '0FA501A13102000000000000000000000F010000000000000000000000000000',
+                    delimiter2Length: 1,
+                    delimiter2: ';',
+                    arqc: 'DDA6BCC881C093AD',
+                    arcLength: 0,
+                    arc: '',
+                    csuLength: 0,
+                    csu: '',
+                    padLengthLength: 0,
+                    padLength: '',
+                    pad: ''
+                },
+                response: '303030324B5730325535313837363341433631464235334532323330364331443835393738433339433239010000012101005B32300FA501A13102000000000000000000000F0100000000000000000000000000003BDDA6BCC881C093AD'
+            },
+            2: {
+                request: {
+                    modeFlag: 4,
+                    schemeId: 2,
+                    mkac: 'U518763AC61FB53E22306C1D85978C39C',
+                    ivacLength: 0,
+                    ivac: '',
+                    panSeqNoLengthLength: 0,
+                    panLength: '',
+                    panSeqNoLength: 8,
+                    panSeqNo: '3239010000012101',
+                    delimiter1Length: 0,
+                    delimiter1: '',
+                    branchHeightParamsLength: 0,
+                    branchHeightParams: '',
+                    atc: '005B',
+                    transactionDataLengthLength: 0,
+                    transactionDataLengthDec: '',
+                    transactionDataLengthHex: '',
+                    transactionData: '',
+                    delimiter2Length: 0,
+                    delimiter2: '',
+                    arqc: 'DDA6BCC881C093AD',
+                    arcLength: 0,
+                    arc: '',
+                    csuLength: 4,
+                    csu: '00000000',
+                    padLengthLength: 1,
+                    padLength: 5,
+                    pad: '8080040000'
+                },
+                response: '303030324B5734325535313837363341433631464235334532323330364331443835393738433339433239010000012101005BDDA6BCC881C093AD00000000358080040000'
+            }
+        },
+        generateArqc4Decode: {
+            0: {
+                request: bufferize('303030364B583030'),
+                response: {
+                    errorCode: '00',
+                    arpc: bufferize([])
+                }
+            },
+            1: {
+                request: bufferize('303032344B583030'),
+                response: {
+                    errorCode: '00',
+                    arpc: bufferize([])
+                }
+            },
+            2: {
+                request: bufferize('303236334B583030A62169F300000000'),
+                response: {
+                    errorCode: '00',
+                    arpc: bufferize([166, 33, 105, 243, 0, 0, 0, 0])
+                }
+            },
+            3: {
+                request: bufferize('303239324B583031F67B7E07A55DF243'),
+                response: 'payshield.generateArqc4.01'
+            },
+            4: {
+                request: bufferize('303330304B583034'),
+                response: 'payshield.generateArqc4.04'
+            },
+            5: {
+                request: bufferize('303330374B583035'),
+                response: 'payshield.generateArqc4.05'
+            },
+            6: {
+                request: bufferize('303338374B583130'),
+                response: 'payshield.generateArqc4.10'
+            }
+        },
+        encryptDataBlockEncode: {
+            0: {
+                request: {
+                    modeFlag: '00',
+                    inputFormatFlag: '1',
+                    outputFormatFlag: '1',
+                    keyType: '00B',
+                    key: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
+                    ksnDescriptorLength: 0,
+                    ksnDescriptor: '',
+                    ksnLength: 0,
+                    ksn: '',
+                    ivLength: 0,
+                    iv: '',
+                    messageLenHex: '20',
+                    messageLen: 32,
+                    message: '0400980C0002AE900AF140D0C21230D7'
+                },
+                response: '303030324D3030303131303042554231393046374642423830324541313446414337393137443346364544423637303032303034303039383043303030324145393030414631343044304332313233304437'
+            },
+            1: {
+                request: {
+                    modeFlag: '00',
+                    inputFormatFlag: '2',
+                    outputFormatFlag: '1',
+                    keyType: '00B',
+                    key: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
+                    ksnDescriptorLength: 0,
+                    ksnDescriptor: '',
+                    ksnLength: 0,
+                    ksn: '',
+                    ivLength: 0,
+                    iv: '',
+                    messageLenHex: '20',
+                    messageLen: 32,
+                    message: '0400980C0002AE900AF140D0C21230D7'
+                },
+                response: '303030324D3030303231303042554231393046374642423830324541313446414337393137443346364544423637303032303034303039383043303030324145393030414631343044304332313233304437'
+            }
+        },
+        encryptDataBlockDecode: {
+            0: {
+                request: bufferize('303030364D313030303032303331314438443133463843363137454638333834343143333645333341364441'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([48, 48, 50, 48, 51, 49, 49, 68, 56, 68, 49, 51, 70, 56, 67, 54, 49, 55, 69, 70, 56, 51, 56, 52, 52, 49, 67, 51, 54, 69, 51, 51, 65, 54, 68, 65])
+                }
+            },
+            1: {
+                request: bufferize('303038334D3130303030343038314536424446333530433733454431333639384532433133353642353836323243333837314432383436464331313044443745374139443130323445433038'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([48, 48, 52, 48, 56, 49, 69, 54, 66, 68, 70, 51, 53, 48, 67, 55, 51, 69, 68, 49, 51, 54, 57, 56, 69, 50, 67, 49, 51, 53, 54, 66, 53, 56, 54, 50, 50, 67, 51, 56, 55, 49, 68, 50, 56, 52, 54, 70, 67, 49, 49, 48, 68, 68, 55, 69, 55, 65, 57, 68, 49, 48, 50, 52, 69, 67, 48, 56])
+                }
+            },
+            2: {
+                request: bufferize('303030354D313032'),
+                response: 'payshield.encryptDataBlock.02'
+            },
+            3: {
+                request: bufferize('303030304D313033'),
+                response: 'payshield.encryptDataBlock.03'
+            },
+            4: {
+                request: bufferize('303030314D313034'),
+                response: 'payshield.encryptDataBlock.04'
+            },
+            5: {
+                request: bufferize('303030304D313035'),
+                response: 'payshield.encryptDataBlock.05'
+            },
+            6: {
+                request: bufferize('303030314D313130'),
+                response: 'payshield.encryptDataBlock.10'
+            }
+        },
+        decryptDataBlockEncode: {
+            0: {
+                request: {
+                    modeFlag: '00',
+                    bpsRadixFlag: '',
+                    bpsRadixFlagLength: 0,
+                    bpsRadixValue: '',
+                    bpsRadixValueLength: 0,
+                    bpsTweak: '',
+                    bpsTweakLength: 0,
+                    inputFormatFlag: '1',
+                    outputFormatFlag: '1',
+                    keyType: '00B',
+                    key: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
+                    ksnDescriptor: '',
+                    ksnDescriptorLength: 0,
+                    ksn: '',
+                    ksnLength: 0,
+                    iv: '',
+                    ivLength: 0,
+                    messageLenHex: '20',
+                    message: '311D8D13F8C617EF838441C36E33A6DA',
+                    messageLen: 32
+                },
+                response: '303030324D3230303131303042554231393046374642423830324541313446414337393137443346364544423637303032303331314438443133463843363137454638333834343143333645333341364441'
+            },
+            1: {
+                request: {
+                    modeFlag: '00',
+                    bpsRadixFlag: '',
+                    bpsRadixFlagLength: 0,
+                    bpsRadixValue: '',
+                    bpsRadixValueLength: 0,
+                    bpsTweak: '',
+                    bpsTweakLength: 0,
+                    inputFormatFlag: '1',
+                    outputFormatFlag: '2',
+                    keyType: '00B',
+                    key: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
+                    ksnDescriptor: '',
+                    ksnDescriptorLength: 0,
+                    ksn: '',
+                    ksnLength: 0,
+                    iv: '',
+                    ivLength: 0,
+                    messageLenHex: '40',
+                    message: '81E6BDF350C73ED13698E2C1356B58622C3871D2846FC110DD7E7A9D1024EC08',
+                    messageLen: 64
+                },
+                response: '303030324D32303031323030425542313930463746424238303245413134464143373931374433463645444236373030343038314536424446333530433733454431333639384532433133353642353836323243333837314432383436464331313044443745374139443130323445433038'
+            }
+        },
+        decryptDataBlockDecode: {
+            0: {
+                request: bufferize('303031334D333030303032303034303039383043303030324145393030414631343044304332313233304437'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([48, 48, 50, 48, 48, 52, 48, 48, 57, 56, 48, 67, 48, 48, 48, 50, 65, 69, 57, 48, 48, 65, 70, 49, 52, 48, 68, 48, 67, 50, 49, 50, 51, 48, 68, 55])
+                }
+            },
+            1: {
+                request: bufferize('303033364D333030303032303034303039383043303030324145393030414631343044304332313233304437'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([48, 48, 50, 48, 48, 52, 48, 48, 57, 56, 48, 67, 48, 48, 48, 50, 65, 69, 57, 48, 48, 65, 70, 49, 52, 48, 68, 48, 67, 50, 49, 50, 51, 48, 68, 55])
+                }
+            },
+            2: {
+                request: bufferize('303030304D333032'),
+                response: 'payshield.decryptDataBlock.02'
+            },
+            3: {
+                request: bufferize('303030304D333034'),
+                response: 'payshield.decryptDataBlock.04'
+            },
+            4: {
+                request: bufferize('303030304D333033'),
+                response: 'payshield.decryptDataBlock.03'
+            },
+            5: {
+                request: bufferize('303030304D333035'),
+                response: 'payshield.decryptDataBlock.05'
+            },
+            6: {
+                request: bufferize('303030304D333130'),
+                response: 'payshield.decryptDataBlock.10'
+            }
+        },
+        translateDataBlockEncode: {
+            0: {
+                request: {
+                    sourceModeFlag: '00',
+                    destinationModeFlag: '00',
+                    inputFormatFlag: '1',
+                    outputFormatFlag: '1',
+                    sourceKeyType: '00B',
+                    sourceKey: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
+                    sourceKsnDescriptor: '',
+                    sourceKsnDescriptorLength: 0,
+                    sourceKsn: '',
+                    sourceKsnLength: 0,
+                    destinationKeyType: '00B',
+                    destinationKey: 'U69721302D9FB7876D98CDDA0FDE1A09B',
+                    destinationKsnDescriptor: '',
+                    destinationKsnDescriptorLength: 0,
+                    destinationKsn: '',
+                    destinationKsnLength: 0,
+                    sourceIv: '',
+                    sourceIvLength: 0,
+                    destinationIv: '',
+                    destinationIvLength: 0,
+                    messageLenHex: '20',
+                    message: '311D8D13F8C617EF838441C36E33A6DA',
+                    messageLen: 32
+                },
+                response: '303030324D34303030303131303042554231393046374642423830324541313446414337393137443346364544423637303042553639373231333032443946423738373644393843444441304644453141303942303032303331314438443133463843363137454638333834343143333645333341364441'
+            }
+        },
+        translateDataBlockDecode: {
+            0: {
+                request: bufferize('303031384D353030303032304644364146423545433834314530384144313731414531344133393732303938'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([48, 48, 50, 48, 70, 68, 54, 65, 70, 66, 53, 69, 67, 56, 52, 49, 69, 48, 56, 65, 68, 49, 55, 49, 65, 69, 49, 52, 65, 51, 57, 55, 50, 48, 57, 56])
+                }
+            },
+            1: {
+                request: bufferize('303036334D353032'),
+                response: 'payshield.translateDataBlock.02'
+            },
+            2: {
+                request: bufferize('303036394D353037'),
+                response: 'payshield.translateDataBlock.07'
+            },
+            3: {
+                request: bufferize('303038314D353131'),
+                response: 'payshield.translateDataBlock.11'
+            }
+        },
+        generateMacEncode: {
+            0: {
+                request: {
+                    modeFlag: '0',
+                    inputFormatFlag: '2',
+                    macSize: '0',
+                    macAlgorithm: '3',
+                    paddingMethod: '1',
+                    keyType: '003',
+                    key: 'U5FFE8014DA383D44C24AB41E37DB252F',
+                    ivLength: 0,
+                    iv: '',
+                    messageLengthHex: '1E',
+                    messageLength: 30,
+                    message: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
+                },
+                response: '303030324D3630323033313030335535464645383031344441333833443434433234414234314533374442323532463030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
+            },
+            1: {
+                request: {
+                    modeFlag: '0',
+                    inputFormatFlag: '0',
+                    macSize: '0',
+                    macAlgorithm: '3',
+                    paddingMethod: '1',
+                    keyType: '008',
+                    key: 'UF759EF72F15F88933CB9B86E54C9DC83',
+                    ivLength: 0,
+                    iv: '',
+                    messageLengthHex: '1E',
+                    messageLength: 30,
+                    message: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
+                },
+                response: '303030324D3630303033313030385546373539454637324631354638383933334342394238364535344339444338333030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
+            }
+        },
+        generateMacDecode: {
+            0: {
+                request: {},
+                response: {}
+            },
+            1: {
+                request: {},
+                response: {}
+            },
+            2: {
+                request: {},
+                response: {}
+            },
+            3: {
+                request: {},
+                response: {}
+            },
+            4: {
+                request: {},
+                response: {}
+            },
+            5: {
+                request: {},
+                response: {}
+            }
         }
-
     }
 };

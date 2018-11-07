@@ -49,6 +49,7 @@
         "responseCode": "BL",
         "requestPattern": "keyType:3/string, pinKey:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string",
         "responsePattern": "errorCode:2/string, offset:12/string",
+        "warnings": ["02"],
         "customResponseError": {
             "03": "Excluded PIN count incorrect",
             "10": "TPK or ZPK parity error",
@@ -175,6 +176,7 @@
         "responseCode": "GP",
         "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
         "responsePattern": "errorCode:2/string",
+        "warnings": ["02"],
         "customResponseError": {
             "01": "PIN Verification failure",
             "10": "BDK parity error",
@@ -182,12 +184,6 @@
             "27": "BDK not double length",
             "68": "Command disabled"
         }
-    },
-    "generateTak": {
-        "requestCode": "HA",
-        "responseCode": "HB",
-        "requestPattern": "tmk:33/string, \";\", keyScheme:1/string, keyScheme1:1/string, \"0\"",
-        "responsePattern": "errorCode:2/string, tpk:33/string, key:33/string"
     },
     "generateRandomPin": {
         "requestCode": "JA",
@@ -231,7 +227,15 @@
         "responseCode": "KX",
         "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, ivac:ivacLength/string-binhex, panLength:panSeqNoLengthLength/string-left-zero, panSeqNo:panSeqNoLength/string-binhex, delimiter1:delimiter1Length/string, branchHeightParams:branchHeightParamsLength/string, atc:2/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter2:delimiter2Length/string, arqc:8/string-binhex, arc:arcLength/string-binhex, csu:csuLength/string-binhex, padLength:padLengthLength/string, pad:padLength/string-binhex",
         "responsePattern": "errorCode:2/string, arpc/binary",
-        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex"
+        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex",
+        "customResponseError": {
+            "01": "ARQC/TC/AAC/MPVV verification failure",
+            "04": "Unrecognized Mode Flag",
+            "05": "Unrecognized Scheme ID",
+            "06": "Invalid YHHHHCC value",
+            "10": "MK parity error",
+            "52": "Invalid Branch/Height"
+        }
     },
     "encryptDataBlockECB": {
         "requestCode": "M0",
@@ -249,28 +253,57 @@
             "05": "Invalid Key Type field",
             "06": "Invalid Message Length field",
             "10": "Encryption Key Parity Error",
-            "35": "Illegal Message Format",
-            "67": "Command not licensed",
-            "68": "Command disabled"
+            "35": "Illegal Message Format"
         }
     },
     "decryptDataBlock": {
         "requestCode": "M2",
         "responseCode": "M3",
         "requestPattern": "modeFlag:2/string, bpsRadixFlag:bpsRadixFlagLength/string, bpsRadixValue:bpsRadixValueLength/string, bpsTweak:bpsTweakLength/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "02": "Invalid Mode Flag field",
+            "03": "Invalid Input Format Flag field",
+            "04": "Invalid Output Format Flag field",
+            "05": "Invalid Key Type field",
+            "06": "Invalid Message Length field",
+            "10": "Decryption Key Parity Error",
+            "35": "Illegal Message Format"
+        }
     },
     "translateDataBlock": {
         "requestCode": "M4",
         "responseCode": "M5",
         "requestPattern": "sourceModeFlag:2/string, destinationModeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, sourceKeyType:3/string, sourceKey:33/string, sourceKsnDescriptor:sourceKsnDescriptorLength/string, sourceKsn:sourceKsnLength/string, destinationKeyType:3/string, destinationKey:33/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourceIv:sourceIvLength/string, destinationIv:destinationIvLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "02": "Invalid Mode Flag field",
+            "03": "Invalid Input Format Flag field",
+            "04": "Invalid Output Format Flag field",
+            "05": "Invalid Key Type field",
+            "06": "Actual Message Length is too Short",
+            "07": "Invalid Destination Mode Flag Field",
+            "08": "Invalid destination Key Type Field",
+            "10": "Decryption Key Parity Error",
+            "11": "Encryption Key Parity Error",
+            "15": "Actual Message Length is too Long",
+            "35": "Illegal Message Format"
+        }
     },
     "generateMac": {
         "requestCode": "M6",
         "responseCode": "M7",
         "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, iv:ivLength/string, messageLengthHex:4/string-left-zero, message:messageLength/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "02": "Invalid Mode Flag field",
+            "03": "Invalid Input Format Flag field",
+            "04": "Invalid MAC Algorithm field",
+            "05": "Invalid Key Type field",
+            "06": "Invalid Message Length field",
+            "09": "Invalid Padding Method field",
+            "10": "MAC Key Parity Error"
+        }
     },
     "verifyMac": {
         "requestCode": "M8",
