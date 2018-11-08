@@ -6,20 +6,19 @@ const errorApi = { getError: get, fetchErrors: fetch, defineError: define };
 const Payshield = require('../../../index');
 const payshield = new Payshield(Object.assign({}, config, errorApi));
 
-const method = 'generateKey';
-const testData = config.test[method];
+const method = 'printPin';
+const testData = config.test[`${method}Encode`];
+const testResults = config.test[`${method}Encode`];
 const $meta = {
     method: method,
     mtid: 'request',
-    trace: 0
+    trace: 2
 };
 const context = {
-    trace: 0
+    trace: 2
 };
-
-tap.test(method, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, context).toString('hex').toUpperCase(), testData[0].response, 'generateKey simple');
-    t.same(payshield.encode(testData[1].request, $meta, context).toString('hex').toUpperCase(), testData[1].response, 'generateKey under ZMK');
+tap.test(`${method}Encode`, (t) => {
+    t.same(payshield.encode(testData[0].request, $meta, context).toString('hex').toUpperCase(), testResults[0].response, 'printPin encode');
 
     t.end();
 });

@@ -3,26 +3,40 @@
         "requestCode": "A0",
         "responseCode": "A1",
         "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLen/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keySchemeZmkTmk:keySchemeZmkTmkLength/string, tr31BlockData:tr31BlockDataLen/string",
-        "responsePattern": "errorCode:2/string, key:33/string, rest/binary"
+        "responsePattern": "errorCode:2/string, key:33/string, rest/binary",
+        "customResponseError": {
+            "10": "ZMK or TMK Parity error"
+        }
     },
     "formKeyFromComponents": {
         "requestCode": "A4",
         "responseCode": "A5",
         "requestPattern": "numberOfComponents:1/string, keyType:3/string, keySchemeLmk:1/string, keyComponents:keyComponentsLength/string",
-        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string"
+        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
+        "customResponseError": {
+            "03": "Invalid number of components",
+            "10": "Component parity error"
+        }
     },
     "importKey": {
         "requestCode": "A6",
         "responseCode": "A7",
         "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string",
         "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
-        "warnings": ["01"]
+        "warnings": ["01"],
+        "customResponseError": {
+            "10": "ZMK Parity error"
+        }
     },
     "exportKey": {
         "requestCode": "A8",
         "responseCode": "A9",
         "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string",
-        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string"
+        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
+        "customResponseError": {
+            "10": "ZMK or TMK Parity error",
+            "11": "Key parity error"
+        }
     },
     "echo": {
         "requestCode": "B2",
@@ -34,37 +48,65 @@
         "requestCode": "BK",
         "responseCode": "BL",
         "requestPattern": "keyType:3/string, pinKey:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string",
-        "responsePattern": "errorCode:2/string, offset:12/string"
+        "responsePattern": "errorCode:2/string, offset:12/string",
+        "warnings": ["02"],
+        "customResponseError": {
+            "03": "Excluded PIN count incorrect",
+            "10": "TPK or ZPK parity error",
+            "11": "PVK parity error",
+            "81": "PIN length mismatch",
+            "86": "PIN exists in either global or local Excluded PIN Table"
+        }
     },
     "generateKeyCheckValue": {
         "requestCode": "BU",
         "responseCode": "BV",
         "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key:keyLength/string, delimiter1:delimiter1Length/string, keyType:keyTypeLength/string, delimiter2:delimiter2Length/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string, hashId:hashIdLength/string, hmacKeyLength:hmacKeyLengthLength/string, hmac:hmacLength/string-binhex, delimiter3:delimiter3Length/string",
-        "responsePattern": "errorCode:2/string, keyCheckValue/binary"
+        "responsePattern": "errorCode:2/string, keyCheckValue/binary",
+        "customResponseError": {
+            "10": "Key parity error"
+        }
     },
     "translatePinTpkZpk": {
         "requestCode": "CA",
         "responseCode": "CB",
         "requestPattern": "sourceTpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string"
+        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
+        "customResponseError": {
+            "10": "Source TPK parity error",
+            "11": "Destination ZPK parity error"
+        }
     },
     "translatePinZpkZpk": {
         "requestCode": "CC",
         "responseCode": "CD",
         "requestPattern": "sourceZpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string"
+        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
+        "customResponseError": {
+            "10": "Source ZPK parity error",
+            "11": "Destination ZPK parity error"
+        }
     },
     "generateCvv": {
         "requestCode": "CW",
         "responseCode": "CX",
         "requestPattern": "cvk:33/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string",
-        "responsePattern": "errorCode:2/string, cvv:3/string"
+        "responsePattern": "errorCode:2/string, cvv:3/string",
+        "customResponseError": {
+            "10": "CVK A or CVK B parity error",
+            "27": "CVK not double length"
+        }
     },
     "verifyCvv": {
         "requestCode": "CY",
         "responseCode": "CZ",
         "requestPattern": "cvk:33/string, cvv:3/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string",
-        "responsePattern": "errorCode:2/string"
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "01": "CVV failed verification",
+            "10": "CVK A or B parity error",
+            "27": "CVK not double length"
+        }
     },
     "verifyTermPinIbm": {
         "requestCode": "DA",
@@ -73,26 +115,46 @@
         "responsePattern": "errorCode:2/string",
         "warnings": ["02"],
         "customResponseError": {
-            "01": "PIN Verification failure"
+            "01": "PIN Verification failure",
+            "10": "TPK parity error",
+            "11": "PVK parity error"
         }
     },
     "generateOffsetIbmLmk": {
         "requestCode": "DE",
         "responseCode": "DF",
         "requestPattern": "pvk:pvkLength/string, pin:encryptedPinLength/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
-        "responsePattern": "errorCode:2/string, offset:12/string"
+        "responsePattern": "errorCode:2/string, offset:12/string",
+        "warnings": ["02"],
+        "customResponseError": {
+            "10": "PVK parity error",
+            "81": "PIN length mismatch",
+            "86": "PIN exists in either global or local Excluded PIN Table"
+        }
     },
     "getPvv": {
         "requestCode": "DG",
         "responseCode": "DH",
         "requestPattern": "pvk:pvkLength/string, pin:encryptedPinLength/string, account:12/string, pvki:1/string",
-        "responsePattern": "errorCode:2/string, pvv:4/string"
+        "responsePattern": "errorCode:2/string, pvv:4/string",
+        "customResponseError": {
+            "10": "PVK parity error",
+            "27": "PVK not double length",
+            "81": "PIN length mismatch",
+            "86": "PIN exists in either global or local Excluded PIN Table"
+        }
     },
     "derivePinIbm": {
         "requestCode": "EE",
         "responseCode": "EF",
         "requestPattern": "pvk:pvkLength/string, offset:12/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
+        "responsePattern": "errorCode:2/string, pin/binary",
+        "warnings": ["02"],
+        "customResponseError": {
+            "10": "PVK parity error",
+            "81": "PIN length mismatch",
+            "86": "PIN exists in either global or local Excluded PIN Table"
+        }
     },
     "translateZekZakLmkZmk": {
         "requestCode": "FM",
@@ -103,23 +165,25 @@
     "hashDataBlock": {
         "requestCode": "GM",
         "responseCode": "GN",
-        "requestPattern": "hashId:2/string, dataLength:5/string-left-zero, messageData:messageDataLength/string-binhex",
-        "responsePattern": "errorCode:2/string, hash/binary"
+        "requestPattern": "hashId:2/string, messageDataLength:5/string-left-zero, messageData:messageDataLength/string-binhex",
+        "responsePattern": "errorCode:2/string, hash/binary",
+        "customResponseError": {
+            "05": "Invalid hash identifier"
+        }
     },
     "verifyOffsetIbmDukpt": {
         "requestCode": "GO",
         "responseCode": "GP",
         "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
         "responsePattern": "errorCode:2/string",
+        "warnings": ["02"],
         "customResponseError": {
-            "01": "PIN Verification failure"
+            "01": "PIN Verification failure",
+            "10": "BDK parity error",
+            "11": "PVK error",
+            "27": "BDK not double length",
+            "68": "Command disabled"
         }
-    },
-    "generateTak": {
-        "requestCode": "HA",
-        "responseCode": "HB",
-        "requestPattern": "tmk:33/string, \";\", keyScheme:1/string, keyScheme1:1/string, \"0\"",
-        "responsePattern": "errorCode:2/string, tpk:33/string, key:33/string"
     },
     "generateRandomPin": {
         "requestCode": "JA",
@@ -142,7 +206,7 @@
     "generateArqc3": {
         "requestCode": "KQ",
         "responseCode": "KR",
-        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter:delimiterLength/string, arqc:8/string-binhex, arc:arcLength/string-binhex",
+        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, mksmi:mksmiLength/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter:delimiterLength/string, arqc:8/string-binhex, arc:arcLength/string-binhex, discretionaryDataMac:discretionaryDataMacLength/string-binhex, discretionaryDataBytes:discretionaryDataBytesLength/string, discretionaryData:discretionaryDataLength/string-binhex",
         "responsePattern": "errorCode:2/string, arpc/binary",
         "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex",
         "customResponseError": {
@@ -163,7 +227,15 @@
         "responseCode": "KX",
         "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, ivac:ivacLength/string-binhex, panLength:panSeqNoLengthLength/string-left-zero, panSeqNo:panSeqNoLength/string-binhex, delimiter1:delimiter1Length/string, branchHeightParams:branchHeightParamsLength/string, atc:2/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter2:delimiter2Length/string, arqc:8/string-binhex, arc:arcLength/string-binhex, csu:csuLength/string-binhex, padLength:padLengthLength/string, pad:padLength/string-binhex",
         "responsePattern": "errorCode:2/string, arpc/binary",
-        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex"
+        "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex",
+        "customResponseError": {
+            "01": "ARQC/TC/AAC/MPVV verification failure",
+            "04": "Unrecognized Mode Flag",
+            "05": "Unrecognized Scheme ID",
+            "06": "Invalid YHHHHCC value",
+            "10": "MK parity error",
+            "52": "Invalid Branch/Height"
+        }
     },
     "encryptDataBlockECB": {
         "requestCode": "M0",
@@ -181,34 +253,73 @@
             "05": "Invalid Key Type field",
             "06": "Invalid Message Length field",
             "10": "Encryption Key Parity Error",
-            "35": "Illegal Message Format",
-            "67": "Command not licensed",
-            "68": "Command disabled"
+            "35": "Illegal Message Format"
         }
     },
     "decryptDataBlock": {
         "requestCode": "M2",
         "responseCode": "M3",
         "requestPattern": "modeFlag:2/string, bpsRadixFlag:bpsRadixFlagLength/string, bpsRadixValue:bpsRadixValueLength/string, bpsTweak:bpsTweakLength/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "02": "Invalid Mode Flag field",
+            "03": "Invalid Input Format Flag field",
+            "04": "Invalid Output Format Flag field",
+            "05": "Invalid Key Type field",
+            "06": "Invalid Message Length field",
+            "10": "Decryption Key Parity Error",
+            "35": "Illegal Message Format"
+        }
     },
     "translateDataBlock": {
         "requestCode": "M4",
         "responseCode": "M5",
         "requestPattern": "sourceModeFlag:2/string, destinationModeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, sourceKeyType:3/string, sourceKey:33/string, sourceKsnDescriptor:sourceKsnDescriptorLength/string, sourceKsn:sourceKsnLength/string, destinationKeyType:3/string, destinationKey:33/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourceIv:sourceIvLength/string, destinationIv:destinationIvLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "02": "Invalid Mode Flag field",
+            "03": "Invalid Input Format Flag field",
+            "04": "Invalid Output Format Flag field",
+            "05": "Invalid Key Type field",
+            "06": "Actual Message Length is too Short",
+            "07": "Invalid Destination Mode Flag Field",
+            "08": "Invalid destination Key Type Field",
+            "10": "Decryption Key Parity Error",
+            "11": "Encryption Key Parity Error",
+            "15": "Actual Message Length is too Long",
+            "35": "Illegal Message Format"
+        }
     },
     "generateMac": {
         "requestCode": "M6",
         "responseCode": "M7",
         "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, iv:ivLength/string, messageLengthHex:4/string-left-zero, message:messageLength/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "02": "Invalid Mode Flag field",
+            "03": "Invalid Input Format Flag field",
+            "04": "Invalid MAC Algorithm field",
+            "05": "Invalid Key Type field",
+            "06": "Invalid Message Length field",
+            "09": "Invalid Padding Method field",
+            "10": "MAC Key Parity Error"
+        }
     },
     "verifyMac": {
         "requestCode": "M8",
         "responseCode": "M9",
         "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, messageLengthHex:4/string-left-zero, message:messageLength/string, mac:macLength/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "01": "MAC verification failed",
+            "02": "Invalid Mode Flag field",
+            "03": "Invalid Input Format Flag field",
+            "04": "Invalid MAC Algorithm field",
+            "05": "Invalid Key Type field",
+            "06": "Invalid Message Length field",
+            "09": "Invalid Padding Method field",
+            "10": "MAC Key Parity Error"
+        }
     },
     "printFormat": {
         "requestCode": "PA",
@@ -230,22 +341,26 @@
     },
     "printPinEnd": {
         "responseCode": "PZ",
-        "responsePattern": "errorCode:2/string"
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "16": "Printer not ready/disconnected",
+            "41": "Internal hardware/software error"
+        }
     },
     "printTmkMailer": {
         "requestCode": "TA",
         "responseCode": "TB",
         "requestPattern": "tmk:33/string, printFields:printFieldsLength/string",
-        "responsePattern": "errorCode:2/string"
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "10": "TMK parity error"
+        }
     },
     "printTmkMailerEnd": {
         "responseCode": "TZ",
-        "responsePattern": "errorCode:2/string"
-    },
-    "test": {
-        "requestCode": "TT",
-        "responseCode": "TU",
-        "requestPattern": "value:4/string-binhex, st:4/string",
-        "responsePattern": "errorCode:2/string"
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "16": "Printer time out"
+        }
     }
 }

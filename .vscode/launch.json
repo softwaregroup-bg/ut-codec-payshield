@@ -4,6 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Single test",
+            "program": "${workspaceFolder}/test/unit/cases/test.unit.generateArqc3Decode",
+            "outputCapture": "std"
+        },
       	{
             "name": "Unit tests",
             "type": "node",
@@ -14,7 +21,7 @@
                 "-J",
                 "-T",
                 "--node-arg=--preserve-symlinks",
-                "test/unit"
+                "test/unit/cases"
             ],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": null,
