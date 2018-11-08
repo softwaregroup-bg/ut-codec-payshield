@@ -309,7 +309,17 @@
         "requestCode": "M8",
         "responseCode": "M9",
         "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, messageLengthHex:4/string-left-zero, message:messageLength/string, mac:macLength/string",
-        "responsePattern": "errorCode:2/string, rest/binary"
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "01": "MAC verification failed",
+            "02": "Invalid Mode Flag field",
+            "03": "Invalid Input Format Flag field",
+            "04": "Invalid MAC Algorithm field",
+            "05": "Invalid Key Type field",
+            "06": "Invalid Message Length field",
+            "09": "Invalid Padding Method field",
+            "10": "MAC Key Parity Error"
+        }
     },
     "printFormat": {
         "requestCode": "PA",
@@ -331,22 +341,26 @@
     },
     "printPinEnd": {
         "responseCode": "PZ",
-        "responsePattern": "errorCode:2/string"
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "16": "Printer not ready/disconnected",
+            "41": "Internal hardware/software error"
+        }
     },
     "printTmkMailer": {
         "requestCode": "TA",
         "responseCode": "TB",
         "requestPattern": "tmk:33/string, printFields:printFieldsLength/string",
-        "responsePattern": "errorCode:2/string"
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "10": "TMK parity error"
+        }
     },
     "printTmkMailerEnd": {
         "responseCode": "TZ",
-        "responsePattern": "errorCode:2/string"
-    },
-    "test": {
-        "requestCode": "TT",
-        "responseCode": "TU",
-        "requestPattern": "value:4/string-binhex, st:4/string",
-        "responsePattern": "errorCode:2/string"
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "16": "Printer time out"
+        }
     }
 }

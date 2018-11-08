@@ -1471,28 +1471,199 @@ module.exports = {
         },
         generateMacDecode: {
             0: {
-                request: {},
-                response: {}
+                request: bufferize('303034384D3730304335374534323935'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([67, 53, 55, 69, 52, 50, 57, 53])
+                }
             },
             1: {
-                request: {},
-                response: {}
+                request: bufferize('303034384D3730304246323637363545'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([66, 70, 50, 54, 55, 54, 53, 69])
+                }
             },
             2: {
-                request: {},
-                response: {}
+                request: bufferize('303030304D373032'),
+                response: 'payshield.generateMac.02'
             },
             3: {
-                request: {},
-                response: {}
+                request: bufferize('303030344D373033'),
+                response: 'payshield.generateMac.03'
             },
             4: {
-                request: {},
-                response: {}
+                request: bufferize('303030314D373035'),
+                response: 'payshield.generateMac.05'
             },
             5: {
-                request: {},
-                response: {}
+                request: bufferize('303030384D373130'),
+                response: 'payshield.generateMac.10'
+            }
+        },
+        verifyMacEncode: {
+            0: {
+                request: {
+                    modeFlag: '0',
+                    inputFormatFlag: '2',
+                    macSize: '0',
+                    macAlgorithm: '3',
+                    paddingMethod: '1',
+                    keyType: '003',
+                    key: 'U5FFE8014DA383D44C24AB41E37DB252F',
+                    ivLength: 0,
+                    iv: '',
+                    messageLengthHex: '1E',
+                    messageLength: 30,
+                    message: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
+                    macLength: 8,
+                    mac: 'C57E4295'
+                },
+                response: '303030324D3830323033313030335535464645383031344441333833443434433234414234314533374442323532463030314532321C3030323030303030311C1C30353135313030391C461C36303030304335374534323935'
+            },
+            1: {
+                request: {
+                    modeFlag: '0',
+                    inputFormatFlag: '0',
+                    macSize: '0',
+                    macAlgorithm: '3',
+                    paddingMethod: '1',
+                    keyType: '008',
+                    key: 'UF759EF72F15F88933CB9B86E54C9DC83',
+                    ivLength: 0,
+                    iv: '',
+                    messageLengthHex: '1E',
+                    messageLength: 30,
+                    message: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
+                    macLength: 8,
+                    mac: 'BF26765E'
+                },
+                response: '303030324D3830303033313030385546373539454637324631354638383933334342394238364535344339444338333030314532321C3030323030303030311C1C30353135313030391C461C36303030304246323637363545'
+            }
+        },
+        verifyMacDecode: {
+            0: {
+                request: bufferize('303034324D393030'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([])
+                }
+            },
+            1: {
+                request: bufferize('303036334D393030'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([])
+                }
+            },
+            2: {
+                request: bufferize('303030304D393031'),
+                response: 'payshield.verifyMac.01'
+            },
+            3: {
+                request: bufferize('303031314D393032'),
+                response: 'payshield.verifyMac.02'
+            },
+            4: {
+                request: bufferize('303031374D393033'),
+                response: 'payshield.verifyMac.03'
+            },
+            5: {
+                request: bufferize('303032384D393033'),
+                response: 'payshield.verifyMac.03'
+            },
+            6: {
+                request: bufferize('303033354D393130'),
+                response: 'payshield.verifyMac.10'
+            }
+        },
+        printFormatEncode: {
+            0: {
+                request: {
+                    printFieldsLength: 54,
+                    printFields: '>L>L>L>L>005^1>L>L>005^3>L>L>L>L>L>L>L>030^P>L>L>L>L>L'
+                },
+                response: '3030303250413E4C3E4C3E4C3E4C3E3030355E313E4C3E4C3E3030355E333E4C3E4C3E4C3E4C3E4C3E4C3E4C3E3033305E503E4C3E4C3E4C3E4C3E4C'
+            }
+        },
+        printFormatDecode: {
+            0: {
+                request: bufferize('3035333450423030'),
+                response: {
+                    errorCode: '00'
+                }
+            }
+        },
+        printPinEncode: {
+            0: {
+                request: {
+                    documentType: 'C',
+                    account: '540008900009',
+                    pin: '0302477',
+                    encryptedPinLength: 7,
+                    printFieldsLength: 13,
+                    printFields: ';Krasi;;Kolev'
+                },
+                response: '30303032504543353430303038393030303039303330323437373B4B726173693B3B4B6F6C6576'
+            }
+        },
+        printPinDecode: {
+            0: {
+                request: bufferize('303035305046303034393634393238343135343439333337323735'),
+                response: {
+                    errorCode: '00',
+                    checkValue: bufferize([52, 57, 54, 52, 57, 50, 56, 52, 49, 53, 52, 52, 57, 51, 51, 55, 50, 55, 53])
+                }
+            },
+            1: {
+                request: bufferize('3031313050463135'),
+                response: 'payshield.printPin.15'
+            }
+        },
+        printPinEndDecode: {
+            0: {
+                request: bufferize('30313335505A3030'),
+                response: {
+                    errorCode: '00'
+                }
+            },
+            1: {
+                request: bufferize('3030363350463136'),
+                response: 'payshield.printPin.16'
+            }
+        },
+        printTmkMailerEncode: {
+            0: {
+                request: {
+                    tmk: 'U653BDD7BF37AC36B160D787BD306877B',
+                    printFieldsLength: 25,
+                    printFields: 'field0;Krasi;Kolev;444A82'
+                },
+                response: '3030303254415536353342444437424633374143333642313630443738374244333036383737426669656C64303B4B726173693B4B6F6C65763B343434413832'
+            }
+        },
+        printTmkMailerDecode: {
+            0: {
+                request: bufferize('3033393054423030'),
+                response: {
+                    errorCode: '00'
+                }
+            },
+            1: {
+                request: bufferize('3030303054423130'),
+                response: 'payshield.printTmkMailer.10'
+            },
+            2: {
+                request: bufferize('3030303054423136'),
+                response: 'payshield.printTmkMailer.16'
+            }
+        },
+        printTmkMailerEndDecode: {
+            0: {
+                request: bufferize('30333930545A3030'),
+                response: {
+                    errorCode: '00'
+                }
             }
         }
     }

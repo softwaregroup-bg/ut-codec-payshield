@@ -19,9 +19,11 @@ const context = {
 };
 tap.test(`${method}Decode`, (t) => {
     t.same(payshield.decode(testData[0].request, $meta, context), testResults[0].response, 'generateMac decode, set 1, success');
-    // t.same(payshield.decode(testData[1].request, $meta, context).type, testResults[1].response, 'generateMac decode, Invalid Mode Flag field');
-    // t.same(payshield.decode(testData[2].request, $meta, context).type, testResults[2].response, 'generateMac decode, Invalid Destination Mode Flag field');
-    // t.same(payshield.decode(testData[3].request, $meta, context).type, testResults[3].response, 'generateMac decode, Encryption Key Parity Error');
+    t.same(payshield.decode(testData[1].request, $meta, context), testResults[1].response, 'generateMac decode, set 2, success');
+    t.same(payshield.decode(testData[2].request, $meta, context).type, testResults[2].response, 'generateMac decode, Invalid Mode Flag field');
+    t.same(payshield.decode(testData[3].request, $meta, context).type, testResults[3].response, 'generateMac decode, Invalid Input Format Flag field');
+    t.same(payshield.decode(testData[4].request, $meta, context).type, testResults[4].response, 'generateMac decode, Invalid Key Type field');
+    t.same(payshield.decode(testData[5].request, $meta, context).type, testResults[5].response, 'generateMac decode, MAC Key Parity Error');
 
     t.end();
 });
