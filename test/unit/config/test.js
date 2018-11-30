@@ -770,7 +770,7 @@ module.exports = {
                 response: 'payshield.generateOffsetIbmLmk.15'
             }
         },
-        getPvvEncode: {
+        generatePvvLmkEncode: {
             0: {
                 request: {
                     'pvkLength': 33,
@@ -794,7 +794,7 @@ module.exports = {
                 response: '303030324447553737333338463734413139453342423339303632413541343739343733464338353836353230383835303232363530303030393234'
             }
         },
-        getPvvDecode: {
+        generatePvvLmkDecode: {
             0: {
                 request: bufferize('303031364448303038313536'),
                 response: {
@@ -811,11 +811,11 @@ module.exports = {
             },
             2: {
                 request: bufferize('3030303044483130'),
-                response: 'payshield.getPvv.10'
+                response: 'payshield.generatePvvLmk.10'
             },
             3: {
                 request: bufferize('3030313144483135'),
-                response: 'payshield.getPvv.15'
+                response: 'payshield.generatePvvLmk.15'
             }
         },
         derivePinIbmEncode: {
