@@ -1665,6 +1665,181 @@ module.exports = {
                     errorCode: '00'
                 }
             }
+        },
+        generatePvvEncode: {
+            0: {
+                request: {
+                    keyType: '002',
+                    key: 'U3027C895181D912A91D7DF0ED78AC6FB',
+                    pvkLength: 33,
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    pinBlock: 'A69F9E7646904B68',
+                    pinBlockFormat: '01',
+                    pan: '540008900009',
+                    pvki: '4'
+                },
+                response: '30303032465730303255333032374338393531383144393132413931443744463045443738414336464255383041453346384436334230384639433133363532453534313644373645384441363946394537363436393034423638303135343030303839303030303934'
+            },
+            1: {
+                request: {
+                    keyType: '001',
+                    key: 'UBB224A0D70899E7D216A4DDDA615C078',
+                    pvkLength: 33,
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    pinBlock: 'ED42DE5980AB024B',
+                    pinBlockFormat: '01',
+                    pan: '600000000000',
+                    pvki: '4'
+                },
+                response: '30303032465730303155424232323441304437303839394537443231364134444444413631354330373855383041453346384436334230384639433133363532453534313644373645384445443432444535393830414230323442303136303030303030303030303034'
+            }
+        },
+        generatePvvDecode: {
+            0: {
+                request: bufferize('303033304658303032393134'),
+                response: {
+                    errorCode: '00',
+                    pvv: '2914'
+                }
+            },
+            1: {
+                request: bufferize('303038314658303031383335'),
+                response: {
+                    errorCode: '00',
+                    pvv: '1835'
+                }
+            },
+            2: {
+                request: bufferize('3030303746583130'),
+                response: 'payshield.generatePvv.10'
+            },
+            3: {
+                request: bufferize('3030323646583233'),
+                response: 'payshield.generatePvv.23'
+            }
+        },
+        verifyTermPinPvvEncode: {
+            0: {
+                request: {
+                    tpk: 'U3027C895181D912A91D7DF0ED78AC6FB',
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    pvkLength: 33,
+                    pinBlock: 'A69F9E7646904B68',
+                    pinBlockFormat: '01',
+                    pan: '540008900009',
+                    pvki: '4',
+                    pvv: '2914'
+                },
+                response: '3030303244435533303237433839353138314439313241393144374446304544373841433646425538304145334638443633423038463943313336353245353431364437364538444136394639453736343639303442363830313534303030383930303030393432393134'
+            }
+        },
+        verifyTermPinPvvDecode: {
+            0: {
+                request: bufferize('3032323044443030'),
+                response: {
+                    errorCode: '00'
+                }
+            },
+            1: {
+                request: bufferize('3032323544443031'),
+                response: 'payshield.verifyTermPinPvv.01'
+            },
+            2: {
+                request: bufferize('3032323844443130'),
+                response: 'payshield.verifyTermPinPvv.10'
+            },
+            3: {
+                request: bufferize('3032323944443131'),
+                response: 'payshield.verifyTermPinPvv.11'
+            },
+            4: {
+                request: bufferize('3032333344443135'),
+                response: 'payshield.verifyTermPinPvv.15'
+            }
+        },
+        verifyPinGeneratePvvEncode: {
+            0: {
+                request: {
+                    keyType: '002',
+                    key: 'U948B74933EAAD46C6B8BDEAD1550AF2A',
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    sourcePinBlock: '2FDC581AC25C9640',
+                    sourcePinBlockFormat: '01',
+                    pan: '540008900009',
+                    pvki: '4',
+                    sourcePvv: '2914',
+                    destinationPinBlock: 'B2766AACF790B197'
+                },
+                response: '303030324355303032553934384237343933334541414434364336423842444541443135353041463241553830414533463844363342303846394331333635324535343136443736453844324644433538314143323543393634303031353430303038393030303039343239313442323736364141434637393042313937'
+            }
+        },
+        verifyPinGeneratePvvDecode: {
+            0: {
+                request: bufferize('303030314356303033383736'),
+                response: {
+                    errorCode: '00',
+                    pvv: '3876'
+                }
+            },
+            1: {
+                request: bufferize('3030303343563031'),
+                response: 'payshield.verifyPinGeneratePvv.01'
+            },
+            2: {
+                request: bufferize('3030303543563130'),
+                response: 'payshield.verifyPinGeneratePvv.10'
+            },
+            3: {
+                request: bufferize('3030303843563131'),
+                response: 'payshield.verifyPinGeneratePvv.11'
+            },
+            4: {
+                request: bufferize('3030313043563230'),
+                response: 'payshield.verifyPinGeneratePvv.20'
+            }
+        },
+        verifyInterPinPvvEncode: {
+            0: {
+                request: {
+                    zpk: 'UBB224A0D70899E7D216A4DDDA615C078',
+                    pvkLength: 33,
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    pinBlock: 'ED42DE5980AB024B',
+                    pinBlockFormat: '01',
+                    pan: '600000000000',
+                    delimiterLength: 0,
+                    delimiter: '',
+                    verificationPanLength: 0,
+                    verificationPan: '',
+                    pvki: '4',
+                    pvv: '1835'
+                },
+                response: '3030303245435542423232344130443730383939453744323136413444444441363135433037385538304145334638443633423038463943313336353245353431364437364538444544343244453539383041423032344230313630303030303030303030303431383335'
+            }
+        },
+        verifyInterPinPvvDecode: {
+            0: {
+                request: bufferize('3030303445443030'),
+                response: {
+                    errorCode: '00'
+                }
+            },
+            1: {
+                request: bufferize('3031313345443031'),
+                response: 'payshield.verifyInterPinPvv.01'
+            },
+            2: {
+                request: bufferize('3031313545443130'),
+                response: 'payshield.verifyInterPinPvv.10'
+            },
+            3: {
+                request: bufferize('3031313745443131'),
+                response: 'payshield.verifyInterPinPvv.11'
+            },
+            4: {
+                request: bufferize('3031313845443135'),
+                response: 'payshield.verifyInterPinPvv.15'
+            }
         }
     }
 };

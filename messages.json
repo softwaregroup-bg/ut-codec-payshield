@@ -87,6 +87,20 @@
             "11": "Destination ZPK parity error"
         }
     },
+    "verifyPinGeneratePvv": {
+        "requestCode": "CU",
+        "responseCode": "CV",
+        "requestPattern": "keyType:3/string, key:33/string, pvk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, pan:12/string, pvki:1/string, sourcePvv:4/string, destinationPinBlock:16/string",
+        "responsePattern": "errorCode:2/string, pvv:4/string",
+        "customResponseError": {
+            "01": "PIN Verification failure",
+            "10": "PIN Block Key parity error",
+            "11": "PVK parity error",
+            "27": "PVK not double length",
+            "81": "PIN length mismatch",
+            "86": "PIN exists in either global or local Excluded PIN Table"
+        }
+    },
     "generateCvv": {
         "requestCode": "CW",
         "responseCode": "CX",
@@ -111,13 +125,25 @@
     "verifyTermPinIbm": {
         "requestCode": "DA",
         "responseCode": "DB",
-        "requestPattern": "tpk:33/string, pvk:pvkLength/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
+        "requestPattern": "tpk:33/string, pvk:pvkLength/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
         "responsePattern": "errorCode:2/string",
         "warnings": ["02"],
         "customResponseError": {
             "01": "PIN Verification failure",
             "10": "TPK parity error",
             "11": "PVK parity error"
+        }
+    },
+    "verifyTermPinPvv": {
+        "requestCode": "DC",
+        "responseCode": "DD",
+        "requestPattern": "tpk:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, pvki:1/string, pvv:4/string",
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "01": "PIN verification failure",
+            "10": "TPK parity error",
+            "11": "PVK parity error",
+            "27": "PVK not double length"
         }
     },
     "generateOffsetIbmLmk": {
@@ -132,7 +158,7 @@
             "86": "PIN exists in either global or local Excluded PIN Table"
         }
     },
-    "getPvv": {
+    "generatePvvLmk": {
         "requestCode": "DG",
         "responseCode": "DH",
         "requestPattern": "pvk:pvkLength/string, pin:encryptedPinLength/string, account:12/string, pvki:1/string",
@@ -142,6 +168,18 @@
             "27": "PVK not double length",
             "81": "PIN length mismatch",
             "86": "PIN exists in either global or local Excluded PIN Table"
+        }
+    },
+    "verifyInterPinPvv": {
+        "requestCode": "EC",
+        "responseCode": "ED",
+        "requestPattern": "zpk:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiter:delimiterLength/string, verificationPan:verificationPanLength/string, pvki:1/string, pvv:4/string",
+        "responsePattern": "errorCode:2/string",
+        "customResponseError": {
+            "01": "PIN verification failure",
+            "10": "ZPK parity error",
+            "11": "PVK parity error",
+            "27": "PVK not double length"
         }
     },
     "derivePinIbm": {
@@ -162,6 +200,18 @@
         "requestPattern": "flag:1/string, zmk:33/string, zek:zekLength/string, zak:zakLength/string, atallaVariant:atallaVariantLength/string, delimiter:delimiterLength/string, keySchemeZmk:keySchemeZmkLength/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string",
         "responsePattern": "errorCode:2/string, responseData/binary"
     },
+    "generatePvv": {
+        "requestCode": "FW",
+        "responseCode": "FX",
+        "requestPattern": "keyType:3/string, key:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, pvki:1/string",
+        "responsePattern": "errorCode:2/string, pvv:4/string",
+        "customResponseError": {
+            "10": "PVK parity error",
+            "27": "PVK not double length",
+            "81": "PIN length mismatch",
+            "86": "PIN exists in either global or local Excluded PIN Table"
+        }
+    },
     "hashDataBlock": {
         "requestCode": "GM",
         "responseCode": "GN",
@@ -174,7 +224,7 @@
     "verifyOffsetIbmDukpt": {
         "requestCode": "GO",
         "responseCode": "GP",
-        "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
+        "requestPattern": "mode:1/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
         "responsePattern": "errorCode:2/string",
         "warnings": ["02"],
         "customResponseError": {
@@ -194,13 +244,13 @@
     "translatePinTpkLmk": {
         "requestCode": "JC",
         "responseCode": "JD",
-        "requestPattern": "sourceTpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string",
+        "requestPattern": "sourceTpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, pan:12/string",
         "responsePattern": "errorCode:2/string, pin/binary"
     },
     "translatePinZpkLmk": {
         "requestCode": "JE",
         "responseCode": "JF",
-        "requestPattern": "sourceZpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, account:12/string",
+        "requestPattern": "sourceZpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, pan:12/string",
         "responsePattern": "errorCode:2/string, pin/binary"
     },
     "generateArqc3": {
