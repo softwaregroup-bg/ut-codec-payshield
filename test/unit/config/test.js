@@ -660,7 +660,7 @@ module.exports = {
                     pinBlock: 'A69F9E7646904B68',
                     pinBlockFormat: '01',
                     checkLength: '06',
-                    account: '540008900009',
+                    pan: '540008900009',
                     decimalisationTable: '0123456789123456',
                     pinValidationData: '5022654000N2',
                     offset: '876955FFFFFF'
@@ -676,7 +676,7 @@ module.exports = {
                     pinBlock: 'A69F9E7646904B68',
                     pinBlockFormat: '01',
                     checkLength: '06',
-                    account: '540008900009',
+                    pan: '540008900009',
                     decimalisationTable: '5432109876543210',
                     pinValidationData: '5022654000N2',
                     offset: '757798FFFFFF'
