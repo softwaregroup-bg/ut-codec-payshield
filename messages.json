@@ -256,7 +256,7 @@
     "generateVerifyMacDukpt": {
         "requestCode": "GW",
         "responseCode": "GX",
-        "requestPattern": "macMode:1/string, macMethod:1/string, bdk:33/string, ksnDescriptor:3/string, ksn:ksnLength/string, mac:macLength/string, messageDataLengthBytes:4/string-left-zero, messageData:messageDataLength/string",
+        "requestPattern": "macMode:1/string, macMethod:1/string, bdk:33/string, ksnDescriptor:3/string, ksn:ksnLength/string, mac:macLength/string, messageDataLengthBytes:4/string-left-zero, messageData:messageDataLengthBytes/string-binhex",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "01": "MAC Verification Failure"
