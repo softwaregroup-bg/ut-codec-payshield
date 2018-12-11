@@ -1840,6 +1840,66 @@ module.exports = {
                 request: bufferize('3031313845443135'),
                 response: 'payshield.verifyInterPinPvv.15'
             }
+        },
+        generateVerifyMacDukptEncode: {
+            0: {
+                request: {
+                    macMode: '4',
+                    macMethod: '1',
+                    bdk: 'U99805903FDC563240A118DE88DAE0536',
+                    ksnDescriptor: 'A05',
+                    ksnLength: 20,
+                    ksn: 'FFFF000001315240000F',
+                    macLength: 0,
+                    mac: '',
+                    messageDataLengthBytes: 8,
+                    messageData: 'ABCABCABCDEF8000'
+                },
+                response: bufferize('3030303247573431553939383035393033464443353633323430413131384445383844414530353336413035464646463030303030313331353234303030304630303038ABCABCABCDEF8000')
+            },
+            1: {
+                request: {
+                    macMode: '1',
+                    macMethod: '1',
+                    bdk: 'U99805903FDC563240A118DE88DAE0536',
+                    ksnDescriptor: 'A05',
+                    ksnLength: 20,
+                    ksn: 'FFFF000001315240000F',
+                    macLength: 16,
+                    mac: '40BDD0ED6B9FBCBE',
+                    messageDataLengthBytes: 8,
+                    messageData: 'ABCABCABCDEF8000'
+                },
+                response: bufferize('303030324757313155393938303539303346444335363332343041313138444538384441453035333641303546464646303030303031333135323430303030463430424444304544364239464243424530303038ABCABCABCDEF8000')
+            }
+        },
+        generateVerifyMacDukptDecode: {
+            0: {
+                request: bufferize('303030304758303034304244443045443642394642434245'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([52, 48, 66, 68, 68, 48, 69, 68, 54, 66, 57, 70, 66, 67, 66, 69])
+                }
+            },
+            1: {
+                request: bufferize('3030303147583030'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([])
+                }
+            },
+            2: {
+                request: bufferize('3030303647583031'),
+                response: 'payshield.generateVerifyMacDukpt.01'
+            },
+            3: {
+                request: bufferize('3030303747583130'),
+                response: 'payshield.generateVerifyMacDukpt.10'
+            },
+            4: {
+                request: bufferize('3030303947583135'),
+                response: 'payshield.generateVerifyMacDukpt.15'
+            }
         }
     }
 };
