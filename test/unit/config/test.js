@@ -554,6 +554,48 @@ module.exports = {
                 response: 'payshield.translatePinZpkZpk.20'
             }
         },
+        translatePinBdkZpkEncode: {
+            0: {
+                request: {
+                    destinationPinBlockFormat: '01',
+                    destinationZpk: 'U3CBFC71309FC372E9A32EA67BE4C81C9',
+                    ksn: 'FFFF000001315240003A',
+                    ksnDescriptor: 'A05',
+                    pan: '540008900009',
+                    sourceBdk: 'U3702EF0DEF15CB6DD5367784A7102C3E',
+                    sourcePinBlock: '496F07B85222517D',
+                    sourcePinBlockFormat: '01'
+                },
+                response: '303030303034473055333730324546304445463135434236444435333637373834413731303243334555334342464337313330394643333732453941333245413637424534433831433941303546464646303030303031333135323430303033413439364630374238353232323531374430313031353430303038393030303039'
+            }
+        },
+        translatePinBdkZpkDecode: {
+            0: {
+                request: bufferize('303030303034473130303036373544423044314144443937354346383031'),
+                response: {
+                    errorCode: '00',
+                    checkLength: '06',
+                    destinationPinBlock: '75DB0D1ADD975CF8',
+                    pinBlockFormat: '01'
+                }
+            },
+            1: {
+                request: bufferize('3032373143443130'),
+                response: 'payshield.translatePinBdkZpk.10'
+            },
+            2: {
+                request: bufferize('3032373643443131'),
+                response: 'payshield.translatePinBdkZpk.11'
+            },
+            3: {
+                request: bufferize('3033303143443233'),
+                response: 'payshield.translatePinBdkZpk.23'
+            },
+            4: {
+                request: bufferize('3033313043443230'),
+                response: 'payshield.translatePinBdkZpk.20'
+            }
+        },
         generateCvvEncode: {
             0: {
                 request: {
