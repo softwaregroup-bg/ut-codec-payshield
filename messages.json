@@ -77,14 +77,14 @@
             "11": "Destination ZPK parity error"
         }
     },
-    "translatePinZpkZpk": {
-        "requestCode": "CC",
-        "responseCode": "CD",
-        "requestPattern": "sourceZpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
+    "translatePinBdkZpk": {
+        "requestCode": "G0",
+        "responseCode": "G1",
+        "requestPattern": "sourceBdk:33/string, destinationZpk:33/string, ksnDescriptor:3/string, ksn:20/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
         "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
         "customResponseError": {
-            "10": "Source ZPK parity error",
-            "11": "Destination ZPK parity error"
+            "10": "BDK parity error",
+            "11": "Interchange key parity error"
         }
     },
     "verifyPinGeneratePvv": {
