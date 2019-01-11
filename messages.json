@@ -94,7 +94,8 @@
         "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
         "customResponseError": {
             "10": "BDK parity error",
-            "11": "Interchange key parity error"
+            "11": "Interchange key parity error",
+            "27": "BDK not double or triple length"
         }
     },
     "verifyPinGeneratePvv": {
