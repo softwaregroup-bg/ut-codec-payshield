@@ -566,12 +566,12 @@ module.exports = {
                     sourcePinBlock: '496F07B85222517D',
                     sourcePinBlockFormat: '01'
                 },
-                response: '303030303034473055333730324546304445463135434236444435333637373834413731303243334555334342464337313330394643333732453941333245413637424534433831433941303546464646303030303031333135323430303033413439364630374238353232323531374430313031353430303038393030303039'
+                response: '30303131473055333730324546304445463135434236444435333637373834413731303243334555334342464337313330394643333732453941333245413637424534433831433941303546464646303030303031333135323430303033413439364630374238353232323531374430313031353430303038393030303039'
             }
         },
         translatePinBdkZpkDecode: {
             0: {
-                request: bufferize('303030303034473130303036373544423044314144443937354346383031'),
+                request: bufferize('30303034473130303036373544423044314144443937354346383031'),
                 response: {
                     errorCode: '00',
                     checkLength: '06',
@@ -580,19 +580,19 @@ module.exports = {
                 }
             },
             1: {
-                request: bufferize('3032373143443130'),
+                request: bufferize('3032373147313130'),
                 response: 'payshield.translatePinBdkZpk.10'
             },
             2: {
-                request: bufferize('3032373643443131'),
+                request: bufferize('3032373147313131'),
                 response: 'payshield.translatePinBdkZpk.11'
             },
             3: {
-                request: bufferize('3033303143443233'),
+                request: bufferize('3032373147313233'),
                 response: 'payshield.translatePinBdkZpk.23'
             },
             4: {
-                request: bufferize('3033313043443230'),
+                request: bufferize('3032373147313230'),
                 response: 'payshield.translatePinBdkZpk.20'
             }
         },

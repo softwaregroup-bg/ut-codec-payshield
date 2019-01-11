@@ -19,10 +19,10 @@ const context = {
 };
 tap.test(`${method}Decode`, (t) => {
     t.same(payshield.decode(testData[0].request, $meta, context), testResults[0].response, 'translatePinZpkBdk decode, set 1, success');
-    t.same(payshield.decode(testData[2].request, $meta, context).type, testResults[1].response, 'translatePinZpkBdk decode, source BDK parity error');
-    t.same(payshield.decode(testData[3].request, $meta, context).type, testResults[2].response, 'translatePinZpkBdk decode, destination ZPK parity error');
-    t.same(payshield.decode(testData[4].request, $meta, context).type, testResults[3].response, 'translatePinZpkBdk decode, invalid PIN block format code');
-    t.same(payshield.decode(testData[5].request, $meta, context).type, testResults[4].response, 'translatePinZpkBdk decode, PIN block does not contain valid values');
+    t.same(payshield.decode(testData[1].request, $meta, context).type, testResults[1].response, 'translatePinZpkBdk decode, source BDK parity error');
+    t.same(payshield.decode(testData[2].request, $meta, context).type, testResults[2].response, 'translatePinZpkBdk decode, destination ZPK parity error');
+    t.same(payshield.decode(testData[3].request, $meta, context).type, testResults[3].response, 'translatePinZpkBdk decode, invalid PIN block format code');
+    t.same(payshield.decode(testData[4].request, $meta, context).type, testResults[4].response, 'translatePinZpkBdk decode, PIN block does not contain valid values');
 
     t.end();
 });
