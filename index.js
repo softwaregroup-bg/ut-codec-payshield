@@ -1,9 +1,9 @@
 var bitsyntax = require('ut-bitsyntax');
 var merge = require('lodash.merge');
 var defaultFormat = require('./messages');
+var defaultMaskSymbol = '*'.charCodeAt(0).toString(16);
 
-function maskLogRecord(buffer, data, pattern, maskedKeys) {
-    let asterisk = '*'.charCodeAt(0).toString(16);
+function maskLogRecord(buffer, data, {pattern, maskedKeys, maskSymbol}) {
     return maskedKeys
         .filter((key) => (pattern.find((element) => (element.name === key))))
         .map((k) => {
@@ -11,15 +11,15 @@ function maskLogRecord(buffer, data, pattern, maskedKeys) {
             switch (patternElement.type) {
                 case 'string':
                     if (patternElement.binhex) {
-                        return (data[k] && {key: k, value: data[k], replaceValue: asterisk.repeat(data[k].length * 2)}) || false;
+                        return (data[k] && {key: k, value: data[k], replaceValue: maskSymbol.repeat(data[k].length * 2)}) || false;
                     } else if (patternElement.hexbin) {
-                        return (data[k] && {key: k, value: Buffer.from(Buffer.from(data[k]).toString('hex')).toString('hex'), replaceValue: asterisk.repeat(data[k].length * 2)}) || false;
+                        return (data[k] && {key: k, value: Buffer.from(Buffer.from(data[k]).toString('hex')).toString('hex'), replaceValue: maskSymbol.repeat(data[k].length * 2)}) || false;
                     } else if (patternElement.binary) {
                         return false;
                     } else if (patternElement.z) {
                         return false;
                     } else {
-                        return (data[k] && {key: k, value: Buffer.from(data[k]).toString('hex'), replaceValue: asterisk.repeat(data[k].length)}) || false;
+                        return (data[k] && {key: k, value: Buffer.from(data[k]).toString('hex'), replaceValue: maskSymbol.repeat(data[k].length)}) || false;
                     }
                 default:
                     return false;
@@ -178,7 +178,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
         body: bodyBuff
     });
     if (log && log.trace) {
-        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, data, this.commands[commandName].pattern, this.maskedKeys), log: context && context.session && context.session.log});
+        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, data, {pattern: this.commands[commandName].pattern, maskedKeys: this.maskedKeys, maskSymbol: defaultMaskSymbol}), log: context && context.session && context.session.log});
     }
     return buffer;
 };
