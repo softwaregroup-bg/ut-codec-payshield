@@ -41,8 +41,8 @@
     "echo": {
         "requestCode": "B2",
         "responseCode": "B3",
-        "requestPattern": "msgSize:4/string-left-zero, message:msgSize/string-left-zero",
-        "responsePattern": "errorCode:2/string, message:4/string"
+        "requestPattern": "length:4/string-left-zero, data:length/string-left-zero",
+        "responsePattern": "errorCode:2/string, data:4/string"
     },
     "generateOffsetIbm": {
         "requestCode": "BK",
@@ -394,7 +394,7 @@
     "printFormat": {
         "requestCode": "PA",
         "responseCode": "PB",
-        "requestPattern": "printFields:printFieldsLength/string",
+        "requestPattern": "data:dataLength/string",
         "responsePattern": "errorCode:2/string"
     },
     "printFormatAdditional": {
