@@ -1622,8 +1622,8 @@ module.exports = {
         printFormatEncode: {
             0: {
                 request: {
-                    printFieldsLength: 54,
-                    printFields: '>L>L>L>L>005^1>L>L>005^3>L>L>L>L>L>L>L>030^P>L>L>L>L>L'
+                    dataLength: 54,
+                    data: '>L>L>L>L>005^1>L>L>005^3>L>L>L>L>L>L>L>030^P>L>L>L>L>L'
                 },
                 response: '3030303250413E4C3E4C3E4C3E4C3E3030355E313E4C3E4C3E3030355E333E4C3E4C3E4C3E4C3E4C3E4C3E4C3E3033305E503E4C3E4C3E4C3E4C3E4C'
             }
