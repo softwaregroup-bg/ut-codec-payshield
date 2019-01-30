@@ -87,17 +87,6 @@
             "11": "Destination ZPK parity error"
         }
     },
-    "translatePinBdkZpk": {
-        "requestCode": "G0",
-        "responseCode": "G1",
-        "requestPattern": "sourceBdk:33/string, destinationZpk:33/string, ksnDescriptor:3/string, ksn:20/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
-        "customResponseError": {
-            "10": "BDK parity error",
-            "11": "Interchange key parity error",
-            "27": "BDK not double or triple length"
-        }
-    },
     "verifyPinGeneratePvv": {
         "requestCode": "CU",
         "responseCode": "CV",
@@ -223,6 +212,17 @@
             "86": "PIN exists in either global or local Excluded PIN Table"
         }
     },
+    "translatePinBdkZpk": {
+        "requestCode": "G0",
+        "responseCode": "G1",
+        "requestPattern": "sourceBdk:33/string, destinationZpk:33/string, ksnDescriptor:3/string, ksn:20/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
+        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
+        "customResponseError": {
+            "10": "BDK parity error",
+            "11": "Interchange key parity error",
+            "27": "BDK not double or triple length"
+        }
+    },
     "hashDataBlock": {
         "requestCode": "GM",
         "responseCode": "GN",
@@ -246,6 +246,15 @@
             "68": "Command disabled"
         }
     },
+    "generateVerifyMacDukpt": {
+        "requestCode": "GW",
+        "responseCode": "GX",
+        "requestPattern": "macMode:1/string, macMethod:1/string, bdk:33/string, ksnDescriptor:3/string, ksn:ksnLength/string, mac:macLength/string, messageDataLengthBytes:4/string-left-zero, messageData:messageDataLengthBytes/string-binhex",
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "01": "MAC Verification Failure"
+        }
+    },
     "generateRandomPin": {
         "requestCode": "JA",
         "responseCode": "JB",
@@ -263,15 +272,6 @@
         "responseCode": "JF",
         "requestPattern": "sourceZpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, pan:12/string",
         "responsePattern": "errorCode:2/string, pin/binary"
-    },
-    "generateVerifyMacDukpt": {
-        "requestCode": "GW",
-        "responseCode": "GX",
-        "requestPattern": "macMode:1/string, macMethod:1/string, bdk:33/string, ksnDescriptor:3/string, ksn:ksnLength/string, mac:macLength/string, messageDataLengthBytes:4/string-left-zero, messageData:messageDataLengthBytes/string-binhex",
-        "responsePattern": "errorCode:2/string, rest/binary",
-        "customResponseError": {
-            "01": "MAC Verification Failure"
-        }
     },
     "generateArqc3": {
         "requestCode": "KQ",
