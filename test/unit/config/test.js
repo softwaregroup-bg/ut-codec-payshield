@@ -33,7 +33,7 @@ module.exports = {
                     keyZmkTmkFlagLength: '',
                     keyZmkTmkLength: '',
                     ksn: '',
-                    ksnLen: 0,
+                    ksnLength: 0,
                     mode: '0',
                     tr31BlockData: '',
                     tr31BlockDataLen: 0
@@ -59,7 +59,7 @@ module.exports = {
                     keyZmkTmkFlagLength: 1,
                     keyZmkTmkLength: 33,
                     ksn: '',
-                    ksnLen: 0,
+                    ksnLength: 0,
                     mode: '1',
                     tr31BlockData: '',
                     tr31BlockDataLen: 0
@@ -554,22 +554,35 @@ module.exports = {
                 response: 'payshield.translatePinZpkZpk.20'
             }
         },
-        translatePinBdkZpkEncode: {
+        translatePinBdkBdkZpkEncode: {
             0: {
                 request: {
-                    destinationPinBlockFormat: '01',
-                    destinationZpk: 'U3CBFC71309FC372E9A32EA67BE4C81C9',
-                    ksn: 'FFFF000001315240003A',
-                    ksnDescriptor: 'A05',
-                    pan: '540008900009',
-                    sourceBdk: 'U3702EF0DEF15CB6DD5367784A7102C3E',
+                    sourceKeyFlag: '',
+                    sourceKeyFlagLength: 0,
+                    sourceKey: 'U3702EF0DEF15CB6DD5367784A7102C3E',
+                    destinationKeyFlag: '',
+                    destinationKeyFlagLength: 0,
+                    destinationKey: 'U3CBFC71309FC372E9A32EA67BE4C81C9',
+                    sourceKsnDescriptor: 'A05',
+                    sourceKsnLength: 20,
+                    sourceKsn: 'FFFF000001315240003A',
+                    destinationKsnDescriptor: '',
+                    destinationKsnDescriptorLength: 0,
+                    destinationKsn: '',
+                    destinationKsnLength: 0,
                     sourcePinBlock: '496F07B85222517D',
-                    sourcePinBlockFormat: '01'
+                    sourcePinBlockFormat: '01',
+                    destinationPinBlockFormat: '01',
+                    pan: '540008900009',
+                    destinationPanDelimiter: '',
+                    destinationPanDelimiterLength: 0,
+                    destionationPan: '',
+                    destionationPanLength: 0
                 },
                 response: '30303131473055333730324546304445463135434236444435333637373834413731303243334555334342464337313330394643333732453941333245413637424534433831433941303546464646303030303031333135323430303033413439364630374238353232323531374430313031353430303038393030303039'
             }
         },
-        translatePinBdkZpkDecode: {
+        translatePinBdkBdkZpkDecode: {
             0: {
                 request: bufferize('30303034473130303036373544423044314144443937354346383031'),
                 response: {
@@ -581,19 +594,19 @@ module.exports = {
             },
             1: {
                 request: bufferize('3032373147313130'),
-                response: 'payshield.translatePinBdkZpk.10'
+                response: 'payshield.translatePinBdkBdkZpk.10'
             },
             2: {
                 request: bufferize('3032373147313131'),
-                response: 'payshield.translatePinBdkZpk.11'
+                response: 'payshield.translatePinBdkBdkZpk.11'
             },
             3: {
                 request: bufferize('3032373147313233'),
-                response: 'payshield.translatePinBdkZpk.23'
+                response: 'payshield.translatePinBdkBdkZpk.23'
             },
             4: {
                 request: bufferize('3032373147313230'),
-                response: 'payshield.translatePinBdkZpk.20'
+                response: 'payshield.translatePinBdkBdkZpk.20'
             }
         },
         generateCvvEncode: {

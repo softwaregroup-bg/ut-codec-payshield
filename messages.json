@@ -2,7 +2,7 @@
     "generateKey": {
         "requestCode": "A0",
         "responseCode": "A1",
-        "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLen/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keySchemeZmkTmk:keySchemeZmkTmkLength/string, tr31BlockData:tr31BlockDataLen/string",
+        "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLength/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keySchemeZmkTmk:keySchemeZmkTmkLength/string, tr31BlockData:tr31BlockDataLen/string",
         "responsePattern": "errorCode:2/string, key:33/string, rest/binary",
         "customResponseError": {
             "10": "ZMK or TMK Parity error"
@@ -212,10 +212,10 @@
             "86": "PIN exists in either global or local Excluded PIN Table"
         }
     },
-    "translatePinBdkZpk": {
+    "translatePinBdkBdkZpk": {
         "requestCode": "G0",
         "responseCode": "G1",
-        "requestPattern": "sourceBdk:33/string, destinationZpk:33/string, ksnDescriptor:3/string, ksn:20/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
+        "requestPattern": "sourceKeyFlag:sourceKeyFlagLength/string, sourceKey:33/string, destinationKeyFlag:destinationKeyFlagLength/string, destinationKey:33/string, sourceKsnDescriptor:3/string, sourceKsn:sourceKsnLength/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, destinationPanDelimiter:destinationPanDelimiterLength/string, destionationPan:destionationPanLength/string",
         "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
         "customResponseError": {
             "10": "BDK parity error",
