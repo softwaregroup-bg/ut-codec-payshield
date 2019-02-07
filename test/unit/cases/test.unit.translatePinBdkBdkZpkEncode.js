@@ -6,7 +6,7 @@ const errorApi = { getError: get, fetchErrors: fetch, defineError: define };
 const Payshield = require('../../../index');
 const payshield = new Payshield(Object.assign({}, config, errorApi));
 
-const method = 'translatePinBdkZpk';
+const method = 'translatePinBdkBdkZpk';
 const testData = config.test[`${method}Encode`];
 const testResults = config.test[`${method}Encode`];
 const $meta = {
