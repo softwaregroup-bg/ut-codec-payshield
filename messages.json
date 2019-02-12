@@ -215,7 +215,7 @@
     "translatePinBdkBdkZpk": {
         "requestCode": "G0",
         "responseCode": "G1",
-        "requestPattern": "sourceKeyFlag:sourceKeyFlagLength/string, sourceKey:33/string, destinationKeyFlag:destinationKeyFlagLength/string, destinationKey:33/string, sourceKsnDescriptor:3/string, sourceKsn:sourceKsnLength/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, destinationPanDelimiter:destinationPanDelimiterLength/string, destionationPan:destionationPanLength/string",
+        "requestPattern": "sourceKeyFlag:sourceKeyFlagLength/string, sourceKey:33/string, destinationKeyFlag:destinationKeyFlagLength/string, destinationKey:33/string, sourceKsnDescriptor:3/string, sourceKsn:sourceKsnLength/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, destinationPanDelimiter:destinationPanDelimiterLength/string, destinationPan:destinationPanLength/string",
         "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
         "customResponseError": {
             "10": "BDK parity error",
