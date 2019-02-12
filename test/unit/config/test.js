@@ -576,8 +576,8 @@ module.exports = {
                     pan: '540008900009',
                     destinationPanDelimiter: '',
                     destinationPanDelimiterLength: 0,
-                    destionationPan: '',
-                    destionationPanLength: 0
+                    destinationPan: '',
+                    destinationPanLength: 0
                 },
                 response: '30303131473055333730324546304445463135434236444435333637373834413731303243334555334342464337313330394643333732453941333245413637424534433831433941303546464646303030303031333135323430303033413439364630374238353232323531374430313031353430303038393030303039'
             }
