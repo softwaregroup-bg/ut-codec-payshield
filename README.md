@@ -13,9 +13,15 @@ The module exposes _PayshieldCodec_ class.
 - **params**
 
     - _config_ (object) - codec configuration
-        - _headerFormat_ (string) - defines the length and data type of the message header in format _length/data type_; **for more information of the format definitions, please refer to _ut-bitsyntax_ documentation**
-        - _messageFormat_ (object) - may contain new command definitions, or definitions of existing commands to be overwritten, or parts of existing commands to be overwritten; **for more information of command definitions, please refer to _Payshield commands_ below**
-        - _maskedKeys_ (array) - request/response keys for which the values to be masked in the log records
+        - _headerFormat_ (string) - defines the length and data type of the
+         message header in format _length/data type_; **for more information of
+         the format definitions, please refer to _ut-bitsyntax_ documentation**
+        - _messageFormat_ (object) - may contain new command definitions, or
+         definitions of existing commands to be overwritten, or parts of
+         existing commands to be overwritten; **for more information of command
+         definitions, please refer to _Payshield commands_ below**
+        - _maskedKeys_ (array) - request/response keys for which the values to
+         be masked in the log records
 
 - **result** (void)
 
@@ -26,7 +32,8 @@ The module exposes _PayshieldCodec_ class.
     - _buff_ (buffer) - data buffer to be decoded
     - _$meta_ (object) - _$meta_ object as defined in _ut-port_
     - _context_ (object) - _context_ object as defined by _ut-port-tcp_
-    - _log_ (object) - contains log functions; **for more information, please refer to _ut-log_ documentation**
+    - _log_ (object) - contains log functions; **for more information, please
+     refer to _ut-log_ documentation**
 
 - **result**
 
@@ -39,7 +46,8 @@ The module exposes _PayshieldCodec_ class.
     - _data_ (object) - data object to be encoded
     - _$meta_ (object) - _$meta_ object as defined in _ut-port_
     - _context_ (object) - _context_ object as defined by _ut-port-tcp_
-    - _log_ (object) - contains log functions; **for more information, please refer to _ut-log_ documentation**
+    - _log_ (object) - contains log functions; **for more information, please
+     refer to _ut-log_ documentation**
 
 - **result**
 
@@ -53,8 +61,10 @@ The module exposes _PayshieldCodec_ class.
 
     - _buffer_ (buffer) - data buffer to be written to log file (encoded _data_ object)
     - _data_ (object) - JSON object representing _buffer_
-    - _pattern_ (object) - _requestPattern_ of the command, as defined in _Payshield commands_ below
-    - _maskedKeys_ (array) - keys to be found in _data_ and their respective values to be replaced in _buffer_
+    - _pattern_ (object) - _requestPattern_ of the command, as defined in
+     _Payshield commands_ below
+    - _maskedKeys_ (array) - keys to be found in _data_ and their respective
+     values to be replaced in _buffer_
         - (string) - key for which the value to be masked
     - _maskSymbol_ (string) - symbol from which the replacing value is formed
 
@@ -66,14 +76,25 @@ The module exposes _PayshieldCodec_ class.
 
 Each command should be described in _messages.json_ in the following way:
 
-- __commandName__ (object) - name of the method which will be exposed in _payshield_ namespace
-    - _requestCode_ (string) - _Command Code_ for this command as defined in _Payshield Host Command Reference Manual_
-    - _responseCode_ (string) - _Response Code_ for this command as defined in _Payshield Host Command Reference Manual_
-    - _requestPattern_ (string) - request pattern definition for _PayshieldCodec_ _encode_ method; **for more information of pattern definitions, please refer to _ut-bitsyntax_ documentation**
-    - _responsePattern_ (string) - response pattern definition for _PayshieldCodec_ _decode_ method; **for more information of pattern definitions, please refer to _ut-bitsyntax_ documentation**
-    - _warnings_ (array) - array with error codes to be processed as warnings instead of errors **for this command only**; **for list of error codes, please refer to _Error codes_ below**
+- __commandName__ (object) - name of the method which will be exposed in
+ _payshield_ namespace
+    - _requestCode_ (string) - _Command Code_ for this command as defined in
+     _Payshield Host Command Reference Manual_
+    - _responseCode_ (string) - _Response Code_ for this command as defined in
+     _Payshield Host Command Reference Manual_
+    - _requestPattern_ (string) - request pattern definition for
+     _PayshieldCodec_ _encode_ method; **for more information of pattern
+     definitions, please refer to _ut-bitsyntax_ documentation**
+    - _responsePattern_ (string) - response pattern definition for
+     _PayshieldCodec_ _decode_ method; **for more information of pattern
+     definitions, please refer to _ut-bitsyntax_ documentation**
+    - _warnings_ (array) - array with error codes to be processed as warnings
+     instead of errors **for this command only**; **for list of error codes,
+     please refer to _Error codes_ below**
         - (string) - error code to be processed as warning
-    - _customResponseError_ (object) - _key: value_ pairs object to define new error codes, or to overwrite existing standard error codes **for this command only**
+    - _customResponseError_ (object) - _key: value_ pairs object to define new
+     error codes, or to overwrite existing standard error codes **for this
+     command only**
         - _key_ - error code
         - _value_ - error description
 
@@ -360,9 +381,11 @@ Each command should be described in _messages.json_ in the following way:
 - _12_: _Contents of user storage not available. Reset, power-down or overwrite_
 - _13_: _Invalid LMK Identifier_
 - _14_: _PIN encrypted under LMK pair 02-03 is invalid_
-- _15_: _Invalid input data (invalid format, invalid characters, or not enough data provided)_
+- _15_: _Invalid input data (invalid format, invalid characters, or not enough
+ data provided)_
 - _16_: _Console or printer not ready or not connected_
-- _17_: _HSM not in the Authorised state, or not enabled for clear PIN output, or both_
+- _17_: _HSM not in the Authorised state, or not enabled for clear PIN output,
+ or both_
 - _18_: _Document format definition not loaded_
 - _19_: _Specified Diebold Table is invalid_
 - _20_: _PIN block does not contain valid values_
@@ -395,7 +418,8 @@ Each command should be described in _messages.json_ in the following way:
 - _77_: _Clear data block error_
 - _78_: _Private key length error_
 - _79_: _Hash algorithm object identifier error_
-- _80_: _Data length error. The amount of MAC data (or other data) is greater than or less than the expected amount._
+- _80_: _Data length error. The amount of MAC data (or other data) is greater
+ than or less than the expected amount._
 - _81_: _Invalid certificate header_
 - _82_: _Invalid check value length_
 - _83_: _Key block format error_
@@ -423,4 +447,8 @@ Each command should be described in _messages.json_ in the following way:
 
 ## Mask Logs
 
-* `maskedKeys` must be set. It is array of items (fields) that will be masked. Item value should be taken from `messages.json` `requestPattern` for specific message. For instance if there is need to mask field `keySchemeLmk` in message `generateKey`, `maskedKeys` should have following struct. `maskedKeys = ['generateKey']`
+- `maskedKeys` must be set. It is array of items (fields) that will be masked.
+ Item value should be taken from `messages.json` `requestPattern` for specific
+ message. For instance if there is need to mask field `keySchemeLmk` in message
+ `generateKey`, `maskedKeys` should have following struct.
+ `maskedKeys = ['generateKey']`
