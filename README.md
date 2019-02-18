@@ -8,69 +8,85 @@ Encode/decode Payshield messages to/from buffer
 
 The module exposes _PayshieldCodec_ class.
 
-### init (config) - initializes the _PayshieldCodec_ instance
+### init
 
-- **params**
+(config)
 
-  - _config_ (object) - codec configuration
-    - _headerFormat_ (string) - defines the length and data type of the
-      message header in format _length/data type_; **for more information of
-      the format definitions, please refer to _ut-bitsyntax_ documentation**
-    - _messageFormat_ (object) - may contain new command definitions, or
-      definitions of existing commands to be overwritten, or parts of
-      existing commands to be overwritten; **for more information of command
-      definitions, please refer to _Payshield commands_ below**
-    - _maskedKeys_ (array) - request/response keys for which the values to
-      be masked in the log records
+Initializes the _PayshieldCodec_ instance
 
-- **result** (void)
+params
 
-### decode (buff, $meta, context, log) - decodes data buffer to JSON object
+- _config_ (object) - codec configuration
+  - _headerFormat_ (string) - defines the length and data type of the
+    message header in format _length/data type_; **for more information of
+    the format definitions, please refer to _ut-bitsyntax_ documentation**
+  - _messageFormat_ (object) - may contain new command definitions, or
+    definitions of existing commands to be overwritten, or parts of
+    existing commands to be overwritten; **for more information of command
+    definitions, please refer to _Payshield commands_ below**
+  - _maskedKeys_ (array) - request/response keys for which the values to
+    be masked in the log records
 
-- **params**
+result (void)
 
-  - _buff_ (buffer) - data buffer to be decoded
-  - _$meta_ (object) - _$meta_ object as defined in _ut-port_
-  - _context_ (object) - _context_ object as defined by _ut-port-tcp_
-  - _log_ (object) - contains log functions; **for more information, please
-    refer to _ut-log_ documentation**
+### decode
 
-- **result**
+(buff, $meta, context, log)
 
-  - (object) - decoded _buff_
+Decodes data buffer to JSON object
 
-### encode (data, $meta, context, log) - encodes JSON object data to buffer
+params
 
-- **params**
+- _buff_ (buffer) - data buffer to be decoded
+- _$meta_ (object) - _$meta_ object as defined in _ut-port_
+- _context_ (object) - _context_ object as defined by _ut-port-tcp_
+- _log_ (object) - contains log functions; **for more information, please
+  refer to _ut-log_ documentation**
 
-  - _data_ (object) - data object to be encoded
-  - _$meta_ (object) - _$meta_ object as defined in _ut-port_
-  - _context_ (object) - _context_ object as defined by _ut-port-tcp_
-  - _log_ (object) - contains log functions; **for more information, please
-    refer to _ut-log_ documentation**
+result
 
-- **result**
+- (object) - decoded _buff_
 
-  - (buffer) - encoded _data_
+### encode
+
+(data, $meta, context, log)
+
+Encodes JSON object data to buffer
+
+params
+
+- _data_ (object) - data object to be encoded
+- _$meta_ (object) - _$meta_ object as defined in _ut-port_
+- _context_ (object) - _context_ object as defined by _ut-port-tcp_
+- _log_ (object) - contains log functions; **for more information, please
+  refer to _ut-log_ documentation**
+
+result
+
+- (buffer) - encoded _data_
 
 ## Private API
 
-### maskLogRecord (buffer, data, {pattern, maskedKeys, maskSymbol}) - replaces predefined data in log records
+### maskLogRecord
 
-- **params**
+(buffer, data, {pattern, maskedKeys, maskSymbol})
 
-  - _buffer_ (buffer) - data buffer to be written to log file (encoded _data_ object)
-  - _data_ (object) - JSON object representing _buffer_
-  - _pattern_ (object) - _requestPattern_ of the command, as defined in
-    _Payshield commands_ below
-  - _maskedKeys_ (array) - keys to be found in _data_ and their respective
-    values to be replaced in _buffer_
-    - (string) - key for which the value to be masked
-  - _maskSymbol_ (string) - symbol from which the replacing value is formed
+Replaces predefined data in log records
 
-- **result**
+params
 
-  - (string) - log record with masked values for predefined keys
+- _buffer_ (buffer) - data buffer to be written to log file (encoded _data_ object)
+- _data_ (object) - JSON object representing _buffer_
+- _pattern_ (object) - _requestPattern_ of the command, as defined in
+  _Payshield commands_ below
+- _maskedKeys_ (array) - keys to be found in _data_ and their respective
+  values to be replaced in _buffer_
+  - (string) - key for which the value to be masked
+- _maskSymbol_ (string) - symbol from which the replacing value is formed
+
+result
+
+- (string) - log record with masked values for predefined keys
 
 ## Defining new commands
 
@@ -100,18 +116,24 @@ Each command should be described in _messages.json_ in the following way:
 
 ## Available Payshield commands, command specific error codes, command specific warnings
 
-### _A0 (A1)_ - Generate a Key
+### _A0 (A1)_
+
+Generate a Key
 
 - _error codes_
   - _10_: _ZMK or TMK Parity error_
 
-### _A4 (A5)_ - Form a Key from Encrypted Components
+### _A4 (A5)_
+
+Form a Key from Encrypted Components
 
 - _error codes_
   - _03_: _Invalid number of components_
   - _10_: _Component parity error_
 
-### _A6 (A7)_ - Import a Key
+### _A6 (A7)_
+
+Import a Key
 
 - _error codes_
   - _10_: _ZMK Parity error_
@@ -119,15 +141,21 @@ Each command should be described in _messages.json_ in the following way:
 - _warnings_
   - _01_: _Key parity error, advice only_
 
-### _A8 (A9)_ - Export a Key
+### _A8 (A9)_
+
+Export a Key
 
 - _error codes_
   - _10_: _ZMK or TMK Parity error_
   - _11_: _Key parity error_
 
-### _B2 (B3)_ - Echo Command
+### _B2 (B3)_
 
-### _BK (BL)_ - Generate an IBM PIN Offset (of a customer selected PIN)
+Echo Command
+
+### _BK (BL)_
+
+Generate an IBM PIN Offset (of a customer selected PIN)
 
 - _error codes_
   - _03_: _Excluded PIN count incorrect_
@@ -139,24 +167,32 @@ Each command should be described in _messages.json_ in the following way:
 - _warnings_
   - _02_: _Warning PVK not single length_
 
-### _BU (BV)_ - Generate a Key Check Value
+### _BU (BV)_
+
+Generate a Key Check Value
 
 - _error codes_
   - _10_: _Key parity error_
 
-### _CA (CB)_ - Translate a PIN from TPK to ZPK/BDK (3DES DUKPT) Encryption
+### _CA (CB)_
+
+Translate a PIN from TPK to ZPK/BDK (3DES DUKPT) Encryption
 
 - _error codes_
   - _10_: _Source TPK parity error_
   - _11_: _Destination ZPK parity error_
 
-### _CC (CD)_ - Translate a PIN from one ZPK to another
+### _CC (CD)_
+
+Translate a PIN from one ZPK to another
 
 - _error codes_
   - _10_: _Source ZPK parity error_
   - _11_: _Destination ZPK parity error_
 
-### _CU (CV)_ - Verify a PIN & Generate an ABA PVV (of a customer selected PIN)
+### _CU (CV)_
+
+Verify a PIN & Generate an ABA PVV (of a customer selected PIN)
 
 - _error codes_
   - _01_: _PIN Verification failure_
@@ -166,20 +202,26 @@ Each command should be described in _messages.json_ in the following way:
   - _81_: _PIN length mismatch_
   - _86_: _PIN exists in either global or local Excluded PIN Table_
 
-### _CW (CX)_ - Generate a Card Verification Code/Value
+### _CW (CX)_
+
+Generate a Card Verification Code/Value
 
 - _error codes_
   - _10_: _CVK A or CVK B parity error_
   - _27_: _CVK not double length_
 
-### _CY (CZ)_ - Verify a Card Verification Code/Value
+### _CY (CZ)_
+
+Verify a Card Verification Code/Value
 
 - _error codes_
   - _01_: _CVV failed verification_
   - _10_: _CVK A or B parity error_
   - _27_: _CVK not double length_
 
-### _DA (DB)_ - Verify a Terminal PIN Using the IBM Offset Method
+### _DA (DB)_
+
+Verify a Terminal PIN Using the IBM Offset Method
 
 - _error codes_
   - _01_: _PIN Verification failure_
@@ -189,7 +231,9 @@ Each command should be described in _messages.json_ in the following way:
 - _warnings_
   - _02_: _Warning PVK not single length_
 
-### _DC (DD)_ - Verify a Terminal PIN Using the ABA PVV Method
+### _DC (DD)_
+
+Verify a Terminal PIN Using the ABA PVV Method
 
 - _error codes_
   - _01_: _PIN verification failure_
@@ -197,7 +241,9 @@ Each command should be described in _messages.json_ in the following way:
   - _11_: _PVK parity error_
   - _27_: _PVK not double length_
 
-### _DE (DF)_ - Generate an IBM PIN Offset (of an LMK encrypted PIN)
+### _DE (DF)_
+
+Generate an IBM PIN Offset (of an LMK encrypted PIN)
 
 - _error codes_
   - _10_: _PVK parity error_
@@ -207,7 +253,9 @@ Each command should be described in _messages.json_ in the following way:
 - _warnings_
   - _02_: _Warning PVK not single length_
 
-### _DG (DH)_ - Generate an ABA PVV (of an LMK encrypted PIN)
+### _DG (DH)_
+
+Generate an ABA PVV (of an LMK encrypted PIN)
 
 - _error codes_
   - _10_: _PVK parity error_
@@ -215,7 +263,9 @@ Each command should be described in _messages.json_ in the following way:
   - _81_: _PIN length mismatch_
   - _86_: _PIN exists in either global or local Excluded PIN Table_
 
-### _EC (ED)_ - Verify an Interchange PIN Using the ABA PVV Method
+### _EC (ED)_
+
+Verify an Interchange PIN Using the ABA PVV Method
 
 - _error codes_
   - _01_: _PIN verification failure_
@@ -223,7 +273,9 @@ Each command should be described in _messages.json_ in the following way:
   - _11_: _PVK parity error_
   - _27_: _PVK not double length_
 
-### _EE (EF)_ - Derive a PIN Using the IBM Offset Method
+### _EE (EF)_
+
+Derive a PIN Using the IBM Offset Method
 
 - _error codes_
   - _10_: _PVK parity error_
@@ -233,9 +285,13 @@ Each command should be described in _messages.json_ in the following way:
 - _warnings_
   - _02_: _Warning PVK not single length_
 
-### _FM (FN)_ - Translate a ZEK/ZAK from LMK to ZMK Encryption
+### _FM (FN)_
 
-### _FW (FX)_ - Generate an ABA PVV (of a customer selected PIN)
+Translate a ZEK/ZAK from LMK to ZMK Encryption
+
+### _FW (FX)_
+
+Generate an ABA PVV (of a customer selected PIN)
 
 - _error codes_
   - _10_: _PVK parity error_
@@ -243,19 +299,25 @@ Each command should be described in _messages.json_ in the following way:
   - _81_: _PIN length mismatch_
   - _86_: _PIN exists in either global or local Excluded PIN Table_
 
-### _G0 (G1)_ - Translate a PIN from BDK to BDK or ZPK Encryption (3DES DUKPT)
+### _G0 (G1)_
+
+Translate a PIN from BDK to BDK or ZPK Encryption (3DES DUKPT)
 
 - _error codes_
   - _10_: _BDK parity error_
   - _11_: _Interchange key parity error_
   - _27_: _BDK not double or triple length_
 
-### _GM (GN)_ - Hash a Block of Data
+### _GM (GN)_
+
+Hash a Block of Data
 
 - _error codes_
   - _05_: _Invalid hash identifier_
 
-### _GO (GP)_ - Verify a PIN Using the IBM Offset Method (3DES DUKPT)
+### _GO (GP)_
+
+Verify a PIN Using the IBM Offset Method (3DES DUKPT)
 
 - _error codes_
   - _01_: _PIN Verification failure_
@@ -267,12 +329,17 @@ Each command should be described in _messages.json_ in the following way:
 - _warnings_
   - _02_: _Warning PVK not single length_
 
-### _GW (GX)_ - Generate/Verify a MAC (3DES DUKPT)
+### _GW (GX)_
+
+Generate/Verify a MAC (3DES DUKPT)
 
 - _error codes_
   - _01_: _MAC Verification Failure_
 
-### _KQ (KR)_ - ARQC Verification and/or ARPC Generation (Using Static or MasterCard Proprietary SKD Method)
+### _KQ (KR)_
+
+ARQC Verification and/or ARPC Generation (Using Static or MasterCard
+ Proprietary SKD Method)
 
 - _error codes_
   - _01_: _ARQC/TC/AAC verification failed_
@@ -286,7 +353,9 @@ Each command should be described in _messages.json_ in the following way:
   - _81_: _Zero length Transaction Data_
   - _82_: _Invalid Discretionary MAC Data length_
 
-### _KW (KX)_ - ARQC Verification and/or ARPC Generation (Using EMV or Cloud-Based SKD Methods)
+### _KW (KX)_
+
+ARQC Verification and/or ARPC Generation (Using EMV or Cloud-Based SKD Methods)
 
 - _error codes_
   - _01_: _ARQC/TC/AAC/MPVV verification failure_
@@ -296,7 +365,9 @@ Each command should be described in _messages.json_ in the following way:
   - _10_: _MK parity error_
   - _52_: _Invalid Branch/Height_
 
-### _M0 (M1)_ - Encrypt Data Block
+### _M0 (M1)_
+
+Encrypt Data Block
 
 - _error codes_
   - _02_: _Invalid Mode Flag field_
@@ -307,7 +378,9 @@ Each command should be described in _messages.json_ in the following way:
   - _10_: _Encryption Key Parity Error_
   - _35_: _Illegal Message Format_
 
-### _M2 (M3)_ - Decrypt Data Block
+### _M2 (M3)_
+
+Decrypt Data Block
 
 - _error codes_
   - _02_: _Invalid Mode Flag field_
@@ -318,7 +391,9 @@ Each command should be described in _messages.json_ in the following way:
   - _10_: _Decryption Key Parity Error_
   - _35_: _Illegal Message Format_
 
-### _M4 (M5)_ - Translate Data Block
+### _M4 (M5)_
+
+Translate Data Block
 
 - _error codes_
   - _02_: _Invalid Mode Flag field_
@@ -333,7 +408,9 @@ Each command should be described in _messages.json_ in the following way:
   - _15_: _Actual Message Length is too Long_
   - _35_: _Illegal Message Format_
 
-### _M6 (M7)_ - Generate MAC
+### _M6 (M7)_
+
+Generate MAC
 
 - _error codes_
   - _02_: _Invalid Mode Flag field_
@@ -344,7 +421,9 @@ Each command should be described in _messages.json_ in the following way:
   - _09_: _Invalid Padding Method field_
   - _10_: _MAC Key Parity Error_
 
-### _M8 (M9)_ - Verify MAC
+### _M8 (M9)_
+
+Verify MAC
 
 - _error codes_
   - _01_: _MAC verification failed_
@@ -356,17 +435,25 @@ Each command should be described in _messages.json_ in the following way:
   - _09_: _Invalid Padding Method field_
   - _10_: _MAC Key Parity Error_
 
-### _PA (PB)_ - Load Formatting Data to HSM
+### _PA (PB)_
 
-### _PC (PD)_ - Load Additional Formatting Data to HSM
+Load Formatting Data to HSM
 
-### _PE (PF, PZ)_ - Print PIN/PIN and Solicitation Data
+### _PC (PD)_
+
+Load Additional Formatting Data to HSM
+
+### _PE (PF, PZ)_
+
+Print PIN/PIN and Solicitation Data
 
 - _error codes (PZ)_
   - _16_: _Printer not ready/disconnected_
   - _41_: _Internal hardware/software error_
 
-### _TA (TB, TZ)_ - Print TMK Mailer
+### _TA (TB, TZ)_
+
+Print TMK Mailer
 
 - _error codes (TB)_
   - _10_: _TMK parity error_
