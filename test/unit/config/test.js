@@ -492,6 +492,97 @@ module.exports = {
                 response: 'payshield.translatePinTpkZpk.20'
             }
         },
+        translatePinZpkLmkEncode: {
+            0: {
+                request: {
+                    zpk: 'U592A36AE05F8E181AB3939B1D29BD8D1',
+                    pinBlock: '87C832F7179E9CCE',
+                    pinBlockFormat: '01',
+                    pan: '540008900009'
+                },
+                response: '303031314A45553539324133364145303546384531383141423339333942314432394244384431383743383332463731373945394343453031353430303038393030303039'
+            }
+        },
+        translatePinZpkLmkDecode: {
+            0: {
+                request: bufferize('303030314A46303035303439323438'),
+                response: {
+                    errorCode: '00',
+                    pin: bufferize([53, 48, 52, 57, 50, 52, 56])
+                }
+            },
+            1: {
+                request: bufferize('303033334A463130'),
+                response: 'payshield.translatePinZpkLmk.10'
+            },
+            2: {
+                request: bufferize('303034334A463233'),
+                response: 'payshield.translatePinZpkLmk.23'
+            }
+        },
+        translatePinTpkLmkEncode: {
+            0: {
+                request: {
+                    tpk: 'U95F693B7A4DF212C165A8D2FF44550D8',
+                    pinBlock: '8475B774B6C63C52',
+                    pinBlockFormat: '01',
+                    pan: '540008900009'
+                },
+                response: '303031344A43553935463639334237413444463231324331363541384432464634343535304438383437354237373442364336334335323031353430303038393030303039'
+            }
+        },
+        translatePinTpkLmkDecode: {
+            0: {
+                request: bufferize('303030304A44303030333935373032'),
+                response: {
+                    errorCode: '00',
+                    pin: bufferize([48, 51, 57, 53, 55, 48, 50])
+                }
+            },
+            1: {
+                request: bufferize('303032384A443130'),
+                response: 'payshield.translatePinTpkLmk.10'
+            },
+            2: {
+                request: bufferize('303032394A443233'),
+                response: 'payshield.translatePinTpkLmk.23'
+            }
+        },
+        translatePinLmkZpkEncode: {
+            0: {
+                request: {
+                    zpk: 'U592A36AE05F8E181AB3939B1D29BD8D1',
+                    pinBlockFormat: '01',
+                    pan: '540008900009',
+                    delimiter: '',
+                    delimiterLength: 0,
+                    pin: '5049248',
+                    pinLength: 7
+                },
+                response: '303031324A47553539324133364145303546384531383141423339333942314432394244384431303135343030303839303030303935303439323438'
+            }
+        },
+        translatePinLmkZpkDecode: {
+            0: {
+                request: bufferize('303030324A48303038374338333246373137394539434345'),
+                response: {
+                    errorCode: '00',
+                    pinBlock: '87C832F7179E9CCE'
+                }
+            },
+            1: {
+                request: bufferize('303031304A483131'),
+                response: 'payshield.translatePinLmkZpk.11'
+            },
+            2: {
+                request: bufferize('303032304A483233'),
+                response: 'payshield.translatePinLmkZpk.23'
+            },
+            3: {
+                request: {},
+                response: {}
+            }
+        },
         translatePinZpkZpkEncode: {
             0: {
                 request: {
