@@ -336,6 +336,27 @@ Generate/Verify a MAC (3DES DUKPT)
 - _error codes_
   - _01_: _MAC Verification Failure_
 
+### _JC (JD)_
+
+Translate a PIN from TPK to LMK Encryption
+
+- _error codes_
+  - _10_: _TPK parity error_
+
+### _JE (JF)_
+
+Translate a PIN from ZPK to LMK Encryption
+
+- _error codes_
+  - _10_: _ZPK parity error_
+
+### _JG (JH)_
+
+Translate a PIN from LMK to ZPK Encryption
+
+- _error codes_
+  - _10_: _ZPK parity error_
+
 ### _KQ (KR)_
 
 ARQC Verification and/or ARPC Generation (Using Static or MasterCard

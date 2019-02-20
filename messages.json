@@ -264,14 +264,29 @@
     "translatePinTpkLmk": {
         "requestCode": "JC",
         "responseCode": "JD",
-        "requestPattern": "sourceTpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, pan:12/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
+        "requestPattern": "tpk:33/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string",
+        "responsePattern": "errorCode:2/string, pin/binary",
+        "customResponseError": {
+            "10": "TPK parity error"
+        }
     },
     "translatePinZpkLmk": {
         "requestCode": "JE",
         "responseCode": "JF",
-        "requestPattern": "sourceZpk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, pan:12/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
+        "requestPattern": "zpk:33/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string",
+        "responsePattern": "errorCode:2/string, pin/binary",
+        "customResponseError": {
+            "10": "ZPK parity error"
+        }
+    },
+    "translatePinLmkZpk": {
+        "requestCode": "JG",
+        "responseCode": "JH",
+        "requestPattern": "zpk:33/string, pinBlockFormat:2/string, pan:12/string, delimiter:delimiterLength/string, pin:pinLength/string",
+        "responsePattern": "errorCode:2/string, pinBlock:16/string",
+        "customResponseError": {
+            "11": "ZPK parity error"
+        }
     },
     "generateArqc3": {
         "requestCode": "KQ",
