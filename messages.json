@@ -71,7 +71,7 @@
         "requestCode": "CA",
         "responseCode": "CB",
         "requestPattern": "sourceTpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
+        "responsePattern": "errorCode:2/string, checkLength:2/string, pinBlock:16/string, pinBlockFormat:2/string",
         "customResponseError": {
             "10": "Source TPK parity error",
             "11": "Destination ZPK parity error"
@@ -81,7 +81,7 @@
         "requestCode": "CC",
         "responseCode": "CD",
         "requestPattern": "sourceZpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
+        "responsePattern": "errorCode:2/string, checkLength:2/string, pinBlock:16/string, pinBlockFormat:2/string",
         "customResponseError": {
             "10": "Source ZPK parity error",
             "11": "Destination ZPK parity error"
@@ -216,7 +216,7 @@
         "requestCode": "G0",
         "responseCode": "G1",
         "requestPattern": "sourceKeyFlag:sourceKeyFlagLength/string, sourceKey:33/string, destinationKeyFlag:destinationKeyFlagLength/string, destinationKey:33/string, sourceKsnDescriptor:3/string, sourceKsn:sourceKsnLength/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, destinationPanDelimiter:destinationPanDelimiterLength/string, destinationPan:destinationPanLength/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, destinationPinBlock:16/string, pinBlockFormat:2/string",
+        "responsePattern": "errorCode:2/string, checkLength:2/string, pinBlock:16/string, pinBlockFormat:2/string",
         "customResponseError": {
             "10": "BDK parity error",
             "11": "Interchange key parity error",
