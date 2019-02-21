@@ -462,7 +462,7 @@ module.exports = {
                 response: {
                     errorCode: '00',
                     checkLength: '06',
-                    destinationPinBlock: '14D3E09CD3B6456E',
+                    pinBlock: '14D3E09CD3B6456E',
                     pinBlockFormat: '01'
                 }
             },
@@ -471,7 +471,7 @@ module.exports = {
                 response: {
                     errorCode: '00',
                     checkLength: '04',
-                    destinationPinBlock: 'E870CDC8E067EB2E',
+                    pinBlock: 'E870CDC8E067EB2E',
                     pinBlockFormat: '01'
                 }
             },
@@ -615,7 +615,7 @@ module.exports = {
                 response: {
                     errorCode: '00',
                     checkLength: '06',
-                    destinationPinBlock: '0E4A2BFA78E244FF',
+                    pinBlock: '0E4A2BFA78E244FF',
                     pinBlockFormat: '01'
                 }
             },
@@ -624,7 +624,7 @@ module.exports = {
                 response: {
                     errorCode: '00',
                     checkLength: '04',
-                    destinationPinBlock: 'BEBC38EB586FE425',
+                    pinBlock: 'BEBC38EB586FE425',
                     pinBlockFormat: '01'
                 }
             },
@@ -679,7 +679,7 @@ module.exports = {
                 response: {
                     errorCode: '00',
                     checkLength: '06',
-                    destinationPinBlock: '75DB0D1ADD975CF8',
+                    pinBlock: '75DB0D1ADD975CF8',
                     pinBlockFormat: '01'
                 }
             },
