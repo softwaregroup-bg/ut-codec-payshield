@@ -61,7 +61,7 @@
     "generateKeyCheckValue": {
         "requestCode": "BU",
         "responseCode": "BV",
-        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key:keyLength/string, delimiter1:delimiter1Length/string, keyType:keyTypeLength/string, delimiter2:delimiter2Length/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string, hashId:hashIdLength/string, hmacKeyLength:hmacKeyLengthLength/string, hmac:hmacLength/string-binhex, delimiter3:delimiter3Length/string",
+        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key:keyLength/string, delimiter1:delimiter1Length/string, keyType:keyTypeLength/string, delimiter2:delimiter2Length/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string, hashId:hashIdLength/string, hmacKeyLengthBytes:hmacKeyLengthBytesLength/string, hmacKey:hmacKeyLength/string-binhex, delimiter3:delimiter3Length/string",
         "responsePattern": "errorCode:2/string, keyCheckValue/binary",
         "customResponseError": {
             "10": "Key parity error"
