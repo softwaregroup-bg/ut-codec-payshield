@@ -2,7 +2,7 @@
     "generateKey": {
         "requestCode": "A0",
         "responseCode": "A1",
-        "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLength/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keySchemeZmkTmk:keySchemeZmkTmkLength/string, tr31BlockData:tr31BlockDataLen/string",
+        "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLength/string, zkaMasterKeyType:zkaMasterKeyTypeLength/string, zkaMasterKey:zkaMasterKeyLength/string, zkaOption:zkaOptionLength/string, zkaRndi:zkaRndiLength/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keySchemeZmkTmk:keySchemeZmkTmkLength/string, tr31BlockData:tr31BlockDataLen/string",
         "responsePattern": "errorCode:2/string, key:33/string, rest/binary",
         "customResponseError": {
             "10": "ZMK or TMK Parity error"
