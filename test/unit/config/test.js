@@ -35,8 +35,16 @@ module.exports = {
                     ksn: '',
                     ksnLength: 0,
                     mode: '0',
-                    tr31BlockData: '',
-                    tr31BlockDataLen: 0
+                    zkaMasterKeyTypeLength: 0,
+                    zkaMasterKeyType: '',
+                    zkaMasterKeyLength: 0,
+                    zkaMasterKey: '',
+                    zkaOptionLength: 0,
+                    zkaOption: '',
+                    zkaRndiLength: 0,
+                    zkaRndi: '',
+                    tr31BlockDataLen: 0,
+                    tr31BlockData: ''
                 },
                 response: '3030303041303030303255'
             },
@@ -61,8 +69,16 @@ module.exports = {
                     ksn: '',
                     ksnLength: 0,
                     mode: '1',
-                    tr31BlockData: '',
-                    tr31BlockDataLen: 0
+                    zkaMasterKeyTypeLength: 0,
+                    zkaMasterKeyType: '',
+                    zkaMasterKeyLength: 0,
+                    zkaMasterKey: '',
+                    zkaOptionLength: 0,
+                    zkaOption: '',
+                    zkaRndiLength: 0,
+                    zkaRndi: '',
+                    tr31BlockDataLen: 0,
+                    tr31BlockData: ''
                 },
                 response: '30303030413031303032553B3055393944384643373738303535423633443346443533434441394545454642394558'
             }
