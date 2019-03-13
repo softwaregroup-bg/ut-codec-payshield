@@ -259,7 +259,10 @@
         "requestCode": "JA",
         "responseCode": "JB",
         "requestPattern": "account:12/string, checkLength:2/string-left-zero",
-        "responsePattern": "errorCode:2/string, pin/binary"
+        "responsePattern": "errorCode:2/string, pin/binary",
+        "customResponseError": {
+            "81": "PIN length mismatch"
+        }
     },
     "translatePinTpkLmk": {
         "requestCode": "JC",
