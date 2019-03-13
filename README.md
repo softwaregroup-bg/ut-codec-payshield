@@ -336,6 +336,13 @@ Generate/Verify a MAC (3DES DUKPT)
 - _error codes_
   - _01_: _MAC Verification Failure_
 
+### _JA (JB)_
+
+Generate a Random PIN
+
+- _error codes_
+  - _81_: _PIN length mismatch_
+
 ### _JC (JD)_
 
 Translate a PIN from TPK to LMK Encryption
