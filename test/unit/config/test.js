@@ -2003,6 +2003,81 @@ module.exports = {
                 response: 'payshield.verifyInterPinPvv.15'
             }
         },
+        verifyOffsetIbmDukptEncode: {
+            0: {
+                request: {
+                    mode: '0',
+                    macModeLength: 0,
+                    macMode: '',
+                    macMethodLength: 0,
+                    macMethod: '',
+                    bdk: 'UAADAFCC8551ADAB246EA1176FD691EDF',
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    ksnDescriptor: 'A05',
+                    ksn: 'FFFF0000010020000026',
+                    pvkLength: 33,
+                    pinBlock: 'BC786E28753DD4B2',
+                    pinBlockFormat: '01',
+                    checkLength: 4,
+                    pan: '540008900009',
+                    decimalisationTable: '0123456789123456',
+                    pinValidationData: '5052654000N2',
+                    offset: '1234FFFFFFFF',
+                    macLength: 0,
+                    mac: '',
+                    messageDataLengthBytesLength: 0,
+                    messageDataLengthBytes: '',
+                    messageDataLength: 0,
+                    messageData: ''
+                },
+                response: bufferize('30303134474F305541414441464343383535314144414232343645413131373646443639314544465538304145334638443633423038463943313336353245353431364437364538444130354646464630303030303130303230303030303236424337383645323837353344443442323031303435343030303839303030303930313233343536373839313233343536353035323635343030304E32313233344646464646464646')
+            },
+            1: {
+                request: {
+                    mode: '0',
+                    macModeLength: 1,
+                    macMode: '1',
+                    macMethodLength: 1,
+                    macMethod: '1',
+                    bdk: 'UAADAFCC8551ADAB246EA1176FD691EDF',
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    ksnDescriptor: 'A05',
+                    ksn: 'FFFF0000010020000026',
+                    pvkLength: 33,
+                    pinBlock: 'BC786E28753DD4B2',
+                    pinBlockFormat: '01',
+                    checkLength: 4,
+                    pan: '540008900009',
+                    decimalisationTable: '0123456789123456',
+                    pinValidationData: '5052654000N2',
+                    offset: '1234FFFFFFFF',
+                    macLength: 16,
+                    mac: 'ABCD1234EF098765',
+                    messageDataLengthBytesLength: 4,
+                    messageDataLengthBytes: '16',
+                    messageDataLength: 16,
+                    messageData: '424C41424C414D455353414745000000'
+                },
+                response: bufferize('30303134474F3031315541414441464343383535314144414232343645413131373646443639314544465538304145334638443633423038463943313336353245353431364437364538444130354646464630303030303130303230303030303236424337383645323837353344443442323031303435343030303839303030303930313233343536373839313233343536353035323635343030304E323132333446464646464646464142434431323334454630393837363530303136424C41424C414D455353414745000000')
+            }
+        },
+        verifyOffsetIbmDukptDecode: {
+            0: {
+                request: bufferize('30303138475030303030'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize('3030')
+                }
+            },
+            1: {
+                request: bufferize('30303138475030313031'),
+                response: 'payshield.verifyOffsetIbmDukpt.01'
+            },
+            2: {
+                request: bufferize('3030313847503130'),
+                response: 'payshield.verifyOffsetIbmDukpt.10'
+            }
+        },
         generateVerifyMacDukptEncode: {
             0: {
                 request: {
