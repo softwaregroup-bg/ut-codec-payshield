@@ -21,7 +21,6 @@ tap.test(`${method}Decode`, (t) => {
     t.same(payshield.decode(testData[0].request, $meta, context), testResults[0].response, 'verifyOffsetIbmDukpt decode, verify PIN success, verify MAC success');
     t.same(payshield.decode(testData[1].request, $meta, context).type, testResults[1].response, 'verifyOffsetIbmDukpt decode, PIN Verification failure, verify MAC failure');
     t.same(payshield.decode(testData[2].request, $meta, context).type, testResults[2].response, 'verifyOffsetIbmDukpt decode, BDK parity error');
-    // t.same(payshield.decode(testData[4].request, $meta, context).type, testResults[4].response, 'verifyOffsetIbmDukpt decode, invalid input data');
 
     t.end();
 });
