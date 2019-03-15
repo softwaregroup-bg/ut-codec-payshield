@@ -415,12 +415,6 @@
         "requestPattern": "data:dataLength/string",
         "responsePattern": "errorCode:2/string"
     },
-    "printFormatAdditional": {
-        "requestCode": "PC",
-        "responseCode": "PD",
-        "requestPattern": "",
-        "responsePattern": ""
-    },
     "printPin": {
         "requestCode": "PE",
         "responseCode": "PF",
