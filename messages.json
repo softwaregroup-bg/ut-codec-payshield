@@ -325,10 +325,6 @@
             "52": "Invalid Branch/Height"
         }
     },
-    "encryptDataBlockECB": {
-        "requestCode": "M0",
-        "requestPattern": "\"0011\", keyType:3/string, dek:33/string, messageLenHex:4/string-left-zero, message:messageLen/string"
-    },
     "encryptDataBlock": {
         "requestCode": "M0",
         "responseCode": "M1",
