@@ -67,6 +67,19 @@
             "10": "Key parity error"
         }
     },
+    "translateKeyLmk": {
+        "requestCode": "BW",
+        "responseCode": "BX",
+        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key:33/string, delimiter1:delimiter1Length/string, keyType:keyTypeLength/string, delimiter2:delimiter2Length/string, reserved1:reserved1Length/string, keySchemeLmk:keySchemeLmkLength/string, reserved2:reserved2Length/string",
+        "responsePattern": "errorCode:2/string, keyTranslated:33/string",
+        "customResponseError": {
+            "04": "Invalid key type code",
+            "05": "Invalid key length flag",
+            "10": "Key parity error",
+            "44": "Migration not allowed: 'Enforce key type 002 separation for PCI HSM compliance' not set",
+            "45": "Invalid key migration destination key type"
+        }
+    },
     "translatePinTpkZpk": {
         "requestCode": "CA",
         "responseCode": "CB",
@@ -324,6 +337,12 @@
             "10": "MK parity error",
             "52": "Invalid Branch/Height"
         }
+    },
+    "translateDtab": {
+        "requestCode": "LO",
+        "responseCode": "LP",
+        "requestPattern": "decimalisationTableOld:16/string",
+        "responsePattern": "errorCode:2/string, decimalisationTableNew:16/string"
     },
     "encryptDataBlock": {
         "requestCode": "M0",

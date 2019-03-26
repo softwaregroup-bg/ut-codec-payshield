@@ -174,6 +174,17 @@ Generate a Key Check Value
 - _error codes_
   - _10_: _Key parity error_
 
+### _BW (BX)_
+
+Translate Keys from Old LMK to New LMK and Migrate to New Key Type
+
+- _error codes_
+  - _04_: _Invalid key type code"_
+  - _05_: _Invalid key length flag"_
+  - _10_: _Key parity error"_
+  - _44_: _Migration not allowed: 'Enforce key type 002 separation for PCI HSM compliance' not set"_
+  - _45_: _Invalid key migration destination key type"_
+
 ### _CA (CB)_
 
 Translate a PIN from TPK to ZPK/BDK (3DES DUKPT) Encryption
@@ -392,6 +403,10 @@ ARQC Verification and/or ARPC Generation (Using EMV or Cloud-Based SKD Methods)
   - _06_: _Invalid YHHHHCC value_
   - _10_: _MK parity error_
   - _52_: _Invalid Branch/Height_
+
+### _LO (LP)_
+
+Translate Decimalization Table from Old to New LMK
 
 ### _M0 (M1)_
 
