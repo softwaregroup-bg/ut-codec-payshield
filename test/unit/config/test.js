@@ -331,6 +331,45 @@ module.exports = {
                 response: 'payshield.generateOffsetIbm.15'
             }
         },
+        translateKeyLmkEncode: {
+            0: {
+                request: {
+                    keyTypeCode: '00',
+                    keyLengthFlag: 1,
+                    key: 'UB7A1DC09C990EC0F6EC5AD811FD1E4E0',
+                    delimiter1Length: 0,
+                    delimiter1: '',
+                    keyTypeLength: 0,
+                    keyType: '',
+                    delimiter2Length: 1,
+                    delimiter2: ';',
+                    reserved1Length: 1,
+                    reserved1: '0',
+                    keySchemeLmkLength: 1,
+                    keySchemeLmk: 'U',
+                    reserved2Length: 1,
+                    reserved2: '0'
+                },
+                response: '3030323542573030315542374131444330394339393045433046364543354144383131464431453445303B305530'
+            }
+        },
+        translateKeyLmkDecode: {
+            0: {
+                request: bufferize('3030303142583030553530323634443130334445323741353437373039343441464541413943454546'),
+                response: {
+                    errorCode: '00',
+                    keyTranslated: 'U50264D103DE27A54770944AFEAA9CEEF'
+                }
+            },
+            1: {
+                request: bufferize('3030303142583333'),
+                response: 'payshield.translateKeyLmk.33'
+            },
+            2: {
+                request: bufferize('3030303042583130'),
+                response: 'payshield.translateKeyLmk.10'
+            }
+        },
         generateKeyCheckValueEncode: {
             0: {
                 request: {
@@ -1378,6 +1417,27 @@ module.exports = {
             6: {
                 request: bufferize('303338374B583130'),
                 response: 'payshield.generateArqc4.10'
+            }
+        },
+        translateDtabEncode: {
+            0: {
+                request: {
+                    decimalisationTableOld: 'ABCDEF1231234567'
+                },
+                response: '303032324C4F41424344454631323331323334353637'
+            }
+        },
+        translateDtabDecode: {
+            0: {
+                request: bufferize('303030304C50303037363534333231333231464544434241'),
+                response: {
+                    errorCode: '00',
+                    decimalisationTableNew: '7654321321FEDCBA'
+                }
+            },
+            1: {
+                request: bufferize('303030304C503333'),
+                response: 'payshield.translateDtab.33'
             }
         },
         encryptDataBlockEncode: {
