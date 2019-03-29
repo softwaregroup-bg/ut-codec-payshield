@@ -331,6 +331,29 @@ module.exports = {
                 response: 'payshield.generateOffsetIbm.15'
             }
         },
+        translatePinLmkLmkEncode: {
+            0: {
+                request: {
+                    account: '540008900009',
+                    pinLength: 7,
+                    pin: '0567899'
+                },
+                response: '30303238424735343030303839303030303930353637383939'
+            }
+        },
+        translatePinLmkLmkDecode: {
+            0: {
+                request: bufferize('303030334248303030393938373635'),
+                response: {
+                    errorCode: '00',
+                    pin: bufferize('30393938373635', 'ascii')
+                }
+            },
+            1: {
+                request: bufferize('3030303342483134'),
+                response: 'payshield.translatePinLmkLmk.14'
+            }
+        },
         translateKeyLmkEncode: {
             0: {
                 request: {
