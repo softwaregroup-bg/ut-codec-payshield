@@ -44,6 +44,12 @@
         "requestPattern": "length:4/string-left-zero, data:length/string-left-zero",
         "responsePattern": "errorCode:2/string, data:4/string"
     },
+    "translatePinLmkLmk": {
+        "requestCode": "BG",
+        "responseCode": "BH",
+        "requestPattern": "account:12/string, pin:pinLength/string",
+        "responsePattern": "errorCode:2/string, pin/binary"
+    },
     "generateOffsetIbm": {
         "requestCode": "BK",
         "responseCode": "BL",
