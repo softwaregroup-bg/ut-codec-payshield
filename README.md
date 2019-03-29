@@ -153,6 +153,10 @@ Export a Key
 
 Echo Command
 
+### _BG (BH)_
+
+Translate a PIN and PIN Length
+
 ### _BK (BL)_
 
 Generate an IBM PIN Offset (of a customer selected PIN)
