@@ -353,8 +353,8 @@
     "translateDtab": {
         "requestCode": "LO",
         "responseCode": "LP",
-        "requestPattern": "decimalisationTableOld:16/string",
-        "responsePattern": "errorCode:2/string, decimalisationTableNew:16/string"
+        "requestPattern": "decimalisationTable:16/string",
+        "responsePattern": "errorCode:2/string, decimalisationTableTranslated:16/string"
     },
     "encryptDataBlock": {
         "requestCode": "M0",
