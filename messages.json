@@ -64,6 +64,12 @@
             "86": "PIN exists in either global or local Excluded PIN Table"
         }
     },
+    "eraseKeyChangeStorage": {
+        "requestCode": "BS",
+        "responseCode": "BT",
+        "requestPattern": "",
+        "responsePattern": "errorCode:2/string"
+    },
     "generateKeyCheckValue": {
         "requestCode": "BU",
         "responseCode": "BV",
@@ -73,7 +79,7 @@
             "10": "Key parity error"
         }
     },
-    "translateKeyLmk": {
+    "translateKeyLmkLmk": {
         "requestCode": "BW",
         "responseCode": "BX",
         "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key:33/string, delimiter1:delimiter1Length/string, keyType:keyTypeLength/string, delimiter2:delimiter2Length/string, reserved1:reserved1Length/string, keySchemeLmk:keySchemeLmkLength/string, reserved2:reserved2Length/string",

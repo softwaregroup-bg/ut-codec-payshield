@@ -171,6 +171,10 @@ Generate an IBM PIN Offset (of a customer selected PIN)
 - _warnings_
   - _02_: _Warning PVK not single length_
 
+### _BS (BT)_
+
+Erase the Key Change Storage
+
 ### _BU (BV)_
 
 Generate a Key Check Value
@@ -183,11 +187,11 @@ Generate a Key Check Value
 Translate Keys from Old LMK to New LMK and Migrate to New Key Type
 
 - _error codes_
-  - _04_: _Invalid key type code"_
-  - _05_: _Invalid key length flag"_
-  - _10_: _Key parity error"_
-  - _44_: _Migration not allowed: 'Enforce key type 002 separation for PCI HSM compliance' not set"_
-  - _45_: _Invalid key migration destination key type"_
+  - _04_: _Invalid key type code_
+  - _05_: _Invalid key length flag_
+  - _10_: _Key parity error_
+  - _44_: _Migration not allowed: 'Enforce key type 002 separation for PCI HSM compliance' not set_
+  - _45_: _Invalid key migration destination key type_
 
 ### _CA (CB)_
 
