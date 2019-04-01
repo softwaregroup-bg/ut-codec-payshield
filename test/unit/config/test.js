@@ -354,7 +354,7 @@ module.exports = {
                 response: 'payshield.translatePinLmkLmk.14'
             }
         },
-        translateKeyLmkEncode: {
+        translateKeyLmkLmkEncode: {
             0: {
                 request: {
                     keyTypeCode: '00',
@@ -376,7 +376,7 @@ module.exports = {
                 response: '3030323542573030315542374131444330394339393045433046364543354144383131464431453445303B305530'
             }
         },
-        translateKeyLmkDecode: {
+        translateKeyLmkLmkDecode: {
             0: {
                 request: bufferize('3030303142583030553530323634443130334445323741353437373039343441464541413943454546'),
                 response: {
@@ -386,11 +386,11 @@ module.exports = {
             },
             1: {
                 request: bufferize('3030303142583333'),
-                response: 'payshield.translateKeyLmk.33'
+                response: 'payshield.translateKeyLmkLmk.33'
             },
             2: {
                 request: bufferize('3030303042583130'),
-                response: 'payshield.translateKeyLmk.10'
+                response: 'payshield.translateKeyLmkLmk.10'
             }
         },
         generateKeyCheckValueEncode: {

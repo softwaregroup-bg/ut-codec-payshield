@@ -6,7 +6,7 @@ const errorApi = { getError: get, fetchErrors: fetch, defineError: define };
 const Payshield = require('../../../index');
 const payshield = new Payshield(Object.assign({}, config, errorApi));
 
-const method = 'translateKeyLmk';
+const method = 'translateKeyLmkLmk';
 const testData = config.test[`${method}Encode`];
 const testResults = config.test[`${method}Encode`];
 const $meta = {
@@ -18,7 +18,7 @@ const context = {
     trace: 25
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, context).toString('hex').toUpperCase(), testResults[0].response, 'translateKeyLmk encode');
+    t.same(payshield.encode(testData[0].request, $meta, context).toString('hex').toUpperCase(), testResults[0].response, 'translateKeyLmkLmk encode');
 
     t.end();
 });
