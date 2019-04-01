@@ -1445,7 +1445,7 @@ module.exports = {
         translateDtabEncode: {
             0: {
                 request: {
-                    decimalisationTableOld: 'ABCDEF1231234567'
+                    decimalisationTable: 'ABCDEF1231234567'
                 },
                 response: '303032324C4F41424344454631323331323334353637'
             }
@@ -1455,7 +1455,7 @@ module.exports = {
                 request: bufferize('303030304C50303037363534333231333231464544434241'),
                 response: {
                     errorCode: '00',
-                    decimalisationTableNew: '7654321321FEDCBA'
+                    decimalisationTableTranslated: '7654321321FEDCBA'
                 }
             },
             1: {
