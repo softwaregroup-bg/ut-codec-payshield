@@ -393,6 +393,24 @@ module.exports = {
                 response: 'payshield.translateKeyLmkLmk.10'
             }
         },
+        eraseKeyChangeStorageEncode: {
+            0: {
+                request: {},
+                response: '303032384253'
+            }
+        },
+        eraseKeyChangeStorageDecode: {
+            0: {
+                request: bufferize('3030323842543030'),
+                response: {
+                    errorCode: '00'
+                }
+            },
+            1: {
+                request: bufferize('3030323842543638'),
+                response: 'payshield.eraseKeyChangeStorage.68'
+            }
+        },
         generateKeyCheckValueEncode: {
             0: {
                 request: {

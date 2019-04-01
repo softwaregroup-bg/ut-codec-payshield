@@ -67,7 +67,7 @@
     "eraseKeyChangeStorage": {
         "requestCode": "BS",
         "responseCode": "BT",
-        "requestPattern": "",
+        "requestPattern": "\"\"",
         "responsePattern": "errorCode:2/string"
     },
     "generateKeyCheckValue": {
