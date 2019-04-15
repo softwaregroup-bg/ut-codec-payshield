@@ -195,6 +195,18 @@
             "86": "PIN exists in either global or local Excluded PIN Table"
         }
     },
+    "verifyInterPinIbm": {
+        "requestCode": "EA",
+        "responseCode": "EB",
+        "requestPattern": "zpk:33/string, pvk:pvkLength/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string",
+        "responsePattern": "errorCode:2/string",
+        "warnings": ["02"],
+        "customResponseError": {
+            "01": "PIN verification failure",
+            "10": "ZPK parity error",
+            "11": "PVK parity error"
+        }
+    },
     "verifyInterPinPvv": {
         "requestCode": "EC",
         "responseCode": "ED",
