@@ -2061,6 +2061,50 @@ module.exports = {
                 response: 'payshield.verifyPinGeneratePvv.20'
             }
         },
+        verifyPinGenerateOffsetEncode: {
+            0: {
+                request: {
+                    keyType: '002',
+                    key: 'U948B74933EAAD46C6B8BDEAD1550AF2A',
+                    pvkLength: 33,
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    sourcePinBlock: '2FDC581AC25C9640',
+                    sourcePinBlockFormat: '01',
+                    checkLength: 6,
+                    pan: '540008900009',
+                    decimalisationTable: 'FD64FC3FAD504BB3',
+                    pinValidationData: '5022654000N2',
+                    offset: '123456FFFFFF',
+                    destinationPinBlock: 'B2766AACF790B197'
+                },
+                response: '303032394455303032553934384237343933334541414434364336423842444541443135353041463241553830414533463844363342303846394331333635324535343136443736453844324644433538314143323543393634303031303635343030303839303030303946443634464333464144353034424233353032323635343030304E3231323334353646464646464642323736364141434637393042313937'
+            }
+        },
+        verifyPinGenerateOffsetDecode: {
+            0: {
+                request: bufferize('3030303144563030363534333231464646464646'),
+                response: {
+                    errorCode: '00',
+                    offset: '654321FFFFFF'
+                }
+            },
+            1: {
+                request: bufferize('3030303344563031'),
+                response: 'payshield.verifyPinGenerateOffset.01'
+            },
+            2: {
+                request: bufferize('3030303544563130'),
+                response: 'payshield.verifyPinGenerateOffset.10'
+            },
+            3: {
+                request: bufferize('3030303844563131'),
+                response: 'payshield.verifyPinGenerateOffset.11'
+            },
+            4: {
+                request: bufferize('3030313044563230'),
+                response: 'payshield.verifyPinGenerateOffset.20'
+            }
+        },
         verifyInterPinIbmEncode: {
             0: {
                 request: {
