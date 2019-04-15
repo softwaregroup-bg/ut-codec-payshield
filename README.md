@@ -282,6 +282,32 @@ Generate an ABA PVV (of an LMK encrypted PIN)
   - _81_: _PIN length mismatch_
   - _86_: _PIN exists in either global or local Excluded PIN Table_
 
+### _DU (DV)_
+
+Verify a PIN & Generate an IBM PIN Offset (of customer selected new PIN)
+
+- _error codes_
+  - _01_: _PIN verification failure_
+  - _10_: _PIN Block Key parity error_
+  - _11_: _PVK parity error_
+  - _81_: _PIN length mismatch_
+  - _86_: _PIN exists in either global or local Excluded PIN Table_
+
+- _warnings_
+  - _02_: _Warning PVK not single length_
+
+### _EA (EB)_
+
+Verify an Interchange PIN Using the IBM Offset Method
+
+- _error codes_
+  - _01_: _PIN verification failure_
+  - _10_: _ZPK parity error_
+  - _11_: _PVK parity error_
+
+- _warnings_
+  - _02_: _Warning PVK not single length_
+
 ### _EC (ED)_
 
 Verify an Interchange PIN Using the ABA PVV Method
