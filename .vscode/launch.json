@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Single test",
-            "program": "${workspaceFolder}/test/unit/cases/test.unit.generateArqc3Decode",
+            "program": "${workspaceFolder}/test/unit/cases/test.unit.verifyInterPinIbmDecode",
             "outputCapture": "std"
         },
       	{

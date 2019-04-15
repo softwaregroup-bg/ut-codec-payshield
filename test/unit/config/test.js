@@ -2061,6 +2061,48 @@ module.exports = {
                 response: 'payshield.verifyPinGeneratePvv.20'
             }
         },
+        verifyInterPinIbmEncode: {
+            0: {
+                request: {
+                    zpk: 'U3027C895181D912A91D7DF0ED78AC6FB',
+                    pvkLength: 33,
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    maximumPinLength: '12',
+                    pinBlock: 'A69F9E7646904B68',
+                    pinBlockFormat: '01',
+                    checkLength: '06',
+                    pan: '540008900009',
+                    decimalisationTable: '0123456789123456',
+                    pinValidationData: '5022654000N2',
+                    offset: '876955FFFFFF'
+                },
+                response: '3030323845415533303237433839353138314439313241393144374446304544373841433646425538304145334638443633423038463943313336353245353431364437364538443132413639463945373634363930344236383031303635343030303839303030303930313233343536373839313233343536353032323635343030304E32383736393535464646464646'
+            }
+        },
+        verifyInterPinIbmDecode: {
+            0: {
+                request: bufferize('3132333245423032'),
+                response: {
+                    'errorCode': '02'
+                }
+            },
+            1: {
+                request: bufferize('3030333945423031'),
+                response: 'payshield.verifyInterPinIbm.01'
+            },
+            2: {
+                request: bufferize('3030353445423131'),
+                response: 'payshield.verifyInterPinIbm.11'
+            },
+            3: {
+                request: bufferize('3030363245423130'),
+                response: 'payshield.verifyInterPinIbm.10'
+            },
+            4: {
+                request: bufferize('3030363745423135'),
+                response: 'payshield.verifyInterPinIbm.15'
+            }
+        },
         verifyInterPinPvvEncode: {
             0: {
                 request: {
