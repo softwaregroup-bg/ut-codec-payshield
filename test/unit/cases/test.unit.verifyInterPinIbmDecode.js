@@ -12,10 +12,10 @@ const testResults = config.test[`${method}Decode`];
 const $meta = {
     method: method,
     mtid: 'response',
-    trace: 3
+    trace: 28
 };
 const context = {
-    trace: 3
+    trace: 28
 };
 tap.test(`${method}Decode`, (t) => {
     t.same(payshield.decode(testData[0].request, $meta, context), testResults[0].response, 'verifyInterPinIbm decode, success');
