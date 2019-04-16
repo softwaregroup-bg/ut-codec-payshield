@@ -198,7 +198,7 @@
     "verifyPinGenerateOffset": {
         "requestCode": "DU",
         "responseCode": "DV",
-        "requestPattern": "keyType:3/string, key:33/string, pvk:pvkLength/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string, destinationPinBlock:16/string",
+        "requestPattern": "keyType:3/string, key:33/string, pvk:pvkLength/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, sourceOffset:12/string, destinationPinBlock:16/string",
         "responsePattern": "errorCode:2/string, offset:12/string",
         "warnings": ["02"],
         "customResponseError": {
