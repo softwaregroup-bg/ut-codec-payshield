@@ -269,7 +269,7 @@ module.exports = {
             0: {
                 request: {
                     keyType: '002',
-                    pinKey: 'U3027C895181D912A91D7DF0ED78AC6FB',
+                    key: 'U3027C895181D912A91D7DF0ED78AC6FB',
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     pvkLength: 33,
                     pinBlock: 'A69F9E7646904B68',
@@ -285,7 +285,7 @@ module.exports = {
             1: {
                 request: {
                     keyType: '002',
-                    pinKey: 'U3027C895181D912A91D7DF0ED78AC6FB',
+                    key: 'U3027C895181D912A91D7DF0ED78AC6FB',
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     pvkLength: 33,
                     pinBlock: 'A69F9E7646904B68',

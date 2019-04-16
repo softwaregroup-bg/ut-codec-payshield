@@ -53,7 +53,7 @@
     "generateOffsetIbm": {
         "requestCode": "BK",
         "responseCode": "BL",
-        "requestPattern": "keyType:3/string, pinKey:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string",
+        "requestPattern": "keyType:3/string, key:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string",
         "responsePattern": "errorCode:2/string, offset:12/string",
         "warnings": ["02"],
         "customResponseError": {
