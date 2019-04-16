@@ -190,7 +190,8 @@ Translate Keys from Old LMK to New LMK and Migrate to New Key Type
   - _04_: _Invalid key type code_
   - _05_: _Invalid key length flag_
   - _10_: _Key parity error_
-  - _44_: _Migration not allowed: 'Enforce key type 002 separation for PCI HSM compliance' not set_
+  - _44_: _Migration not allowed: 'Enforce key type 002 separation for PCI HSM
+   compliance' not set_
   - _45_: _Invalid key migration destination key type_
 
 ### _CA (CB)_
