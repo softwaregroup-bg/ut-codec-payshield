@@ -269,7 +269,7 @@ module.exports = {
             0: {
                 request: {
                     keyType: '002',
-                    pinKey: 'U3027C895181D912A91D7DF0ED78AC6FB',
+                    key: 'U3027C895181D912A91D7DF0ED78AC6FB',
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     pvkLength: 33,
                     pinBlock: 'A69F9E7646904B68',
@@ -285,7 +285,7 @@ module.exports = {
             1: {
                 request: {
                     keyType: '002',
-                    pinKey: 'U3027C895181D912A91D7DF0ED78AC6FB',
+                    key: 'U3027C895181D912A91D7DF0ED78AC6FB',
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     pvkLength: 33,
                     pinBlock: 'A69F9E7646904B68',
@@ -1893,6 +1893,30 @@ module.exports = {
             1: {
                 request: bufferize('3030363350463136'),
                 response: 'payshield.printPin.16'
+            }
+        },
+        translateAccountNumberEncode: {
+            0: {
+                request: {
+                    pinLength: '5',
+                    pin: '01234',
+                    oldAccountNumber: '1234560000001234',
+                    newAccountNumber: '6543210000004321'
+                },
+                response: '30303330514B3031323334313233343536303030303030313233343635343332313030'
+            }
+        },
+        translateAccountNumberDecode: {
+            0: {
+                request: bufferize('30303330514C30303433323130'),
+                response: {
+                    errorCode: '00',
+                    pin: bufferize('3433323130')
+                }
+            },
+            1: {
+                request: bufferize('30303330514C3135'),
+                response: 'payshield.translateAccountNumber.15'
             }
         },
         printTmkMailerEncode: {
