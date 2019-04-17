@@ -482,6 +482,12 @@
             "41": "Internal hardware/software error"
         }
     },
+    "translateAccountNumber": {
+        "requestCode": "QK",
+        "responseCode": "QL",
+        "requestPattern": "pin:pinLength/string, oldAccountNumber:12/string, newAccountNumber:12/string",
+        "responsePattern": "errorCode:2/string, pin/binary"
+    },
     "printTmkMailer": {
         "requestCode": "TA",
         "responseCode": "TB",

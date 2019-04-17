@@ -1895,6 +1895,30 @@ module.exports = {
                 response: 'payshield.printPin.16'
             }
         },
+        translateAccountNumberEncode: {
+            0: {
+                request: {
+                    pinLength: '5',
+                    pin: '01234',
+                    oldAccountNumber: '1234560000001234',
+                    newAccountNumber: '6543210000004321'
+                },
+                response: '30303330514B3031323334313233343536303030303030313233343635343332313030'
+            }
+        },
+        translateAccountNumberDecode: {
+            0: {
+                request: bufferize('30303330514C30303433323130'),
+                response: {
+                    errorCode: '00',
+                    pin: bufferize('3433323130')
+                }
+            },
+            1: {
+                request: bufferize('30303330514C3135'),
+                response: 'payshield.translateAccountNumber.15'
+            }
+        },
         printTmkMailerEncode: {
             0: {
                 request: {

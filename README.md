@@ -529,6 +529,10 @@ Print PIN/PIN and Solicitation Data
   - _16_: _Printer not ready/disconnected_
   - _41_: _Internal hardware/software error_
 
+### _QK (QL)_
+
+Translate Account Number for LMK-encrypted PIN
+
 ### _TA (TB, TZ)_
 
 Print TMK Mailer
