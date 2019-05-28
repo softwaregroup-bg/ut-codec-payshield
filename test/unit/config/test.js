@@ -2223,10 +2223,11 @@ module.exports = {
                     macMethodLength: 0,
                     macMethod: '',
                     bdk: 'UAADAFCC8551ADAB246EA1176FD691EDF',
+                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     ksnDescriptor: 'A05',
+                    ksnLength: 20,
                     ksn: 'FFFF0000010020000026',
-                    pvkLength: 33,
                     pinBlock: 'BC786E28753DD4B2',
                     pinBlockFormat: '01',
                     checkLength: 4,
@@ -2251,10 +2252,11 @@ module.exports = {
                     macMethodLength: 1,
                     macMethod: '1',
                     bdk: 'UAADAFCC8551ADAB246EA1176FD691EDF',
+                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     ksnDescriptor: 'A05',
+                    ksnLength: 20,
                     ksn: 'FFFF0000010020000026',
-                    pvkLength: 33,
                     pinBlock: 'BC786E28753DD4B2',
                     pinBlockFormat: '01',
                     checkLength: 4,
@@ -2287,6 +2289,64 @@ module.exports = {
             2: {
                 request: bufferize('3030313847503130'),
                 response: 'payshield.verifyOffsetIbmDukpt.10'
+            }
+        },
+        verifyPvvDukptEncode: {
+            0: {
+                request: {
+                    mode: '0',
+                    macModeLength: 0,
+                    macMode: '',
+                    macMethodLength: 0,
+                    macMethod: '',
+                    bdk: 'UAADAFCC8551ADAB246EA1176FD691EDF',
+                    pvkLength: 33,
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    ksnDescriptor: 'A05',
+                    ksnLength: 20,
+                    ksn: 'FFFF0000010020000026',
+                    pinBlock: 'A69F9E7646904B68',
+                    pinBlockFormat: '01',
+                    pan: '540008900009',
+                    delimiterLength: 0,
+                    delimiter: '',
+                    verificationPanLength: 0,
+                    verificationPan: '',
+                    pvki: '1',
+                    pvv: '8156',
+                    macLength: 0,
+                    mac: '',
+                    messageDataLengthBytesLength: 0,
+                    messageDataLengthBytes: '',
+                    messageDataLength: 0,
+                    messageData: ''
+                },
+                response: bufferize('3030333147513055414144414643433835353141444142323436454131313736464436393145444655383041453346384436334230384639433133363532453534313644373645384441303546464646303030303031303032303030303032364136394639453736343639303442363830313534303030383930303030393138313536')
+            }
+        },
+        verifyPvvDukptDecode: {
+            0: {
+                request: bufferize('3030333147523030'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([])
+                }
+            },
+            1: {
+                request: bufferize('3030333147523031'),
+                response: 'payshield.verifyPvvDukpt.01'
+            },
+            2: {
+                request: bufferize('3030333147523130'),
+                response: 'payshield.verifyPvvDukpt.10'
+            },
+            3: {
+                request: bufferize('3030333147523131'),
+                response: 'payshield.verifyPvvDukpt.11'
+            },
+            4: {
+                request: bufferize('3030333147523237'),
+                response: 'payshield.verifyPvvDukpt.27'
             }
         },
         generateVerifyMacDukptEncode: {

@@ -286,15 +286,26 @@
     "verifyOffsetIbmDukpt": {
         "requestCode": "GO",
         "responseCode": "GP",
-        "requestPattern": "mode:1/string, macMode:macModeLength/string, macMethod:macMethodLength/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:20/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string, mac:macLength/string, messageDataLengthBytes:messageDataLengthBytesLength/string-left-zero, messageData:messageDataLength/string-binhex",
+        "requestPattern": "mode:1/string, macMode:macModeLength/string, macMethod:macMethodLength/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:ksnLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string, mac:macLength/string, messageDataLengthBytes:messageDataLengthBytesLength/string-left-zero, messageData:messageDataLength/string-binhex",
         "responsePattern": "errorCode:2/string, rest/binary",
         "warnings": ["02"],
         "customResponseError": {
             "01": "PIN Verification failure",
             "10": "BDK parity error",
             "11": "PVK error",
-            "27": "BDK not double length",
-            "68": "Command disabled"
+            "27": "BDK not double length"
+        }
+    },
+    "verifyPvvDukpt": {
+        "requestCode": "GQ",
+        "responseCode": "GR",
+        "requestPattern": "mode:1/string, macMode:macModeLength/string, macMethod:macMethodLength/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:ksnLength/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiter:delimiterLength/string, verificationPan:verificationPanLength/string, pvki:1/string, pvv:4/string, mac:macLength/string, messageDataLengthBytes:messageDataLengthBytesLength/string-left-zero, messageData:messageDataLength/string-binhex",
+        "responsePattern": "errorCode:2/string, rest/binary",
+        "customResponseError": {
+            "01": "PIN Verification failure",
+            "10": "BDK parity error",
+            "11": "PVK error",
+            "27": "BDK not double or triple length"
         }
     },
     "generateVerifyMacDukpt": {
