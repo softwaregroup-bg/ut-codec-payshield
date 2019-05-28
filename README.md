@@ -375,6 +375,16 @@ Verify a PIN Using the IBM Offset Method (3DES DUKPT)
 - _warnings_
   - _02_: _Warning PVK not single length_
 
+### _GQ (GR)_
+
+Verify a PIN Using the ABA PVV Method (3DES DUKPT)
+
+- _error codes_
+  - _01_: _PIN Verification failure_
+  - _10_: _BDK parity error_
+  - _11_: _PVK error_
+  - _27_: _BDK not double or triple length_
+
 ### _GW (GX)_
 
 Generate/Verify a MAC (3DES DUKPT)
