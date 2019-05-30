@@ -16,16 +16,8 @@ Initializes the _PayshieldCodec_ instance
 
 params
 
-- _config_ (object) - codec configuration
-  - _headerFormat_ (string) - defines the length and data type of the
-    message header in format _length/data type_; **for more information of
-    the format definitions, please refer to _ut-bitsyntax_ documentation**
-  - _messageFormat_ (object) - may contain new command definitions, or
-    definitions of existing commands to be overwritten, or parts of
-    existing commands to be overwritten; **for more information of command
-    definitions, please refer to _Payshield commands_ below**
-  - _maskedKeys_ (array) - request/response keys for which the values to
-    be masked in the log records
+- _config_ (object) - codec configuration; **NOTE: for more information, please
+ refer to _Configuration_ below**
 
 result (void)
 
@@ -39,7 +31,7 @@ params
 
 - _buff_ (buffer) - data buffer to be decoded
 - _$meta_ (object) - _$meta_ object as defined in _ut-port_
-- _context_ (object) - _context_ object as defined by _ut-port-tcp_
+- _context_ (object) - _context_ object as defined in _ut-port-tcp_
 - _log_ (object) - contains log functions; **for more information, please
   refer to _ut-log_ documentation**
 
@@ -57,7 +49,7 @@ params
 
 - _data_ (object) - data object to be encoded
 - _$meta_ (object) - _$meta_ object as defined in _ut-port_
-- _context_ (object) - _context_ object as defined by _ut-port-tcp_
+- _context_ (object) - _context_ object as defined in _ut-port-tcp_
 - _log_ (object) - contains log functions; **for more information, please
   refer to _ut-log_ documentation**
 
@@ -95,22 +87,23 @@ Each command should be described in _messages.json_ in the following way:
 - __commandName__ (object) - name of the method which will be exposed in
  _payshield_ namespace
   - _requestCode_ (string) - _Command Code_ for this command as defined in
-    _Payshield Host Command Reference Manual_
+   _Payshield Host Command Reference Manual_
   - _responseCode_ (string) - _Response Code_ for this command as defined in
-    _Payshield Host Command Reference Manual_
+   _Payshield Host Command Reference Manual_
   - _requestPattern_ (string) - request pattern definition for
-    _PayshieldCodec_ _encode_ method; **for more information of pattern
-    definitions, please refer to _ut-bitsyntax_ documentation**
+   _PayshieldCodec_ _encode_ method; **NOTE: for more information of pattern
+   definitions, please refer to _ut-bitsyntax_ documentation**
   - _responsePattern_ (string) - response pattern definition for
-    _PayshieldCodec_ _decode_ method; **for more information of pattern
-    definitions, please refer to _ut-bitsyntax_ documentation**
+   _PayshieldCodec_ _decode_ method; **NOTE: for more information of pattern
+   definitions, please refer to _ut-bitsyntax_ documentation**
   - _warnings_ (array) - array with error codes to be processed as warnings
-    instead of errors **for this command only**; **for list of error codes,
-    please refer to _Error codes_ below**
+   instead of errors **for this command only**; **NOTE: for list of error
+   codes, please refer to _Available Payshield commands, command specific
+   error codes, command specific warnings_ below**
     - (string) - error code to be processed as warning
   - _customResponseError_ (object) - _key: value_ pairs object to define new
-    error codes, or to overwrite existing standard error codes **for this
-    command only**
+   error codes, or to overwrite existing standard error codes **for this
+   command only**
     - _key_ - error code
     - _value_ - error description
 
@@ -624,10 +617,15 @@ Print TMK Mailer
 - _BC_: _Repeated optional block_
 - _BD_: _Incompatible key types_
 
-## Mask Logs
+## Configuration
 
-- `maskedKeys` must be set. It is array of items (fields) that will be masked.
- Item value should be taken from `messages.json` `requestPattern` for specific
- message. For instance if there is need to mask field `keySchemeLmk` in message
- `generateKey`, `maskedKeys` should have following struct.
- `maskedKeys = ['generateKey']`
+  - _headerFormat_ (string) - defines the length and data type of the
+   message header in format _length/data type_; **NOTE: for more information
+   of the format definitions, please refer to _ut-bitsyntax_ documentation**
+  - _messageFormat_ (object) - may contain new command definitions, or
+   definitions of existing commands to be overwritten, or parts of existing
+   commands to be overwritten; **NOTE: for more information of command
+   definitions, please refer to _Defining new commands_ above**
+  - _maskedKeys_ (array) - request/response keys for which the values to
+   be masked in the log records
+    - (string) - key for which the value will be masked in log records
