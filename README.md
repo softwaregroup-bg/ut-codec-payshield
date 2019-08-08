@@ -619,13 +619,13 @@ Print TMK Mailer
 
 ## Configuration
 
-  - _headerFormat_ (string) - defines the length and data type of the
-   message header in format _length/data type_; **NOTE: for more information
-   of the format definitions, please refer to _ut-bitsyntax_ documentation**
-  - _messageFormat_ (object) - may contain new command definitions, or
-   definitions of existing commands to be overwritten, or parts of existing
-   commands to be overwritten; **NOTE: for more information of command
-   definitions, please refer to _Defining new commands_ above**
-  - _maskedKeys_ (array) - request/response keys for which the values to
-   be masked in the log records
-    - (string) - key for which the value will be masked in log records
+- _headerFormat_ (string) - defines the length and data type of the
+ message header in format _length/data type_; **NOTE: for more information
+ of the format definitions, please refer to _ut-bitsyntax_ documentation**
+- _messageFormat_ (object) - may contain new command definitions, or
+ definitions of existing commands to be overwritten, or parts of existing
+ commands to be overwritten; **NOTE: for more information of command
+ definitions, please refer to _Defining new commands_ above**
+- _maskedKeys_ (array) - request/response keys for which the values to
+ be masked in the log records
+  - (string) - key for which the value will be masked in log records
