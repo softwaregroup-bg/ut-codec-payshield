@@ -3,7 +3,7 @@
   "version": "7.0.0-rc-dss.34",
   "main": "./index.js",
   "dependencies": {
-    "lodash.merge": "4.6.1",
+    "lodash.merge": "4.6.2",
     "ut-bitsyntax": "^6.2.3"
   },
   "devDependencies": {
@@ -34,7 +34,7 @@
   "description": "Payshield codec",
   "repository": {
     "type": "git",
-    "url": "git@github.com:softwaregroup/ut-codec-payshield.git"
+    "url": "git@github.com:softwaregroup-bg/ut-codec-payshield.git"
   },
   "license": "Apache-2.0"
 }
