@@ -1,6 +1,6 @@
 {
   "name": "ut-codec-payshield",
-  "version": "7.0.0-rc-dss.36",
+  "version": "7.0.0-rc-dss.37",
   "main": "./index.js",
   "dependencies": {
     "lodash.merge": "4.6.2",
