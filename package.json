@@ -4,11 +4,11 @@
   "main": "./index.js",
   "dependencies": {
     "lodash.merge": "4.6.1",
-    "ut-bitsyntax": "^6.0.17"
+    "ut-bitsyntax": "^6.2.3"
   },
   "devDependencies": {
-    "tap": "^12.5.3",
-    "ut-tools": "^6.9.5",
+    "tap": "12.5.3",
+    "ut-tools": "^6.23.0",
     "ut-unittest": "^1.1.0"
   },
   "scripts": {
@@ -34,7 +34,7 @@
   "description": "Payshield codec",
   "repository": {
     "type": "git",
-    "url": "git@github.com:softwaregroup-bg/ut-codec-payshield.git"
+    "url": "git@github.com:softwaregroup/ut-codec-payshield.git"
   },
   "license": "Apache-2.0"
 }
