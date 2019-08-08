@@ -396,7 +396,7 @@
     "encryptDataBlock": {
         "requestCode": "M0",
         "responseCode": "M1",
-        "requestPattern": "modeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
+        "requestPattern": "modeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageDataLengthHex:4/string-left-zero, messageData:messageDataLength/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "02": "Invalid Mode Flag field",
@@ -411,7 +411,7 @@
     "decryptDataBlock": {
         "requestCode": "M2",
         "responseCode": "M3",
-        "requestPattern": "modeFlag:2/string, bpsRadixFlag:bpsRadixFlagLength/string, bpsRadixValue:bpsRadixValueLength/string, bpsTweak:bpsTweakLength/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
+        "requestPattern": "modeFlag:2/string, bpsRadixFlag:bpsRadixFlagLength/string, bpsRadixValue:bpsRadixValueLength/string, bpsTweak:bpsTweakLength/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageDataLengthHex:4/string-left-zero, messageData:messageDataLength/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "02": "Invalid Mode Flag field",
@@ -426,7 +426,7 @@
     "translateDataBlock": {
         "requestCode": "M4",
         "responseCode": "M5",
-        "requestPattern": "sourceModeFlag:2/string, destinationModeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, sourceKeyType:3/string, sourceKey:33/string, sourceKsnDescriptor:sourceKsnDescriptorLength/string, sourceKsn:sourceKsnLength/string, destinationKeyType:3/string, destinationKey:33/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourceIv:sourceIvLength/string, destinationIv:destinationIvLength/string, messageLenHex:4/string-left-zero, message:messageLen/string",
+        "requestPattern": "sourceModeFlag:2/string, destinationModeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, sourceKeyType:3/string, sourceKey:33/string, sourceKsnDescriptor:sourceKsnDescriptorLength/string, sourceKsn:sourceKsnLength/string, destinationKeyType:3/string, destinationKey:33/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourceIv:sourceIvLength/string, destinationIv:destinationIvLength/string, messageDataLengthHex:4/string-left-zero, messageData:messageDataLength/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "02": "Invalid Mode Flag field",
@@ -445,7 +445,7 @@
     "generateMac": {
         "requestCode": "M6",
         "responseCode": "M7",
-        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, iv:ivLength/string, messageLengthHex:4/string-left-zero, message:messageLength/string",
+        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, iv:ivLength/string, messageDataLengthHex:4/string-left-zero, messageData:messageDataLength/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "02": "Invalid Mode Flag field",
@@ -460,7 +460,7 @@
     "verifyMac": {
         "requestCode": "M8",
         "responseCode": "M9",
-        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, messageLengthHex:4/string-left-zero, message:messageLength/string, mac:macLength/string",
+        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, messageDataLengthHex:4/string-left-zero, messageData:messageDataLength/string, mac:macLength/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "01": "MAC verification failed",
