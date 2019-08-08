@@ -1495,9 +1495,9 @@ module.exports = {
                     ksn: '',
                     ivLength: 0,
                     iv: '',
-                    messageLenHex: '20',
-                    messageLen: 32,
-                    message: '0400980C0002AE900AF140D0C21230D7'
+                    messageDataLengthHex: '20',
+                    messageDataLength: 32,
+                    messageData: '0400980C0002AE900AF140D0C21230D7'
                 },
                 response: '303030324D3030303131303042554231393046374642423830324541313446414337393137443346364544423637303032303034303039383043303030324145393030414631343044304332313233304437'
             },
@@ -1514,9 +1514,9 @@ module.exports = {
                     ksn: '',
                     ivLength: 0,
                     iv: '',
-                    messageLenHex: '20',
-                    messageLen: 32,
-                    message: '0400980C0002AE900AF140D0C21230D7'
+                    messageDataLengthHex: '20',
+                    messageDataLength: 32,
+                    messageData: '0400980C0002AE900AF140D0C21230D7'
                 },
                 response: '303030324D3030303231303042554231393046374642423830324541313446414337393137443346364544423637303032303034303039383043303030324145393030414631343044304332313233304437'
             }
@@ -1577,9 +1577,9 @@ module.exports = {
                     ksnLength: 0,
                     iv: '',
                     ivLength: 0,
-                    messageLenHex: '20',
-                    message: '311D8D13F8C617EF838441C36E33A6DA',
-                    messageLen: 32
+                    messageDataLengthHex: '20',
+                    messageData: '311D8D13F8C617EF838441C36E33A6DA',
+                    messageDataLength: 32
                 },
                 response: '303030324D3230303131303042554231393046374642423830324541313446414337393137443346364544423637303032303331314438443133463843363137454638333834343143333645333341364441'
             },
@@ -1602,9 +1602,9 @@ module.exports = {
                     ksnLength: 0,
                     iv: '',
                     ivLength: 0,
-                    messageLenHex: '40',
-                    message: '81E6BDF350C73ED13698E2C1356B58622C3871D2846FC110DD7E7A9D1024EC08',
-                    messageLen: 64
+                    messageDataLengthHex: '40',
+                    messageData: '81E6BDF350C73ED13698E2C1356B58622C3871D2846FC110DD7E7A9D1024EC08',
+                    messageDataLength: 64
                 },
                 response: '303030324D32303031323030425542313930463746424238303245413134464143373931374433463645444236373030343038314536424446333530433733454431333639384532433133353642353836323243333837314432383436464331313044443745374139443130323445433038'
             }
@@ -1668,9 +1668,9 @@ module.exports = {
                     sourceIvLength: 0,
                     destinationIv: '',
                     destinationIvLength: 0,
-                    messageLenHex: '20',
-                    message: '311D8D13F8C617EF838441C36E33A6DA',
-                    messageLen: 32
+                    messageDataLengthHex: '20',
+                    messageData: '311D8D13F8C617EF838441C36E33A6DA',
+                    messageDataLength: 32
                 },
                 response: '303030324D34303030303131303042554231393046374642423830324541313446414337393137443346364544423637303042553639373231333032443946423738373644393843444441304644453141303942303032303331314438443133463843363137454638333834343143333645333341364441'
             }
@@ -1708,9 +1708,9 @@ module.exports = {
                     key: 'U5FFE8014DA383D44C24AB41E37DB252F',
                     ivLength: 0,
                     iv: '',
-                    messageLengthHex: '1E',
-                    messageLength: 30,
-                    message: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
+                    messageDataLengthHex: '1E',
+                    messageDataLength: 30,
+                    messageData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
                 },
                 response: '303030324D3630323033313030335535464645383031344441333833443434433234414234314533374442323532463030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
             },
@@ -1725,9 +1725,9 @@ module.exports = {
                     key: 'UF759EF72F15F88933CB9B86E54C9DC83',
                     ivLength: 0,
                     iv: '',
-                    messageLengthHex: '1E',
-                    messageLength: 30,
-                    message: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
+                    messageDataLengthHex: '1E',
+                    messageDataLength: 30,
+                    messageData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
                 },
                 response: '303030324D3630303033313030385546373539454637324631354638383933334342394238364535344339444338333030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
             }
@@ -1776,9 +1776,9 @@ module.exports = {
                     key: 'U5FFE8014DA383D44C24AB41E37DB252F',
                     ivLength: 0,
                     iv: '',
-                    messageLengthHex: '1E',
-                    messageLength: 30,
-                    message: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
+                    messageDataLengthHex: '1E',
+                    messageDataLength: 30,
+                    messageData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
                     macLength: 8,
                     mac: 'C57E4295'
                 },
@@ -1795,9 +1795,9 @@ module.exports = {
                     key: 'UF759EF72F15F88933CB9B86E54C9DC83',
                     ivLength: 0,
                     iv: '',
-                    messageLengthHex: '1E',
-                    messageLength: 30,
-                    message: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
+                    messageDataLengthHex: '1E',
+                    messageDataLength: 30,
+                    messageData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
                     macLength: 8,
                     mac: 'BF26765E'
                 },
