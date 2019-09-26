@@ -1,20 +1,22 @@
 {
   "name": "ut-codec-payshield",
-  "version": "6.5.2",
+  "version": "7.0.0-rc-dss.37",
   "main": "./index.js",
   "dependencies": {
-    "lodash.merge": "4.6.0",
-    "ut-bitsyntax": "^6.0.15"
+    "lodash.merge": "4.6.2",
+    "ut-bitsyntax": "^6.2.3"
   },
   "devDependencies": {
-    "ut-tools": "^5.32.5"
+    "tap": "12.5.3",
+    "ut-tools": "^6.23.0",
+    "ut-unittest": "^1.1.0"
   },
   "scripts": {
     "lint": "ut-lint .",
     "release": "ut-release",
     "changelog": "ut-changelog",
     "check": "ut-check",
-    "cover": "ut-cover",
+    "cover": "ut-cover-parallel",
     "lint-js": "ut-lint-js .",
     "postpublish": "ut-postpublish",
     "postversion": "ut-postversion",
@@ -24,7 +26,7 @@
     "pretest": "ut-pretest",
     "precover": "ut-precover",
     "preversion": "ut-preversion",
-    "test": "ut-test",
+    "test": "ut-test-parallel",
     "version": "ut-version",
     "jenkins": "ut-jenkins",
     "gitlab": "ut-gitlab"
