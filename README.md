@@ -8,19 +8,6 @@ Encode/decode Payshield messages to/from buffer
 
 The module exposes _PayshieldCodec_ class.
 
-### init
-
-(config)
-
-Initializes the _PayshieldCodec_ instance
-
-params
-
-- _config_ (object) - codec configuration; **NOTE: for more information, please
- refer to _Configuration_ below**
-
-result (void)
-
 ### decode
 
 (buff, $meta, context, log)
@@ -56,29 +43,6 @@ params
 result
 
 - (buffer) - encoded _data_
-
-## Private API
-
-### maskLogRecord
-
-(buffer, data, {pattern, maskedKeys, maskSymbol})
-
-Replaces predefined data in log records
-
-params
-
-- _buffer_ (buffer) - data buffer to be written to log file (encoded _data_ object)
-- _data_ (object) - JSON object representing _buffer_
-- _pattern_ (object) - _requestPattern_ of the command, as defined in
-  _Payshield commands_ below
-- _maskedKeys_ (array) - keys to be found in _data_ and their respective
-  values to be replaced in _buffer_
-  - (string) - key for which the value to be masked
-- _maskSymbol_ (string) - symbol from which the replacing value is formed
-
-result
-
-- (string) - log record with masked values for predefined keys
 
 ## Defining new commands
 
