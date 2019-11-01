@@ -3,7 +3,40 @@ var merge = require('lodash.merge');
 var defaultFormat = require('./messages');
 var defaultMaskSymbol = '*'.charCodeAt(0).toString(16);
 var nonCorrectableFields = {
-    printFields: true
+    printFields: true,
+    delimiter: true,
+    delimiter1: true,
+    delimiter2: true,
+    delimiter3: true,
+    pinBlockFormat,
+    sourcePinBlockFormat,
+    destinationPinBlockFormat,
+    checkLength,
+    // panLength
+    maximumPinLength,
+    pan,
+    pvki,
+    pvv,
+    sourcePvv,
+    expirationDate,
+    serviceCode,
+    pin
+    // kcvType
+    // mode
+    // modeFlag
+    // schemeId
+    // branchHeightParams
+    // macMode
+    // macMethod
+    // sourceKeyFlag
+    // destinationKeyFlag
+    // messageDataLength
+    // hashId
+    // inputFormatFlag
+    // outputFormatFlag
+    // macSize
+    // macAlgorithm
+    // paddingMethod
 };
 
 function maskLogRecord(buffer, data, {pattern, maskedKeys, maskSymbol}) {
