@@ -2,6 +2,9 @@ var bitsyntax = require('ut-bitsyntax');
 var merge = require('lodash.merge');
 var defaultFormat = require('./messages');
 var defaultMaskSymbol = '*'.charCodeAt(0).toString(16);
+var nonCorrectableFields = {
+    printFields: true
+};
 
 function maskLogRecord(buffer, data, {pattern, maskedKeys, maskSymbol}) {
     return maskedKeys
@@ -33,12 +36,21 @@ function maskLogRecord(buffer, data, {pattern, maskedKeys, maskSymbol}) {
         .toUpperCase();
 }
 
+function upperCaseObject(data, nonCorrectableFields) {
+    return Object.keys(data).reduce((acc, curr) => {
+        var param = (!nonCorrectableFields[curr] && typeof data[curr] === 'string' && data[curr].toUpperCase()) || data[curr];
+        return Object.assign(acc, {[curr]: param});
+    }
+    , {});
+}
+
 function PayshieldCodec(config) {
     this.commands = {};
     this.headerPattern = null;
     this.commandNames = {};
     this.errors = require('./errors')(config);
     this.maskedKeys = null;
+    this.nonCorrectableFields = Object.assign({}, nonCorrectableFields, config.nonCorrectableFields || {});
     this.init(config);
 }
 
@@ -164,8 +176,8 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
             context.trace = 0;
         }
     }
-
-    var bodyBuff = bitsyntax.build(this.commands[commandName].pattern, data);
+    var dataCorrected = upperCaseObject(data, this.nonCorrectableFields);
+    var bodyBuff = bitsyntax.build(this.commands[commandName].pattern, dataCorrected);
     if (!bodyBuff) {
         throw this.errors['payshield.parser.body']({params: {command: commandName}});
     }
@@ -178,7 +190,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
         body: bodyBuff
     });
     if (log && log.trace) {
-        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, data, {pattern: this.commands[commandName].pattern, maskedKeys: this.maskedKeys, maskSymbol: defaultMaskSymbol}), log: context && context.session && context.session.log});
+        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, dataCorrected, {pattern: this.commands[commandName].pattern, maskedKeys: this.maskedKeys, maskSymbol: defaultMaskSymbol}), log: context && context.session && context.session.log});
     }
     return buffer;
 };

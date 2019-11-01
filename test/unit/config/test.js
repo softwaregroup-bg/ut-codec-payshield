@@ -905,7 +905,7 @@ module.exports = {
                     pan: '540008900009',
                     decimalisationTable: '0123456789123456',
                     pinValidationData: '5022654000N2',
-                    offset: '876955FFFFFF'
+                    offset: '876955ffffff'
                 },
                 response: '3030313144415533303237433839353138314439313241393144374446304544373841433646425538304145334638443633423038463943313336353245353431364437364538443132413639463945373634363930344236383031303635343030303839303030303930313233343536373839313233343536353032323635343030304E32383736393535464646464646'
             },
@@ -921,7 +921,7 @@ module.exports = {
                     pan: '540008900009',
                     decimalisationTable: '5432109876543210',
                     pinValidationData: '5022654000N2',
-                    offset: '757798FFFFFF'
+                    offset: '757798ffffff'
                 },
                 response: '3030313144415533303237433839353138314439313241393144374446304544373841433646425538304145334638443633423038463943313336353245353431364437364538443132413639463945373634363930344236383031303635343030303839303030303935343332313039383736353433323130353032323635343030304E32373537373938464646464646'
             }
@@ -1065,7 +1065,7 @@ module.exports = {
                 request: {
                     pvk: 'U77338F74A19E3BB39062A5A479473FC8',
                     pvkLength: 33,
-                    offset: '000000FFFFFF',
+                    offset: '000000ffffff',
                     checkLength: '6',
                     account: '654000890009',
                     decimalisationTable: '0123456789012345',
@@ -1077,7 +1077,7 @@ module.exports = {
                 request: {
                     'pvk': 'U77338F74A19E3BB39062A5A479473FC8',
                     'pvkLength': 33,
-                    'offset': '0000FFFFFFFF',
+                    'offset': '0000ffffffff',
                     'checkLength': '4',
                     'account': '502265000092',
                     'decimalisationTable': '6543210987654321',
@@ -2142,7 +2142,7 @@ module.exports = {
                     pan: '540008900009',
                     decimalisationTable: '0123456789123456',
                     pinValidationData: '5022654000N2',
-                    offset: '876955FFFFFF'
+                    offset: '876955ffffff'
                 },
                 response: '3030323845415533303237433839353138314439313241393144374446304544373841433646425538304145334638443633423038463943313336353245353431364437364538443132413639463945373634363930344236383031303635343030303839303030303930313233343536373839313233343536353032323635343030304E32383736393535464646464646'
             }
@@ -2234,7 +2234,7 @@ module.exports = {
                     pan: '540008900009',
                     decimalisationTable: '0123456789123456',
                     pinValidationData: '5052654000N2',
-                    offset: '1234FFFFFFFF',
+                    offset: '1234ffffffff',
                     macLength: 0,
                     mac: '',
                     messageDataLengthBytesLength: 0,
@@ -2263,7 +2263,7 @@ module.exports = {
                     pan: '540008900009',
                     decimalisationTable: '0123456789123456',
                     pinValidationData: '5052654000N2',
-                    offset: '1234FFFFFFFF',
+                    offset: '1234ffffffff',
                     macLength: 16,
                     mac: 'ABCD1234EF098765',
                     messageDataLengthBytesLength: 4,
