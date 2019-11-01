@@ -34,7 +34,9 @@ Encodes JSON object data to buffer
 
 params
 
-- _data_ (object) - data object to be encoded
+- _data_ (object) - data object to be encoded; **NOTE: all strings will be
+ converted toUpperCase before encoding, unless otherwise specified in
+ _nonCorrectableFields_ object (see _Configuration_ below)**
 - _$meta_ (object) - _$meta_ object as defined in _ut-port_
 - _context_ (object) - _context_ object as defined in _ut-port-tcp_
 - _log_ (object) - contains log functions; **for more information, please
@@ -593,3 +595,9 @@ Print TMK Mailer
 - _maskedKeys_ (array) - request/response keys for which the values to
  be masked in the log records
   - (string) - key for which the value will be masked in log records
+- _nonCorrectableFields_ (object) - each _key: value_ pair contains the
+ following:
+  - _key_ - field name
+  - _value_ (bool) - flags if _key_ in requests should be left as it is
+   (_true_) or converted toUpperCase (_false_, _undefined_/not present) before
+   encoding
