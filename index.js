@@ -8,35 +8,30 @@ var nonCorrectableFields = {
     delimiter1: true,
     delimiter2: true,
     delimiter3: true,
-    pinBlockFormat,
-    sourcePinBlockFormat,
-    destinationPinBlockFormat,
-    checkLength,
-    // panLength
-    maximumPinLength,
-    pan,
-    pvki,
-    pvv,
-    sourcePvv,
-    expirationDate,
-    serviceCode,
-    pin
-    // kcvType
-    // mode
-    // modeFlag
-    // schemeId
-    // branchHeightParams
-    // macMode
-    // macMethod
-    // sourceKeyFlag
-    // destinationKeyFlag
-    // messageDataLength
-    // hashId
-    // inputFormatFlag
-    // outputFormatFlag
-    // macSize
-    // macAlgorithm
-    // paddingMethod
+    pinBlockFormat: true,
+    sourcePinBlockFormat: true,
+    destinationPinBlockFormat: true,
+    checkLength: true,
+    panLength: true,
+    maximumPinLength: true,
+    pan: true,
+    pvki: true,
+    pvv: true,
+    sourcePvv: true,
+    expirationDate: true,
+    serviceCode: true,
+    pin: true,
+    kcvType: true,
+    modeFlag: true,
+    branchHeightParams: true,
+    macMethod: true,
+    messageDataLength: true,
+    hashId: true,
+    inputFormatFlag: true,
+    outputFormatFlag: true,
+    macSize: true,
+    macAlgorithm: true,
+    paddingMethod: true
 };
 
 function maskLogRecord(buffer, data, {pattern, maskedKeys, maskSymbol}) {
@@ -83,7 +78,7 @@ function PayshieldCodec(config) {
     this.commandNames = {};
     this.errors = require('./errors')(config);
     this.maskedKeys = null;
-    this.nonCorrectableFields = Object.assign({}, nonCorrectableFields, config.nonCorrectableFields || {});
+    this.nonCorrectableFields = Object.assign({}, nonCorrectableFields, config.nonCorrectableFields);
     this.init(config);
 }
 
