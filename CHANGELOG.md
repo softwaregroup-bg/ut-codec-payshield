@@ -1,3 +1,19 @@
+# [7.1.0](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.0.1...v7.1.0) (2019-11-06)
+
+
+### Bug Fixes
+
+* PS-169 additional nonCorrectableFields added ([d6278fa](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/d6278fa))
+* PS-169 move config to json ([7bf31e5](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/7bf31e5))
+* PS-169 nonCorrectableFields default ([2d1de87](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/2d1de87))
+
+
+### Features
+
+* PS-169 uppercase strings in requests before encoding ([b3b857e](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/b3b857e))
+
+
+
 ## [7.0.1](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.0.0...v7.0.1) (2019-09-27)
 
 
