@@ -2,37 +2,7 @@ var bitsyntax = require('ut-bitsyntax');
 var merge = require('lodash.merge');
 var defaultFormat = require('./messages');
 var defaultMaskSymbol = '*'.charCodeAt(0).toString(16);
-var nonCorrectableFields = {
-    printFields: true,
-    delimiter: true,
-    delimiter1: true,
-    delimiter2: true,
-    delimiter3: true,
-    pinBlockFormat: true,
-    sourcePinBlockFormat: true,
-    destinationPinBlockFormat: true,
-    checkLength: true,
-    panLength: true,
-    maximumPinLength: true,
-    pan: true,
-    pvki: true,
-    pvv: true,
-    sourcePvv: true,
-    expirationDate: true,
-    serviceCode: true,
-    pin: true,
-    kcvType: true,
-    modeFlag: true,
-    branchHeightParams: true,
-    macMethod: true,
-    messageDataLength: true,
-    hashId: true,
-    inputFormatFlag: true,
-    outputFormatFlag: true,
-    macSize: true,
-    macAlgorithm: true,
-    paddingMethod: true
-};
+const nonCorrectableFields = require('./constants.json').nonCorrectableFields;
 
 function maskLogRecord(buffer, data, {pattern, maskedKeys, maskSymbol}) {
     return maskedKeys
