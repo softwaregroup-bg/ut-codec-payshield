@@ -410,7 +410,7 @@ ARQC Verification and/or ARPC Generation (Using EMV or Cloud-Based SKD Methods)
 
 ### _LO (LP)_
 
-Translate Decimalization Table from Old to New LMK
+Translate Decimalisation Table from Old to New LMK
 
 ### _M0 (M1)_
 
