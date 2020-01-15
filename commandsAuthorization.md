@@ -53,10 +53,22 @@
 - [1] - check the Key Type Table (G and E) for additional information on the requirements
 - [2] - check the Key Type Table (I) for additional information on the requirements
 - [3] - check the Key Type Table (E) for additional information on the requirements
-- [4] - generation of a 6-digit KCV does not require authorization (Key Type Table G); generation of a non-6-digit KCV requires authorization
-- [5] - diagnostic data is produced by this command only if the HSM is in Authorized state
-- {key} - available key types depending on the command type being authorized (Generate, Import, Export or component):
-  - Generate - rsa, 000, 100, 200, 001, 002, 302, 402, 003, 105, 205, 305, 405, 505, 605, 705, 805, 905, 006, 106, 206, 306, 406, 506, 606, 107, 207, 507, 607, 807, 907, 008, 009, 109, 209, 309, 409, 509, 609, 709, 809, 909, 00a, 10a, 00b, 30b, 00c, 10c, 00d, 30d, 40d, 50d, 70d, 80d, 90d
+- [4] - generation of a 6-digit KCV does not require authorization (Key Type
+ Table G); generation of a non-6-digit KCV requires authorization
+- [5] - diagnostic data is produced by this command only if the HSM is in
+ Authorized state
+- {key} - available key types depending on the command type being authorized
+ (Generate, Import, Export or component):
+  - Generate - rsa, 000, 100, 200, 001, 002, 302, 402, 003, 105, 205, 305, 405,
+   505, 605, 705, 805, 905, 006, 106, 206, 306, 406, 506, 606, 107, 207, 507,
+   607, 807, 907, 008, 009, 109, 209, 309, 409, 509, 609, 709, 809, 909, 00a,
+   10a, 00b, 30b, 00c, 10c, 00d, 30d, 40d, 50d, 70d, 80d, 90d
   - Import - rsa, 000, 107, 207, 00a, 00c, 00d
-  - Export - rsa, 100, 200, 001, 002, 302, 402, 003, 105, 205, 305, 405, 505, 605, 705, 805, 905, 006, 106, 206, 306, 406, 506, 606, 107, 207, 607, 807, 907, 008, 009, 109, 209, 309, 409, 509, 609, 709, 809, 909, 00a, 30b, 00c, 10c, 30d, 40d, 50d, 70d, 80d, 90d
-  - component - 000, 100, 200, 001, 002, 302, 402, 003, 105, 205, 305, 405, 505, 605, 705, 805, 905, 006, 106, 206, 306, 406, 506, 606, 107, 207, 507, 607, 807, 907, 008, 009, 109, 209, 309, 409, 509, 609, 709, 809, 909, 00a, 10a, 00b, 30b, 00c, 10c, 00d, 30d, 40d, 50d, 70d, 80d, 90d
+  - Export - rsa, 100, 200, 001, 002, 302, 402, 003, 105, 205, 305, 405, 505,
+   605, 705, 805, 905, 006, 106, 206, 306, 406, 506, 606, 107, 207, 607, 807,
+   907, 008, 009, 109, 209, 309, 409, 509, 609, 709, 809, 909, 00a, 30b, 00c,
+   10c, 30d, 40d, 50d, 70d, 80d, 90d
+  - component - 000, 100, 200, 001, 002, 302, 402, 003, 105, 205, 305, 405,
+   505, 605, 705, 805, 905, 006, 106, 206, 306, 406, 506, 606, 107, 207, 507,
+   607, 807, 907, 008, 009, 109, 209, 309, 409, 509, 609, 709, 809, 909, 00a,
+   10a, 00b, 30b, 00c, 10c, 00d, 30d, 40d, 50d, 70d, 80d, 90d
