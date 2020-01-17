@@ -445,7 +445,7 @@
     "generateMac": {
         "requestCode": "M6",
         "responseCode": "M7",
-        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, iv:ivLength/string, messageDataLengthHex:4/string-left-zero, messageData:messageDataLength/string",
+        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, iv:ivLength/string, macDataLengthHex:4/string-left-zero, macData:macDataLength/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "02": "Invalid Mode Flag field",
@@ -460,7 +460,7 @@
     "verifyMac": {
         "requestCode": "M8",
         "responseCode": "M9",
-        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, messageDataLengthHex:4/string-left-zero, messageData:messageDataLength/string, mac:macLength/string",
+        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, macDataLengthHex:4/string-left-zero, macData:macDataLength/string, mac:macLength/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "01": "MAC verification failed",

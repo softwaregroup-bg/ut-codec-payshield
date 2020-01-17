@@ -22,6 +22,7 @@
         "modeFlag": true,
         "branchHeightParams": true,
         "macMethod": true,
+        "macData": true,
         "messageDataLength": true,
         "hashId": true,
         "inputFormatFlag": true,
