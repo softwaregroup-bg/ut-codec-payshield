@@ -7,8 +7,8 @@
     "ut-bitsyntax": "^6.2.3"
   },
   "devDependencies": {
-    "tap": "12.5.3",
-    "ut-tools": "^6.30.3",
+    "tap": "^14.10.6",
+    "ut-tools": "^6.30.5",
     "ut-unittest": "^1.1.0"
   },
   "scripts": {
