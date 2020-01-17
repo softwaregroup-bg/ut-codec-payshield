@@ -1,3 +1,7 @@
+## [7.1.2](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.1.1...v7.1.2) (2020-01-17)
+
+
+
 ## [7.1.1](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.1.0...v7.1.1) (2020-01-15)
 
 
