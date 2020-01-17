@@ -1708,9 +1708,9 @@ module.exports = {
                     key: 'U5FFE8014DA383D44C24AB41E37DB252F',
                     ivLength: 0,
                     iv: '',
-                    messageDataLengthHex: '1E',
-                    messageDataLength: 30,
-                    messageData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
+                    macDataLengthHex: '1E',
+                    macDataLength: 30,
+                    macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
                 },
                 response: '303030324D3630323033313030335535464645383031344441333833443434433234414234314533374442323532463030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
             },
@@ -1725,9 +1725,9 @@ module.exports = {
                     key: 'UF759EF72F15F88933CB9B86E54C9DC83',
                     ivLength: 0,
                     iv: '',
-                    messageDataLengthHex: '1E',
-                    messageDataLength: 30,
-                    messageData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
+                    macDataLengthHex: '1E',
+                    macDataLength: 30,
+                    macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
                 },
                 response: '303030324D3630303033313030385546373539454637324631354638383933334342394238364535344339444338333030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
             }
@@ -1776,9 +1776,9 @@ module.exports = {
                     key: 'U5FFE8014DA383D44C24AB41E37DB252F',
                     ivLength: 0,
                     iv: '',
-                    messageDataLengthHex: '1E',
-                    messageDataLength: 30,
-                    messageData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
+                    macDataLengthHex: '1E',
+                    macDataLength: 30,
+                    macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
                     macLength: 8,
                     mac: 'C57E4295'
                 },
@@ -1795,9 +1795,9 @@ module.exports = {
                     key: 'UF759EF72F15F88933CB9B86E54C9DC83',
                     ivLength: 0,
                     iv: '',
-                    messageDataLengthHex: '1E',
-                    messageDataLength: 30,
-                    messageData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
+                    macDataLengthHex: '1E',
+                    macDataLength: 30,
+                    macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
                     macLength: 8,
                     mac: 'BF26765E'
                 },
