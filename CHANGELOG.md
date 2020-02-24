@@ -1,3 +1,12 @@
+## [7.1.5](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.1.4...v7.1.5) (2020-02-24)
+
+
+### Bug Fixes
+
+* lint ([ecde656](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/ecde656ea6fdd532aa20d7e2dab8f5b7848c6bc4))
+
+
+
 ## [7.1.4](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.1.3...v7.1.4) (2020-01-17)
 
 
