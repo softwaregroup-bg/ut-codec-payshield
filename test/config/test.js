@@ -930,13 +930,13 @@ module.exports = {
             0: {
                 request: bufferize('3132333244423032'),
                 response: {
-                    'errorCode': '02'
+                    errorCode: '02'
                 }
             },
             1: {
                 request: bufferize('3132323344423032'),
                 response: {
-                    'errorCode': '02'
+                    errorCode: '02'
                 }
             },
             2: {
@@ -988,15 +988,15 @@ module.exports = {
             0: {
                 request: bufferize('3031353944463032303030303030464646464646'),
                 response: {
-                    'errorCode': '02',
-                    'offset': '000000FFFFFF'
+                    errorCode: '02',
+                    offset: '000000FFFFFF'
                 }
             },
             1: {
                 request: bufferize('3031363344463032303030304646464646464646'),
                 response: {
-                    'errorCode': '02',
-                    'offset': '0000FFFFFFFF'
+                    errorCode: '02',
+                    offset: '0000FFFFFFFF'
                 }
             },
             2: {
@@ -1015,23 +1015,23 @@ module.exports = {
         generatePvvLmkEncode: {
             0: {
                 request: {
-                    'pvkLength': 33,
-                    'pvk': 'U77338F74A19E3BB39062A5A479473FC8',
-                    'encryptedPinLength': 8,
-                    'pin': '73638636',
-                    'account': '654000890009',
-                    'pvki': '1'
+                    pvkLength: 33,
+                    pvk: 'U77338F74A19E3BB39062A5A479473FC8',
+                    encryptedPinLength: 8,
+                    pin: '73638636',
+                    account: '654000890009',
+                    pvki: '1'
                 },
                 response: '303030324447553737333338463734413139453342423339303632413541343739343733464338373336333836333636353430303038393030303931'
             },
             1: {
                 request: {
-                    'pvkLength': 33,
-                    'pvk': 'U77338F74A19E3BB39062A5A479473FC8',
-                    'encryptedPinLength': 8,
-                    'pin': '58652088',
-                    'account': '502265000092',
-                    'pvki': '4'
+                    pvkLength: 33,
+                    pvk: 'U77338F74A19E3BB39062A5A479473FC8',
+                    encryptedPinLength: 8,
+                    pin: '58652088',
+                    account: '502265000092',
+                    pvki: '4'
                 },
                 response: '303030324447553737333338463734413139453342423339303632413541343739343733464338353836353230383835303232363530303030393234'
             }
@@ -1040,15 +1040,15 @@ module.exports = {
             0: {
                 request: bufferize('303031364448303038313536'),
                 response: {
-                    'errorCode': '00',
-                    'pvv': '8156'
+                    errorCode: '00',
+                    pvv: '8156'
                 }
             },
             1: {
                 request: bufferize('303032374448303031343931'),
                 response: {
-                    'errorCode': '00',
-                    'pvv': '1491'
+                    errorCode: '00',
+                    pvv: '1491'
                 }
             },
             2: {
@@ -1075,13 +1075,13 @@ module.exports = {
             },
             1: {
                 request: {
-                    'pvk': 'U77338F74A19E3BB39062A5A479473FC8',
-                    'pvkLength': 33,
-                    'offset': '0000ffffffff',
-                    'checkLength': '4',
-                    'account': '502265000092',
-                    'decimalisationTable': '6543210987654321',
-                    'pinValidationData': '5022650000N2'
+                    pvk: 'U77338F74A19E3BB39062A5A479473FC8',
+                    pvkLength: 33,
+                    offset: '0000ffffffff',
+                    checkLength: '4',
+                    account: '502265000092',
+                    decimalisationTable: '6543210987654321',
+                    pinValidationData: '5022650000N2'
                 },
                 response: '303031314545553737333338463734413139453342423339303632413541343739343733464338303030304646464646464646303435303232363530303030393236353433323130393837363534333231353032323635303030304E32'
             }
@@ -1090,15 +1090,15 @@ module.exports = {
             0: {
                 request: bufferize('30303531454630323733363338363336'),
                 response: {
-                    'errorCode': '02',
-                    'pin': bufferize([55, 51, 54, 51, 56, 54, 51, 54])
+                    errorCode: '02',
+                    pin: bufferize([55, 51, 54, 51, 56, 54, 51, 54])
                 }
             },
             1: {
                 request: bufferize('30303838454630323538363532303838'),
                 response: {
-                    'errorCode': '02',
-                    'pin': bufferize([53, 56, 54, 53, 50, 48, 56, 56])
+                    errorCode: '02',
+                    pin: bufferize([53, 56, 54, 53, 50, 48, 56, 56])
                 }
             },
             2: {
@@ -2151,7 +2151,7 @@ module.exports = {
             0: {
                 request: bufferize('3132333245423032'),
                 response: {
-                    'errorCode': '02'
+                    errorCode: '02'
                 }
             },
             1: {

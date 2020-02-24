@@ -4,11 +4,11 @@
   "main": "./index.js",
   "dependencies": {
     "lodash.merge": "4.6.2",
-    "ut-bitsyntax": "^6.2.3"
+    "ut-bitsyntax": "^6.2.4"
   },
   "devDependencies": {
     "tap": "^14.10.6",
-    "ut-tools": "^6.30.5",
+    "ut-tools": "^6.33.2",
     "ut-unittest": "^1.1.0"
   },
   "scripts": {
