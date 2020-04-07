@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Single test",
-            "program": "${workspaceFolder}/test/unit/cases/test.unit.verifyInterPinIbmDecode",
+            "program": "${workspaceFolder}/test/decryptDataBlockDecode.test",
             "outputCapture": "std"
         },
       	{
@@ -21,7 +21,7 @@
                 "-J",
                 "-T",
                 "--node-arg=--preserve-symlinks",
-                "test/unit/cases"
+                "test"
             ],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": null,
