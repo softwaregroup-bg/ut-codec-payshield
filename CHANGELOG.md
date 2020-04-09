@@ -1,3 +1,12 @@
+## [7.1.6](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.1.5...v7.1.6) (2020-04-09)
+
+
+### Bug Fixes
+
+* TAP upgrade ([f2c6b16](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/f2c6b1617b41d644a5f81202547d1ed8708fbac6))
+
+
+
 ## [7.1.5](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.1.4...v7.1.5) (2020-02-24)
 
 
