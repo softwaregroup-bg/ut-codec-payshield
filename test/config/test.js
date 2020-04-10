@@ -13,6 +13,27 @@ module.exports = {
         'offset'
     ],
     test: {
+        notImplementedEncode: {
+            0: {
+                request: {},
+                response: 'payshield.notimplemented'
+            }
+        },
+        notImplementedDecode: {
+            0: {
+                request: bufferize('303337358888'),
+                response: 'payshield.unknownResponseCode'
+            }
+        },
+        echoEncode: {
+            0: {
+                request: {
+                    length: 4,
+                    data: 'ping'
+                },
+                response: '3939393942323030303450494E47'
+            }
+        },
         generateKeyEncode: {
             0: {
                 request: {
@@ -209,6 +230,14 @@ module.exports = {
             4: {
                 request: bufferize('3130303841373135'),
                 response: 'payshield.importKey.15'
+            },
+            5: {
+                request: bufferize('3130303841373031'),
+                response: 'payshield.unableMatchingPattern'
+            },
+            6: {
+                request: bufferize('313030384137'),
+                response: 'payshield.unableMatchingResponseECode'
             }
         },
         exportKeyEncode: {
