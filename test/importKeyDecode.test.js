@@ -23,6 +23,16 @@ tap.test(`${method}Decode`, (t) => {
     t.same(payshield.decode(testData[2].request, $meta, context).type, testResults[2].response, 'importKey decode, ZMK parity error');
     t.same(payshield.decode(testData[3].request, $meta, context).type, testResults[3].response, 'importKey decode, invalid key scheme');
     t.same(payshield.decode(testData[4].request, $meta, context).type, testResults[4].response, 'importKey decode, invalid input data');
+    try {
+        payshield.decode(testData[5].request, $meta, context);
+    } catch (e) {
+        t.same(e.type, testResults[5].response, 'importKey decode, warning, unableMatchingPattern');
+    }
+    try {
+        payshield.decode(testData[6].request, $meta, context);
+    } catch (e) {
+        t.same(e.type, testResults[6].response, 'importKey decode, warning, unableMatchingPattern');
+    }
 
     t.end();
 });
