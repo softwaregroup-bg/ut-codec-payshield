@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "tap": "^14.10.7",
-    "ut-tools": "^6.33.4",
+    "ut-tools": "^6.37.0",
     "ut-unittest": "^1.1.0"
   },
   "scripts": {
