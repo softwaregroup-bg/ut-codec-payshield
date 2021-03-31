@@ -268,7 +268,6 @@
         "requestPattern": "hashIdentifier:2/string, signatureIdentifier:2/string, padModeIdentifier:2/string, messageDataLength:4/string-left-zero, messageData:messageDataLength/string-binhex, \";\", privateKeyFlag:2/string, privateKeyLength:4/string-left-zero, privateKey:privateKeyLength/string-binhex",
         "responsePattern": "errorCode:2/string, signatureLength:4/string-left-zero, signature:signatureLength/string-binhex",
         "customResponseError": {
-            "00": "No error",
             "03": "Invalid private key type",
             "04": "Invalid private key flag",
             "05": "Invalid hash identifier",
