@@ -290,6 +290,37 @@ Derive a PIN Using the IBM Offset Method
 - _warnings_
   - _02_: _Warning PVK not single length_
 
+### _EI (EJ)_
+
+Generate a public/private key pair.
+
+- _error codes_
+  - _03_: _Invalid public key encoding type_
+  - _04_: _Key Length error_
+  - _05_: _Invalid key type_
+  - _06_: _Public exponent length error_
+  - _08_: _Supplied public exponent is even_
+  - _47_: _Algorithm not licensed_
+  - _48_: _Stronger LMK required to protect this size RSA key_
+  - _68_: _Command disabled_
+
+### _EW (EX)_
+
+Generate a public/private key pair.
+
+- _error codes_
+  - _03_: _Invalid private key type_
+  - _04_: _Invalid private key flag_
+  - _05_: _Invalid hash identifier_
+  - _06_: _Invalid signature identifier_
+  - _07_: _Invalid pad mode identifier_
+  - _47_: _Algorithm not licensed_
+  - _68_: _Command disabled_
+  - _74_: _Invalid digest info syntax (no-hash mode only)_
+  - _76_: _Hash length error_
+  - _78_: _Private key length error_
+  - _80_: _Message length error or a standard error code._
+
 ### _FM (FN)_
 
 Translate a ZEK/ZAK from LMK to ZMK Encryption
