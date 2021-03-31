@@ -1,3 +1,12 @@
+# [7.2.0](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.1.7...v7.2.0) (2021-03-31)
+
+
+### Features
+
+* generate rsa key pair and sign ([#63](https://github.com/softwaregroup-bg/ut-codec-payshield/issues/63)) ([8ed1fac](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/8ed1fac988394c51867cbe6a0fbb711093ebf912))
+
+
+
 ## [7.1.7](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.1.6...v7.1.7) (2020-04-27)
 
 
