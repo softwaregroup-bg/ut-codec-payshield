@@ -245,6 +245,42 @@
             "86": "PIN exists in either global or local Excluded PIN Table"
         }
     },
+    "generateRsaKeyPair": {
+        "requestCode": "EI",
+        "responseCode": "EJ",
+        "_requestPattern": "keyTypeIndicator:1/string, keyLength:4/string, publicKeyEncoding:2/string",
+        "requestPattern": "keyTypeIndicator:1/string, \"2048\", \"01\"",
+        "responsePattern": "errorCode:2/string, publicKey:269/string-binhex, privateKeyLength:4/string-left-zero, privateKey:privateKeyLength/string-binhex",
+        "customResponseError": {
+            "03": "Invalid public key encoding type",
+            "04": "Key Length error",
+            "05": "Invalid key type",
+            "06": "Public exponent length error",
+            "08": "Supplied public exponent is even",
+            "47": "Algorithm not licensed",
+            "48": "Stronger LMK required to protect this size RSA key",
+            "68": "Command disabled"
+        }
+    },
+    "generateRsaSignature": {
+        "requestCode": "EW",
+        "responseCode": "EX",
+        "requestPattern": "hashIdentifier:2/string, signatureIdentifier:2/string, padModeIdentifier:2/string, messageDataLength:4/string-left-zero, messageData:messageDataLength/string-binhex, \";\", privateKeyFlag:2/string, privateKeyLength:4/string-left-zero, privateKey:privateKeyLength/string-binhex",
+        "responsePattern": "errorCode:2/string, signatureLength:4/string-left-zero, signature:signatureLength/string-binhex",
+        "customResponseError": {
+            "03": "Invalid private key type",
+            "04": "Invalid private key flag",
+            "05": "Invalid hash identifier",
+            "06": "Invalid signature identifier",
+            "07": "Invalid pad mode identifier",
+            "47": "Algorithm not licensed",
+            "68": "Command disabled",
+            "74": "Invalid digest info syntax (no-hash mode only)",
+            "76": "Hash length error",
+            "78": "Private key length error",
+            "80": "Message length error or a standard error code."
+        }
+    },
     "translateZekZakLmkZmk": {
         "requestCode": "FM",
         "responseCode": "FN",
