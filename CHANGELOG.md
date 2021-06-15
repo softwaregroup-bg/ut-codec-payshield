@@ -1,3 +1,12 @@
+## [7.2.1](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.2.0...v7.2.1) (2021-06-15)
+
+
+### Bug Fixes
+
+* ignore $meta.trace for requests [UTCORE-121] ([4d92aa9](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/4d92aa9b385dab45ad1919c1eb9e95f90ecea1b2))
+
+
+
 # [7.2.0](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.1.7...v7.2.0) (2021-03-31)
 
 
