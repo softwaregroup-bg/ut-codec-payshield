@@ -17,7 +17,7 @@ const context = {
     trace: parseInt('9'.repeat(payshield.headerNoSize))
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, context).toString('hex').toUpperCase(), testResults[0].response, 'echo encode, maxTrace');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'echo encode, maxTrace');
 
     t.end();
 });

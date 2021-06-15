@@ -19,7 +19,7 @@ const context = {
 };
 tap.test(`${method}Encode`, async(t) => {
     try {
-        payshield.encode(testData[0].request, $meta, context);
+        payshield.encode(testData[0].request, $meta, {trace: context.trace});
     } catch (e) {
         t.same(e.type, testResults[0].response, 'notImplemented encode');
     }

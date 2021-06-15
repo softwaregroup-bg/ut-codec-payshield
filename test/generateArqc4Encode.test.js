@@ -18,9 +18,9 @@ const context = {
     trace: 2
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, context).toString('hex').toUpperCase(), testResults[0].response, 'generateArqc4 encode, verify ARQC set 1');
-    t.same(payshield.encode(testData[1].request, $meta, context).toString('hex').toUpperCase(), testResults[1].response, 'generateArqc4 encode, verify ARQC set 2');
-    t.same(payshield.encode(testData[2].request, $meta, context).toString('hex').toUpperCase(), testResults[2].response, 'generateArqc4 encode, generate ARPC');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'generateArqc4 encode, verify ARQC set 1');
+    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'generateArqc4 encode, verify ARQC set 2');
+    t.same(payshield.encode(testData[2].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[2].response, 'generateArqc4 encode, generate ARPC');
 
     t.end();
 });

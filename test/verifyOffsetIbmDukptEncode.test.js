@@ -18,8 +18,8 @@ const context = {
     trace: 14
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, context), testResults[0].response, 'verifyOffsetIbmDukpt encode, PIN verify');
-    t.same(payshield.encode(testData[1].request, $meta, context), testResults[1].response, 'verifyOffsetIbmDukpt encode, PIN verify, MAC verify');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}), testResults[0].response, 'verifyOffsetIbmDukpt encode, PIN verify');
+    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}), testResults[1].response, 'verifyOffsetIbmDukpt encode, PIN verify, MAC verify');
 
     t.end();
 });

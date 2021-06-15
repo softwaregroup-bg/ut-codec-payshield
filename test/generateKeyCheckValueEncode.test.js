@@ -18,9 +18,9 @@ const context = {
     trace: 11
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, context).toString('hex').toUpperCase(), testResults[0].response, 'generateKeyCheckValue encode, set 1, keyType');
-    t.same(payshield.encode(testData[1].request, $meta, context).toString('hex').toUpperCase(), testResults[1].response, 'generateKeyCheckValue encode, set 2, keyType');
-    t.same(payshield.encode(testData[2].request, $meta, context).toString('hex').toUpperCase(), testResults[2].response, 'generateKeyCheckValue encode, set 1, keyTypeCode');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'generateKeyCheckValue encode, set 1, keyType');
+    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'generateKeyCheckValue encode, set 2, keyType');
+    t.same(payshield.encode(testData[2].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[2].response, 'generateKeyCheckValue encode, set 1, keyTypeCode');
 
     t.end();
 });

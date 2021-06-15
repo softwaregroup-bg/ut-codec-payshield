@@ -18,7 +18,7 @@ const context = {
     trace: 31
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, context), testResults[0].response, 'verifyPvvDukpt encode');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}), testResults[0].response, 'verifyPvvDukpt encode');
 
     t.end();
 });
