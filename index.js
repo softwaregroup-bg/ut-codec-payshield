@@ -166,7 +166,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
         throw this.errors['payshield.notimplemented']({params: {opcode: commandName}});
     }
 
-    let headerNo = $meta.trace;
+    let headerNo = ($meta.mtid === 'request') ? null : $meta.trace;
     if (headerNo === undefined || headerNo === null) {
         headerNo = $meta.trace = ('0'.repeat(this.headerNoSize) + context.trace).substr(-this.headerNoSize);
         context.trace += 1;
