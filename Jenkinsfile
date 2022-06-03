@@ -1,6 +1,7 @@
-library identifier: 'jenkinsfile@master', retriever: modernSCM([
+library identifier: 'jenkinsfile@gallium', retriever: modernSCM([
     $class: 'GitSCMSource',
     remote: 'https://github.com/softwaregroup-bg/jenkinsfile.git'
 ])
 
-ut buildImage: 'softwaregroup/ut-docker'
+ut buildImage: 'nexus-dev.softwaregroup.com:5000/softwaregroup/node-gallium'
+
