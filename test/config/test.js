@@ -1668,7 +1668,11 @@ module.exports = {
         translateDtabEncode: {
             0: {
                 request: {
-                    decimalisationTable: 'ABCDEF1231234567'
+                    decimalisationTable: 'ABCDEF1231234567',
+                    deliminaterLmk: '',
+                    deliminaterLmkLen: 0,
+                    lmkIdentifier: '',
+                    lmkIdentifierLen: 0
                 },
                 response: '303032324C4F41424344454631323331323334353637'
             }
