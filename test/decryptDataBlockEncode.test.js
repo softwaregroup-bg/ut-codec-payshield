@@ -20,6 +20,7 @@ const context = {
 tap.test(`${method}Encode`, (t) => {
     t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'decryptDataBlock encode, set 1');
     t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'decryptDataBlock encode, set 2');
+    t.same(payshield.encode(testData[2].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[2].response, 'decryptDataBlock encode, set 3');
 
     t.end();
 });

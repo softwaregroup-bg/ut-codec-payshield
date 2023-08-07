@@ -19,6 +19,7 @@ const context = {
 };
 tap.test(`${method}Encode`, (t) => {
     t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}), testResults[0].response, 'verifyPvvDukpt encode');
+    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}), testResults[1].response, 'verifyPvvDukpt encode with LMK identifier');
 
     t.end();
 });
