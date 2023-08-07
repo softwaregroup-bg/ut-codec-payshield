@@ -1,3 +1,12 @@
+# [7.3.0](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.2.2...v7.3.0) (2023-08-07)
+
+
+### Features
+
+* Add lmkIdentifier to hsm the commands. UNMB-54 ([#64](https://github.com/softwaregroup-bg/ut-codec-payshield/issues/64)) ([6e97216](https://github.com/softwaregroup-bg/ut-codec-payshield/commit/6e97216227975d510f3818575e2dc93a3c05aba7))
+
+
+
 ## [7.2.2](https://github.com/softwaregroup-bg/ut-codec-payshield/compare/v7.2.1...v7.2.2) (2022-06-03)
 
 
