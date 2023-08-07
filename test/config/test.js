@@ -65,11 +65,7 @@ module.exports = {
                     zkaRndiLength: 0,
                     zkaRndi: '',
                     tr31BlockDataLen: 0,
-                    tr31BlockData: '',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    tr31BlockData: ''
                 },
                 response: '3030303041303030303255'
             },
@@ -103,11 +99,7 @@ module.exports = {
                     zkaRndiLength: 0,
                     zkaRndi: '',
                     tr31BlockDataLen: 0,
-                    tr31BlockData: '',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    tr31BlockData: ''
                 },
                 response: '30303030413031303032553B3055393944384643373738303535423633443346443533434441394545454642394558'
             }
@@ -145,11 +137,7 @@ module.exports = {
                     keyType: '402',
                     keySchemeLmk: 'U',
                     keyComponentsLength: 99,
-                    keyComponents: 'U78D68FB4966305485C74466DACDE4E65UA128A7F7102F48B8582065D7B411A558UE8DA2D69626452A0CB47C6C4C142F17B',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    keyComponents: 'U78D68FB4966305485C74466DACDE4E65UA128A7F7102F48B8582065D7B411A558UE8DA2D69626452A0CB47C6C4C142F17B'
                 },
                 response: '3030303641343334303255553738443638464234393636333035343835433734343636444143444534453635554131323841374637313032463438423835383230363544374234313141353538554538444132443639363236343532413043423437433643344331343246313742'
             },
@@ -159,11 +147,7 @@ module.exports = {
                     keyType: '402',
                     keySchemeLmk: 'U',
                     keyComponentsLength: 66,
-                    keyComponents: 'U78D68FB4966305485C74466DACDE4E65UA128A7F7102F48B8582065D7B411A558',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    keyComponents: 'U78D68FB4966305485C74466DACDE4E65UA128A7F7102F48B8582065D7B411A558'
                 },
                 response: '3030303641343234303255553738443638464234393636333035343835433734343636444143444534453635554131323841374637313032463438423835383230363544374234313141353538'
             }
@@ -204,11 +188,7 @@ module.exports = {
                     keyType: '002',
                     zmk: 'UE6565E2D55B9463120398E7729DA524E',
                     key: 'XA921158D2F2571942EA0B770637F005C',
-                    keyScheme: 'U',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    keyScheme: 'U'
                 },
                 response: '30303032413630303255453635363545324435354239343633313230333938453737323944413532344558413932313135384432463235373139343245413042373730363337463030354355'
             },
@@ -217,11 +197,7 @@ module.exports = {
                     keyType: '109',
                     zmk: 'UE6565E2D55B9463120398E7729DA524E',
                     key: 'X7292BCCA0CD4563354F627B0E8E852B2',
-                    keyScheme: 'U',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    keyScheme: 'U'
                 },
                 response: '30303032413631303955453635363545324435354239343633313230333938453737323944413532344558373239324243434130434434353633333534463632374230453845383532423255'
             }
@@ -270,11 +246,7 @@ module.exports = {
                     keyType: '109',
                     zmk: 'U773F7C1902633996DCCBE4EC5F2986AE',
                     key: 'U7E717639AE951BBD85C280216DD3289E',
-                    keyScheme: 'T',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    keyScheme: 'T'
                 },
                 response: '30303034413831303955373733463743313930323633333939364443434245344543354632393836414555374537313736333941453935314242443835433238303231364444333238394554'
             },
@@ -283,11 +255,7 @@ module.exports = {
                     keyType: '402',
                     zmk: 'U773F7C1902633996DCCBE4EC5F2986AD',
                     key: 'U7E717639AE951BBD85C280216DD3289F',
-                    keyScheme: 'X',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    keyScheme: 'X'
                 },
                 response: '30303034413834303255373733463743313930323633333939364443434245344543354632393836414455374537313736333941453935314242443835433238303231364444333238394658'
             }
@@ -339,11 +307,7 @@ module.exports = {
                     checkLength: '04',
                     pan: '540008900009',
                     decimalisationTable: '0123456789123456',
-                    pinValidationData: '5022654000N2',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pinValidationData: '5022654000N2'
                 },
                 response: '30303039424B303032553330323743383935313831443931324139314437444630454437384143364642553830414533463844363342303846394331333635324535343136443736453844413639463945373634363930344236383031303435343030303839303030303930313233343536373839313233343536353032323635343030304E32'
             },
@@ -359,11 +323,7 @@ module.exports = {
                     checkLength: '06',
                     pan: '540008900009',
                     decimalisationTable: '5432109876543210',
-                    pinValidationData: '5022654000N2',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pinValidationData: '5022654000N2'
                 },
                 response: '30303039424B303032553330323743383935313831443931324139314437444630454437384143364642553830414533463844363342303846394331333635324535343136443736453844413639463945373634363930344236383031303635343030303839303030303935343332313039383736353433323130353032323635343030304E32'
             }
@@ -405,11 +365,7 @@ module.exports = {
                 request: {
                     account: '540008900009',
                     pinLength: 7,
-                    pin: '0567899',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pin: '0567899'
                 },
                 response: '30303238424735343030303839303030303930353637383939'
             }
@@ -444,11 +400,7 @@ module.exports = {
                     keySchemeLmkLength: 1,
                     keySchemeLmk: 'U',
                     reserved2Length: 1,
-                    reserved2: '0',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    reserved2: '0'
                 },
                 response: '3030323542573030315542374131444330394339393045433046364543354144383131464431453445303B305530'
             }
@@ -512,11 +464,7 @@ module.exports = {
                     hmacKey: '',
                     hmacKeyLength: 0,
                     delimiter3: '',
-                    delimiter3Length: 0,
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    delimiter3Length: 0
                 },
                 response: '3030313142554646315537373333384637344131394533424233393036324135413437393437334643383B3030323B303031'
             },
@@ -543,11 +491,7 @@ module.exports = {
                     hmacKey: '',
                     hmacKeyLength: 0,
                     delimiter3: '',
-                    delimiter3Length: 0,
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    delimiter3Length: 0
                 },
                 response: '3030313142554646315543313345394539324442413035463244463233373942383231433537363641333B3130393B303030'
             },
@@ -574,11 +518,7 @@ module.exports = {
                     hmacKey: '',
                     hmacKeyLength: 0,
                     delimiter3: '',
-                    delimiter3Length: 0,
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    delimiter3Length: 0
                 },
                 response: '3030313142553032315537373333384637344131394533424233393036324135413437393437334643383B303031'
             }
@@ -624,11 +564,7 @@ module.exports = {
                     sourcePinBlock: '3C7C732E667A9BC6',
                     sourcePinBlockFormat: '01',
                     destinationPinBlockFormat: '01',
-                    pan: '540028800010',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pan: '540028800010'
                 },
                 response: '30303131434155364330393141453330414242313942334542364334433342384430384330373155424232323441304437303839394537443231364134444444413631354330373831323343374337333245363637413942433630313031353430303238383030303130'
             },
@@ -640,11 +576,7 @@ module.exports = {
                     sourcePinBlock: 'C5ED6A332BAD3FE7',
                     sourcePinBlockFormat: '01',
                     destinationPinBlockFormat: '01',
-                    pan: '239010000012',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pan: '239010000012'
                 },
                 response: '30303131434155364330393141453330414242313942334542364334433342384430384330373155424232323441304437303839394537443231364134444444413631354330373831324335454436413333324241443346453730313031323339303130303030303132'
             }
@@ -691,11 +623,7 @@ module.exports = {
                     zpk: 'U592A36AE05F8E181AB3939B1D29BD8D1',
                     pinBlock: '87C832F7179E9CCE',
                     pinBlockFormat: '01',
-                    pan: '540008900009',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pan: '540008900009'
                 },
                 response: '303031314A45553539324133364145303546384531383141423339333942314432394244384431383743383332463731373945394343453031353430303038393030303039'
             }
@@ -723,11 +651,7 @@ module.exports = {
                     tpk: 'U95F693B7A4DF212C165A8D2FF44550D8',
                     pinBlock: '8475B774B6C63C52',
                     pinBlockFormat: '01',
-                    pan: '540008900009',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pan: '540008900009'
                 },
                 response: '303031344A43553935463639334237413444463231324331363541384432464634343535304438383437354237373442364336334335323031353430303038393030303039'
             }
@@ -758,11 +682,7 @@ module.exports = {
                     delimiter: '',
                     delimiterLength: 0,
                     pin: '5049248',
-                    pinLength: 7,
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pinLength: 7
                 },
                 response: '303031324A47553539324133364145303546384531383141423339333942314432394244384431303135343030303839303030303935303439323438'
             }
@@ -797,11 +717,7 @@ module.exports = {
                     sourcePinBlock: '14D3E09CD3B6456E',
                     sourcePinBlockFormat: '01',
                     destinationPinBlockFormat: '01',
-                    pan: '540028800010',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pan: '540028800010'
                 },
                 response: '30303131434355424232323441304437303839394537443231364134444444413631354330373855454534323445363038453943463030373145323339463945313530333243383131323134443345303943443342363435364530313031353430303238383030303130'
             },
@@ -813,11 +729,7 @@ module.exports = {
                     sourcePinBlock: 'E870CDC8E067EB2E',
                     sourcePinBlockFormat: '01',
                     destinationPinBlockFormat: '01',
-                    pan: '239010000012',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pan: '239010000012'
                 },
                 response: '30303131434355424232323441304437303839394537443231364134444444413631354330373855454534323445363038453943463030373145323339463945313530333243383131324538373043444338453036374542324530313031323339303130303030303132'
             }
@@ -881,11 +793,7 @@ module.exports = {
                     destinationPanDelimiter: '',
                     destinationPanDelimiterLength: 0,
                     destinationPan: '',
-                    destinationPanLength: 0,
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    destinationPanLength: 0
                 },
                 response: '30303131473055333730324546304445463135434236444435333637373834413731303243334555334342464337313330394643333732453941333245413637424534433831433941303546464646303030303031333135323430303033413439364630374238353232323531374430313031353430303038393030303039'
             }
@@ -924,11 +832,7 @@ module.exports = {
                     panLength: 18,
                     pan: '502265400089000092',
                     expirationDate: '2010',
-                    serviceCode: '620',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    serviceCode: '620'
                 },
                 response: '3030313143575545313644344344394541423631303033344244453241353039333542434642453530323236353430303038393030303039323B32303130363230'
             },
@@ -938,11 +842,7 @@ module.exports = {
                     panLength: 12,
                     pan: '502265000092',
                     expirationDate: '2010',
-                    serviceCode: '999',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    serviceCode: '999'
                 },
                 response: '3030313143575545313644344344394541423631303033344244453241353039333542434642453530323236353030303039323B32303130393939'
             }
@@ -979,11 +879,7 @@ module.exports = {
                     pan: '502265400089000092',
                     expirationDate: '2010',
                     cvv: '463',
-                    serviceCode: '620',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    serviceCode: '620'
                 },
                 response: '3030313143595545313644344344394541423631303033344244453241353039333542434642453436333530323236353430303038393030303039323B32303130363230'
             },
@@ -994,11 +890,7 @@ module.exports = {
                     panLength: 12,
                     pan: '502265000092',
                     expirationDate: '2010',
-                    serviceCode: '999',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    serviceCode: '999'
                 },
                 response: '3030313143595545313644344344394541423631303033344244453241353039333542434642453730353530323236353030303039323B32303130393939'
             }
@@ -1042,11 +934,7 @@ module.exports = {
                     pan: '540008900009',
                     decimalisationTable: '0123456789123456',
                     pinValidationData: '5022654000N2',
-                    offset: '876955ffffff',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    offset: '876955ffffff'
                 },
                 response: '3030313144415533303237433839353138314439313241393144374446304544373841433646425538304145334638443633423038463943313336353245353431364437364538443132413639463945373634363930344236383031303635343030303839303030303930313233343536373839313233343536353032323635343030304E32383736393535464646464646'
             },
@@ -1062,11 +950,7 @@ module.exports = {
                     pan: '540008900009',
                     decimalisationTable: '5432109876543210',
                     pinValidationData: '5022654000N2',
-                    offset: '757798ffffff',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    offset: '757798ffffff'
                 },
                 response: '3030313144415533303237433839353138314439313241393144374446304544373841433646425538304145334638443633423038463943313336353245353431364437364538443132413639463945373634363930344236383031303635343030303839303030303935343332313039383736353433323130353032323635343030304E32373537373938464646464646'
             }
@@ -1111,11 +995,7 @@ module.exports = {
                     pin: '73638636',
                     pinValidationData: '5022654000N2',
                     pvk: 'U77338F74A19E3BB39062A5A479473FC8',
-                    pvkLength: 33,
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pvkLength: 33
                 },
                 response: '3030313144455537373333384637344131394533424233393036324135413437393437334643383733363338363336303636353430303038393030303930313233343536373839303132333435353032323635343030304E32'
             },
@@ -1128,11 +1008,7 @@ module.exports = {
                     pin: '58652088',
                     pinValidationData: '5022650000N2',
                     pvk: 'U77338F74A19E3BB39062A5A479473FC8',
-                    pvkLength: 33,
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pvkLength: 33
                 },
                 response: '3030313144455537373333384637344131394533424233393036324135413437393437334643383538363532303838303435303232363530303030393236353433323130393837363534333231353032323635303030304E32'
             }
@@ -1173,11 +1049,7 @@ module.exports = {
                     encryptedPinLength: 8,
                     pin: '73638636',
                     account: '654000890009',
-                    pvki: '1',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pvki: '1'
                 },
                 response: '303030324447553737333338463734413139453342423339303632413541343739343733464338373336333836333636353430303038393030303931'
             },
@@ -1188,11 +1060,7 @@ module.exports = {
                     encryptedPinLength: 8,
                     pin: '58652088',
                     account: '502265000092',
-                    pvki: '4',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pvki: '4'
                 },
                 response: '303030324447553737333338463734413139453342423339303632413541343739343733464338353836353230383835303232363530303030393234'
             }
@@ -1230,11 +1098,7 @@ module.exports = {
                     checkLength: '6',
                     account: '654000890009',
                     decimalisationTable: '0123456789012345',
-                    pinValidationData: '5022654000N2',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pinValidationData: '5022654000N2'
                 },
                 response: '303031314545553737333338463734413139453342423339303632413541343739343733464338303030303030464646464646303636353430303038393030303930313233343536373839303132333435353032323635343030304E32'
             },
@@ -1246,11 +1110,7 @@ module.exports = {
                     checkLength: '4',
                     account: '502265000092',
                     decimalisationTable: '6543210987654321',
-                    pinValidationData: '5022650000N2',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pinValidationData: '5022650000N2'
                 },
                 response: '303031314545553737333338463734413139453342423339303632413541343739343733464338303030304646464646464646303435303232363530303030393236353433323130393837363534333231353032323635303030304E32'
             }
@@ -1288,11 +1148,7 @@ module.exports = {
                 request: {
                     hashId: '06',
                     messageDataLength: 16,
-                    messageData: '77338F74A19E3BB39062A5A479473FC8',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    messageData: '77338F74A19E3BB39062A5A479473FC8'
                 },
                 response: '30303032474D3036303030313677338F74A19E3BB39062A5A479473FC8'
             },
@@ -1300,11 +1156,7 @@ module.exports = {
                 request: {
                     hashId: '01',
                     messageDataLength: 17,
-                    messageData: '736F6D65206461746120746F2068617368',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    messageData: '736F6D65206461746120746F2068617368'
                 },
                 response: '30303032474D30313030303137736F6D65206461746120746F2068617368'
             }
@@ -1354,11 +1206,7 @@ module.exports = {
                     discretionaryDataBytesLength: 0,
                     discretionaryDataBytes: '',
                     discretionaryDataLength: 0,
-                    discretionaryData: '',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    discretionaryData: ''
                 },
                 response: '303030324B5130305535363242374331393841353844323838353146313535313743444142413630457804020000000000001884F01F9D32380000000000000000000000000288800004800002881712200184F01F9D14020300180000180000003B0A994C22203060C4'
             },
@@ -1386,11 +1234,7 @@ module.exports = {
                     discretionaryDataBytesLength: 0,
                     discretionaryDataBytes: '',
                     discretionaryDataLength: 0,
-                    discretionaryData: '',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    discretionaryData: ''
                 },
                 response: '303030324B5132305535363242374331393841353844323838353146313535313743444142413630457804020000000000001884F01F9D0A994C22203060C40000'
             },
@@ -1418,11 +1262,7 @@ module.exports = {
                     discretionaryDataBytesLength: 2,
                     discretionaryDataBytes: '08',
                     discretionaryDataLength: 8,
-                    discretionaryData: '4E6F772069732074',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    discretionaryData: '4E6F772069732074'
                 },
                 response: '303030324B5133305535363242374331393841353844323838353146313535313743444142413630455530413935354234324339333141374644334632423132423135393543423346427804020000000000001884F01F9D32380000000000000000000000000288800004800002881712200184F01F9D14020300180000180000003B0A994C22203060C463EB7F4230384E6F772069732074'
             },
@@ -1450,11 +1290,7 @@ module.exports = {
                     discretionaryDataBytesLength: 2,
                     discretionaryDataBytes: '08',
                     discretionaryDataLength: 8,
-                    discretionaryData: '4E6F772069732074',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    discretionaryData: '4E6F772069732074'
                 },
                 response: '303030324B5134305535363242374331393841353844323838353146313535313743444142413630455530413935354234324339333141374644334632423132423135393543423346427804020000000000001884F01F9D32380000000000000000000000000288800004800002881712200184F01F9D14020300180000180000003B0A994C22203060C4303063EB7F4230384E6F772069732074'
             }
@@ -1543,11 +1379,7 @@ module.exports = {
                     csu: '',
                     padLengthLength: 0,
                     padLength: '',
-                    pad: '',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pad: ''
                 },
                 response: '303030324B57303255343138453745353432373943454134443239383438354639463846344146443278040200000018000003343800000001000000000000000006088010040000060818010201B21BB356180000030FA501803000000000000000000000000F000000000000000000000000000000000000000000003BF67B7E07A55DF243'
             },
@@ -1580,11 +1412,7 @@ module.exports = {
                     csu: '',
                     padLengthLength: 0,
                     padLength: '',
-                    pad: '',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pad: ''
                 },
                 response: '303030324B5730325535313837363341433631464235334532323330364331443835393738433339433239010000012101005B32300FA501A13102000000000000000000000F0100000000000000000000000000003BDDA6BCC881C093AD'
             },
@@ -1617,11 +1445,7 @@ module.exports = {
                     csu: '00000000',
                     padLengthLength: 1,
                     padLength: 5,
-                    pad: '8080040000',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pad: '8080040000'
                 },
                 response: '303030324B5734325535313837363341433631464235334532323330364331443835393738433339433239010000012101005BDDA6BCC881C093AD00000000358080040000'
             }
@@ -1668,11 +1492,7 @@ module.exports = {
         translateDtabEncode: {
             0: {
                 request: {
-                    decimalisationTable: 'ABCDEF1231234567',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    decimalisationTable: 'ABCDEF1231234567'
                 },
                 response: '303032324C4F41424344454631323331323334353637'
             }
@@ -1706,11 +1526,7 @@ module.exports = {
                     iv: '',
                     messageDataLengthHex: '20',
                     messageDataLength: 32,
-                    messageData: '0400980C0002AE900AF140D0C21230D7',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    messageData: '0400980C0002AE900AF140D0C21230D7'
                 },
                 response: '303030324D3030303131303042554231393046374642423830324541313446414337393137443346364544423637303032303034303039383043303030324145393030414631343044304332313233304437'
             },
@@ -1729,11 +1545,7 @@ module.exports = {
                     iv: '',
                     messageDataLengthHex: '20',
                     messageDataLength: 32,
-                    messageData: '0400980C0002AE900AF140D0C21230D7',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    messageData: '0400980C0002AE900AF140D0C21230D7'
                 },
                 response: '303030324D3030303231303042554231393046374642423830324541313446414337393137443346364544423637303032303034303039383043303030324145393030414631343044304332313233304437'
             }
@@ -1825,11 +1637,7 @@ module.exports = {
                     ivLength: 0,
                     messageDataLengthHex: '40',
                     messageData: '81E6BDF350C73ED13698E2C1356B58622C3871D2846FC110DD7E7A9D1024EC08',
-                    messageDataLength: 64,
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    messageDataLength: 64
                 },
                 response: '303030324D32303031323030425542313930463746424238303245413134464143373931374433463645444236373030343038314536424446333530433733454431333639384532433133353642353836323243333837314432383436464331313044443745374139443130323445433038'
             }
@@ -1895,11 +1703,7 @@ module.exports = {
                     destinationIvLength: 0,
                     messageDataLengthHex: '20',
                     messageData: '311D8D13F8C617EF838441C36E33A6DA',
-                    messageDataLength: 32,
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    messageDataLength: 32
                 },
                 response: '303030324D34303030303131303042554231393046374642423830324541313446414337393137443346364544423637303042553639373231333032443946423738373644393843444441304644453141303942303032303331314438443133463843363137454638333834343143333645333341364441'
             }
@@ -1939,11 +1743,7 @@ module.exports = {
                     iv: '',
                     macDataLengthHex: '1E',
                     macDataLength: 30,
-                    macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
                 },
                 response: '303030324D3630323033313030335535464645383031344441333833443434433234414234314533374442323532463030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
             },
@@ -1960,11 +1760,7 @@ module.exports = {
                     iv: '',
                     macDataLengthHex: '1E',
                     macDataLength: 30,
-                    macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
                 },
                 response: '303030324D3630303033313030385546373539454637324631354638383933334342394238364535344339444338333030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
             }
@@ -2017,11 +1813,7 @@ module.exports = {
                     macDataLength: 30,
                     macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
                     macLength: 8,
-                    mac: 'C57E4295',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    mac: 'C57E4295'
                 },
                 response: '303030324D3830323033313030335535464645383031344441333833443434433234414234314533374442323532463030314532321C3030323030303030311C1C30353135313030391C461C36303030304335374534323935'
             },
@@ -2040,11 +1832,7 @@ module.exports = {
                     macDataLength: 30,
                     macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
                     macLength: 8,
-                    mac: 'BF26765E',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    mac: 'BF26765E'
                 },
                 response: '303030324D3830303033313030385546373539454637324631354638383933334342394238364535344339444338333030314532321C3030323030303030311C1C30353135313030391C461C36303030304246323637363545'
             }
@@ -2110,11 +1898,7 @@ module.exports = {
                     pin: '0302477',
                     encryptedPinLength: 7,
                     printFieldsLength: 13,
-                    printFields: ';Krasi;;Kolev',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    printFields: ';Krasi;;Kolev'
                 },
                 response: '30303032504543353430303038393030303039303330323437373B4B726173693B3B4B6F6C6576'
             }
@@ -2150,11 +1934,7 @@ module.exports = {
                     pinLength: '5',
                     pin: '01234',
                     oldAccountNumber: '1234560000001234',
-                    newAccountNumber: '6543210000004321',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    newAccountNumber: '6543210000004321'
                 },
                 response: '30303330514B3031323334313233343536303030303030313233343635343332313030'
             }
@@ -2177,11 +1957,7 @@ module.exports = {
                 request: {
                     tmk: 'U653BDD7BF37AC36B160D787BD306877B',
                     printFieldsLength: 25,
-                    printFields: 'field0;Krasi;Kolev;444A82',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    printFields: 'field0;Krasi;Kolev;444A82'
                 },
                 response: '3030303254415536353342444437424633374143333642313630443738374244333036383737426669656C64303B4B726173693B4B6F6C65763B343434413832'
             }
@@ -2220,11 +1996,7 @@ module.exports = {
                     pinBlock: 'A69F9E7646904B68',
                     pinBlockFormat: '01',
                     pan: '540008900009',
-                    pvki: '4',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pvki: '4'
                 },
                 response: '30303032465730303255333032374338393531383144393132413931443744463045443738414336464255383041453346384436334230384639433133363532453534313644373645384441363946394537363436393034423638303135343030303839303030303934'
             },
@@ -2237,11 +2009,7 @@ module.exports = {
                     pinBlock: 'ED42DE5980AB024B',
                     pinBlockFormat: '01',
                     pan: '600000000000',
-                    pvki: '4',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pvki: '4'
                 },
                 response: '30303032465730303155424232323441304437303839394537443231364134444444413631354330373855383041453346384436334230384639433133363532453534313644373645384445443432444535393830414230323442303136303030303030303030303034'
             }
@@ -2280,11 +2048,7 @@ module.exports = {
                     pinBlockFormat: '01',
                     pan: '540008900009',
                     pvki: '4',
-                    pvv: '2914',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pvv: '2914'
                 },
                 response: '3030303244435533303237433839353138314439313241393144374446304544373841433646425538304145334638443633423038463943313336353245353431364437364538444136394639453736343639303442363830313534303030383930303030393432393134'
             }
@@ -2324,11 +2088,7 @@ module.exports = {
                     pan: '540008900009',
                     pvki: '4',
                     sourcePvv: '2914',
-                    destinationPinBlock: 'B2766AACF790B197',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    destinationPinBlock: 'B2766AACF790B197'
                 },
                 response: '303030324355303032553934384237343933334541414434364336423842444541443135353041463241553830414533463844363342303846394331333635324535343136443736453844324644433538314143323543393634303031353430303038393030303039343239313442323736364141434637393042313937'
             }
@@ -2372,11 +2132,7 @@ module.exports = {
                     decimalisationTable: 'FD64FC3FAD504BB3',
                     pinValidationData: '5022654000N2',
                     sourceOffset: '123456FFFFFF',
-                    destinationPinBlock: 'B2766AACF790B197',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    destinationPinBlock: 'B2766AACF790B197'
                 },
                 response: '303032394455303032553934384237343933334541414434364336423842444541443135353041463241553830414533463844363342303846394331333635324535343136443736453844324644433538314143323543393634303031303635343030303839303030303946443634464333464144353034424233353032323635343030304E3231323334353646464646464642323736364141434637393042313937'
             }
@@ -2419,11 +2175,7 @@ module.exports = {
                     pan: '540008900009',
                     decimalisationTable: '0123456789123456',
                     pinValidationData: '5022654000N2',
-                    offset: '876955ffffff',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    offset: '876955ffffff'
                 },
                 response: '3030323845415533303237433839353138314439313241393144374446304544373841433646425538304145334638443633423038463943313336353245353431364437364538443132413639463945373634363930344236383031303635343030303839303030303930313233343536373839313233343536353032323635343030304E32383736393535464646464646'
             }
@@ -2466,11 +2218,7 @@ module.exports = {
                     verificationPanLength: 0,
                     verificationPan: '',
                     pvki: '4',
-                    pvv: '1835',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    pvv: '1835'
                 },
                 response: '3030303245435542423232344130443730383939453744323136413444444441363135433037385538304145334638443633423038463943313336353245353431364437364538444544343244453539383041423032344230313630303030303030303030303431383335'
             }
@@ -2525,11 +2273,7 @@ module.exports = {
                     messageDataLengthBytesLength: 0,
                     messageDataLengthBytes: '',
                     messageDataLength: 0,
-                    messageData: '',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    messageData: ''
                 },
                 response: bufferize('30303134474F305541414441464343383535314144414232343645413131373646443639314544465538304145334638443633423038463943313336353245353431364437364538444130354646464630303030303130303230303030303236424337383645323837353344443442323031303435343030303839303030303930313233343536373839313233343536353035323635343030304E32313233344646464646464646')
             },
@@ -2558,11 +2302,7 @@ module.exports = {
                     messageDataLengthBytesLength: 4,
                     messageDataLengthBytes: '16',
                     messageDataLength: 16,
-                    messageData: '424C41424C414D455353414745000000',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    messageData: '424C41424C414D455353414745000000'
                 },
                 response: bufferize('30303134474F3031315541414441464343383535314144414232343645413131373646443639314544465538304145334638443633423038463943313336353245353431364437364538444130354646464630303030303130303230303030303236424337383645323837353344443442323031303435343030303839303030303930313233343536373839313233343536353035323635343030304E323132333446464646464646464142434431323334454630393837363530303136424C41424C414D455353414745000000')
             }
@@ -2658,11 +2398,7 @@ module.exports = {
                     macLength: 0,
                     mac: '',
                     messageDataLengthBytes: 8,
-                    messageData: 'ABCABCABCDEF8000',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    messageData: 'ABCABCABCDEF8000'
                 },
                 response: bufferize('3030303247573431553939383035393033464443353633323430413131384445383844414530353336413035464646463030303030313331353234303030304630303038ABCABCABCDEF8000')
             },
@@ -2677,11 +2413,7 @@ module.exports = {
                     macLength: 16,
                     mac: '40BDD0ED6B9FBCBE',
                     messageDataLengthBytes: 8,
-                    messageData: 'ABCABCABCDEF8000',
-                    deliminaterLmk: '',
-                    deliminaterLmkLen: 0,
-                    lmkIdentifier: '',
-                    lmkIdentifierLen: 0
+                    messageData: 'ABCABCABCDEF8000'
                 },
                 response: bufferize('303030324757313155393938303539303346444335363332343041313138444538384441453035333641303546464646303030303031333135323430303030463430424444304544364239464243424530303038ABCABCABCDEF8000')
             }

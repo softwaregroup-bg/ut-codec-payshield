@@ -42,6 +42,21 @@ function upperCaseObject(data, nonCorrectableFields) {
     , {});
 }
 
+function getLmkIdentifierParam(data) {
+    const {lmkIdentifier} = data;
+    const params = (lmkIdentifier === '' || isNaN(lmkIdentifier)) ? {
+        deliminaterLmkLen: 0,
+        deliminaterLmk: '',
+        lmkIdentifierLen: 0,
+        lmkIdentifier: ''
+    } : {
+        deliminaterLmk: '%',
+        deliminaterLmkLen: 1,
+        lmkIdentifier: `00${lmkIdentifier}`.slice(-2),
+        lmkIdentifierLen: 2
+    };
+    return {...data, ...params};
+}
 function PayshieldCodec(config) {
     this.commands = {};
     this.headerPattern = null;
@@ -174,6 +189,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
             context.trace = 0;
         }
     }
+    data = getLmkIdentifierParam(data);
     const dataCorrected = upperCaseObject(data, this.nonCorrectableFields);
     const bodyBuff = bitsyntax.build(this.commands[commandName].pattern, dataCorrected);
     if (!bodyBuff) {
