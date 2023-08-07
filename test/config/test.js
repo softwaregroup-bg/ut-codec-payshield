@@ -1636,6 +1636,32 @@ module.exports = {
                     messageDataLength: 64
                 },
                 response: '303030324D32303031323030425542313930463746424238303245413134464143373931374433463645444236373030343038314536424446333530433733454431333639384532433133353642353836323243333837314432383436464331313044443745374139443130323445433038'
+            },
+            2: {
+                request: {
+                    modeFlag: '00',
+                    bpsRadixFlag: '',
+                    bpsRadixFlagLength: 0,
+                    bpsRadixValue: '',
+                    bpsRadixValueLength: 0,
+                    bpsTweak: '',
+                    bpsTweakLength: 0,
+                    inputFormatFlag: '1',
+                    outputFormatFlag: '1',
+                    keyType: '00B',
+                    key: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
+                    ksnDescriptor: '',
+                    ksnDescriptorLength: 0,
+                    ksn: '',
+                    ksnLength: 0,
+                    iv: '',
+                    ivLength: 0,
+                    messageDataLengthHex: '20',
+                    messageData: '311D8D13F8C617EF838441C36E33A6DA',
+                    messageDataLength: 32,
+                    lmkIdentifier: 0
+                },
+                response: '303030324D3230303131303042554231393046374642423830324541313446414337393137443346364544423637303032303331314438443133463843363137454638333834343143333645333341364441253030'
             }
         },
         decryptDataBlockDecode: {
@@ -2351,6 +2377,38 @@ module.exports = {
                     messageData: ''
                 },
                 response: bufferize('3030333147513055414144414643433835353141444142323436454131313736464436393145444655383041453346384436334230384639433133363532453534313644373645384441303546464646303030303031303032303030303032364136394639453736343639303442363830313534303030383930303030393138313536')
+            },
+            1: {
+                request: {
+                    mode: '0',
+                    macModeLength: 0,
+                    macMode: '',
+                    macMethodLength: 0,
+                    macMethod: '',
+                    bdk: 'UAADAFCC8551ADAB246EA1176FD691EDF',
+                    pvkLength: 33,
+                    pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
+                    ksnDescriptor: 'A05',
+                    ksnLength: 20,
+                    ksn: 'FFFF0000010020000026',
+                    pinBlock: 'A69F9E7646904B68',
+                    pinBlockFormat: '01',
+                    pan: '540008900009',
+                    delimiterLength: 0,
+                    delimiter: '',
+                    verificationPanLength: 0,
+                    verificationPan: '',
+                    pvki: '1',
+                    pvv: '8156',
+                    macLength: 0,
+                    mac: '',
+                    messageDataLengthBytesLength: 0,
+                    messageDataLengthBytes: '',
+                    messageDataLength: 0,
+                    messageData: '',
+                    lmkIdentifier: '0'
+                },
+                response: bufferize('3030333147513055414144414643433835353141444142323436454131313736464436393145444655383041453346384436334230384639433133363532453534313644373645384441303546464646303030303031303032303030303032364136394639453736343639303442363830313534303030383930303030393138313536253030')
             }
         },
         verifyPvvDukptDecode: {
