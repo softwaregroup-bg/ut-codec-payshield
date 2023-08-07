@@ -1609,8 +1609,8 @@ module.exports = {
                     messageDataLengthHex: '20',
                     messageData: '311D8D13F8C617EF838441C36E33A6DA',
                     messageDataLength: 32,
-                    deliminaterLmk: '%',
-                    deliminaterLmkLen: 1,
+                    delimiterLmk: '%',
+                    delimiterLmkLen: 1,
                     lmkIdentifier: '00',
                     lmkIdentifierLen: 2
                 },
@@ -2353,8 +2353,8 @@ module.exports = {
                     messageDataLengthBytes: '',
                     messageDataLength: 0,
                     messageData: '',
-                    deliminaterLmk: '%',
-                    deliminaterLmkLen: 1,
+                    delimiterLmk: '%',
+                    delimiterLmkLen: 1,
                     lmkIdentifier: '00',
                     lmkIdentifierLen: 2
                 },

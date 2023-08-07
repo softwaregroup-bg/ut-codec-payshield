@@ -45,13 +45,13 @@ function upperCaseObject(data, nonCorrectableFields) {
 function getLmkIdentifierParam(data) {
     const {lmkIdentifier} = data;
     const params = (lmkIdentifier === '' || isNaN(lmkIdentifier)) ? {
-        deliminaterLmkLen: 0,
-        deliminaterLmk: '',
+        delimiterLmkLen: 0,
+        delimiterLmk: '',
         lmkIdentifierLen: 0,
         lmkIdentifier: ''
     } : {
-        deliminaterLmk: '%',
-        deliminaterLmkLen: 1,
+        delimiterLmk: '%',
+        delimiterLmkLen: 1,
         lmkIdentifier: `00${lmkIdentifier}`.slice(-2),
         lmkIdentifierLen: 2
     };
