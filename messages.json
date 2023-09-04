@@ -31,7 +31,7 @@
     "exportKey": {
         "requestCode": "A8",
         "responseCode": "A9",
-        "requestPattern": "keyType:3/string, zmk:zmkLength/string, key:keyLength/string, keyScheme:1/string, delimiter:delimiterLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string, keyBlockParams:keyBlockParamsLength/string",
+        "requestPattern": "keyType:3/string, zmk:zmkLength/string, key:keyLength/string, keyScheme:1/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string, keyBlockParams:keyBlockParamsLength/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "10": "ZMK or TMK Parity error",
