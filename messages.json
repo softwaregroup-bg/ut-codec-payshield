@@ -3,7 +3,7 @@
         "requestCode": "A0",
         "responseCode": "A1",
         "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLength/string, zkaMasterKeyType:zkaMasterKeyTypeLength/string, zkaMasterKey:zkaMasterKeyLength/string, zkaOption:zkaOptionLength/string, zkaRndi:zkaRndiLength/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keySchemeZmkTmk:keySchemeZmkTmkLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string, tr31BlockData:tr31BlockDataLen/string",
-        "responsePattern": "errorCode:2/string, key:33/string, rest/binary",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "10": "ZMK or TMK Parity error"
         }
@@ -21,8 +21,8 @@
     "importKey": {
         "requestCode": "A6",
         "responseCode": "A7",
-        "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
+        "requestPattern": "keyType:3/string, zmk:zmkLength/string, key:keyLength/string, keyScheme:1/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string, keyBlockParams:keyBlockParamsLength/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "warnings": ["01"],
         "customResponseError": {
             "10": "ZMK Parity error"
@@ -31,8 +31,8 @@
     "exportKey": {
         "requestCode": "A8",
         "responseCode": "A9",
-        "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
+        "requestPattern": "keyType:3/string, zmk:zmkLength/string, key:keyLength/string, keyScheme:1/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string, keyBlockParams:keyBlockParamsLength/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "10": "ZMK or TMK Parity error",
             "11": "Key parity error"
@@ -302,7 +302,7 @@
     "translatePinBdkBdkZpk": {
         "requestCode": "G0",
         "responseCode": "G1",
-        "requestPattern": "sourceKeyFlag:sourceKeyFlagLength/string, sourceKey:33/string, destinationKeyFlag:destinationKeyFlagLength/string, destinationKey:33/string, sourceKsnDescriptor:3/string, sourceKsn:sourceKsnLength/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, destinationPanDelimiter:destinationPanDelimiterLength/string, destinationPan:destinationPanLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "sourceKeyFlag:sourceKeyFlagLength/string, sourceKey:sourceKeyLength/string, destinationKeyFlag:destinationKeyFlagLength/string, destinationKey:destinationKeyLength/string, sourceKsnDescriptor:3/string, sourceKsn:sourceKsnLength/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, destinationPanDelimiter:destinationPanDelimiterLength/string, destinationPan:destinationPanLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
         "responsePattern": "errorCode:2/string, checkLength:2/string, pinBlock:16/string, pinBlockFormat:2/string",
         "customResponseError": {
             "10": "BDK parity error",
