@@ -186,18 +186,26 @@ module.exports = {
             0: {
                 request: {
                     keyType: '002',
+                    zmkLength: 33,
                     zmk: 'UE6565E2D55B9463120398E7729DA524E',
+                    keyLength: 33,
                     key: 'XA921158D2F2571942EA0B770637F005C',
-                    keyScheme: 'U'
+                    keyScheme: 'U',
+                    keyBlockParamsLength: 0,
+                    keyBlockParams: ''
                 },
                 response: '30303032413630303255453635363545324435354239343633313230333938453737323944413532344558413932313135384432463235373139343245413042373730363337463030354355'
             },
             1: {
                 request: {
                     keyType: '109',
+                    zmkLength: 33,
                     zmk: 'UE6565E2D55B9463120398E7729DA524E',
+                    keyLength: 33,
                     key: 'X7292BCCA0CD4563354F627B0E8E852B2',
-                    keyScheme: 'U'
+                    keyScheme: 'U',
+                    keyBlockParamsLength: 0,
+                    keyBlockParams: ''
                 },
                 response: '30303032413631303955453635363545324435354239343633313230333938453737323944413532344558373239324243434130434434353633333534463632374230453845383532423255'
             }
@@ -207,16 +215,15 @@ module.exports = {
                 request: bufferize('3039343641373030554331334539453932444241303546324446323337394238323143353736364133384646454431'),
                 response: {
                     errorCode: '00',
-                    key: 'UC13E9E92DBA05F2DF2379B821C5766A3',
-                    keyCheckValue: '8FFED1'
+                    rest: bufferize([85, 67, 49, 51, 69, 57, 69, 57, 50, 68, 66, 65, 48, 53, 70, 50, 68, 70, 50, 51, 55, 57, 66, 56, 50, 49, 67, 53, 55, 54, 54, 65, 51, 56, 70, 70, 69, 68, 49])
+
                 }
             },
             1: {
                 request: bufferize('3039353941373030553737333338463734413139453342423339303632413541343739343733464338364145374344'),
                 response: {
                     errorCode: '00',
-                    key: 'U77338F74A19E3BB39062A5A479473FC8',
-                    keyCheckValue: '6AE7CD'
+                    rest: bufferize([85, 55, 55, 51, 51, 56, 70, 55, 52, 65, 49, 57, 69, 51, 66, 66, 51, 57, 48, 54, 50, 65, 53, 65, 52, 55, 57, 52, 55, 51, 70, 67, 56, 54, 65, 69, 55, 67, 68])
                 }
             },
             2: {
@@ -775,9 +782,11 @@ module.exports = {
                 request: {
                     sourceKeyFlag: '',
                     sourceKeyFlagLength: 0,
+                    sourceKeyLength: 33,
                     sourceKey: 'U3702EF0DEF15CB6DD5367784A7102C3E',
                     destinationKeyFlag: '',
                     destinationKeyFlagLength: 0,
+                    destinationKeyLength: 33,
                     destinationKey: 'U3CBFC71309FC372E9A32EA67BE4C81C9',
                     sourceKsnDescriptor: 'A05',
                     sourceKsnLength: 20,
@@ -793,7 +802,8 @@ module.exports = {
                     destinationPanDelimiter: '',
                     destinationPanDelimiterLength: 0,
                     destinationPan: '',
-                    destinationPanLength: 0
+                    destinationPanLength: 0,
+                    
                 },
                 response: '30303131473055333730324546304445463135434236444435333637373834413731303243334555334342464337313330394643333732453941333245413637424534433831433941303546464646303030303031333135323430303033413439364630374238353232323531374430313031353430303038393030303039'
             }
