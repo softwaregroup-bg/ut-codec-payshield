@@ -184,12 +184,9 @@ module.exports = {
             0: {
                 request: {
                     keyType: '002',
-                    zmkLength: 33,
                     zmk: 'UE6565E2D55B9463120398E7729DA524E',
-                    keyLength: 33,
                     key: 'XA921158D2F2571942EA0B770637F005C',
                     keyScheme: 'U',
-                    keyBlockParamsLength: 0,
                     keyBlockParams: ''
                 },
                 response: '30303032413630303255453635363545324435354239343633313230333938453737323944413532344558413932313135384432463235373139343245413042373730363337463030354355'
@@ -197,12 +194,9 @@ module.exports = {
             1: {
                 request: {
                     keyType: '109',
-                    zmkLength: 33,
                     zmk: 'UE6565E2D55B9463120398E7729DA524E',
-                    keyLength: 33,
                     key: 'X7292BCCA0CD4563354F627B0E8E852B2',
                     keyScheme: 'U',
-                    keyBlockParamsLength: 0,
                     keyBlockParams: ''
                 },
                 response: '30303032413631303955453635363545324435354239343633313230333938453737323944413532344558373239324243434130434434353633333534463632374230453845383532423255'
@@ -248,12 +242,9 @@ module.exports = {
             0: {
                 request: {
                     keyType: '109',
-                    zmkLength: 33,
                     zmk: 'U773F7C1902633996DCCBE4EC5F2986AE',
-                    keyLength: 33,
                     key: 'U7E717639AE951BBD85C280216DD3289E',
                     keyScheme: 'T',
-                    keyBlockParamsLength: 0,
                     keyBlockParams: ''
                 },
                 response: '30303034413831303955373733463743313930323633333939364443434245344543354632393836414555374537313736333941453935314242443835433238303231364444333238394554'
@@ -261,12 +252,9 @@ module.exports = {
             1: {
                 request: {
                     keyType: '402',
-                    zmkLength: 33,
                     zmk: 'U773F7C1902633996DCCBE4EC5F2986AD',
-                    keyLength: 33,
                     key: 'U7E717639AE951BBD85C280216DD3289F',
                     keyScheme: 'X',
-                    keyBlockParamsLength: 0,
                     keyBlockParams: ''
                 },
                 response: '30303034413834303255373733463743313930323633333939364443434245344543354632393836414455374537313736333941453935314242443835433238303231364444333238394658'
@@ -784,28 +772,19 @@ module.exports = {
             0: {
                 request: {
                     sourceKeyFlag: '',
-                    sourceKeyFlagLength: 0,
-                    sourceKeyLength: 33,
                     sourceKey: 'U3702EF0DEF15CB6DD5367784A7102C3E',
                     destinationKeyFlag: '',
-                    destinationKeyFlagLength: 0,
-                    destinationKeyLength: 33,
                     destinationKey: 'U3CBFC71309FC372E9A32EA67BE4C81C9',
                     sourceKsnDescriptor: 'A05',
-                    sourceKsnLength: 20,
                     sourceKsn: 'FFFF000001315240003A',
                     destinationKsnDescriptor: '',
-                    destinationKsnDescriptorLength: 0,
                     destinationKsn: '',
-                    destinationKsnLength: 0,
                     sourcePinBlock: '496F07B85222517D',
                     sourcePinBlockFormat: '01',
                     destinationPinBlockFormat: '01',
                     pan: '540008900009',
                     destinationPanDelimiter: '',
-                    destinationPanDelimiterLength: 0,
-                    destinationPan: '',
-                    destinationPanLength: 0
+                    destinationPan: ''
                 },
                 response: '30303131473055333730324546304445463135434236444435333637373834413731303243334555334342464337313330394643333732453941333245413637424534433831433941303546464646303030303031333135323430303033413439364630374238353232323531374430313031353430303038393030303039'
             }
