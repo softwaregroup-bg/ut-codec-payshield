@@ -776,8 +776,7 @@ module.exports = {
             0: {
                 request: bufferize('303030314A46303035303439323438'),
                 response: {
-                    errorCode: '00',
-                    pin: bufferize([53, 48, 52, 57, 50, 52, 56])
+                    pin: '5049248'
                 }
             },
             1: {
@@ -844,7 +843,6 @@ module.exports = {
             0: {
                 request: bufferize('303030324A48303038374338333246373137394539434345'),
                 response: {
-                    errorCode: '00',
                     pinBlock: '87C832F7179E9CCE'
                 }
             },
@@ -900,7 +898,6 @@ module.exports = {
             0: {
                 request: bufferize('30323438434430303036304534413242464137384532343446463031'),
                 response: {
-                    errorCode: '00',
                     checkLength: '06',
                     pinBlock: '0E4A2BFA78E244FF',
                     pinBlockFormat: '01'
@@ -909,7 +906,6 @@ module.exports = {
             1: {
                 request: bufferize('30313930434430303034424542433338454235383646453432353031'),
                 response: {
-                    errorCode: '00',
                     checkLength: '04',
                     pinBlock: 'BEBC38EB586FE425',
                     pinBlockFormat: '01'
@@ -2671,16 +2667,12 @@ module.exports = {
             0: {
                 request: bufferize('303030304758303034304244443045443642394642434245'),
                 response: {
-                    errorCode: '00',
-                    rest: bufferize([52, 48, 66, 68, 68, 48, 69, 68, 54, 66, 57, 70, 66, 67, 66, 69])
+                    mac: '40BDD0ED6B9FBCBE'
                 }
             },
             1: {
                 request: bufferize('3030303147583030'),
-                response: {
-                    errorCode: '00',
-                    rest: bufferize([])
-                }
+                response: {}
             },
             2: {
                 request: bufferize('3030303647583031'),
