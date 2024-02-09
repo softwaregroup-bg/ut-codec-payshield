@@ -18,8 +18,10 @@ const context = {
     trace: 2
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}), testResults[0].response, 'generateVerifyMacDukpt encode, set 1, generate MAC');
-    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}), testResults[1].response, 'generateVerifyMacDukpt encode, set 2, verify MAC');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}), testResults[0].response, 'generateVerifyMacDukpt variant encode, set 1, generate MAC');
+    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}), testResults[1].response, 'generateVerifyMacDukpt variant encode, set 2, verify MAC');
+    t.same(payshield.encode(testData[2].request, $meta, {trace: context.trace}), testResults[2].response, 'generateVerifyMacDukpt keyblock encode, set 3, generate MAC');
+    t.same(payshield.encode(testData[3].request, $meta, {trace: context.trace}), testResults[3].response, 'generateVerifyMacDukpt keyblock encode, set 4, verify MAC');
 
     t.end();
 });

@@ -50,7 +50,7 @@ result
 
 Each command should be described in _messages.json_ in the following way:
 
-- __commandName__ (object) - name of the method which will be exposed in
+- **commandName** (object) - name of the method which will be exposed in
  _payshield_ namespace
   - _requestCode_ (string) - _Command Code_ for this command as defined in
    _Payshield Host Command Reference Manual_

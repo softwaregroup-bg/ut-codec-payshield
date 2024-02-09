@@ -35,73 +35,123 @@ module.exports = {
             }
         },
         generateKeyEncode: {
+            // variant LMK
             0: {
                 request: {
                     delimiter: '',
-                    delimiterLength: 0,
                     deriveKeyMode: '',
-                    deriveKeyModeLen: 0,
                     dukptMasterKey: '',
-                    dukptMasterKeyLen: 0,
                     dukptMasterKeyType: '',
-                    dukptMasterKeyTypeLen: 0,
                     keySchemeLmk: 'U',
                     keySchemeZmkTmk: '',
-                    keySchemeZmkTmkLength: '',
                     keyType: '002',
                     keyZmkTmk: '',
                     keyZmkTmkFlag: '',
-                    keyZmkTmkFlagLength: '',
-                    keyZmkTmkLength: '',
                     ksn: '',
-                    ksnLength: 0,
                     mode: '0',
-                    zkaMasterKeyTypeLength: 0,
                     zkaMasterKeyType: '',
-                    zkaMasterKeyLength: 0,
                     zkaMasterKey: '',
-                    zkaOptionLength: 0,
                     zkaOption: '',
-                    zkaRndiLength: 0,
                     zkaRndi: '',
-                    tr31BlockDataLen: 0,
-                    tr31BlockData: ''
+                    tr31BlockData: '',
+                    delimiterKeyBlock: '',
+                    keyUsage: '',
+                    algorithm: '',
+                    modeOfUse: '',
+                    keyVersionNumber: '',
+                    exportability: '',
+                    optionalBlocksCount: ''
                 },
                 response: '3030303041303030303255'
             },
+            // variant LMK
             1: {
                 request: {
                     delimiter: ';',
-                    delimiterLength: 1,
                     deriveKeyMode: '',
-                    deriveKeyModeLen: 0,
                     dukptMasterKey: '',
-                    dukptMasterKeyLen: 0,
                     dukptMasterKeyType: '',
-                    dukptMasterKeyTypeLen: 0,
                     keySchemeLmk: 'U',
                     keySchemeZmkTmk: 'X',
-                    keySchemeZmkTmkLength: 1,
                     keyType: '002',
                     keyZmkTmk: 'U99D8FC778055B63D3FD53CDA9EEEFB9E',
                     keyZmkTmkFlag: '0',
-                    keyZmkTmkFlagLength: 1,
-                    keyZmkTmkLength: 33,
                     ksn: '',
-                    ksnLength: 0,
                     mode: '1',
-                    zkaMasterKeyTypeLength: 0,
                     zkaMasterKeyType: '',
-                    zkaMasterKeyLength: 0,
                     zkaMasterKey: '',
-                    zkaOptionLength: 0,
                     zkaOption: '',
-                    zkaRndiLength: 0,
                     zkaRndi: '',
-                    tr31BlockDataLen: 0,
-                    tr31BlockData: ''
+                    tr31BlockData: '',
+                    delimiterKeyBlock: '',
+                    keyUsage: '',
+                    algorithm: '',
+                    modeOfUse: '',
+                    keyVersionNumber: '',
+                    exportability: '',
+                    optionalBlocksCount: ''
                 },
                 response: '30303030413031303032553B3055393944384643373738303535423633443346443533434441394545454642394558'
+            },
+            // keyblock LMK
+            2: {
+                request: {
+                    mode: '0',
+                    keyType: 'FFF',
+                    keySchemeLmk: 'S',
+                    delimiter: '',
+                    deriveKeyMode: '',
+                    dukptMasterKey: '',
+                    dukptMasterKeyType: '',
+                    keySchemeZmkTmk: '',
+                    keyZmkTmk: '',
+                    keyZmkTmkFlag: '',
+                    ksn: '',
+                    zkaMasterKeyType: '',
+                    zkaMasterKey: '',
+                    zkaOption: '',
+                    zkaRndi: '',
+                    tr31BlockData: '',
+                    lmkIdentifier: '01',
+                    delimiterKeyBlock: '#',
+                    keyUsage: 'K0',
+                    algorithm: 'T2',
+                    modeOfUse: 'B',
+                    keyVersionNumber: '00',
+                    exportability: 'E',
+                    optionalBlocksCount: '00'
+                },
+                response: '3030303041303046464653253031234B305432423030453030'
+            },
+            // keyblock LMK
+            3: {
+                request: {
+                    mode: '1',
+                    keyType: 'FFF',
+                    keySchemeLmk: 'S',
+                    delimiter: '',
+                    deriveKeyMode: '',
+                    dukptMasterKey: '',
+                    dukptMasterKeyType: '',
+                    keyZmkTmkFlag: '0',
+                    keyZmkTmk: 'S00072K0TB00E00017CECF0FB9210B3CC93B9FFB304963C39CFFF94B837D318E1A6F1F058',
+                    keySchemeZmkTmk: 'S',
+                    ksn: '',
+                    zkaMasterKeyType: '',
+                    zkaMasterKey: '',
+                    zkaOption: '',
+                    zkaRndi: '',
+                    tr31BlockData: '',
+                    lmkIdentifier: '01',
+                    delimiterKeyBlock: '#',
+                    keyUsage: 'K0',
+                    algorithm: 'T2',
+                    modeOfUse: 'B',
+                    keyVersionNumber: '00',
+                    exportability: 'E',
+                    optionalBlocksCount: '00'
+                },
+                response: '3030303041303146464653305330303037324B30544230304530303031374345434630464239323130423343433933423946464233303439363343333943464646393442383337443331384531413646314630353853253031234B305432423030453030'
             }
         },
         generateKeyDecode: {
@@ -120,10 +170,25 @@ module.exports = {
                 }
             },
             2: {
+                request: bufferize('30303939413130305330303037324b305442303045303030314642384134393532424645343231373941423844373941383139343344463146414436374346303135313137454538353238453739393030443441334538'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([83, 48, 48, 48, 55, 50, 75, 48, 84, 66, 48, 48, 69, 48, 48, 48, 49, 70, 66, 56, 65, 52, 57, 53, 50, 66, 70, 69, 52, 50, 49, 55, 57, 65, 66, 56, 68, 55, 57, 65, 56, 49, 57, 52, 51, 68, 70, 49, 70, 65, 68, 54, 55, 67, 70, 48, 49, 53, 49, 49, 55, 69, 69, 56, 53, 50, 56, 69, 55, 57, 57, 48, 48, 68, 52, 65, 51, 69, 56])
+
+                }
+            },
+            3: {
+                request: bufferize('30304040413130305330303037324b3054423030453030303135314643344431413631443538344241324131334535384634313544333143313643464331333030443632373231303941393532463238445330303037324b305442303045303046463532313436443744374531324446454645353742374342444337384639424344343438394538313033413532353637363035323934333734453941423136'),
+                response: {
+                    errorCode: '00',
+                    rest: bufferize([83, 48, 48, 48, 55, 50, 75, 48, 84, 66, 48, 48, 69, 48, 48, 48, 49, 53, 49, 70, 67, 52, 68, 49, 65, 54, 49, 68, 53, 56, 52, 66, 65, 50, 65, 49, 51, 69, 53, 56, 70, 52, 49, 53, 68, 51, 49, 67, 49, 54, 67, 70, 67, 49, 51, 48, 48, 68, 54, 50, 55, 50, 49, 48, 57, 65, 57, 53, 50, 70, 50, 56, 68, 83, 48, 48, 48, 55, 50, 75, 48, 84, 66, 48, 48, 69, 48, 48, 70, 70, 53, 50, 49, 52, 54, 68, 55, 68, 55, 69, 49, 50, 68, 70, 69, 70, 69, 53, 55, 66, 55, 67, 66, 68, 67, 55, 56, 70, 57, 66, 67, 68, 52, 52, 56, 57, 69, 56, 49, 48, 51, 65, 53, 50, 53, 54, 55, 54, 48, 53, 50, 57, 52, 51, 55, 52, 69, 57, 65, 66, 49, 54])
+                }
+            },
+            4: {
                 request: bufferize('3033383441313130'),
                 response: 'payshield.generateKey.10'
             },
-            3: {
+            5: {
                 request: bufferize('3033393241313135'),
                 response: 'payshield.generateKey.15'
             }
@@ -134,8 +199,10 @@ module.exports = {
                     numberOfComponents: 3,
                     keyType: '402',
                     keySchemeLmk: 'U',
-                    keyComponentsLength: 99,
-                    keyComponents: 'U78D68FB4966305485C74466DACDE4E65UA128A7F7102F48B8582065D7B411A558UE8DA2D69626452A0CB47C6C4C142F17B'
+                    keyComponents: 'U78D68FB4966305485C74466DACDE4E65UA128A7F7102F48B8582065D7B411A558UE8DA2D69626452A0CB47C6C4C142F17B',
+                    delimiterKeyBlock: '',
+                    keyVersionNumber: '',
+                    optionalBlocksCount: ''
                 },
                 response: '3030303641343334303255553738443638464234393636333035343835433734343636444143444534453635554131323841374637313032463438423835383230363544374234313141353538554538444132443639363236343532413043423437433643344331343246313742'
             },
@@ -144,39 +211,59 @@ module.exports = {
                     numberOfComponents: 2,
                     keyType: '402',
                     keySchemeLmk: 'U',
-                    keyComponentsLength: 66,
-                    keyComponents: 'U78D68FB4966305485C74466DACDE4E65UA128A7F7102F48B8582065D7B411A558'
+                    keyComponents: 'U78D68FB4966305485C74466DACDE4E65UA128A7F7102F48B8582065D7B411A558',
+                    delimiterKeyBlock: '',
+                    keyVersionNumber: '',
+                    optionalBlocksCount: ''
                 },
                 response: '3030303641343234303255553738443638464234393636333035343835433734343636444143444534453635554131323841374637313032463438423835383230363544374234313141353538'
+            },
+            2: {
+                request: {
+                    numberOfComponents: 2,
+                    keyType: 'FFF',
+                    keySchemeLmk: 'S',
+                    keyComponents: 'S0007252TBc1E0001C9ED3207A1A79BCA1CAB8C05FEC9429E2232067D1F9E908F15E9DCA7S0007252TBc2E000125276E9C8BC0FA0F70109274FAB9647EF89A189C019465182A345009',
+                    delimiterKeyBlock: '#',
+                    keyVersionNumber: '00',
+                    optionalBlocksCount: '00'
+                },
+                response: '303030364134324646465353303030373235325442633145303030314339454433323037413141373942434131434142384330354645433934323945323233323036374431463945393038463135453944434137533030303732353254426332453030303132353237364539433842433046413046373031303932373446414239363437454638394131383943303139343635313832413334353030392330303030'
             }
         },
         formKeyFromComponentsDecode: {
             0: {
-                request: bufferize('30303032383141353030554332424434433942453341423339353745323346313135344438394244353332443035333837'),
+                request: bufferize('3032383141353030554332424434433942453341423339353745323346313135344438394244353332443035333837'),
                 response: {
-                    errorCode: '00',
                     key: 'UC2BD4C9BE3AB3957E23F1154D89BD532',
                     keyCheckValue: 'D05387'
                 }
             },
             1: {
-                request: bufferize('30303031323341353030554537464436304244453632363042464138423736423741374433313234433835304338304631'),
+                request: bufferize('3031323341353030554537464436304244453632363042464138423736423741374433313234433835304338304631'),
                 response: {
-                    errorCode: '00',
                     key: 'UE7FD60BDE6260BFA8B76B7A7D3124C85',
                     keyCheckValue: '0C80F1'
                 }
             },
             2: {
-                request: bufferize('30303032393141353130'),
+                request: bufferize('303030304135303053303030373235325442303045303030314434423441323635433532373346333533373239463135334643314332414441323344463244393443373641354546333034363643424142324145303832'),
+                response: {
+                    key: 'S0007252TB00E0001D4B4A265C5273F353729F153FC1C2ADA23DF2D94C76A5EF30466CBAB',
+                    keyCheckValue: '2AE082'
+                }
+            },
+
+            3: {
+                request: bufferize('3032393141353130'),
                 response: 'payshield.formKeyFromComponents.10'
             },
-            3: {
-                request: bufferize('30303037313641353033'),
+            4: {
+                request: bufferize('3037313641353033'),
                 response: 'payshield.formKeyFromComponents.03'
             },
-            4: {
-                request: bufferize('30303037323941353135'),
+            5: {
+                request: bufferize('3037323941353135'),
                 response: 'payshield.formKeyFromComponents.15'
             }
         },
@@ -186,8 +273,7 @@ module.exports = {
                     keyType: '002',
                     zmk: 'UE6565E2D55B9463120398E7729DA524E',
                     key: 'XA921158D2F2571942EA0B770637F005C',
-                    keyScheme: 'U',
-                    keyBlockParams: ''
+                    keyScheme: 'U'
                 },
                 response: '30303032413630303255453635363545324435354239343633313230333938453737323944413532344558413932313135384432463235373139343245413042373730363337463030354355'
             },
@@ -196,44 +282,60 @@ module.exports = {
                     keyType: '109',
                     zmk: 'UE6565E2D55B9463120398E7729DA524E',
                     key: 'X7292BCCA0CD4563354F627B0E8E852B2',
-                    keyScheme: 'U',
-                    keyBlockParams: ''
+                    keyScheme: 'U'
                 },
                 response: '30303032413631303955453635363545324435354239343633313230333938453737323944413532344558373239324243434130434434353633333534463632374230453845383532423255'
+            },
+            2: {
+                request: {
+                    keyType: 'FFF',
+                    zmk: 'S00072K0TB00E0001DB045F29C053EEFF7B9425B3A88C7258EB7EA7E40E2C47878647072A',
+                    key: 'S00072P0TB00N00FFE1D89671C973C7F0DAF91CB2EBF379493C08975679001172C89A0AF8',
+                    keyScheme: 'S',
+                    lmkIdentifier: '01'
+                },
+                response: '3030303241364646465330303037324B3054423030453030303144423034354632394330353345454646374239343235423341383843373235384542374541374534304532433437383738363437303732415330303037325030544230304E30304646453144383936373143393733433746304441463931434232454246333739343933433038393735363739303031313732433839413041463853253031'
             }
         },
         importKeyDecode: {
             0: {
                 request: bufferize('3039343641373030554331334539453932444241303546324446323337394238323143353736364133384646454431'),
                 response: {
-                    errorCode: '00',
-                    rest: bufferize([85, 67, 49, 51, 69, 57, 69, 57, 50, 68, 66, 65, 48, 53, 70, 50, 68, 70, 50, 51, 55, 57, 66, 56, 50, 49, 67, 53, 55, 54, 54, 65, 51, 56, 70, 70, 69, 68, 49])
+                    key: 'UC13E9E92DBA05F2DF2379B821C5766A3',
+                    keyCheckValue: '8FFED1'
                 }
             },
             1: {
                 request: bufferize('3039353941373030553737333338463734413139453342423339303632413541343739343733464338364145374344'),
                 response: {
-                    errorCode: '00',
-                    rest: bufferize([85, 55, 55, 51, 51, 56, 70, 55, 52, 65, 49, 57, 69, 51, 66, 66, 51, 57, 48, 54, 50, 65, 53, 65, 52, 55, 57, 52, 55, 51, 70, 67, 56, 54, 65, 69, 55, 67, 68])
+                    key: 'U77338F74A19E3BB39062A5A479473FC8',
+                    keyCheckValue: '6AE7CD'
                 }
             },
             2: {
+                request: bufferize('30303030413730305330303037325030544230304e303030314541343231363138423334463546413141373746374346363438303131314239323146303239373344464335413036463334354233344642344645394644'),
+                response: {
+                    key: 'S00072P0TB00N0001EA421618B34F5FA1A77F7CF6480111B921F02973DFC5A06F345B34FB',
+                    keyCheckValue: '4FE9FD'
+                }
+            },
+            3: {
                 request: bufferize('3039383041373130'),
                 response: 'payshield.importKey.10'
             },
-            3: {
+            4: {
                 request: bufferize('3039393841373236'),
                 response: 'payshield.importKey.26'
             },
-            4: {
+            5: {
                 request: bufferize('3130303841373135'),
                 response: 'payshield.importKey.15'
             },
-            5: {
+            6: {
                 request: bufferize('3130303841373031'),
                 response: 'payshield.unableMatchingPattern'
             },
-            6: {
+            7: {
                 request: bufferize('313030384137'),
                 response: 'payshield.unableMatchingResponseECode'
             }
@@ -245,7 +347,8 @@ module.exports = {
                     zmk: 'U773F7C1902633996DCCBE4EC5F2986AE',
                     key: 'U7E717639AE951BBD85C280216DD3289E',
                     keyScheme: 'T',
-                    keyBlockParams: ''
+                    delimiterKeyBlock: '',
+                    exportability: ''
                 },
                 response: '30303034413831303955373733463743313930323633333939364443434245344543354632393836414555374537313736333941453935314242443835433238303231364444333238394554'
             },
@@ -255,39 +358,60 @@ module.exports = {
                     zmk: 'U773F7C1902633996DCCBE4EC5F2986AD',
                     key: 'U7E717639AE951BBD85C280216DD3289F',
                     keyScheme: 'X',
-                    keyBlockParams: ''
+                    delimiterKeyBlock: '',
+                    exportability: ''
                 },
                 response: '30303034413834303255373733463743313930323633333939364443434245344543354632393836414455374537313736333941453935314242443835433238303231364444333238394658'
+            },
+            2: {
+                request: {
+                    keyType: 'FFF',
+                    zmk: 'S00072K0TB00E0001DB045F29C053EEFF7B9425B3A88C7258EB7EA7E40E2C47878647072A',
+                    key: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+                    keyScheme: 'S',
+                    lmkIdentifier: '01',
+                    delimiterKeyBlock: '&',
+                    exportability: 'N'
+                },
+                response: '3030303441384646465330303037324B3054423030453030303144423034354632394330353345454646374239343235423341383843373235384542374541374534304532433437383738363437303732415330303037325030544230304530303031454134323136313842333446354641314137374637434636343830313131423937434630464145374244373744353839454339323145463953253031264E'
             }
         },
         exportKeyDecode: {
             0: {
                 request: bufferize('3130333441393030584139323131353844324632353731393432454130423737303633374630303543364145374344'),
                 response: {
-                    errorCode: '00',
-                    rest: bufferize([88, 65, 57, 50, 49, 49, 53, 56, 68, 50, 70, 50, 53, 55, 49, 57, 52, 50, 69, 65, 48, 66, 55, 55, 48, 54, 51, 55, 70, 48, 48, 53, 67, 54, 65, 69, 55, 67, 68])
+                    key: 'XA921158D2F2571942EA0B770637F005C',
+                    keyCheckValue: '6AE7CD'
                 }
             },
             1: {
                 request: bufferize('3130343941393030583732393242434341304344343536333335344636323742304538453835324232384646454431'),
                 response: {
-                    errorCode: '00',
-                    rest: bufferize([88, 55, 50, 57, 50, 66, 67, 67, 65, 48, 67, 68, 52, 53, 54, 51, 51, 53, 52, 70, 54, 50, 55, 66, 48, 69, 56, 69, 56, 53, 50, 66, 50, 56, 70, 70, 69, 68, 49])
+                    key: 'X7292BCCA0CD4563354F627B0E8E852B2',
+                    keyCheckValue: '8FFED1'
                 }
             },
             2: {
+                request: bufferize('30303030413930305330303037325030544230304e303046464531443839363731433937334337463044414639314342324542463337393439443831313030343239354346363642364146394346364138344645394644'),
+                response: {
+                    key: 'S00072P0TB00N00FFE1D89671C973C7F0DAF91CB2EBF37949D811004295CF66B6AF9CF6A8',
+                    keyCheckValue: '4FE9FD'
+                }
+            },
+
+            3: {
                 request: bufferize('3130373941393130'),
                 response: 'payshield.exportKey.10'
             },
-            3: {
+            4: {
                 request: bufferize('3130393141393131'),
                 response: 'payshield.exportKey.11'
             },
-            4: {
+            5: {
                 request: bufferize('3131353141393236'),
                 response: 'payshield.exportKey.26'
             },
-            5: {
+            6: {
                 request: bufferize('3131353741393135'),
                 response: 'payshield.exportKey.15'
             }
@@ -298,7 +422,6 @@ module.exports = {
                     keyType: '002',
                     key: 'U3027C895181D912A91D7DF0ED78AC6FB',
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
-                    pvkLength: 33,
                     pinBlock: 'A69F9E7646904B68',
                     pinBlockFormat: '01',
                     maximumPinLength: '12',
@@ -314,7 +437,6 @@ module.exports = {
                     keyType: '002',
                     key: 'U3027C895181D912A91D7DF0ED78AC6FB',
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
-                    pvkLength: 33,
                     pinBlock: 'A69F9E7646904B68',
                     pinBlockFormat: '01',
                     maximumPinLength: '12',
@@ -324,6 +446,22 @@ module.exports = {
                     pinValidationData: '5022654000N2'
                 },
                 response: '30303039424B303032553330323743383935313831443931324139314437444630454437384143364642553830414533463844363342303846394331333635324535343136443736453844413639463945373634363930344236383031303635343030303839303030303935343332313039383736353433323130353032323635343030304E32'
+            },
+            2: {
+                request: {
+                    keyType: 'FFF',
+                    key: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+                    pvk: 'S00072V1TN00E00010AE0AD2B1990AB407FAD15059E287760A05DF4DA2391EAB138877E22',
+                    pinBlock: '967CDB6E3D492E28',
+                    pinBlockFormat: '01',
+                    maximumPinLength: '12',
+                    checkLength: '06',
+                    pan: '850103093936',
+                    decimalisationTable: '709F26B22464E96A',
+                    pinValidationData: '50103093936N',
+                    lmkIdentifier: '01'
+                },
+                response: '30303039424B464646533030303732503054423030453030303145413432313631384233344635464131413737463743463634383031313142393743463046414537424437374435383945433932314546395330303037325631544E30304530303031304145304144324231393930414234303746414431353035394532383737363041303544463444413233393145414231333838373745323239363743444236453344343932453238303130363835303130333039333933363730394632364232323436344539364135303130333039333933364E253031'
             }
         },
         generateOffsetIbmDecode: {
@@ -362,7 +500,6 @@ module.exports = {
             0: {
                 request: {
                     account: '540008900009',
-                    pinLength: 7,
                     pin: '0567899'
                 },
                 response: '30303238424735343030303839303030303930353637383939'
@@ -384,38 +521,45 @@ module.exports = {
         translateKeyLmkLmkEncode: {
             0: {
                 request: {
-                    keyTypeCode: '00',
-                    keyLengthFlag: 1,
-                    key: 'UB7A1DC09C990EC0F6EC5AD811FD1E4E0',
-                    delimiter1Length: 0,
-                    delimiter1: '',
-                    keyTypeLength: 0,
-                    keyType: '',
-                    delimiter2Length: 1,
-                    delimiter2: ';',
-                    reserved1Length: 1,
-                    reserved1: '0',
-                    keySchemeLmkLength: 1,
-                    keySchemeLmk: 'U',
-                    reserved2Length: 1,
-                    reserved2: '0'
+                    keyTypeCode: 'FF',
+                    keyLengthFlag: '1',
+                    key: 'U7148EB5D14DF3F6ED393B227C2D6B35E',
+                    keyType: '000',
+                    keySchemeLmk: 'U'
                 },
-                response: '3030323542573030315542374131444330394339393045433046364543354144383131464431453445303B305530'
+                response: '3030323542574646315537313438454235443134444633463645443339334232323743324436423335453B3030303B305530213131'
+            },
+            1: {
+                request: {
+                    keyTypeCode: 'FF',
+                    keyLengthFlag: 'F',
+                    key: 'S00072M1TN00E0001FFE01E95CF21BDD0D74B6BEB70E3D90842C137DCA39C1B162C6238D5',
+                    keyType: 'FFF',
+                    keySchemeLmk: 'S'
+                },
+                response: '3030323542574646465330303037324D31544E3030453030303146464530314539354346323142444430443734423642454237304533443930383432433133374443413339433142313632433632333844353B4646463B305330213131'
             }
         },
         translateKeyLmkLmkDecode: {
             0: {
                 request: bufferize('3030303142583030553530323634443130334445323741353437373039343441464541413943454546'),
                 response: {
-                    errorCode: '00',
-                    keyTranslated: 'U50264D103DE27A54770944AFEAA9CEEF'
+                    key: 'U50264D103DE27A54770944AFEA',
+                    keyCheckValue: 'A9CEEF'
                 }
             },
             1: {
+                request: bufferize('30303030425830305330303037324d31544e303045303030314646453031453935434632314244443044373442364245423730453344393038393131304135304536313133433731424638463830394635463830384332'),
+                response: {
+                    key: 'S00072M1TN00E0001FFE01E95CF21BDD0D74B6BEB70E3D9089110A50E6113C71BF8F809F5',
+                    keyCheckValue: 'F808C2'
+                }
+            },
+            2: {
                 request: bufferize('3030303142583333'),
                 response: 'payshield.translateKeyLmkLmk.33'
             },
-            2: {
+            3: {
                 request: bufferize('3030303042583130'),
                 response: 'payshield.translateKeyLmkLmk.10'
             }
@@ -444,25 +588,15 @@ module.exports = {
                     keyTypeCode: 'FF',
                     keyLengthFlag: '1',
                     key: 'U77338F74A19E3BB39062A5A479473FC8',
-                    keyLength: 33,
-                    delimiter1: ';',
-                    delimiter1Length: 1,
+                    delimiterKeyType: ';',
                     keyType: '002',
-                    keyTypeLength: 3,
-                    delimiter2: ';',
-                    delimiter2Length: 1,
+                    delimiterKcvType: ';',
                     reserved: '00',
-                    reservedLength: 2,
                     kcvType: '1',
-                    kcvTypeLength: 1,
                     hashId: '',
-                    hashIdLength: 0,
-                    hmacKeyLengthBytes: 0,
-                    hmacKeyLengthBytesLength: 0,
+                    hmacKeyLengthBytes: '',
                     hmacKey: '',
-                    hmacKeyLength: 0,
-                    delimiter3: '',
-                    delimiter3Length: 0
+                    delimiterHmac: ''
                 },
                 response: '3030313142554646315537373333384637344131394533424233393036324135413437393437334643383B3030323B303031'
             },
@@ -471,25 +605,15 @@ module.exports = {
                     keyTypeCode: 'FF',
                     keyLengthFlag: '1',
                     key: 'UC13E9E92DBA05F2DF2379B821C5766A3',
-                    keyLength: 33,
-                    delimiter1: ';',
-                    delimiter1Length: 1,
+                    delimiterKeyType: ';',
                     keyType: '109',
-                    keyTypeLength: 3,
-                    delimiter2: ';',
-                    delimiter2Length: 1,
+                    delimiterKcvType: ';',
                     reserved: '00',
-                    reservedLength: 2,
                     kcvType: '0',
-                    kcvTypeLength: 1,
                     hashId: '',
-                    hashIdLength: 0,
-                    hmacKeyLengthBytes: 0,
-                    hmacKeyLengthBytesLength: 0,
+                    hmacKeyLengthBytes: '',
                     hmacKey: '',
-                    hmacKeyLength: 0,
-                    delimiter3: '',
-                    delimiter3Length: 0
+                    delimiterHmac: ''
                 },
                 response: '3030313142554646315543313345394539324442413035463244463233373942383231433537363641333B3130393B303030'
             },
@@ -498,57 +622,69 @@ module.exports = {
                     keyTypeCode: '02',
                     keyLengthFlag: '1',
                     key: 'U77338F74A19E3BB39062A5A479473FC8',
-                    keyLength: 33,
-                    delimiter1: '',
-                    delimiter1Length: 0,
+                    delimiterKeyType: '',
                     keyType: '',
-                    keyTypeLength: 0,
-                    delimiter2: ';',
-                    delimiter2Length: 1,
+                    delimiterKcvType: ';',
                     reserved: '00',
-                    reservedLength: 2,
                     kcvType: '1',
-                    kcvTypeLength: 1,
                     hashId: '',
-                    hashIdLength: 0,
-                    hmacKeyLengthBytes: 0,
-                    hmacKeyLengthBytesLength: 0,
+                    hmacKeyLengthBytes: '',
                     hmacKey: '',
-                    hmacKeyLength: 0,
-                    delimiter3: '',
-                    delimiter3Length: 0
+                    delimiterHmac: ''
                 },
                 response: '3030313142553032315537373333384637344131394533424233393036324135413437393437334643383B303031'
+            },
+            3: {
+                request: {
+                    keyTypeCode: 'FF',
+                    keyLengthFlag: 'F',
+                    key: 'S00072K0TB00E0001DB045F29C053EEFF7B9425B3A88C7258EB7EA7E40E2C47878647072A',
+                    delimiterKeyType: ';',
+                    keyType: 'FFF',
+                    delimiterKcvType: ';',
+                    reserved: '00',
+                    kcvType: '1',
+                    hashId: '',
+                    hmacKeyLengthBytes: '',
+                    hmacKey: '',
+                    delimiterHmac: ''
+                },
+                response: '3030313142554646465330303037324B3054423030453030303144423034354632394330353345454646374239343235423341383843373235384542374541374534304532433437383738363437303732413B4646463B303031'
             }
         },
         generateKeyCheckValueDecode: {
             0: {
                 request: bufferize('3030313342563030384646454431'),
                 response: {
-                    errorCode: '00',
-                    keyCheckValue: bufferize([56, 70, 70, 69, 68, 49])
+                    keyCheckValue: '8FFED1'
                 }
             },
             1: {
                 request: bufferize('303031304256303036414537434433444642364637384630'),
                 response: {
-                    errorCode: '00',
-                    keyCheckValue: bufferize([54, 65, 69, 55, 67, 68, 51, 68, 70, 66, 54, 70, 55, 56, 70, 48])
+                    keyCheckValue: '6AE7CD3DFB6F78F0'
                 }
             },
             2: {
+                request: bufferize('3030303042563030323335364632'),
+                response: {
+                    keyCheckValue: '2356F2'
+                }
+            },
+
+            3: {
                 request: bufferize('3031303542563130'),
                 response: 'payshield.generateKeyCheckValue.10'
             },
-            3: {
+            4: {
                 request: bufferize('3030363342563238'),
                 response: 'payshield.generateKeyCheckValue.28'
             },
-            4: {
+            5: {
                 request: bufferize('3030373042563035'),
                 response: 'payshield.generateKeyCheckValue.05'
             },
-            5: {
+            6: {
                 request: bufferize('3030373542563135'),
                 response: 'payshield.generateKeyCheckValue.15'
             }
@@ -624,6 +760,16 @@ module.exports = {
                     pan: '540008900009'
                 },
                 response: '303031314A45553539324133364145303546384531383141423339333942314432394244384431383743383332463731373945394343453031353430303038393030303039'
+            },
+            1: {
+                request: {
+                    zpk: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+                    pinBlock: 'AD72F973446E84E7',
+                    pinBlockFormat: '01',
+                    pan: '850103093936',
+                    lmkIdentifier: '01'
+                },
+                response: '303031314A4553303030373250305442303045303030314541343231363138423334463546413141373746374346363438303131314239374346304641453742443737443538394543393231454639414437324639373334343645383445373031383530313033303933393336253031'
             }
         },
         translatePinZpkLmkDecode: {
@@ -678,11 +824,20 @@ module.exports = {
                     pinBlockFormat: '01',
                     pan: '540008900009',
                     delimiter: '',
-                    delimiterLength: 0,
-                    pin: '5049248',
-                    pinLength: 7
+                    pin: '5049248'
                 },
                 response: '303031324A47553539324133364145303546384531383141423339333942314432394244384431303135343030303839303030303935303439323438'
+            },
+            1: {
+                request: {
+                    zpk: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+                    pinBlockFormat: '01',
+                    pan: '850103093936',
+                    delimiter: '',
+                    pin: '0258743',
+                    lmkIdentifier: '01'
+                },
+                response: '303031324A4753303030373250305442303045303030314541343231363138423334463546413141373746374346363438303131314239374346304641453742443737443538394543393231454639303138353031303330393339333630323538373433253031'
             }
         },
         translatePinLmkZpkDecode: {
@@ -700,10 +855,6 @@ module.exports = {
             2: {
                 request: bufferize('303032304A483233'),
                 response: 'payshield.translatePinLmkZpk.23'
-            },
-            3: {
-                request: {},
-                response: {}
             }
         },
         translatePinZpkZpkEncode: {
@@ -730,6 +881,19 @@ module.exports = {
                     pan: '239010000012'
                 },
                 response: '30303131434355424232323441304437303839394537443231364134444444413631354330373855454534323445363038453943463030373145323339463945313530333243383131324538373043444338453036374542324530313031323339303130303030303132'
+            },
+            2: {
+                request: {
+                    sourceZpk: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+                    destinationZpk: 'S00072P0TB00E00010D869FE84C1F77AE64E0019151533363D4CCE7E1C3F89F3D86115EE8',
+                    maximumPinLength: '12',
+                    sourcePinBlock: 'AD72F973446E84E7',
+                    sourcePinBlockFormat: '01',
+                    destinationPinBlockFormat: '01',
+                    pan: '850103093936',
+                    lmkIdentifier: '01'
+                },
+                response: '303031314343533030303732503054423030453030303145413432313631384233344635464131413737463743463634383031313142393743463046414537424437374435383945433932314546395330303037325030544230304530303031304438363946453834433146373741453634453030313931353135333333363344344343453745314333463839463344383631313545453831324144373246393733343436453834453730313031383530313033303933393336253031'
             }
         },
         translatePinZpkZpkDecode: {
@@ -820,7 +984,6 @@ module.exports = {
             0: {
                 request: {
                     cvk: 'UE16D4CD9EAB610034BDE2A50935BCFBE',
-                    panLength: 18,
                     pan: '502265400089000092',
                     expirationDate: '2010',
                     serviceCode: '620'
@@ -830,34 +993,46 @@ module.exports = {
             1: {
                 request: {
                     cvk: 'UE16D4CD9EAB610034BDE2A50935BCFBE',
-                    panLength: 12,
                     pan: '502265000092',
                     expirationDate: '2010',
                     serviceCode: '999'
                 },
                 response: '3030313143575545313644344344394541423631303033344244453241353039333542434642453530323236353030303039323B32303130393939'
+            },
+            2: {
+                request: {
+                    cvk: 'S00072C0TN00E0001A417975993E2331918759DD1656AC94306BE01C19FDE29E83A93AB42',
+                    pan: '502265400089000092',
+                    expirationDate: '2010',
+                    serviceCode: '620'
+                },
+                response: '3030313143575330303037324330544E3030453030303141343137393735393933453233333139313837353944443136353641433934333036424530314331394644453239453833413933414234323530323236353430303038393030303039323B32303130363230'
             }
         },
         generateCvvDecode: {
             0: {
                 request: bufferize('3030343643583030373035'),
                 response: {
-                    errorCode: '00',
                     cvv: '705'
                 }
             },
             1: {
                 request: bufferize('3031373143583030343633'),
                 response: {
-                    errorCode: '00',
                     cvv: '463'
                 }
             },
             2: {
+                request: bufferize('3030303043583030313831'),
+                response: {
+                    cvv: '181'
+                }
+            },
+            3: {
                 request: bufferize('3030303243583130'),
                 response: 'payshield.generateCvv.10'
             },
-            3: {
+            4: {
                 request: bufferize('3030313343583135'),
                 response: 'payshield.generateCvv.15'
             }
@@ -866,7 +1041,6 @@ module.exports = {
             0: {
                 request: {
                     cvk: 'UE16D4CD9EAB610034BDE2A50935BCFBE',
-                    panLength: 18,
                     pan: '502265400089000092',
                     expirationDate: '2010',
                     cvv: '463',
@@ -878,12 +1052,21 @@ module.exports = {
                 request: {
                     cvk: 'UE16D4CD9EAB610034BDE2A50935BCFBE',
                     cvv: '705',
-                    panLength: 12,
                     pan: '502265000092',
                     expirationDate: '2010',
                     serviceCode: '999'
                 },
                 response: '3030313143595545313644344344394541423631303033344244453241353039333542434642453730353530323236353030303039323B32303130393939'
+            },
+            2: {
+                request: {
+                    cvk: 'S00072C0TN00E0001A417975993E2331918759DD1656AC94306BE01C19FDE29E83A93AB42',
+                    cvv: '181',
+                    pan: '502265400089000092',
+                    expirationDate: '2010',
+                    serviceCode: '620'
+                },
+                response: '3030313143595330303037324330544E3030453030303141343137393735393933453233333139313837353944443136353641433934333036424530314331394644453239453833413933414234323138313530323236353430303038393030303039323B32303130363230'
             }
         },
         verifyCvvDecode: {
@@ -916,7 +1099,6 @@ module.exports = {
             0: {
                 request: {
                     tpk: 'U3027C895181D912A91D7DF0ED78AC6FB',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     maximumPinLength: '12',
                     pinBlock: 'A69F9E7646904B68',
@@ -932,7 +1114,6 @@ module.exports = {
             1: {
                 request: {
                     tpk: 'U3027C895181D912A91D7DF0ED78AC6FB',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     maximumPinLength: '12',
                     pinBlock: 'A69F9E7646904B68',
@@ -982,11 +1163,9 @@ module.exports = {
                     account: '654000890009',
                     checkLength: '6',
                     decimalisationTable: '0123456789012345',
-                    encryptedPinLength: 8,
                     pin: '73638636',
                     pinValidationData: '5022654000N2',
-                    pvk: 'U77338F74A19E3BB39062A5A479473FC8',
-                    pvkLength: 33
+                    pvk: 'U77338F74A19E3BB39062A5A479473FC8'
                 },
                 response: '3030313144455537373333384637344131394533424233393036324135413437393437334643383733363338363336303636353430303038393030303930313233343536373839303132333435353032323635343030304E32'
             },
@@ -995,13 +1174,23 @@ module.exports = {
                     account: '502265000092',
                     checkLength: '4',
                     decimalisationTable: '6543210987654321',
-                    encryptedPinLength: 8,
                     pin: '58652088',
                     pinValidationData: '5022650000N2',
-                    pvk: 'U77338F74A19E3BB39062A5A479473FC8',
-                    pvkLength: 33
+                    pvk: 'U77338F74A19E3BB39062A5A479473FC8'
                 },
                 response: '3030313144455537373333384637344131394533424233393036324135413437393437334643383538363532303838303435303232363530303030393236353433323130393837363534333231353032323635303030304E32'
+            },
+            2: {
+                request: {
+                    pvk: 'S00072V1TN00E00010AE0AD2B1990AB407FAD15059E287760A05DF4DA2391EAB138877E22',
+                    pin: '0258743',
+                    checkLength: '06',
+                    account: '850103093936',
+                    decimalisationTable: '709F26B22464E96A',
+                    pinValidationData: '50103093936N',
+                    lmkIdentifier: '01'
+                },
+                response: '3030313144455330303037325631544E3030453030303130414530414432423139393041423430374641443135303539453238373736304130354446344441323339314541423133383837374532323032353837343330363835303130333039333933363730394632364232323436344539364135303130333039333933364E253031'
             }
         },
         generateOffsetIbmLmkDecode: {
@@ -1035,9 +1224,7 @@ module.exports = {
         generatePvvLmkEncode: {
             0: {
                 request: {
-                    pvkLength: 33,
                     pvk: 'U77338F74A19E3BB39062A5A479473FC8',
-                    encryptedPinLength: 8,
                     pin: '73638636',
                     account: '654000890009',
                     pvki: '1'
@@ -1046,14 +1233,22 @@ module.exports = {
             },
             1: {
                 request: {
-                    pvkLength: 33,
                     pvk: 'U77338F74A19E3BB39062A5A479473FC8',
-                    encryptedPinLength: 8,
                     pin: '58652088',
                     account: '502265000092',
                     pvki: '4'
                 },
                 response: '303030324447553737333338463734413139453342423339303632413541343739343733464338353836353230383835303232363530303030393234'
+            },
+            2: {
+                request: {
+                    pvk: 'S00072V2TN00E0001E80A2926443C3AF11BF0317C669FA0EA0E100ABDF92BF7A3AF232D4C',
+                    pin: '0258743',
+                    account: '850103093936',
+                    pvki: '1',
+                    lmkIdentifier: '01'
+                },
+                response: '3030303244475330303037325632544E3030453030303145383041323932363434334333414631314246303331374336363946413045413045313030414244463932424637413341463233324434433032353837343338353031303330393339333631253031'
             }
         },
         generatePvvLmkDecode: {
@@ -1084,7 +1279,6 @@ module.exports = {
             0: {
                 request: {
                     pvk: 'U77338F74A19E3BB39062A5A479473FC8',
-                    pvkLength: 33,
                     offset: '000000ffffff',
                     checkLength: '6',
                     account: '654000890009',
@@ -1096,7 +1290,6 @@ module.exports = {
             1: {
                 request: {
                     pvk: 'U77338F74A19E3BB39062A5A479473FC8',
-                    pvkLength: 33,
                     offset: '0000ffffffff',
                     checkLength: '4',
                     account: '502265000092',
@@ -1104,21 +1297,31 @@ module.exports = {
                     pinValidationData: '5022650000N2'
                 },
                 response: '303031314545553737333338463734413139453342423339303632413541343739343733464338303030304646464646464646303435303232363530303030393236353433323130393837363534333231353032323635303030304E32'
+            },
+            2: {
+                request: {
+                    pvk: 'S00072V1TN00E00010AE0AD2B1990AB407FAD15059E287760A05DF4DA2391EAB138877E22',
+                    offset: '309783FFFFFF',
+                    checkLength: '06',
+                    account: '850103093936',
+                    decimalisationTable: '709F26B22464E96A',
+                    pinValidationData: '50103093936N',
+                    lmkIdentifier: '01'
+                },
+                response: '3030313145455330303037325631544E30304530303031304145304144324231393930414234303746414431353035394532383737363041303544463444413233393145414231333838373745323233303937383346464646464630363835303130333039333933363730394632364232323436344539364135303130333039333933364E253031'
             }
         },
         derivePinIbmDecode: {
             0: {
                 request: bufferize('30303531454630323733363338363336'),
                 response: {
-                    errorCode: '02',
-                    pin: bufferize([55, 51, 54, 51, 56, 54, 51, 54])
+                    pin: '73638636'
                 }
             },
             1: {
                 request: bufferize('30303838454630323538363532303838'),
                 response: {
-                    errorCode: '02',
-                    pin: bufferize([53, 56, 54, 53, 50, 48, 56, 56])
+                    pin: '58652088'
                 }
             },
             2: {
@@ -1156,15 +1359,13 @@ module.exports = {
             0: {
                 request: bufferize('30353938474E303068EBB852B948D5A06F1F309580D3EBD85C5F8697B4B42C5656584A37A2DDB96C'),
                 response: {
-                    errorCode: '00',
-                    hash: bufferize([104, 235, 184, 82, 185, 72, 213, 160, 111, 31, 48, 149, 128, 211, 235, 216, 92, 95, 134, 151, 180, 180, 44, 86, 86, 88, 74, 55, 162, 221, 185, 108])
+                    hash: '68ebb852b948d5a06f1f309580d3ebd85c5f8697b4b42c5656584a37a2ddb96c'
                 }
             },
             1: {
                 request: bufferize('30303030474E30303D22CA807AD75C9FF3CA07C4E6C396B7D99F7206'),
                 response: {
-                    errorCode: '00',
-                    hash: bufferize([61, 34, 202, 128, 122, 215, 92, 159, 243, 202, 7, 196, 230, 195, 150, 183, 217, 159, 114, 6])
+                    hash: '3d22ca807ad75c9ff3ca07c4e6c396b7d99f7206'
                 }
             },
             2: {
@@ -1178,23 +1379,19 @@ module.exports = {
                     modeFlag: 0,
                     schemeId: 0,
                     mkac: 'U562B7C198A58D28851F15517CDABA60E',
-                    mksmiLength: 0,
                     mksmi: '',
                     panSeqNo: '7804020000000000',
                     atc: '0018',
                     unpredictableNumber: '84F01F9D',
-                    transactionDataLengthLength: 2,
                     transactionDataLengthDec: 40,
                     transactionDataLengthHex: '28',
                     transactionData: '0000000000000000000000000288800004800002881712200184F01F9D1402030018000018000000',
-                    delimiterLength: 1,
                     delimiter: ';',
                     arqc: '0A994C22203060C4',
                     arcLength: 0,
                     arc: '',
                     discretionaryDataMacLength: 0,
                     discretionaryDataMac: '',
-                    discretionaryDataBytesLength: 0,
                     discretionaryDataBytes: '',
                     discretionaryDataLength: 0,
                     discretionaryData: ''
@@ -1206,23 +1403,19 @@ module.exports = {
                     modeFlag: 2,
                     schemeId: 0,
                     mkac: 'U562B7C198A58D28851F15517CDABA60E',
-                    mksmiLength: 0,
                     mksmi: '',
                     panSeqNo: '7804020000000000',
                     atc: '0018',
                     unpredictableNumber: '84F01F9D',
-                    transactionDataLengthLength: 0,
                     transactionDataLengthDec: '',
                     transactionDataLengthHex: '',
                     transactionData: '',
-                    delimiterLength: 0,
                     delimiter: '',
                     arqc: '0A994C22203060C4',
                     arcLength: 2,
                     arc: '',
                     discretionaryDataMacLength: 0,
                     discretionaryDataMac: '',
-                    discretionaryDataBytesLength: 0,
                     discretionaryDataBytes: '',
                     discretionaryDataLength: 0,
                     discretionaryData: ''
@@ -1234,23 +1427,19 @@ module.exports = {
                     modeFlag: 3,
                     schemeId: 0,
                     mkac: 'U562B7C198A58D28851F15517CDABA60E',
-                    mksmiLength: 33,
                     mksmi: 'U0A955B42C931A7FD3F2B12B1595CB3FB',
                     panSeqNo: '7804020000000000',
                     atc: '0018',
                     unpredictableNumber: '84F01F9D',
-                    transactionDataLengthLength: 2,
                     transactionDataLengthDec: 40,
                     transactionDataLengthHex: '28',
                     transactionData: '0000000000000000000000000288800004800002881712200184F01F9D1402030018000018000000',
-                    delimiterLength: 1,
                     delimiter: ';',
                     arqc: '0A994C22203060C4',
                     arcLength: 0,
                     arc: '',
                     discretionaryDataMacLength: 4,
                     discretionaryDataMac: '63EB7F42',
-                    discretionaryDataBytesLength: 2,
                     discretionaryDataBytes: '08',
                     discretionaryDataLength: 8,
                     discretionaryData: '4E6F772069732074'
@@ -1262,23 +1451,19 @@ module.exports = {
                     modeFlag: 4,
                     schemeId: 0,
                     mkac: 'U562B7C198A58D28851F15517CDABA60E',
-                    mksmiLength: 33,
                     mksmi: 'U0A955B42C931A7FD3F2B12B1595CB3FB',
                     panSeqNo: '7804020000000000',
                     atc: '0018',
                     unpredictableNumber: '84F01F9D',
-                    transactionDataLengthLength: 2,
                     transactionDataLengthDec: 40,
                     transactionDataLengthHex: '28',
                     transactionData: '0000000000000000000000000288800004800002881712200184F01F9D1402030018000018000000',
-                    delimiterLength: 1,
                     delimiter: ';',
                     arqc: '0A994C22203060C4',
                     arcLength: 2,
                     arc: '3030',
                     discretionaryDataMacLength: 4,
                     discretionaryDataMac: '63EB7F42',
-                    discretionaryDataBytesLength: 2,
                     discretionaryDataBytes: '08',
                     discretionaryDataLength: 8,
                     discretionaryData: '4E6F772069732074'
@@ -1352,23 +1537,18 @@ module.exports = {
                     panLength: '',
                     panSeqNoLength: 8,
                     panSeqNo: '7804020000001800',
-                    delimiter1Length: 0,
                     delimiter1: '',
-                    branchHeightParamsLength: 0,
                     branchHeightParams: '',
                     atc: '0003',
-                    transactionDataLengthLength: 2,
                     transactionDataLengthDec: 72,
                     transactionDataLengthHex: '48',
                     transactionData: '00000001000000000000000006088010040000060818010201B21BB356180000030FA501803000000000000000000000000F00000000000000000000000000000000000000000000',
-                    delimiter2Length: 1,
                     delimiter2: ';',
                     arqc: 'F67B7E07A55DF243',
                     arcLength: 0,
                     arc: '',
                     csuLength: 0,
                     csu: '',
-                    padLengthLength: 0,
                     padLength: '',
                     pad: ''
                 },
@@ -1385,23 +1565,18 @@ module.exports = {
                     panLength: '',
                     panSeqNoLength: 8,
                     panSeqNo: '3239010000012101',
-                    delimiter1Length: 0,
                     delimiter1: '',
-                    branchHeightParamsLength: 0,
                     branchHeightParams: '',
                     atc: '005B',
-                    transactionDataLengthLength: 2,
                     transactionDataLengthDec: 32,
                     transactionDataLengthHex: '20',
                     transactionData: '0FA501A13102000000000000000000000F010000000000000000000000000000',
-                    delimiter2Length: 1,
                     delimiter2: ';',
                     arqc: 'DDA6BCC881C093AD',
                     arcLength: 0,
                     arc: '',
                     csuLength: 0,
                     csu: '',
-                    padLengthLength: 0,
                     padLength: '',
                     pad: ''
                 },
@@ -1418,24 +1593,19 @@ module.exports = {
                     panLength: '',
                     panSeqNoLength: 8,
                     panSeqNo: '3239010000012101',
-                    delimiter1Length: 0,
                     delimiter1: '',
-                    branchHeightParamsLength: 0,
                     branchHeightParams: '',
                     atc: '005B',
-                    transactionDataLengthLength: 0,
                     transactionDataLengthDec: '',
                     transactionDataLengthHex: '',
                     transactionData: '',
-                    delimiter2Length: 0,
                     delimiter2: '',
                     arqc: 'DDA6BCC881C093AD',
                     arcLength: 0,
                     arc: '',
                     csuLength: 4,
                     csu: '00000000',
-                    padLengthLength: 1,
-                    padLength: 5,
+                    padLength: '5',
                     pad: '8080040000'
                 },
                 response: '303030324B5734325535313837363341433631464235334532323330364331443835393738433339433239010000012101005BDDA6BCC881C093AD00000000358080040000'
@@ -1509,14 +1679,10 @@ module.exports = {
                     outputFormatFlag: '1',
                     keyType: '00B',
                     key: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
-                    ksnDescriptorLength: 0,
                     ksnDescriptor: '',
-                    ksnLength: 0,
                     ksn: '',
-                    ivLength: 0,
                     iv: '',
                     messageDataLengthHex: '20',
-                    messageDataLength: 32,
                     messageData: '0400980C0002AE900AF140D0C21230D7'
                 },
                 response: '303030324D3030303131303042554231393046374642423830324541313446414337393137443346364544423637303032303034303039383043303030324145393030414631343044304332313233304437'
@@ -1528,14 +1694,10 @@ module.exports = {
                     outputFormatFlag: '1',
                     keyType: '00B',
                     key: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
-                    ksnDescriptorLength: 0,
                     ksnDescriptor: '',
-                    ksnLength: 0,
                     ksn: '',
-                    ivLength: 0,
                     iv: '',
                     messageDataLengthHex: '20',
-                    messageDataLength: 32,
                     messageData: '0400980C0002AE900AF140D0C21230D7'
                 },
                 response: '303030324D3030303231303042554231393046374642423830324541313446414337393137443346364544423637303032303034303039383043303030324145393030414631343044304332313233304437'
@@ -1582,24 +1744,17 @@ module.exports = {
                 request: {
                     modeFlag: '00',
                     bpsRadixFlag: '',
-                    bpsRadixFlagLength: 0,
                     bpsRadixValue: '',
-                    bpsRadixValueLength: 0,
                     bpsTweak: '',
-                    bpsTweakLength: 0,
                     inputFormatFlag: '1',
                     outputFormatFlag: '1',
                     keyType: '00B',
                     key: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
                     ksnDescriptor: '',
-                    ksnDescriptorLength: 0,
                     ksn: '',
-                    ksnLength: 0,
                     iv: '',
-                    ivLength: 0,
                     messageDataLengthHex: '20',
-                    messageData: '311D8D13F8C617EF838441C36E33A6DA',
-                    messageDataLength: 32
+                    messageData: '311D8D13F8C617EF838441C36E33A6DA'
                 },
                 response: '303030324D3230303131303042554231393046374642423830324541313446414337393137443346364544423637303032303331314438443133463843363137454638333834343143333645333341364441'
             },
@@ -1607,24 +1762,17 @@ module.exports = {
                 request: {
                     modeFlag: '00',
                     bpsRadixFlag: '',
-                    bpsRadixFlagLength: 0,
                     bpsRadixValue: '',
-                    bpsRadixValueLength: 0,
                     bpsTweak: '',
-                    bpsTweakLength: 0,
                     inputFormatFlag: '1',
                     outputFormatFlag: '2',
                     keyType: '00B',
                     key: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
                     ksnDescriptor: '',
-                    ksnDescriptorLength: 0,
                     ksn: '',
-                    ksnLength: 0,
                     iv: '',
-                    ivLength: 0,
                     messageDataLengthHex: '40',
-                    messageData: '81E6BDF350C73ED13698E2C1356B58622C3871D2846FC110DD7E7A9D1024EC08',
-                    messageDataLength: 64
+                    messageData: '81E6BDF350C73ED13698E2C1356B58622C3871D2846FC110DD7E7A9D1024EC08'
                 },
                 response: '303030324D32303031323030425542313930463746424238303245413134464143373931374433463645444236373030343038314536424446333530433733454431333639384532433133353642353836323243333837314432383436464331313044443745374139443130323445433038'
             },
@@ -1632,24 +1780,17 @@ module.exports = {
                 request: {
                     modeFlag: '00',
                     bpsRadixFlag: '',
-                    bpsRadixFlagLength: 0,
                     bpsRadixValue: '',
-                    bpsRadixValueLength: 0,
                     bpsTweak: '',
-                    bpsTweakLength: 0,
                     inputFormatFlag: '1',
                     outputFormatFlag: '1',
                     keyType: '00B',
                     key: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
                     ksnDescriptor: '',
-                    ksnDescriptorLength: 0,
                     ksn: '',
-                    ksnLength: 0,
                     iv: '',
-                    ivLength: 0,
                     messageDataLengthHex: '20',
                     messageData: '311D8D13F8C617EF838441C36E33A6DA',
-                    messageDataLength: 32,
                     lmkIdentifier: 0
                 },
                 response: '303030324D3230303131303042554231393046374642423830324541313446414337393137443346364544423637303032303331314438443133463843363137454638333834343143333645333341364441253030'
@@ -1701,22 +1842,15 @@ module.exports = {
                     sourceKeyType: '00B',
                     sourceKey: 'UB190F7FBB802EA14FAC7917D3F6EDB67',
                     sourceKsnDescriptor: '',
-                    sourceKsnDescriptorLength: 0,
                     sourceKsn: '',
-                    sourceKsnLength: 0,
                     destinationKeyType: '00B',
                     destinationKey: 'U69721302D9FB7876D98CDDA0FDE1A09B',
                     destinationKsnDescriptor: '',
-                    destinationKsnDescriptorLength: 0,
                     destinationKsn: '',
-                    destinationKsnLength: 0,
                     sourceIv: '',
-                    sourceIvLength: 0,
                     destinationIv: '',
-                    destinationIvLength: 0,
                     messageDataLengthHex: '20',
-                    messageData: '311D8D13F8C617EF838441C36E33A6DA',
-                    messageDataLength: 32
+                    messageData: '311D8D13F8C617EF838441C36E33A6DA'
                 },
                 response: '303030324D34303030303131303042554231393046374642423830324541313446414337393137443346364544423637303042553639373231333032443946423738373644393843444441304644453141303942303032303331314438443133463843363137454638333834343143333645333341364441'
             }
@@ -1752,10 +1886,8 @@ module.exports = {
                     paddingMethod: '1',
                     keyType: '003',
                     key: 'U5FFE8014DA383D44C24AB41E37DB252F',
-                    ivLength: 0,
                     iv: '',
                     macDataLengthHex: '1E',
-                    macDataLength: 30,
                     macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
                 },
                 response: '303030324D3630323033313030335535464645383031344441333833443434433234414234314533374442323532463030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
@@ -1769,28 +1901,39 @@ module.exports = {
                     paddingMethod: '1',
                     keyType: '008',
                     key: 'UF759EF72F15F88933CB9B86E54C9DC83',
-                    ivLength: 0,
                     iv: '',
                     macDataLengthHex: '1E',
-                    macDataLength: 30,
                     macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
                 },
                 response: '303030324D3630303033313030385546373539454637324631354638383933334342394238364535344339444338333030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
+            },
+            2: {
+                request: {
+                    modeFlag: '0',
+                    inputFormatFlag: '2',
+                    macSize: '0',
+                    macAlgorithm: '1',
+                    paddingMethod: '1',
+                    keyType: 'FFF',
+                    key: 'S00072M1TN00E0001FFE01E95CF21BDD0D74B6BEB70E3D90842C137DCA39C1B162C6238D5',
+                    iv: '',
+                    macDataLengthHex: '1E',
+                    macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000'
+                },
+                response: '303030324D3630323031314646465330303037324D31544E3030453030303146464530314539354346323142444430443734423642454237304533443930383432433133374443413339433142313632433632333844353030314532321C3030323030303030311C1C30353135313030391C461C3630303030'
             }
         },
         generateMacDecode: {
             0: {
                 request: bufferize('303034384D3730304335374534323935'),
                 response: {
-                    errorCode: '00',
-                    rest: bufferize([67, 53, 55, 69, 52, 50, 57, 53])
+                    value: 'C57E4295'
                 }
             },
             1: {
                 request: bufferize('303034384D3730304246323637363545'),
                 response: {
-                    errorCode: '00',
-                    rest: bufferize([66, 70, 50, 54, 55, 54, 53, 69])
+                    value: 'BF26765E'
                 }
             },
             2: {
@@ -1820,12 +1963,9 @@ module.exports = {
                     paddingMethod: '1',
                     keyType: '003',
                     key: 'U5FFE8014DA383D44C24AB41E37DB252F',
-                    ivLength: 0,
                     iv: '',
                     macDataLengthHex: '1E',
-                    macDataLength: 30,
                     macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
-                    macLength: 8,
                     mac: 'C57E4295'
                 },
                 response: '303030324D3830323033313030335535464645383031344441333833443434433234414234314533374442323532463030314532321C3030323030303030311C1C30353135313030391C461C36303030304335374534323935'
@@ -1839,31 +1979,39 @@ module.exports = {
                     paddingMethod: '1',
                     keyType: '008',
                     key: 'UF759EF72F15F88933CB9B86E54C9DC83',
-                    ivLength: 0,
                     iv: '',
                     macDataLengthHex: '1E',
-                    macDataLength: 30,
                     macData: '22\u001c002000001\u001c\u001c05151009\u001cF\u001c60000',
-                    macLength: 8,
                     mac: 'BF26765E'
                 },
                 response: '303030324D3830303033313030385546373539454637324631354638383933334342394238364535344339444338333030314532321C3030323030303030311C1C30353135313030391C461C36303030304246323637363545'
+            },
+            2: {
+                request: {
+                    modeFlag: '0',
+                    inputFormatFlag: '1',
+                    macSize: '0',
+                    macAlgorithm: '1',
+                    paddingMethod: '1',
+                    keyType: 'FFF',
+                    key: 'S00072M1TN00E0001FFE01E95CF21BDD0D74B6BEB70E3D90842C137DCA39C1B162C6238D5',
+                    iv: '',
+                    macDataLengthHex: '8',
+                    macData: 'ABCDEF12',
+                    mac: 'F9369211',
+                    lmkIdentifier: '01'
+                },
+                response: '303030324D3830313031314646465330303037324D31544E3030453030303146464530314539354346323142444430443734423642454237304533443930383432433133374443413339433142313632433632333844353030303841424344454631324639333639323131253031'
             }
         },
         verifyMacDecode: {
             0: {
                 request: bufferize('303034324D393030'),
-                response: {
-                    errorCode: '00',
-                    rest: bufferize([])
-                }
+                response: {}
             },
             1: {
                 request: bufferize('303036334D393030'),
-                response: {
-                    errorCode: '00',
-                    rest: bufferize([])
-                }
+                response: {}
             },
             2: {
                 request: bufferize('303030304D393031'),
@@ -1889,7 +2037,6 @@ module.exports = {
         printFormatEncode: {
             0: {
                 request: {
-                    dataLength: 54,
                     data: '>L>L>L>L>005^1>L>L>005^3>L>L>L>L>L>L>L>030^P>L>L>L>L>L'
                 },
                 response: '3030303250413E4C3E4C3E4C3E4C3E3030355E313E4C3E4C3E3030355E333E4C3E4C3E4C3E4C3E4C3E4C3E4C3E3033305E503E4C3E4C3E4C3E4C3E4C'
@@ -1909,8 +2056,6 @@ module.exports = {
                     documentType: 'C',
                     account: '540008900009',
                     pin: '0302477',
-                    encryptedPinLength: 7,
-                    printFieldsLength: 13,
                     printFields: ';Krasi;;Kolev'
                 },
                 response: '30303032504543353430303038393030303039303330323437373B4B726173693B3B4B6F6C6576'
@@ -1920,8 +2065,7 @@ module.exports = {
             0: {
                 request: bufferize('303035305046303034393634393238343135343439333337323735'),
                 response: {
-                    errorCode: '00',
-                    checkValue: bufferize([52, 57, 54, 52, 57, 50, 56, 52, 49, 53, 52, 52, 57, 51, 51, 55, 50, 55, 53])
+                    checkValue: '4964928415449337275'
                 }
             },
             1: {
@@ -1944,7 +2088,6 @@ module.exports = {
         translateAccountNumberEncode: {
             0: {
                 request: {
-                    pinLength: '5',
                     pin: '01234',
                     oldAccountNumber: '1234560000001234',
                     newAccountNumber: '6543210000004321'
@@ -1969,7 +2112,6 @@ module.exports = {
             0: {
                 request: {
                     tmk: 'U653BDD7BF37AC36B160D787BD306877B',
-                    printFieldsLength: 25,
                     printFields: 'field0;Krasi;Kolev;444A82'
                 },
                 response: '3030303254415536353342444437424633374143333642313630443738374244333036383737426669656C64303B4B726173693B4B6F6C65763B343434413832'
@@ -2004,7 +2146,6 @@ module.exports = {
                 request: {
                     keyType: '002',
                     key: 'U3027C895181D912A91D7DF0ED78AC6FB',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     pinBlock: 'A69F9E7646904B68',
                     pinBlockFormat: '01',
@@ -2017,7 +2158,6 @@ module.exports = {
                 request: {
                     keyType: '001',
                     key: 'UBB224A0D70899E7D216A4DDDA615C078',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     pinBlock: 'ED42DE5980AB024B',
                     pinBlockFormat: '01',
@@ -2025,6 +2165,19 @@ module.exports = {
                     pvki: '4'
                 },
                 response: '30303032465730303155424232323441304437303839394537443231364134444444413631354330373855383041453346384436334230384639433133363532453534313644373645384445443432444535393830414230323442303136303030303030303030303034'
+            },
+            2: {
+                request: {
+                    keyType: 'FFF',
+                    key: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+                    pvk: 'S00072V2TN00E0001E80A2926443C3AF11BF0317C669FA0EA0E100ABDF92BF7A3AF232D4C',
+                    pinBlock: 'AD72F973446E84E7',
+                    pinBlockFormat: '01',
+                    pan: '850103093936',
+                    pvki: '1',
+                    lmkIdentifier: '01'
+                },
+                response: '303030324657464646533030303732503054423030453030303145413432313631384233344635464131413737463743463634383031313142393743463046414537424437374435383945433932314546395330303037325632544E30304530303031453830413239323634343343334146313142463033313743363639464130454130453130304142444639324246374133414632333244344341443732463937333434364538344537303138353031303330393339333631253031'
             }
         },
         generatePvvDecode: {
@@ -2056,7 +2209,6 @@ module.exports = {
                 request: {
                     tpk: 'U3027C895181D912A91D7DF0ED78AC6FB',
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
-                    pvkLength: 33,
                     pinBlock: 'A69F9E7646904B68',
                     pinBlockFormat: '01',
                     pan: '540008900009',
@@ -2104,6 +2256,21 @@ module.exports = {
                     destinationPinBlock: 'B2766AACF790B197'
                 },
                 response: '303030324355303032553934384237343933334541414434364336423842444541443135353041463241553830414533463844363342303846394331333635324535343136443736453844324644433538314143323543393634303031353430303038393030303039343239313442323736364141434637393042313937'
+            },
+            1: {
+                request: {
+                    keyType: 'FFF',
+                    key: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+                    pvk: 'S00072V2TN00E0001E80A2926443C3AF11BF0317C669FA0EA0E100ABDF92BF7A3AF232D4C',
+                    sourcePinBlock: 'AD72F973446E84E7',
+                    sourcePinBlockFormat: '01',
+                    pan: '850103093936',
+                    pvki: '1',
+                    sourcePvv: '7548',
+                    destinationPinBlock: '967CDB6E3D492E28',
+                    lmkIdentifier: '01'
+                },
+                response: '303030324355464646533030303732503054423030453030303145413432313631384233344635464131413737463743463634383031313142393743463046414537424437374435383945433932314546395330303037325632544E303045303030314538304132393236343433433341463131424630333137433636394641304541304531303041424446393242463741334146323332443443414437324639373334343645383445373031383530313033303933393336313735343839363743444236453344343932453238253031'
             }
         },
         verifyPinGeneratePvvDecode: {
@@ -2136,7 +2303,6 @@ module.exports = {
                 request: {
                     keyType: '002',
                     key: 'U948B74933EAAD46C6B8BDEAD1550AF2A',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     sourcePinBlock: '2FDC581AC25C9640',
                     sourcePinBlockFormat: '01',
@@ -2148,6 +2314,23 @@ module.exports = {
                     destinationPinBlock: 'B2766AACF790B197'
                 },
                 response: '303032394455303032553934384237343933334541414434364336423842444541443135353041463241553830414533463844363342303846394331333635324535343136443736453844324644433538314143323543393634303031303635343030303839303030303946443634464333464144353034424233353032323635343030304E3231323334353646464646464642323736364141434637393042313937'
+            },
+            1: {
+                request: {
+                    keyType: 'FFF',
+                    key: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+                    pvk: 'S00072V1TN00E00010AE0AD2B1990AB407FAD15059E287760A05DF4DA2391EAB138877E22',
+                    sourcePinBlock: '967CDB6E3D492E28',
+                    sourcePinBlockFormat: '01',
+                    checkLength: '06',
+                    pan: '850103093936',
+                    decimalisationTable: '709F26B22464E96A',
+                    pinValidationData: '50103093936N',
+                    sourceOffset: '309783FFFFFF',
+                    destinationPinBlock: '967CDB6E3D492E28',
+                    lmkIdentifier: '01'
+                },
+                response: '303032394455464646533030303732503054423030453030303145413432313631384233344635464131413737463743463634383031313142393743463046414537424437374435383945433932314546395330303037325631544E30304530303031304145304144324231393930414234303746414431353035394532383737363041303544463444413233393145414231333838373745323239363743444236453344343932453238303130363835303130333039333933363730394632364232323436344539364135303130333039333933364E33303937383346464646464639363743444236453344343932453238253031'
             }
         },
         verifyPinGenerateOffsetDecode: {
@@ -2179,7 +2362,6 @@ module.exports = {
             0: {
                 request: {
                     zpk: 'U3027C895181D912A91D7DF0ED78AC6FB',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     maximumPinLength: '12',
                     pinBlock: 'A69F9E7646904B68',
@@ -2191,6 +2373,22 @@ module.exports = {
                     offset: '876955ffffff'
                 },
                 response: '3030323845415533303237433839353138314439313241393144374446304544373841433646425538304145334638443633423038463943313336353245353431364437364538443132413639463945373634363930344236383031303635343030303839303030303930313233343536373839313233343536353032323635343030304E32383736393535464646464646'
+            },
+            1: {
+                request: {
+                    zpk: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+                    pvk: 'S00072V1TN00E00010AE0AD2B1990AB407FAD15059E287760A05DF4DA2391EAB138877E22',
+                    maximumPinLength: '12',
+                    pinBlock: '967CDB6E3D492E28',
+                    pinBlockFormat: '01',
+                    checkLength: '06',
+                    pan: '850103093936',
+                    decimalisationTable: '709F26B22464E96A',
+                    pinValidationData: '50103093936N',
+                    offset: '309783FFFFFF',
+                    lmkIdentifier: '01'
+                },
+                response: '303032384541533030303732503054423030453030303145413432313631384233344635464131413737463743463634383031313142393743463046414537424437374435383945433932314546395330303037325631544E303045303030313041453041443242313939304142343037464144313530353945323837373630413035444634444132333931454142313338383737453232313239363743444236453344343932453238303130363835303130333039333933363730394632364232323436344539364135303130333039333933364E333039373833464646464646253031'
             }
         },
         verifyInterPinIbmDecode: {
@@ -2221,19 +2419,31 @@ module.exports = {
             0: {
                 request: {
                     zpk: 'UBB224A0D70899E7D216A4DDDA615C078',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     pinBlock: 'ED42DE5980AB024B',
                     pinBlockFormat: '01',
                     pan: '600000000000',
-                    delimiterLength: 0,
                     delimiter: '',
-                    verificationPanLength: 0,
                     verificationPan: '',
                     pvki: '4',
                     pvv: '1835'
                 },
                 response: '3030303245435542423232344130443730383939453744323136413444444441363135433037385538304145334638443633423038463943313336353245353431364437364538444544343244453539383041423032344230313630303030303030303030303431383335'
+            },
+            1: {
+                request: {
+                    zpk: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+                    pvk: 'S00072V2TN00E0001E80A2926443C3AF11BF0317C669FA0EA0E100ABDF92BF7A3AF232D4C',
+                    pinBlock: 'AD72F973446E84E7',
+                    pinBlockFormat: '01',
+                    pan: '850103093936',
+                    delimiter: '',
+                    verificationPan: '',
+                    pvki: '1',
+                    pvv: '7548',
+                    lmkIdentifier: '01'
+                },
+                response: '303030324543533030303732503054423030453030303145413432313631384233344635464131413737463743463634383031313142393743463046414537424437374435383945433932314546395330303037325632544E3030453030303145383041323932363434334333414631314246303331374336363946413045413045313030414244463932424637413341463233324434434144373246393733343436453834453730313835303130333039333933363137353438253031'
             }
         },
         verifyInterPinPvvDecode: {
@@ -2264,15 +2474,11 @@ module.exports = {
             0: {
                 request: {
                     mode: '0',
-                    macModeLength: 0,
                     macMode: '',
-                    macMethodLength: 0,
                     macMethod: '',
                     bdk: 'UAADAFCC8551ADAB246EA1176FD691EDF',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     ksnDescriptor: 'A05',
-                    ksnLength: 20,
                     ksn: 'FFFF0000010020000026',
                     pinBlock: 'BC786E28753DD4B2',
                     pinBlockFormat: '01',
@@ -2281,11 +2487,9 @@ module.exports = {
                     decimalisationTable: '0123456789123456',
                     pinValidationData: '5052654000N2',
                     offset: '1234ffffffff',
-                    macLength: 0,
                     mac: '',
                     messageDataLengthBytesLength: 0,
                     messageDataLengthBytes: '',
-                    messageDataLength: 0,
                     messageData: ''
                 },
                 response: bufferize('30303134474F305541414441464343383535314144414232343645413131373646443639314544465538304145334638443633423038463943313336353245353431364437364538444130354646464630303030303130303230303030303236424337383645323837353344443442323031303435343030303839303030303930313233343536373839313233343536353035323635343030304E32313233344646464646464646')
@@ -2293,15 +2497,11 @@ module.exports = {
             1: {
                 request: {
                     mode: '0',
-                    macModeLength: 1,
                     macMode: '1',
-                    macMethodLength: 1,
                     macMethod: '1',
                     bdk: 'UAADAFCC8551ADAB246EA1176FD691EDF',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     ksnDescriptor: 'A05',
-                    ksnLength: 20,
                     ksn: 'FFFF0000010020000026',
                     pinBlock: 'BC786E28753DD4B2',
                     pinBlockFormat: '01',
@@ -2310,11 +2510,9 @@ module.exports = {
                     decimalisationTable: '0123456789123456',
                     pinValidationData: '5052654000N2',
                     offset: '1234ffffffff',
-                    macLength: 16,
                     mac: 'ABCD1234EF098765',
                     messageDataLengthBytesLength: 4,
                     messageDataLengthBytes: '16',
-                    messageDataLength: 16,
                     messageData: '424C41424C414D455353414745000000'
                 },
                 response: bufferize('30303134474F3031315541414441464343383535314144414232343645413131373646443639314544465538304145334638443633423038463943313336353245353431364437364538444130354646464630303030303130303230303030303236424337383645323837353344443442323031303435343030303839303030303930313233343536373839313233343536353035323635343030304E323132333446464646464646464142434431323334454630393837363530303136424C41424C414D455353414745000000')
@@ -2341,30 +2539,21 @@ module.exports = {
             0: {
                 request: {
                     mode: '0',
-                    macModeLength: 0,
                     macMode: '',
-                    macMethodLength: 0,
                     macMethod: '',
                     bdk: 'UAADAFCC8551ADAB246EA1176FD691EDF',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     ksnDescriptor: 'A05',
-                    ksnLength: 20,
                     ksn: 'FFFF0000010020000026',
                     pinBlock: 'A69F9E7646904B68',
                     pinBlockFormat: '01',
                     pan: '540008900009',
-                    delimiterLength: 0,
                     delimiter: '',
-                    verificationPanLength: 0,
                     verificationPan: '',
                     pvki: '1',
                     pvv: '8156',
-                    macLength: 0,
                     mac: '',
-                    messageDataLengthBytesLength: 0,
                     messageDataLengthBytes: '',
-                    messageDataLength: 0,
                     messageData: ''
                 },
                 response: bufferize('3030333147513055414144414643433835353141444142323436454131313736464436393145444655383041453346384436334230384639433133363532453534313644373645384441303546464646303030303031303032303030303032364136394639453736343639303442363830313534303030383930303030393138313536')
@@ -2372,30 +2561,21 @@ module.exports = {
             1: {
                 request: {
                     mode: '0',
-                    macModeLength: 0,
                     macMode: '',
-                    macMethodLength: 0,
                     macMethod: '',
                     bdk: 'UAADAFCC8551ADAB246EA1176FD691EDF',
-                    pvkLength: 33,
                     pvk: 'U80AE3F8D63B08F9C13652E5416D76E8D',
                     ksnDescriptor: 'A05',
-                    ksnLength: 20,
                     ksn: 'FFFF0000010020000026',
                     pinBlock: 'A69F9E7646904B68',
                     pinBlockFormat: '01',
                     pan: '540008900009',
-                    delimiterLength: 0,
                     delimiter: '',
-                    verificationPanLength: 0,
                     verificationPan: '',
                     pvki: '1',
                     pvv: '8156',
-                    macLength: 0,
                     mac: '',
-                    messageDataLengthBytesLength: 0,
                     messageDataLengthBytes: '',
-                    messageDataLength: 0,
                     messageData: '',
                     lmkIdentifier: '0'
                 },
@@ -2434,9 +2614,7 @@ module.exports = {
                     macMethod: '1',
                     bdk: 'U99805903FDC563240A118DE88DAE0536',
                     ksnDescriptor: 'A05',
-                    ksnLength: 20,
                     ksn: 'FFFF000001315240000F',
-                    macLength: 0,
                     mac: '',
                     messageDataLengthBytes: 8,
                     messageData: 'ABCABCABCDEF8000'
@@ -2449,14 +2627,44 @@ module.exports = {
                     macMethod: '1',
                     bdk: 'U99805903FDC563240A118DE88DAE0536',
                     ksnDescriptor: 'A05',
-                    ksnLength: 20,
                     ksn: 'FFFF000001315240000F',
-                    macLength: 16,
                     mac: '40BDD0ED6B9FBCBE',
                     messageDataLengthBytes: 8,
                     messageData: 'ABCABCABCDEF8000'
                 },
                 response: bufferize('303030324757313155393938303539303346444335363332343041313138444538384441453035333641303546464646303030303031333135323430303030463430424444304544364239464243424530303038ABCABCABCDEF8000')
+            },
+            2: {
+                request: {
+                    macMode: '4',
+                    macMethod: '1',
+                    bdk: 'S00072B0TN00E0001566678078B5337915F4860C92F3FF2D6A6B11E8786F22DC8032EB758',
+                    ksnDescriptor: 'A05',
+                    ksn: 'FFFF0000000000000000',
+                    mac: '',
+                    messageDataLengthBytes: '5',
+                    messageData: 'ABCDEF1234',
+                    messageDataFormat: 'hex',
+                    paddingMethod: 'zero',
+                    lmkIdentifier: '01'
+                },
+                response: bufferize('30303032475734315330303037324230544e303045303030313536363637383037384235333337393135463438363043393246334646324436413642313145383738364632324443383033324542373538413035464646463030303030303030303030303030303030303035abcdef1234253031')
+            },
+            3: {
+                request: {
+                    macMode: '1',
+                    macMethod: '1',
+                    bdk: 'S00072B0TN00E0001566678078B5337915F4860C92F3FF2D6A6B11E8786F22DC8032EB758',
+                    ksnDescriptor: 'A05',
+                    ksn: 'FFFF0000000000000000',
+                    mac: '3E3DEE3DC52E53ED',
+                    messageDataLengthBytes: '5',
+                    messageData: 'ABCDEF1234',
+                    messageDataFormat: 'hex',
+                    paddingMethod: 'zero',
+                    lmkIdentifier: '01'
+                },
+                response: bufferize('30303032475731315330303037324230544e30304530303031353636363738303738423533333739313546343836304339324633464632443641364231314538373836463232444338303332454237353841303546464646303030303030303030303030303030303345334445453344433532453533454430303035abcdef1234253031')
             }
         },
         generateVerifyMacDukptDecode: {
@@ -2485,6 +2693,35 @@ module.exports = {
             4: {
                 request: bufferize('3030303947583135'),
                 response: 'payshield.generateVerifyMacDukpt.15'
+            }
+        },
+        generateRandomPinEncode: {
+            0: {
+                request: {
+                    checkLength: '6',
+                    account: '540008900009',
+                    lmkIdentifier: '01'
+                },
+                response: '303033334A413534303030383930303030393036253031'
+            },
+            1: {
+                request: {
+                    checkLength: '4',
+                    account: '850103093936'
+                },
+                response: '303033334A413835303130333039333933363034'
+            }
+        },
+        generateRandomPinDecode: {
+            0: {
+                request: bufferize('303030304A42303032363337323739'),
+                response: {
+                    pin: '2637279'
+                }
+            },
+            1: {
+                request: bufferize('303030304A423831'),
+                response: 'payshield.generateRandomPin.81'
             }
         }
     }

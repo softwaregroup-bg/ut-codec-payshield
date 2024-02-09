@@ -79,6 +79,8 @@
             "generatePvvEncode.test",
             "generatePvvLmkDecode.test",
             "generatePvvLmkEncode.test",
+            "generateRandomPinDecode.test",
+            "generateRandomPinEncode.test",
             "generateVerifyMacDukptDecode.test",
             "generateVerifyMacDukptEncode.test",
             "hashDataBlockDecode.test",

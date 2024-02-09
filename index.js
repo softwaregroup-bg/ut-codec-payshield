@@ -3,6 +3,7 @@ const merge = require('lodash.merge');
 const defaultFormat = require('./messages');
 const defaultMaskSymbol = '*'.charCodeAt(0).toString(16);
 const nonCorrectableFields = require('./constants.json').nonCorrectableFields;
+const processResponse = require('./processResponse');
 
 function maskLogRecord(buffer, data, {pattern, maskedKeys, maskSymbol}) {
     return maskedKeys
@@ -45,15 +46,11 @@ function upperCaseObject(data, nonCorrectableFields) {
 function getLmkIdentifierParam(data) {
     const {lmkIdentifier} = data;
     const params = (lmkIdentifier === '' || isNaN(lmkIdentifier)) ? {
-        delimiterLmkLen: 0,
         delimiterLmk: '',
-        lmkIdentifierLen: 0,
         lmkIdentifier: ''
     } : {
         delimiterLmk: '%',
-        delimiterLmkLen: 1,
-        lmkIdentifier: `00${lmkIdentifier}`.slice(-2),
-        lmkIdentifierLen: 2
+        lmkIdentifier: `00${lmkIdentifier}`.slice(-2)
     };
     return {...data, ...params};
 }
@@ -123,9 +120,9 @@ PayshieldCodec.prototype.init = function(config) {
 };
 
 PayshieldCodec.prototype.decode = function(buff, $meta, context, log) {
-    if (log && log.trace) {
+    if (log?.trace) {
         // todo mask
-        log.trace({$meta: {mtid: 'frame', method: 'payshield.decode'}, message: buff, log: context && context.session && context.session.log});
+        log.trace({$meta: {mtid: 'frame', method: 'payshield.decode'}, message: buff, log: context?.session?.log});
     }
     const headObj = this.headerMatcher(buff);
     if (!headObj) {
@@ -167,10 +164,10 @@ PayshieldCodec.prototype.decode = function(buff, $meta, context, log) {
             defErrCode = bodyObj.errorCode;
         }
         const e = this.errors[`payshield.${cmd.method}.${defErrCode}`]({});
-        log && log.error && log.error(e);
+        log?.error?.(e);
         return e;
     }
-    return bodyObj;
+    return processResponse[headObj.code]?.(bodyObj) ?? bodyObj;
 };
 
 PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
@@ -189,8 +186,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
             context.trace = 0;
         }
     }
-    data = getLmkIdentifierParam(data);
-    const dataCorrected = upperCaseObject(data, this.nonCorrectableFields);
+    const dataCorrected = upperCaseObject(getLmkIdentifierParam(data), this.nonCorrectableFields);
     const bodyBuff = bitsyntax.build(this.commands[commandName].pattern, dataCorrected);
     if (!bodyBuff) {
         throw this.errors['payshield.parser.body']({params: {command: commandName}});
@@ -203,8 +199,8 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
         code: cmdCode,
         body: bodyBuff
     });
-    if (log && log.trace) {
-        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, dataCorrected, {pattern: this.commands[commandName].pattern, maskedKeys: this.maskedKeys, maskSymbol: defaultMaskSymbol}), log: context && context.session && context.session.log});
+    if (log?.trace) {
+        log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, dataCorrected, {pattern: this.commands[commandName].pattern, maskedKeys: this.maskedKeys, maskSymbol: defaultMaskSymbol}), log: context?.session?.log});
     }
     return buffer;
 };
