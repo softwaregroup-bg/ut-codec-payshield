@@ -1520,30 +1520,22 @@ module.exports = {
         generateArqc3Decode: {
             0: {
                 request: bufferize('323034304B523030'),
-                response: {
-                    errorCode: '00',
-                    arpc: bufferize([])
-                }
+                response: {}
             },
             1: {
                 request: bufferize('303038384B52303095BD8DFD502CA21F'),
                 response: {
-                    errorCode: '00',
-                    arpc: bufferize([149, 189, 141, 253, 80, 44, 162, 31])
+                    arpc: '95BD8DFD502CA21F'
                 }
             },
             2: {
                 request: bufferize('303030314B523030'),
-                response: {
-                    errorCode: '00',
-                    arpc: bufferize([])
-                }
+                response: {}
             },
             3: {
                 request: bufferize('303031304B52303095BD8DFD502CA21F'),
                 response: {
-                    errorCode: '00',
-                    arpc: bufferize([149, 189, 141, 253, 80, 44, 162, 31])
+                    arpc: '95BD8DFD502CA21F'
                 }
             },
             4: {
@@ -1744,23 +1736,16 @@ module.exports = {
         generateArqc4Decode: {
             0: {
                 request: bufferize('303030364B583030'),
-                response: {
-                    errorCode: '00',
-                    arpc: bufferize([])
-                }
+                response: {}
             },
             1: {
                 request: bufferize('303032344B583030'),
-                response: {
-                    errorCode: '00',
-                    arpc: bufferize([])
-                }
+                response: {}
             },
             2: {
                 request: bufferize('303236334B583030A62169F300000000'),
                 response: {
-                    errorCode: '00',
-                    arpc: bufferize([166, 33, 105, 243, 0, 0, 0, 0])
+                    arpc: 'A62169F300000000'
                 }
             },
             3: {
