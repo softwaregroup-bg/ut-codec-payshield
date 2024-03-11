@@ -21,6 +21,7 @@ const verifyPinGenerateOffset = () => {};
 const verifyInterPinIbm = () => {};
 const derivePinIbm = () => {};
 const generateVerifyMacDukpt = () => {};
+const generateArqc = () => {};
 
 await hsmGenerateKey({
     mode: '0',
@@ -385,4 +386,3 @@ await generateArqc({
     paddingMethod: 'zero',
     lmkIdentifier: '01'
 });
-
