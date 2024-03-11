@@ -160,7 +160,7 @@ PayshieldCodec.prototype.decode = function(buff, $meta, context, log) {
         $meta.method = cmd.method;
         if (cmd.errorMatcher) { // try to match errorPattern if it exists
             defErrCode = (cmd.errorMatcher(headObj.body) || bodyObj).errorCode || defErrCode;
-        } else if (bodyObj && bodyObj.errorCode) {
+        } else if (bodyObj?.errorCode) {
             defErrCode = bodyObj.errorCode;
         }
         const e = this.errors[`payshield.${cmd.method}.${defErrCode}`]({});

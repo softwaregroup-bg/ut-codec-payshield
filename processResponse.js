@@ -120,6 +120,22 @@ module.exports = {
             pinBlock: rest.toString()
         };
     },
+    KR: (bodyObj) => {
+        const {rest} = bodyObj;
+        const response = {};
+        if (rest?.length) {
+            response.arpc = rest.toString('hex').toUpperCase();
+        }
+        return response;
+    },
+    KX: (bodyObj) => {
+        const {rest} = bodyObj;
+        const response = {};
+        if (rest?.length) {
+            response.arpc = rest.toString('hex').toUpperCase();
+        }
+        return response;
+    },
     M7: (bodyObj) => {
         const {rest} = bodyObj;
         return {

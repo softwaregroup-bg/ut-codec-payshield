@@ -1409,14 +1409,14 @@ module.exports = {
                     delimiter: '',
                     arqc: '0A994C22203060C4',
                     arcLength: 2,
-                    arc: '',
+                    arc: '3030',
                     discretionaryDataMacLength: 0,
                     discretionaryDataMac: '',
                     discretionaryDataBytes: '',
                     discretionaryDataLength: 0,
                     discretionaryData: ''
                 },
-                response: '303030324B5132305535363242374331393841353844323838353146313535313743444142413630457804020000000000001884F01F9D0A994C22203060C40000'
+                response: '303030324B5132305535363242374331393841353844323838353146313535313743444142413630457804020000000000001884F01F9D0A994C22203060C43030'
             },
             2: {
                 request: {
@@ -1465,6 +1465,56 @@ module.exports = {
                     discretionaryData: '4E6F772069732074'
                 },
                 response: '303030324B5134305535363242374331393841353844323838353146313535313743444142413630455530413935354234324339333141374644334632423132423135393543423346427804020000000000001884F01F9D32380000000000000000000000000288800004800002881712200184F01F9D14020300180000180000003B0A994C22203060C4303063EB7F4230384E6F772069732074'
+            },
+            4: {
+                request: {
+                    modeFlag: 0,
+                    schemeId: 0,
+                    mkac: 'S00072E0TN00S00012574E37226ADAA76E5B8F2C4F14AD34F1F054EF52CB56BE2F4D03BEA',
+                    mksmi: '',
+                    panSeqNo: '5600000000000001',
+                    atc: '7400',
+                    unpredictableNumber: 'C2C6A091',
+                    transactionDataLengthDec: 40,
+                    transactionDataLengthHex: '28',
+                    transactionData: '0000000000000000000000000288800004800002881712200184F01F9D1402030018000018000000',
+                    delimiter: ';',
+                    arqc: '46E98E9B85E9C640',
+                    arcLength: 0,
+                    arc: '',
+                    discretionaryDataMacLength: 0,
+                    discretionaryDataMac: '',
+                    discretionaryDataBytes: '',
+                    discretionaryDataLength: 0,
+                    discretionaryData: '',
+                    lmkIdentifier: '01'
+                },
+                response: '303030324B5130305330303037324530544E30305330303031323537344533373232364144414137364535423846324334463134414433344631463035344546353243423536424532463444303342454156000000000000017400C2C6A09132380000000000000000000000000288800004800002881712200184F01F9D14020300180000180000003B46E98E9B85E9C640253031'
+            },
+            5: {
+                request: {
+                    modeFlag: 1,
+                    schemeId: 0,
+                    mkac: 'S00072E0TN00S00012574E37226ADAA76E5B8F2C4F14AD34F1F054EF52CB56BE2F4D03BEA',
+                    mksmi: '',
+                    panSeqNo: '5600000000000001',
+                    atc: '7400',
+                    unpredictableNumber: 'C2C6A091',
+                    transactionDataLengthDec: 40,
+                    transactionDataLengthHex: '28',
+                    transactionData: '00000000000000000000000009780000000000097820121431C2C6A0915800740003A00000000000',
+                    delimiter: ';',
+                    arqc: '0A994C22203060C4',
+                    arcLength: 2,
+                    arc: '3030',
+                    discretionaryDataMacLength: 0,
+                    discretionaryDataMac: '',
+                    discretionaryDataBytes: '',
+                    discretionaryDataLength: 0,
+                    discretionaryData: '',
+                    lmkIdentifier: '01'
+                },
+                response: '303030324B5131305330303037324530544E30305330303031323537344533373232364144414137364535423846324334463134414433344631463035344546353243423536424532463444303342454156000000000000017400C2C6A091323800000000000000000000000009780000000000097820121431C2C6A0915800740003A000000000003B0A994C22203060C43030253031'
             }
         },
         generateArqc3Decode: {
@@ -1605,6 +1655,90 @@ module.exports = {
                     pad: '8080040000'
                 },
                 response: '303030324B5734325535313837363341433631464235334532323330364331443835393738433339433239010000012101005BDDA6BCC881C093AD00000000358080040000'
+            },
+            3: {
+                request: {
+                    modeFlag: 0,
+                    schemeId: 2,
+                    mkac: 'S00072E0TN00S00012574E37226ADAA76E5B8F2C4F14AD34F1F054EF52CB56BE2F4D03BEA',
+                    ivacLength: 0,
+                    ivac: '',
+                    panSeqNoLengthLength: 0,
+                    panLength: '',
+                    panSeqNoLength: 8,
+                    panSeqNo: '7804020000001800',
+                    delimiter1: '',
+                    branchHeightParams: '',
+                    atc: '0003',
+                    transactionDataLengthDec: 72,
+                    transactionDataLengthHex: '48',
+                    transactionData: '00000001000000000000000006088010040000060818010201B21BB356180000030FA501803000000000000000000000000F00000000000000000000000000000000000000000000',
+                    delimiter2: ';',
+                    arqc: 'F67B7E07A55DF243',
+                    arcLength: 0,
+                    arc: '',
+                    csuLength: 0,
+                    csu: '',
+                    padLength: '',
+                    pad: ''
+                },
+                response: '303030324B5730325330303037324530544E30305330303031323537344533373232364144414137364535423846324334463134414433344631463035344546353243423536424532463444303342454178040200000018000003343800000001000000000000000006088010040000060818010201B21BB356180000030FA501803000000000000000000000000F000000000000000000000000000000000000000000003BF67B7E07A55DF243'
+            },
+            4: {
+                request: {
+                    modeFlag: 0,
+                    schemeId: 2,
+                    mkac: 'S00072E0TN00S00012574E37226ADAA76E5B8F2C4F14AD34F1F054EF52CB56BE2F4D03BEA',
+                    ivacLength: 0,
+                    ivac: '',
+                    panSeqNoLengthLength: 0,
+                    panLength: '',
+                    panSeqNoLength: 8,
+                    panSeqNo: '3239010000012101',
+                    delimiter1: '',
+                    branchHeightParams: '',
+                    atc: '005B',
+                    transactionDataLengthDec: 32,
+                    transactionDataLengthHex: '20',
+                    transactionData: '0FA501A13102000000000000000000000F010000000000000000000000000000',
+                    delimiter2: ';',
+                    arqc: 'DDA6BCC881C093AD',
+                    arcLength: 0,
+                    arc: '',
+                    csuLength: 0,
+                    csu: '',
+                    padLength: '',
+                    pad: ''
+                },
+                response: '303030324B5730325330303037324530544E3030533030303132353734453337323236414441413736453542384632433446313441443334463146303534454635324342353642453246344430334245413239010000012101005B32300FA501A13102000000000000000000000F0100000000000000000000000000003BDDA6BCC881C093AD'
+            },
+            5: {
+                request: {
+                    modeFlag: 4,
+                    schemeId: 2,
+                    mkac: 'S00072E0TN00S00012574E37226ADAA76E5B8F2C4F14AD34F1F054EF52CB56BE2F4D03BEA',
+                    ivacLength: 0,
+                    ivac: '',
+                    panSeqNoLengthLength: 0,
+                    panLength: '',
+                    panSeqNoLength: 8,
+                    panSeqNo: '3239010000012101',
+                    delimiter1: '',
+                    branchHeightParams: '',
+                    atc: '005B',
+                    transactionDataLengthDec: '',
+                    transactionDataLengthHex: '',
+                    transactionData: '',
+                    delimiter2: '',
+                    arqc: 'DDA6BCC881C093AD',
+                    arcLength: 0,
+                    arc: '',
+                    csuLength: 4,
+                    csu: '00000000',
+                    padLength: '5',
+                    pad: '8080040000'
+                },
+                response: '303030324B5734325330303037324530544E3030533030303132353734453337323236414441413736453542384632433446313441443334463146303534454635324342353642453246344430334245413239010000012101005BDDA6BCC881C093AD00000000358080040000'
             }
         },
         generateArqc4Decode: {

@@ -393,7 +393,7 @@
         "requestCode": "KQ",
         "responseCode": "KR",
         "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac/string, mksmi/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex/string, transactionData:transactionDataLengthDec/string-binhex, delimiter/string, arqc:8/string-binhex, arc:arcLength/string-binhex, discretionaryDataMac:discretionaryDataMacLength/string-binhex, discretionaryDataBytes/string, discretionaryData:discretionaryDataLength/string-binhex, delimiterLmk/string, lmkIdentifier/string",
-        "responsePattern": "errorCode:2/string, arpc/binary",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex",
         "customResponseError": {
             "01": "ARQC/TC/AAC verification failed",
@@ -412,7 +412,7 @@
         "requestCode": "KW",
         "responseCode": "KX",
         "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac/string, ivac:ivacLength/string-binhex, panLength:panSeqNoLengthLength/string-left-zero, panSeqNo:panSeqNoLength/string-binhex, delimiter1/string, branchHeightParams/string, atc:2/string-binhex, transactionDataLengthHex/string, transactionData:transactionDataLengthDec/string-binhex, delimiter2/string, arqc:8/string-binhex, arc:arcLength/string-binhex, csu:csuLength/string-binhex, padLength/string, pad:padLength/string-binhex, delimiterLmk/string, lmkIdentifier/string",
-        "responsePattern": "errorCode:2/string, arpc/binary",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex",
         "customResponseError": {
             "01": "ARQC/TC/AAC/MPVV verification failure",

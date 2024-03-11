@@ -338,3 +338,51 @@ await generateVerifyMacDukpt({
     paddingMethod: 'zero',
     lmkIdentifier: '01'
 });
+
+await generateArqc({
+    cryptogramMethodName: 'KQ', // v3
+    modeFlag: 0,
+    schemeId: 0,
+    mkac: 'S00072E0TN00S00012574E37226ADAA76E5B8F2C4F14AD34F1F054EF52CB56BE2F4D03BEA',
+    panSeqNo: '12345600000000000001',
+    atc: '7400',
+    unpredictableNumber: 'C2C6A091',
+    transactionData: '00000000000000000000000009780000000000097820121431C2C6A0915800740003A00000',
+    arqc: '46E98E9B85E9C640',
+    paddingMethod: 'zero',
+    arc: '3030',
+    lmkIdentifier: '01'
+});
+
+await generateArqc({
+    cryptogramMethodName: 'KQ', // v3
+    modeFlag: 1,
+    schemeId: 0,
+    mkac: 'S00072E0TN00S00012574E37226ADAA76E5B8F2C4F14AD34F1F054EF52CB56BE2F4D03BEA',
+    panSeqNo: '12345600000000000001',
+    atc: '7400',
+    unpredictableNumber: 'C2C6A091',
+    transactionData: '00000000000000000000000009780000000000097820121431C2C6A0915800740003A00000000000',
+    arqc: '46E98E9B85E9C640',
+    paddingMethod: 'zero',
+    arc: '3030',
+    lmkIdentifier: '01'
+});
+// {arpc: 'B7C0556F15D1F17C'}
+
+await generateArqc({
+    cryptogramMethodName: 'KW', // v4
+    modeFlag: 0,
+    schemeId: 0,
+    mkac: 'S00072E0TN00S00012574E37226ADAA76E5B8F2C4F14AD34F1F054EF52CB56BE2F4D03BEA',
+    ivac: '00000000000000000000000000000000',
+    branchHeightParams: '1',
+    transactionData: '000000000000000000000000097800000000000978201214313C4658455800000103A00000',
+    panSeqNo: '12345600000000000001',
+    atc: '0001',
+    unpredictableNumber: '3C465845',
+    arqc: '897FE51A726DFE47',
+    paddingMethod: 'zero',
+    lmkIdentifier: '01'
+});
+
