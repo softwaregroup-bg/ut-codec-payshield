@@ -447,7 +447,7 @@
     "decryptDataBlock": {
         "requestCode": "M2",
         "responseCode": "M3",
-        "requestPattern": "modeFlag:2/string, bpsRadixFlag/string, bpsRadixValue/string, bpsTweak/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key/string, ksnDescriptor/string, ksn/string, iv/string, messageDataLengthHex:4/string-left-zero, messageData/string, delimiterLmk/string, lmkIdentifier/string",
+        "requestPattern": "modeFlag:2/string, bpsRadixFlag/string, bpsRadixValue/string, bpsTweak:bpsTweakLength/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key/string, ksnDescriptor/string, ksn/string, iv/string, messageDataLengthHex:4/string-left-zero, messageData/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "02": "Invalid Mode Flag field",

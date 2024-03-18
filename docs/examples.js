@@ -22,6 +22,9 @@ const verifyInterPinIbm = () => {};
 const derivePinIbm = () => {};
 const generateVerifyMacDukpt = () => {};
 const generateArqc = () => {};
+const encryptDataBlock = () => {};
+const decryptDataBlock = () => {};
+const translateDataBlock = () => {};
 
 await hsmGenerateKey({
     mode: '0',
@@ -386,3 +389,40 @@ await generateArqc({
     paddingMethod: 'zero',
     lmkIdentifier: '01'
 });
+
+await encryptDataBlock({
+    modeFlag: '00',
+    inputFormatFlag: 'hex',
+    outputFormatFlag: 'hex',
+    keyType: 'FFF',
+    key: 'S00072D0TN00E0001BD79343066F46B9C1279E2DE4382E56E6DD5BDCE0F850C7E444799D9',
+    messageData: 'ABCDEF1234567890',
+    lmkIdentifier: '01'
+});
+
+// {encrypted: '6DD932DE48520285', messageLength: 16}
+
+await decryptDataBlock({
+    modeFlag: '00',
+    inputFormatFlag: 'hex',
+    outputFormatFlag: 'hex',
+    keyType: 'FFF',
+    key: 'S00072D0TN00E0001BD79343066F46B9C1279E2DE4382E56E6DD5BDCE0F850C7E444799D9',
+    messageData: '6DD932DE48520285',
+    lmkIdentifier: '01'
+});
+
+await translateDataBlock({
+    sourceModeFlag: '00',
+    destinationModeFlag: '00',
+    inputFormatFlag: 'hex',
+    outputFormatFlag: 'hex',
+    sourceKeyType: 'FFF',
+    sourceKey: 'S00072D0TN00E0001BD79343066F46B9C1279E2DE4382E56E6DD5BDCE0F850C7E444799D9',
+    destinationKeyType: 'FFF',
+    destinationKey: 'S00072D0TN00E00010EA718005998326E187E742CF400E5698F5E55E2A0A25A5FD9C5EDDE',
+    messageData: '6DD932DE48520285',
+    lmkIdentifier: '01'
+});
+
+// {encrypted: '1D8F38CC40C6F20D', messageDataLength: 16}

@@ -1,20 +1,32 @@
 module.exports = {
-    // A1: (bodyObj) => {
-    //     const {errorCode, rest} = bodyObj;
-    //     const regex = /^(?<key>[Z|U|T|X|Y|V|R|S]\w+)(?<keyZmk>[Z|U|T|X|Y|V|R|S]\w+)?(?<kcv>[0123456789ABCDEF]{6})$/;
-    //     const regExec = regex.exec(rest.toString());
-    //     const response = {errorCode};
-    //     if (regExec?.groups?.key) {
-    //         response.key = regExec.groups.key;
-    //     }
-    //     if (regExec?.groups?.keyZmk) {
-    //         response.keyZmk = regExec.groups.keyZmk;
-    //     }
-    //     if (regExec?.groups?.kcv) {
-    //         response.kcv = regExec.groups.kcv;
-    //     }
-    //     return response;
-    // },
+    A1: (bodyObj, {mode, keySchemeLmk, keySchemeZmkTmk, zkaOption}) => {
+        const {rest} = bodyObj;
+        const restString = rest.toString();
+        const response = {};
+        const restLength = restString.length - 1;
+        let counter = -1; // from end to start of string
+        if (zkaOption === '1') {
+            counter += 32;
+            response.zkaRndi = restString.substring(restLength - counter, restLength);
+        }
+        counter += 6;
+        response.kcv = restString.substring(restLength - counter, restLength - counter + 6);
+        const keys = restString.substring(0, restLength - counter); // key + keyZmk
+        if (['1', 'B'].includes(mode)) {
+            if (keySchemeLmk === keySchemeZmkTmk) {
+                const [, key, keyZmk] = keys.split(keySchemeLmk);
+                response.key = `${keySchemeLmk}${key}`;
+                response.keyZmk = `${keySchemeZmkTmk}${keyZmk}`;
+            } else {
+                const [key, keyZmk] = keys.split(keySchemeZmkTmk);
+                response.key = key;
+                response.keyZmk = `${keySchemeZmkTmk}${keyZmk}`;
+            }
+        } else {
+            response.key = keys;
+        }
+        return response;
+    },
     A5: (bodyObj) => {
         const {rest} = bodyObj;
         const restString = rest?.toString();
@@ -135,6 +147,73 @@ module.exports = {
             response.arpc = rest.toString('hex').toUpperCase();
         }
         return response;
+    },
+    M1: (bodyObj, {modeFlag, outputFormatFlag}) => {
+        // currently does not support modeFlag 04 and 13
+        // currently does not support AES LMK
+        const {rest} = bodyObj;
+        const returnResponse = {};
+        const restString = rest.toString();
+        const ivLengthByKey = 16; // DES/3DES LMK
+
+        let counter = 0;
+        if (['01', '02', '03'].includes(modeFlag)) {
+            counter += ivLengthByKey;
+            returnResponse.iv = restString.slice(0, counter);
+        } else {
+            returnResponse.messageLength = parseInt(restString.slice(
+                counter,
+                counter + 4
+            ), 16);
+            returnResponse.encrypted = restString.slice(counter + 4);
+        }
+        return returnResponse;
+    },
+    M3: (bodyObj, {modeFlag, outputFormatFlag}) => {
+        // currently does not support modeFlag 04 and 13
+        // currently does not support AES LMK
+        const {rest} = bodyObj;
+        const returnResponse = {};
+        const restString = rest.toString();
+        const ivLengthByKey = 16; // DES/3DES LMK
+
+        let counter = 0;
+        if (['01', '02', '03'].includes(modeFlag)) {
+            counter += ivLengthByKey;
+            returnResponse.iv = restString.slice(0, counter);
+        } else {
+            returnResponse.messageLength = parseInt(restString.slice(
+                counter,
+                counter + 4
+            ), 16);
+            returnResponse.decrypted = restString.slice(counter + 4);
+        }
+        return returnResponse;
+    },
+    M5: (bodyObj, {sourceModeFlag, destinationModeFlag, outputFormatFlag}) => {
+        // currently does not support modeFlag 04 and 13
+        // currently does not support AES LMK
+        const {rest} = bodyObj;
+        const returnResponse = {};
+        const restString = rest.toString();
+        const sourceIvLengthByKey = 16; // DES/3DES LMK
+        const destinationIvLengthByKey = 16; // DES/3DES LMK
+
+        let counter = 0;
+        if (['01', '02', '03'].includes(sourceModeFlag)) {
+            returnResponse.sourceIv = restString.slice(counter, counter + sourceIvLengthByKey);
+            counter += sourceIvLengthByKey;
+        }
+        if (['01', '02', '03'].includes(destinationModeFlag)) {
+            returnResponse.destinationIv = restString.slice(counter, counter + destinationIvLengthByKey);
+            counter += destinationIvLengthByKey;
+        }
+        returnResponse.messageDataLength = parseInt(restString.slice(
+            counter,
+            counter + 4
+        ), 16);
+        returnResponse.encrypted = restString.slice(counter + 4);
+        return returnResponse;
     },
     M7: (bodyObj) => {
         const {rest} = bodyObj;

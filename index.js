@@ -167,7 +167,11 @@ PayshieldCodec.prototype.decode = function(buff, $meta, context, log) {
         log?.error?.(e);
         return e;
     }
-    return processResponse[headObj.code]?.(bodyObj) ?? bodyObj;
+    let request = {};
+    if ($meta.mtid === 'response') {
+        request = context.requests?.get('out/' + headObj.headerNo)?.$meta?.request ?? {};
+    }
+    return processResponse[headObj.code]?.(bodyObj, request) ?? bodyObj;
 };
 
 PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
@@ -202,6 +206,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
     if (log?.trace) {
         log.trace({$meta: {mtid: 'frame', method: 'payshield.encode'}, message: maskLogRecord(buffer, dataCorrected, {pattern: this.commands[commandName].pattern, maskedKeys: this.maskedKeys, maskSymbol: defaultMaskSymbol}), log: context?.session?.log});
     }
+    $meta.request = data;
     return buffer;
 };
 
