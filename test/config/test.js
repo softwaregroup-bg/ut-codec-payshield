@@ -10,7 +10,7 @@ const context = function({request, headerNo}) {
     });
     return {
         requests
-    }
+    };
 };
 module.exports = {
     headerFormat: '4/string-left-zero',
@@ -169,7 +169,7 @@ module.exports = {
                 request: bufferize('3033373541313030553844364534324533334343444437433141424232463443373445334233444538413234363637'),
                 response: {
                     kcv: 'A24667',
-                    key: 'U8D6E42E33CCDD7C1ABB2F4C74E3B3DE8',
+                    key: 'U8D6E42E33CCDD7C1ABB2F4C74E3B3DE8'
                 }
             },
             1: {
@@ -192,7 +192,7 @@ module.exports = {
                 request: bufferize('30303939413130305330303037324b305442303045303030314642384134393532424645343231373941423844373941383139343344463146414436374346303135313137454538353238453739393030443441334538'),
                 response: {
                     kcv: 'D4A3E8',
-                    key: 'S00072K0TB00E0001FB8A4952BFE42179AB8D79A81943DF1FAD67CF015117EE8528E79900',
+                    key: 'S00072K0TB00E0001FB8A4952BFE42179AB8D79A81943DF1FAD67CF015117EE8528E79900'
                 }
             },
             3: {
@@ -1865,14 +1865,14 @@ module.exports = {
                 request: bufferize('303030364D313030303032303331314438443133463843363137454638333834343143333645333341364441'),
                 response: {
                     messageLength: 32,
-                    encrypted: '311D8D13F8C617EF838441C36E33A6DA',
+                    encrypted: '311D8D13F8C617EF838441C36E33A6DA'
                 }
             },
             1: {
                 request: bufferize('303038334D3130303030343038314536424446333530433733454431333639384532433133353642353836323243333837314432383436464331313044443745374139443130323445433038'),
                 response: {
                     messageLength: 64,
-                    encrypted: '81E6BDF350C73ED13698E2C1356B58622C3871D2846FC110DD7E7A9D1024EC08',
+                    encrypted: '81E6BDF350C73ED13698E2C1356B58622C3871D2846FC110DD7E7A9D1024EC08'
                 }
             },
             2: {
@@ -1981,14 +1981,14 @@ module.exports = {
                 request: bufferize('303031334D333030303032303034303039383043303030324145393030414631343044304332313233304437'),
                 response: {
                     messageLength: 32,
-                    decrypted: '0400980C0002AE900AF140D0C21230D7',
+                    decrypted: '0400980C0002AE900AF140D0C21230D7'
                 }
             },
             1: {
                 request: bufferize('303033364D333030303032303034303039383043303030324145393030414631343044304332313233304437'),
                 response: {
                     messageLength: 32,
-                    decrypted: '0400980C0002AE900AF140D0C21230D7',
+                    decrypted: '0400980C0002AE900AF140D0C21230D7'
                 }
             },
             2: {
