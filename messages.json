@@ -92,11 +92,11 @@
             "45": "Invalid key migration destination key type"
         }
     },
-    "translatePinTpkZpk": {
+    "translatePinTpkZpkBdk": {
         "requestCode": "CA",
         "responseCode": "CB",
-        "requestPattern": "sourceTpk/string, destinationZpk/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, delimiterLmk/string, lmkIdentifier/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, pinBlock:16/string, pinBlockFormat:2/string",
+        "requestPattern": "sourceTpk/string, destinationKeyFlag/string, destinationKey/string, destinationKsnDescriptor/string, destinationKsn/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, checkLength:2/string, rest/binary",
         "customResponseError": {
             "10": "Source TPK parity error",
             "11": "Destination ZPK parity error"
@@ -249,8 +249,8 @@
         "requestCode": "EI",
         "responseCode": "EJ",
         "_requestPattern": "keyTypeIndicator:1/string, keyLength:4/string, publicKeyEncoding:2/string",
-        "requestPattern": "keyTypeIndicator:1/string, \"2048\", \"01\", delimiterLmk/string, lmkIdentifier/string",
-        "responsePattern": "errorCode:2/string, publicKey:269/string-binhex, privateKeyLength:4/string-left-zero, privateKey:privateKeyLength/string-binhex",
+        "requestPattern": "keyTypeIndicator:1/string, \"2048\", \"01\", delimiterLmk/string, lmkIdentifier/string, delimiter1/string, keyVersionNumber/string, optionalBlocksCount/string, delimiter2/string, exportability/string",
+        "responsePattern": "errorCode:2/string, publicKey:269/string-binhex, privateKeyLength:4/string-left-zero, rest/binary",
         "customResponseError": {
             "03": "Invalid public key encoding type",
             "04": "Key Length error",
@@ -366,7 +366,7 @@
         "requestCode": "JC",
         "responseCode": "JD",
         "requestPattern": "tpk/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiterLmk/string, lmkIdentifier/string",
-        "responsePattern": "errorCode:2/string, pin/binary",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "10": "TPK parity error"
         }

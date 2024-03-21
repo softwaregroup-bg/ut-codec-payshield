@@ -71,6 +71,15 @@ module.exports = {
             keyCheckValue: restString?.slice(-6)
         };
     },
+    CB: (bodyObj) => {
+        const {rest, checkLength} = bodyObj;
+        const restString = rest.toString();
+        return {
+            checkLength,
+            pinBlockFormat: restString.slice(-2),
+            pinBlock: restString.slice(0, -2)
+        };
+    },
     CD: (bodyObj) => {
         const {checkLength, rest} = bodyObj;
         const restString = rest.toString();
@@ -92,6 +101,23 @@ module.exports = {
             pin: rest.toString()
         };
     },
+    EJ: (bodyObj) => {
+        const {privateKeyLength, publicKey, rest} = bodyObj;
+        return {
+            privateKeyLength,
+            publicKey: [
+                '-----BEGIN RSA PUBLIC KEY-----',
+                Buffer.from(publicKey, 'hex')
+                    .toString('base64')
+                    .match(/.{0,64}/g)
+                    .filter(Boolean)
+                    .join('\n'),
+                '-----END RSA PUBLIC KEY-----'
+            ].join('\n'),
+            // TODO: check how this is passed to other commands !!!
+            privateKey: rest.toString('base64')
+        };
+    },
     FN: (bodyObj) => {
         const {rest} = bodyObj;
         const restString = rest?.toString();
@@ -106,6 +132,14 @@ module.exports = {
             hash: hash.toString('hex')
         };
     },
+    GP: (bodyObj) => {
+        const {rest} = bodyObj;
+        const response = {};
+        if (rest.length) {
+            response.macErrorCode = rest.toString();
+        }
+        return response;
+    },
     GX: (bodyObj) => {
         const {rest} = bodyObj;
         const result = {};
@@ -115,6 +149,12 @@ module.exports = {
         return result;
     },
     JB: (bodyObj) => {
+        const {rest} = bodyObj;
+        return {
+            pin: rest.toString()
+        };
+    },
+    JD: (bodyObj) => {
         const {rest} = bodyObj;
         return {
             pin: rest.toString()

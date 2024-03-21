@@ -1,3 +1,4 @@
+// eslint-disable no-undef
 const hsmGenerateKey = () => {};
 const hsmExportKey = () => {};
 const hsmImportKey = () => {};
@@ -25,6 +26,13 @@ const generateArqc = () => {};
 const encryptDataBlock = () => {};
 const decryptDataBlock = () => {};
 const translateDataBlock = () => {};
+const generateRsaKeyPair = () => {};
+const verifyTermPinIbm = () => {};
+const verifyTermPinPvv = () => {};
+const translatePinTpkLmk = () => {};
+const translatePinTpkZpkBdk = () => {};
+const translatePinBdkBdkZpk = () => {};
+const verifyOffsetIbmDukpt = () => {};
 
 await hsmGenerateKey({
     mode: '0',
@@ -49,7 +57,8 @@ await hsmGenerateKey({
 // PVK IBM3624: S00072V1TN00E00010AE0AD2B1990AB407FAD15059E287760A05DF4DA2391EAB138877E22; 31540C
 // PVK Visa PVV: S00072V2TN00E0001E80A2926443C3AF11BF0317C669FA0EA0E100ABDF92BF7A3AF232D4C; AAB664
 // CVK: S00072C0TN00E0001A417975993E2331918759DD1656AC94306BE01C19FDE29E83A93AB42; EC7A50
-// BDK1: S00072B0TN00E0001566678078B5337915F4860C92F3FF2D6A6B11E8786F22DC8032EB758; 97795F
+// BDK1-1: S00072B0TN00E0001566678078B5337915F4860C92F3FF2D6A6B11E8786F22DC8032EB758; 97795F
+// BDK1-2: S00072B0TN00E0001134E8D68D46BC8356F84F598155A1B5C44199D9847A2A58B64BE091F; 55771A
 // DTAB: 0123456789012345 -> 709F26B22464E96A
 // DTAB: 1234567890123456 -> C9DF59A67019D387
 
@@ -399,7 +408,6 @@ await encryptDataBlock({
     messageData: 'ABCDEF1234567890',
     lmkIdentifier: '01'
 });
-
 // {encrypted: '6DD932DE48520285', messageLength: 16}
 
 await decryptDataBlock({
@@ -424,5 +432,146 @@ await translateDataBlock({
     messageData: '6DD932DE48520285',
     lmkIdentifier: '01'
 });
-
 // {encrypted: '1D8F38CC40C6F20D', messageDataLength: 16}
+
+generateRsaKeyPair({
+    keyTypeIndicator: '1'
+});
+// {
+//     privateKeyLength: '0656',
+//     privateKey: '48c461fa6690e92ee5bcb21e201ade0cff194b1b33ab9911167f43b240b83aa323a5f0f0d5a263a177b09260ff08bafe7af060a6c8a940cb195aa34adb91cd31a507fe7702bf6047441b2e2d1e9058fcb6203508aa06923bd49666995e6c850545ce47befc7c7f6fbcd8aec6244cdaafd4a0f71eba40354d2ca11dfd6e904a22ef2c6d99aaaec875259895f8fa3777638b7106dab24cac3509893bd00bf85bbe6541ef4b693735541e7749c0a43bd88fd0a0da6a72157cf357fafbd4350c9d39a4a2b4645bea4e955f1960a470c9e0807080a1962325da272932acbbccf2124bb63bb10ba9b4e728f849da86018d8e902e76ab903e656ab504847d5c3977d545e42276f50766c727cbba1987141552e2f8d1d019211ddb2edfdc561dc0124e6c2e693b69bc87b859612069193530f57810d9575b4d8f1dcc5abcb177e398fefbaa132e5c03eee73f67d7c7d19bbefc6249280e41a7c6e2d338db283669e0960ac58ea874bc27213f768a1ad834471e60a89fb0d1f7457c9251b27b6afde3b066d86efc911f3e8f4aeff6f655fdbd93598fb5a9a334c00c505f01c6b62c90e18fbb3657d99bbe417c8a20fc5da4c0e25ceaa4b3832c74a03576899ef48ace0b0fb88cb91a2b3fe2e0af4403dbdfcbcda7b7fc49d4d6b591efc8164101a3197e0898d79fb53e1ca58ea06520240b5909a84070b60cb9bc89105643f6ee390996e535c65d51a288918ce3da5d1562504b51b337b56228e0657df41cd0c1b72644b7362c4a605f3e4d2040855996064cab08b65033ed8eb47f46fab9aff6237435b3f7ec13a6931cf49f8dfb23ff66e94f84bad1486ef08e16bec8bbce3744c44c36f3df48e99e6ab20b2ed015993f7f8fbbd9d8ffcc2b7baed7bece16bc631b3319e4e155d4692fb6495847744d55320263',
+//     publicKey: '-----BEGIN RSA PUBLIC KEY-----\nMIIBCQKCAQCrTnbBQop7RO3Zvoj0rfsaeiand3JwOSU2r/XkHMCJ7SUvS7N7wFWs\nED1ZTqUBttuln0xdUEK3vR7Th4KKDeWFjhnX5oO5pC+1e3ZKYaeJ0m4fnb+6tzgW\n1o2p4NyRFgnUoNAcawcRWd6uVNB6Dtkjbjo8YCrTo6CcBu4mONa6IKv3XRidmtzh\nAYuPcBLAkb8qptvX4qMHl/L9d6TQY3obTQ1ispD57YKPU5BpGPds0KUCjqIRUENs\ny0jijfIuRU4EQVTlnAyvT9rVnCU/2A0loECEvDllxsCn0wiVicNhmwKnMPFsbWEB\nogEGjlyv3mUA0e4ja6gFLbOdYmvahdI9AgMBAAE=\n-----END RSA PUBLIC KEY-----'
+// }
+
+verifyTermPinIbm({
+    tpk: 'S0007271TN00E00019BAD23B0CEF79E33328CA0568A0E186FC17E8DE738AAF9FB67C6E1FF',
+    pvk: 'S00072V1TN00E00019412BA0AB9D9377261D2CDDB1C4A063ABF35B4CB9E98F7948A501DA2',
+    maximumPinLength: '12',
+    pinBlock: 'E5B0C1445E4C57AF',
+    pinBlockFormat: '01',
+    checkLength: '06',
+    pan: '600000000000',
+    decimalisationTable: '709F26B22464E96A',
+    pinValidationData: '1234560000N0',
+    offset: '093636FFFFFF',
+    lmkIdentifier: '01'
+});
+
+verifyTermPinPvv({
+    tpk: 'S0007271TN00E00019BAD23B0CEF79E33328CA0568A0E186FC17E8DE738AAF9FB67C6E1FF',
+    pvk: 'S00072V2TN00E00014C0328F82856C4E6D7CCF7A9A1597CB0662C35A18CC72EB9CF97917C',
+    pinBlock: 'E57BC634D4717907',
+    pinBlockFormat: '01',
+    pan: '600000000000',
+    pvki: '1',
+    pvv: '2194'
+});
+
+translatePinTpkLmk({
+    tpk: 'S0007271TN00E00019BAD23B0CEF79E33328CA0568A0E186FC17E8DE738AAF9FB67C6E1FF',
+    pinBlock: 'E57BC634D4717907',
+    pinBlockFormat: '01',
+    pan: '600000000000',
+    lmkIdentifier: '01'
+});
+// pin: '4848867'
+
+translatePinTpkZpkBdk({
+    sourceTpk: 'S0007271TN00E00019BAD23B0CEF79E33328CA0568A0E186FC17E8DE738AAF9FB67C6E1FF',
+    destinationKey: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+    maximumPinLength: '12',
+    sourcePinBlock: 'E57BC634D4717907',
+    sourcePinBlockFormat: '01',
+    destinationPinBlockFormat: '01',
+    pan: '600000000000',
+    lmkIdentifier: '01'
+});
+// {checkLength: '06', pinBlock: 'FC99D994F1D3D3B8', pinBlockFormat: '01'}
+
+translatePinTpkZpkBdk({
+    sourceTpk: 'S0007271TN00E00019BAD23B0CEF79E33328CA0568A0E186FC17E8DE738AAF9FB67C6E1FF',
+    destinationKeyFlag: '',
+    destinationKey: 'S00072B0TN00E0001566678078B5337915F4860C92F3FF2D6A6B11E8786F22DC8032EB758',
+    destinationKsnDescriptor: 'A05',
+    destinationKsn: 'FFFF000001315240003A',
+    maximumPinLength: '12',
+    sourcePinBlock: 'E57BC634D4717907',
+    sourcePinBlockFormat: '01',
+    destinationPinBlockFormat: '01',
+    pan: '600000000000',
+    lmkIdentifier: '01'
+});
+// {checkLength: '06', pinBlock: '741311DA9D5D6C32', pinBlockFormat: '01'}
+
+await translatePinBdkBdkZpk({
+    sourceKeyFlag: '',
+    sourceKey: 'S00072B0TN00E0001566678078B5337915F4860C92F3FF2D6A6B11E8786F22DC8032EB758',
+    destinationKeyFlag: '',
+    destinationKey: 'S00072B0TN00E0001134E8D68D46BC8356F84F598155A1B5C44199D9847A2A58B64BE091F',
+    sourceKsnDescriptor: 'A05',
+    sourceKsn: 'FFFF000001315240003A',
+    destinationKsnDescriptor: 'A05',
+    destinationKsn: 'FFFF000001315240003A',
+    sourcePinBlock: '741311DA9D5D6C32',
+    sourcePinBlockFormat: '01',
+    destinationPinBlockFormat: '01',
+    pan: '600000000000',
+    destinationPanDelimiter: '',
+    destinationPan: '',
+    lmkIdentifier: '01'
+});
+// {checkLength: '06', errorCode: '00', pinBlock: 'BBF74DF0FFA00ED1', pinBlockFormat: '01'}
+
+await translatePinBdkBdkZpk({
+    sourceKeyFlag: '',
+    sourceKey: 'S00072B0TN00E0001566678078B5337915F4860C92F3FF2D6A6B11E8786F22DC8032EB758',
+    destinationKeyFlag: '',
+    destinationKey: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+    sourceKsnDescriptor: 'A05',
+    sourceKsn: 'FFFF000001315240003A',
+    destinationKsnDescriptor: '',
+    destinationKsn: '',
+    sourcePinBlock: '741311DA9D5D6C32',
+    sourcePinBlockFormat: '01',
+    destinationPinBlockFormat: '01',
+    pan: '600000000000',
+    destinationPanDelimiter: '',
+    destinationPan: '',
+    lmkIdentifier: '01'
+});
+// {checkLength: '06', errorCode: '00', pinBlock: 'FC99D994F1D3D3B8', pinBlockFormat: '01'}
+
+await generateOffsetIbm({
+    keyType: 'FFF',
+    key: 'S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9',
+    pvk: 'S00072V1TN00E00010AE0AD2B1990AB407FAD15059E287760A05DF4DA2391EAB138877E22',
+    pinBlock: 'FC99D994F1D3D3B8',
+    pinBlockFormat: '01',
+    checkLength: '06',
+    pan: '600000000000',
+    decimalisationTable: '709F26B22464E96A',
+    pinValidationData: '0000000000N0',
+    lmkIdentifier: '01'
+});
+// {offset: '035965FFFFFF'}
+
+await verifyOffsetIbmDukpt({
+    mode: '0',
+    macMode: '',
+    macMethod: '',
+    bdk: 'S00072B0TN00E0001566678078B5337915F4860C92F3FF2D6A6B11E8786F22DC8032EB758',
+    pvk: 'S00072V1TN00E00010AE0AD2B1990AB407FAD15059E287760A05DF4DA2391EAB138877E22',
+    ksnDescriptor: 'A05',
+    ksn: 'FFFF000001315240003A',
+    pinBlock: '741311DA9D5D6C32',
+    pinBlockFormat: '01',
+    checkLength: 6,
+    pan: '600000000000',
+    decimalisationTable: '709F26B22464E96A',
+    pinValidationData: '0000000000N0',
+    offset: '035965FFFFFF',
+    mac: '',
+    messageDataLengthBytesLength: 0,
+    messageDataLengthBytes: '',
+    messageData: ''
+});

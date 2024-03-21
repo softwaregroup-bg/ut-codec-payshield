@@ -18,8 +18,9 @@ const context = {
     trace: 11
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'verifyTermPinIbm encode, set 1');
-    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'verifyTermPinIbm encode, set 2');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'verifyTermPinIbm variant encode, set 1');
+    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'verifyTermPinIbm variant encode, set 2');
+    t.same(payshield.encode(testData[2].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[2].response, 'verifyTermPinIbm keyblock encode, set 3');
 
     t.end();
 });
