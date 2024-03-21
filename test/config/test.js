@@ -784,7 +784,6 @@ module.exports = {
             0: {
                 request: bufferize('30383531434230303036313444334530394344334236343536453031'),
                 response: {
-                    errorCode: '00',
                     checkLength: '06',
                     pinBlock: '14D3E09CD3B6456E',
                     pinBlockFormat: '01'
@@ -793,7 +792,6 @@ module.exports = {
             1: {
                 request: bufferize('30363139434230303034453837304344433845303637454232453031'),
                 response: {
-                    errorCode: '00',
                     checkLength: '04',
                     pinBlock: 'E870CDC8E067EB2E',
                     pinBlockFormat: '01'
@@ -801,19 +799,19 @@ module.exports = {
             },
             2: {
                 request: bufferize('3039393143423130'),
-                response: 'payshield.translatePinTpkZpk.10'
+                response: 'payshield.translatePinTpkZpkBdk.10'
             },
             3: {
                 request: bufferize('3130303143423131'),
-                response: 'payshield.translatePinTpkZpk.11'
+                response: 'payshield.translatePinTpkZpkBdk.11'
             },
             4: {
                 request: bufferize('3130313043423233'),
-                response: 'payshield.translatePinTpkZpk.23'
+                response: 'payshield.translatePinTpkZpkBdk.23'
             },
             5: {
                 request: bufferize('3130323543423230'),
-                response: 'payshield.translatePinTpkZpk.20'
+                response: 'payshield.translatePinTpkZpkBdk.20'
             }
         },
         translatePinZpkLmkEncode: {
@@ -878,8 +876,7 @@ module.exports = {
             0: {
                 request: bufferize('303030304A44303030333935373032'),
                 response: {
-                    errorCode: '00',
-                    pin: bufferize([48, 51, 57, 53, 55, 48, 50])
+                    pin: '0395702'
                 }
             },
             1: {
@@ -2863,8 +2860,7 @@ module.exports = {
             0: {
                 request: bufferize('30303138475030303030'),
                 response: {
-                    errorCode: '00',
-                    rest: bufferize('3030')
+                    macErrorCode: '00'
                 }
             },
             1: {
