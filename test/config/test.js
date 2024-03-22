@@ -2945,10 +2945,7 @@ module.exports = {
         verifyPvvDukptDecode: {
             0: {
                 request: bufferize('3030333147523030'),
-                response: {
-                    errorCode: '00',
-                    rest: bufferize([])
-                }
+                response: {}
             },
             1: {
                 request: bufferize('3030333147523031'),
