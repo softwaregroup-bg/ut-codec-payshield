@@ -33,6 +33,7 @@ const translatePinTpkLmk = () => {};
 const translatePinTpkZpkBdk = () => {};
 const translatePinBdkBdkZpk = () => {};
 const verifyOffsetIbmDukpt = () => {};
+const verifyPvvDukpt = () => {};
 
 await hsmGenerateKey({
     mode: '0',
@@ -52,6 +53,7 @@ await hsmGenerateKey({
 // ZPK-1: S00072P0TB00E0001EA421618B34F5FA1A77F7CF6480111B97CF0FAE7BD77D589EC921EF9; 4FE9FD
 // ZPK-1 under ZMK-1: S00072P0TB00N00FFE1D89671C973C7F0DAF91CB2EBF379493C08975679001172C89A0AF8; 4FE9FD
 // ZPK-2: S00072P0TB00E00010D869FE84C1F77AE64E0019151533363D4CCE7E1C3F89F3D86115EE8; 456B7D
+// ZPK-3: S0007272TN00E0001DE16F028F38CC385436D8E5B3DD4341F3E55379FBCB39710FE2BB6B4; 4D66A4
 // MK-AC: S00072E0TN00E00017772090F5BDE6568F9B0EFDADD1D160CDB1655DE1984F00973EC3596; 5E7AF8
 // PVK generic: S00072V0TN00E000123721C789734ADC94BBA5A97A7926D5BAFA19AFC35D1D3126BD38F85; 210B96
 // PVK IBM3624: S00072V1TN00E00010AE0AD2B1990AB407FAD15059E287760A05DF4DA2391EAB138877E22; 31540C
@@ -574,4 +576,56 @@ await verifyOffsetIbmDukpt({
     messageDataLengthBytesLength: 0,
     messageDataLengthBytes: '',
     messageData: ''
+});
+
+await translatePinBdkBdkZpk({
+    sourceKeyFlag: '',
+    sourceKey: 'S00072B0TN00E0001566678078B5337915F4860C92F3FF2D6A6B11E8786F22DC8032EB758',
+    destinationKeyFlag: '',
+    destinationKey: 'S0007272TN00E0001DE16F028F38CC385436D8E5B3DD4341F3E55379FBCB39710FE2BB6B4',
+    sourceKsnDescriptor: 'A05',
+    sourceKsn: 'FFFF000001315240003A',
+    destinationKsnDescriptor: '',
+    destinationKsn: '',
+    sourcePinBlock: '741311DA9D5D6C32',
+    sourcePinBlockFormat: '01',
+    destinationPinBlockFormat: '01',
+    pan: '600000000000',
+    destinationPanDelimiter: '',
+    destinationPan: '',
+    lmkIdentifier: '01'
+});
+// {checkLength: '06', errorCode: '00', pinBlock: '766532A20A0A264B', pinBlockFormat: '01'}
+
+await generatePvv({
+    keyType: 'FFF',
+    key: 'S0007272TN00E0001DE16F028F38CC385436D8E5B3DD4341F3E55379FBCB39710FE2BB6B4',
+    pvk: 'S00072V2TN00E0001E80A2926443C3AF11BF0317C669FA0EA0E100ABDF92BF7A3AF232D4C',
+    pinBlock: '766532A20A0A264B',
+    pinBlockFormat: '01',
+    pan: '600000000000',
+    pvki: '1',
+    lmkIdentifier: '01'
+});
+// {pvv: '7547'}
+
+await verifyPvvDukpt({
+    mode: '0',
+    macMode: '',
+    macMethod: '',
+    bdk: 'S00072B0TN00E0001566678078B5337915F4860C92F3FF2D6A6B11E8786F22DC8032EB758',
+    pvk: 'S00072V2TN00E0001E80A2926443C3AF11BF0317C669FA0EA0E100ABDF92BF7A3AF232D4C',
+    ksnDescriptor: 'A05',
+    ksn: 'FFFF000001315240003A',
+    pinBlock: '741311DA9D5D6C32',
+    pinBlockFormat: '01',
+    pan: '600000000000',
+    delimiter: '',
+    verificationPan: '',
+    pvki: '1',
+    pvv: '7547',
+    mac: '',
+    messageDataLengthBytes: '',
+    messageData: '',
+    lmkIdentifier: '01'
 });

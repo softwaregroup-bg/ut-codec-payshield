@@ -140,6 +140,14 @@ module.exports = {
         }
         return response;
     },
+    GR: (bodyObj) => {
+        const {rest} = bodyObj;
+        const response = {};
+        if (rest.length) {
+            response.macErrorCode = rest.toString();
+        }
+        return response;
+    },
     GX: (bodyObj) => {
         const {rest} = bodyObj;
         const result = {};
