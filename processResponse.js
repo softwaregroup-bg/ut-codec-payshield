@@ -208,13 +208,12 @@ module.exports = {
         if (['01', '02', '03'].includes(modeFlag)) {
             counter += ivLengthByKey;
             returnResponse.iv = restString.slice(0, counter);
-        } else {
-            returnResponse.messageLength = parseInt(restString.slice(
-                counter,
-                counter + 4
-            ), 16);
-            returnResponse.encrypted = restString.slice(counter + 4);
         }
+        returnResponse.messageLength = parseInt(restString.slice(
+            counter,
+            counter + 4
+        ), 16);
+        returnResponse.encrypted = restString.slice(counter + 4);
         return returnResponse;
     },
     M3: (bodyObj, {modeFlag, outputFormatFlag}) => {
@@ -229,13 +228,12 @@ module.exports = {
         if (['01', '02', '03'].includes(modeFlag)) {
             counter += ivLengthByKey;
             returnResponse.iv = restString.slice(0, counter);
-        } else {
-            returnResponse.messageLength = parseInt(restString.slice(
-                counter,
-                counter + 4
-            ), 16);
-            returnResponse.decrypted = restString.slice(counter + 4);
         }
+        returnResponse.messageLength = parseInt(restString.slice(
+            counter,
+            counter + 4
+        ), 16);
+        returnResponse.decrypted = restString.slice(counter + 4);
         return returnResponse;
     },
     M5: (bodyObj, {sourceModeFlag, destinationModeFlag, outputFormatFlag}) => {
