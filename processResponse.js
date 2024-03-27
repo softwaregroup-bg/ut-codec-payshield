@@ -127,9 +127,9 @@ module.exports = {
         };
     },
     GN: (bodyObj) => {
-        const {hash} = bodyObj;
+        const {rest} = bodyObj;
         return {
-            hash: hash.toString('hex')
+            hash: rest.toString('hex')
         };
     },
     GP: (bodyObj) => {
@@ -261,11 +261,15 @@ module.exports = {
         returnResponse.encrypted = restString.slice(counter + 4);
         return returnResponse;
     },
-    M7: (bodyObj) => {
+    M7: (bodyObj, {modeFlag}) => {
         const {rest} = bodyObj;
-        return {
-            value: rest.toString()
-        };
+        const response = {};
+        if (['1', '2'].includes(modeFlag)) {
+            response.iv = rest.toString();
+        } else if (['0', '3'].includes(modeFlag)) {
+            response.mac = rest.toString();
+        }
+        return response;
     },
     M9: (bodyObj) => {
         const {rest} = bodyObj;

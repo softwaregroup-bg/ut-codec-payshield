@@ -249,7 +249,7 @@
         "requestCode": "EI",
         "responseCode": "EJ",
         "_requestPattern": "keyTypeIndicator:1/string, keyLength:4/string, publicKeyEncoding:2/string",
-        "requestPattern": "keyTypeIndicator:1/string, \"2048\", \"01\", delimiterLmk/string, lmkIdentifier/string, delimiter1/string, keyVersionNumber/string, optionalBlocksCount/string, delimiter2/string, exportability/string",
+        "requestPattern": "keyTypeIndicator:1/string, \"2048\", \"01\", delimiterLmk/string, lmkIdentifier/string, delimiterKeyBlock/string, keyVersionNumber/string, optionalBlocksCount/string, delimiterExport/string, exportability/string",
         "responsePattern": "errorCode:2/string, publicKey:269/string-binhex, privateKeyLength:4/string-left-zero, rest/binary",
         "customResponseError": {
             "03": "Invalid public key encoding type",
@@ -265,7 +265,7 @@
     "generateRsaSignature": {
         "requestCode": "EW",
         "responseCode": "EX",
-        "requestPattern": "hashIdentifier:2/string, signatureIdentifier:2/string, padModeIdentifier:2/string, messageDataLength:4/string-left-zero, messageData:messageDataLength/string-binhex, \";\", privateKeyFlag:2/string, privateKeyLength:4/string-left-zero, privateKey:privateKeyLength/string-binhex, delimiterLmk/string, lmkIdentifier/string",
+        "requestPattern": "hashIdentifier:2/string, signatureIdentifier:2/string, padModeIdentifier:2/string, messageDataLength:4/string-left-zero, messageData:messageDataLength/string-binhex, \";\", privateKeyFlag:2/string, privateKeyLength:4/string-left-zero, privateKey:privateKeyBytes/string-binhex, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, signatureLength:4/string-left-zero, signature:signatureLength/string-binhex",
         "customResponseError": {
             "03": "Invalid private key type",
@@ -314,7 +314,7 @@
         "requestCode": "GM",
         "responseCode": "GN",
         "requestPattern": "hashId:2/string, messageDataLength:5/string-left-zero, messageData:messageDataLength/string-binhex",
-        "responsePattern": "errorCode:2/string, hash/binary",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "05": "Invalid hash identifier"
         }
