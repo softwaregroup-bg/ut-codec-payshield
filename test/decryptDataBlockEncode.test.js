@@ -10,7 +10,7 @@ const method = 'decryptDataBlock';
 const testData = config.test[`${method}Encode`];
 const testResults = config.test[`${method}Encode`];
 const $meta = {
-    method: method,
+    method,
     mtid: 'request',
     trace: 2
 };

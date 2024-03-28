@@ -199,7 +199,7 @@ PayshieldCodec.prototype.encode = function(data, $meta, context, log) {
     const cmdCode = this.commands[commandName].code;
 
     const buffer = bitsyntax.build(this.headerPattern, {
-        headerNo: headerNo,
+        headerNo,
         code: cmdCode,
         body: bodyBuff
     });

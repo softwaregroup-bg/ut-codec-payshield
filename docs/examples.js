@@ -27,6 +27,7 @@ const encryptDataBlock = () => {};
 const decryptDataBlock = () => {};
 const translateDataBlock = () => {};
 const generateRsaKeyPair = () => {};
+const generateRsaSignature = () => {};
 const verifyTermPinIbm = () => {};
 const verifyTermPinPvv = () => {};
 const translatePinTpkLmk = () => {};

@@ -11,7 +11,7 @@ const testData = config.test[`${method}Decode`];
 const testResults = config.test[`${method}Decode`];
 const testContext = config.test[`${method}Decode`];
 const $meta = {
-    method: method,
+    method,
     mtid: 'response',
     trace: 1
 };
