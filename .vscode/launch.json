@@ -83,6 +83,8 @@
             "generateRandomPinEncode.test",
             "generateRsaKeyPairDecode.test",
             "generateRsaKeyPairEncode.test",
+            "generateRsaSignatureDecode.test",
+            "generateRsaSignatureEncode.test",
             "generateVerifyMacDukptDecode.test",
             "generateVerifyMacDukptEncode.test",
             "hashDataBlockDecode.test",
