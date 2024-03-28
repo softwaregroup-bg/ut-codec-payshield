@@ -2229,14 +2229,26 @@ module.exports = {
             0: {
                 request: bufferize('303034384D3730304335374534323935'),
                 response: {
-                    value: 'C57E4295'
-                }
+                    mac: 'C57E4295'
+                },
+                context: context({
+                    request: {
+                        modeFlag: '0'
+                    },
+                    headerNo: '0048'
+                })
             },
             1: {
                 request: bufferize('303034384D3730304246323637363545'),
                 response: {
-                    value: 'BF26765E'
-                }
+                    iv: 'BF26765E'
+                },
+                context: context({
+                    request: {
+                        modeFlag: '1'
+                    },
+                    headerNo: '0048'
+                })
             },
             2: {
                 request: bufferize('303030304D373032'),
@@ -3081,10 +3093,10 @@ module.exports = {
             0: {
                 request: {
                     keyTypeIndicator: '1',
-                    delimiter1: '',
+                    delimiterKeyBlock: '',
                     keyVersionNumber: '',
                     optionalBlocksCount: '',
-                    delimiter2: '',
+                    delimiterExport: '',
                     exportability: ''
                 },
                 response: '30303131454931323034383031'
@@ -3092,10 +3104,10 @@ module.exports = {
             1: {
                 request: {
                     keyTypeIndicator: '1',
-                    delimiter1: '#',
+                    delimiterKeyBlock: '#',
                     keyVersionNumber: '00',
                     optionalBlocksCount: '00',
-                    delimiter2: '&',
+                    delimiterExport: '&',
                     exportability: 'N',
                     lmkIdentifier: '01'
                 },
