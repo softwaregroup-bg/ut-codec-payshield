@@ -536,8 +536,7 @@ module.exports = {
             0: {
                 request: bufferize('303030334248303030393938373635'),
                 response: {
-                    errorCode: '00',
-                    pin: bufferize('30393938373635', 'ascii')
+                    pin: '0998765'
                 }
             },
             1: {
@@ -600,9 +599,7 @@ module.exports = {
         eraseKeyChangeStorageDecode: {
             0: {
                 request: bufferize('3030323842543030'),
-                response: {
-                    errorCode: '00'
-                }
+                response: true
             },
             1: {
                 request: bufferize('3030323842543638'),
@@ -683,19 +680,19 @@ module.exports = {
             0: {
                 request: bufferize('3030313342563030384646454431'),
                 response: {
-                    keyCheckValue: '8FFED1'
+                    kcv: '8FFED1'
                 }
             },
             1: {
                 request: bufferize('303031304256303036414537434433444642364637384630'),
                 response: {
-                    keyCheckValue: '6AE7CD3DFB6F78F0'
+                    kcv: '6AE7CD3DFB6F78F0'
                 }
             },
             2: {
                 request: bufferize('3030303042563030323335364632'),
                 response: {
-                    keyCheckValue: '2356F2'
+                    kcv: '2356F2'
                 }
             },
 
@@ -1180,15 +1177,11 @@ module.exports = {
         verifyCvvDecode: {
             0: {
                 request: bufferize('30323631435A3030'),
-                response: {
-                    errorCode: '00'
-                }
+                response: true
             },
             1: {
                 request: bufferize('30313131435A3030'),
-                response: {
-                    errorCode: '00'
-                }
+                response: true
             },
             2: {
                 request: bufferize('30323739435A3031'),
@@ -2359,9 +2352,7 @@ module.exports = {
         printFormatDecode: {
             0: {
                 request: bufferize('3035333450423030'),
-                response: {
-                    errorCode: '00'
-                }
+                response: true
             }
         },
         printPinEncode: {
@@ -2413,8 +2404,7 @@ module.exports = {
             0: {
                 request: bufferize('30303330514C30303433323130'),
                 response: {
-                    errorCode: '00',
-                    pin: bufferize('3433323130')
+                    pin: '43210'
                 }
             },
             1: {
@@ -2434,9 +2424,7 @@ module.exports = {
         printTmkMailerDecode: {
             0: {
                 request: bufferize('3033393054423030'),
-                response: {
-                    errorCode: '00'
-                }
+                response: true
             },
             1: {
                 request: bufferize('3030303054423130'),
@@ -2450,9 +2438,7 @@ module.exports = {
         printTmkMailerEndDecode: {
             0: {
                 request: bufferize('30333930545A3030'),
-                response: {
-                    errorCode: '00'
-                }
+                response: true
             }
         },
         generatePvvEncode: {

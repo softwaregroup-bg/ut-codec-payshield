@@ -48,7 +48,7 @@
         "requestCode": "BG",
         "responseCode": "BH",
         "requestPattern": "account:12/string, pin/string, delimiterLmk/string, lmkIdentifier/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "generateOffsetIbm": {
         "requestCode": "BK",
@@ -519,7 +519,7 @@
         "requestCode": "PE",
         "responseCode": "PF",
         "requestPattern": "documentType:1/string, account:12/string, pin/string, printFields/string, delimiterLmk/string, lmkIdentifier/string",
-        "responsePattern": "errorCode:2/string, checkValue/binary"
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "printPinEnd": {
         "responseCode": "PZ",
@@ -533,7 +533,7 @@
         "requestCode": "QK",
         "responseCode": "QL",
         "requestPattern": "pin/string, oldAccountNumber:12/string, newAccountNumber:12/string, delimiterLmk/string, lmkIdentifier/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "printTmkMailer": {
         "requestCode": "TA",

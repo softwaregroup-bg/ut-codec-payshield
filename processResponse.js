@@ -57,10 +57,19 @@ module.exports = {
             data: rest.toString()
         };
     },
+    BH: (bodyObj) => {
+        const {rest} = bodyObj;
+        return {
+            pin: rest.toString()
+        };
+    },
+    BT: () => {
+        return true;
+    },
     BV: (bodyObj) => {
         const {keyCheckValue} = bodyObj;
         return {
-            keyCheckValue: keyCheckValue.toString()
+            kcv: keyCheckValue.toString()
         };
     },
     BX: (bodyObj) => {
@@ -94,6 +103,9 @@ module.exports = {
         return {
             cvv
         };
+    },
+    CZ: () => {
+        return true;
     },
     EF: (bodyObj) => {
         const {rest} = bodyObj;
@@ -271,18 +283,33 @@ module.exports = {
         }
         return response;
     },
-    M9: (bodyObj) => {
+    M9: (bodyObj, {modeFlag}) => {
         const {rest} = bodyObj;
         const response = {};
-        if (rest?.length) {
-            response.value = rest.toString();
+        if (['1', '2'].includes(modeFlag)) {
+            response.iv = rest.toString();
         }
         return response;
     },
+    PB: () => {
+        return true;
+    },
     PF: (bodyObj) => {
-        const {checkValue} = bodyObj;
+        const {rest} = bodyObj;
         return {
-            checkValue: checkValue.toString()
+            checkValue: rest.toString()
         };
+    },
+    QL: (bodyObj) => {
+        const {rest} = bodyObj;
+        return {
+            pin: rest.toString()
+        };
+    },
+    TB: () => {
+        return true;
+    },
+    TZ: () => {
+        return true;
     }
 };
