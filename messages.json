@@ -2,7 +2,7 @@
     "generateKey": {
         "requestCode": "A0",
         "responseCode": "A1",
-        "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode/string, dukptMasterKeyType/string, dukptMasterKey/string, ksn/string, zkaMasterKeyType/string, zkaMasterKey/string, zkaOption/string, zkaRndi/string, delimiter/string, keyZmkTmkFlag/string, keyZmkTmk/string, keySchemeZmkTmk/string, delimiterLmk/string, lmkIdentifier/string, delimiterKeyBlock/string, keyUsage/string, algorithm/string, modeOfUse/string, keyVersionNumber/string, exportability/string, optionalBlocksCount/string, tr31BlockData/string",
+        "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode/string, dukptMasterKeyType/string, dukptMasterKey/string, ksn/string, zkaMasterKeyType/string, zkaMasterKey/string, zkaOption/string, zkaRndi/string, delimiterZmkTmk/string, keyZmkTmkFlag/string, keyZmkTmk/string, keySchemeZmkTmk/string, delimiterLmk/string, lmkIdentifier/string, delimiterKeyblock/string, keyUsageKeyblock/string, algorithmKeyblock/string, modeOfUseKeyblock/string, keyVersionNumberKeyblock/string, exportabilityKeyblock/string, optionalBlocksCountKeyblock/string, optionalBlocksDataKeyblock/string, delimiterExportKeyblock/string, modExportabilityKeyblock/string, delimiterVersionIdKeyblock/string, keyBlockVersionIdKeyblock/string, delimiterVariant/string, keyUsageVariant/string, modeOfUseVariant/string, keyVersionNumberVariant/string, exportabilityVariant/string, optionalBlocksCountVariant/string, optionalBlocksDataVariant/string, delimiterVersionIdVariant/string, keyBlockVersionIdVariant/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "10": "ZMK or TMK Parity error"
@@ -21,7 +21,7 @@
     "importKey": {
         "requestCode": "A6",
         "responseCode": "A7",
-        "requestPattern": "keyType:3/string, zmk/string, key/string, keyScheme:1/string, delimiterLmk/string, lmkIdentifier/string",
+        "requestPattern": "keyType:3/string, zmk/string, key/string, keyScheme:1/string, delimiterLmk/string, lmkIdentifier/string, delimiterTr31/string, keyUsageTr31/string, optionalBlocksCountTr31/string, optionalBlocksDataTr31/string, delimiterKeyblock/string, keyUsageKeyblock/string, modeOfUseKeyblock/string, keyVersionNumberKeyblock/string, exportabilityKeyblock/string, optionalBlocksCountKeyblock/string, optionalBlocksDataKeyblock/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "warnings": ["01"],
         "customResponseError": {
@@ -31,7 +31,7 @@
     "exportKey": {
         "requestCode": "A8",
         "responseCode": "A9",
-        "requestPattern": "keyType:3/string, zmk/string, key/string, keyScheme:1/string, delimiterLmk/string, lmkIdentifier/string, delimiterKeyBlock/string, exportability/string",
+        "requestPattern": "keyType:3/string, zmk/string, key/string, keyScheme:1/string, delimiterLmk/string, lmkIdentifier/string, delimiterKeyblock/string, modExportabilityKeyblock/string, delimiterVersionIdKeyblock/string, keyBlockVersionIdKeyblock/string, delimiterVariant/string, keyUsageVariant/string, modeOfUseVariant/string, keyVersionNumberVariant/string, exportabilityVariant/string, optionalBlocksCountVariant/string, optionalBlocksDataVariant/string, delimiterVersionIdVariant/string, keyBlockVersionIdVariant/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "10": "ZMK or TMK Parity error",
