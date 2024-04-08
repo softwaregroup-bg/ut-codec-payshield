@@ -79,6 +79,8 @@ Each command should be described in _messages.json_ in the following way:
 
 Generate a Key
 
+![A0 parameters](./docs/A0_generateKey.png)
+
 - _error codes_
   - _10_: _ZMK or TMK Parity error_
 
@@ -94,6 +96,8 @@ Form a Key from Encrypted Components
 
 Import a Key
 
+![A6 parameters](./docs/A6_importKey.png)
+
 - _error codes_
   - _10_: _ZMK Parity error_
 
@@ -103,6 +107,8 @@ Import a Key
 ### _A8 (A9)_
 
 Export a Key
+
+![A8 parameters](./docs/A8_exportKey.png)
 
 - _error codes_
   - _10_: _ZMK or TMK Parity error_
