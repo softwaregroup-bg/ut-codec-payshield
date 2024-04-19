@@ -6,11 +6,11 @@ const errorApi = { getError: get, fetchErrors: fetch, defineError: define };
 const Payshield = require('../index');
 const payshield = new Payshield(Object.assign({}, config, errorApi));
 
-const method = 'translatePinTpkZpk';
+const method = 'generateRsaKeyPair';
 const testData = config.test[`${method}Encode`];
 const testResults = config.test[`${method}Encode`];
 const $meta = {
-    method: method,
+    method,
     mtid: 'request',
     trace: 11
 };
@@ -18,8 +18,8 @@ const context = {
     trace: 11
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'translatePinTpkZpk encode, set 1');
-    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'translatePinTpkZpk encode, set 2');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'generateRsaKeyPair variant encode, set 1');
+    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'generateRsaKeyPair keyblock encode, set 2');
 
     t.end();
 });

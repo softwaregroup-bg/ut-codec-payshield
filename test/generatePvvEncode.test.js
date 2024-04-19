@@ -10,7 +10,7 @@ const method = 'generatePvv';
 const testData = config.test[`${method}Encode`];
 const testResults = config.test[`${method}Encode`];
 const $meta = {
-    method: method,
+    method,
     mtid: 'request',
     trace: 2
 };
@@ -18,8 +18,9 @@ const context = {
     trace: 2
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'generatePvv encode, set 1, TPK');
-    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'generatePvv encode, set 2, ZPK');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'generatePvv variant encode, set 1, TPK');
+    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'generatePvv variant encode, set 2, ZPK');
+    t.same(payshield.encode(testData[2].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[2].response, 'generatePvv keyblock encode, set 3, ZPK');
 
     t.end();
 });

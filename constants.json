@@ -29,6 +29,7 @@
         "outputFormatFlag": true,
         "macSize": true,
         "macAlgorithm": true,
-        "paddingMethod": true
+        "paddingMethod": true,
+        "keyComponents": true
     }
 }

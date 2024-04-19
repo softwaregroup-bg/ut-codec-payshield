@@ -10,7 +10,7 @@ const method = 'translatePinLmkZpk';
 const testData = config.test[`${method}Encode`];
 const testResults = config.test[`${method}Encode`];
 const $meta = {
-    method: method,
+    method,
     mtid: 'request',
     trace: 12
 };
@@ -18,7 +18,8 @@ const context = {
     trace: 12
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'translatePinLmkZpk encode');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'translatePinLmkZpk variant encode');
+    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'translatePinLmkZpk keyblock encode');
 
     t.end();
 });

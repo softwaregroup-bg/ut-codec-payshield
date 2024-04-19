@@ -10,7 +10,7 @@ const method = 'verifyPinGenerateOffset';
 const testData = config.test[`${method}Encode`];
 const testResults = config.test[`${method}Encode`];
 const $meta = {
-    method: method,
+    method,
     mtid: 'request',
     trace: 29
 };
@@ -18,7 +18,8 @@ const context = {
     trace: 29
 };
 tap.test(`${method}Encode`, (t) => {
-    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'verifyPinGenerateOffset encode');
+    t.same(payshield.encode(testData[0].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[0].response, 'verifyPinGenerateOffset variant encode');
+    t.same(payshield.encode(testData[1].request, $meta, {trace: context.trace}).toString('hex').toUpperCase(), testResults[1].response, 'verifyPinGenerateOffset keyblock encode');
 
     t.end();
 });

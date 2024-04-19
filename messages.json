@@ -2,8 +2,8 @@
     "generateKey": {
         "requestCode": "A0",
         "responseCode": "A1",
-        "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode:deriveKeyModeLen/string, dukptMasterKeyType:dukptMasterKeyTypeLen/string, dukptMasterKey:dukptMasterKeyLen/string, ksn:ksnLength/string, zkaMasterKeyType:zkaMasterKeyTypeLength/string, zkaMasterKey:zkaMasterKeyLength/string, zkaOption:zkaOptionLength/string, zkaRndi:zkaRndiLength/string, delimiter:delimiterLength/string, keyZmkTmkFlag:keyZmkTmkFlagLength/string, keyZmkTmk:keyZmkTmkLength/string, keySchemeZmkTmk:keySchemeZmkTmkLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string, tr31BlockData:tr31BlockDataLen/string",
-        "responsePattern": "errorCode:2/string, key:33/string, rest/binary",
+        "requestPattern": "mode:1/string, keyType:3/string, keySchemeLmk:1/string, deriveKeyMode/string, dukptMasterKeyType/string, dukptMasterKey/string, ksn/string, zkaMasterKeyType/string, zkaMasterKey/string, zkaOption/string, zkaRndi/string, delimiterZmkTmk/string, keyZmkTmkFlag/string, keyZmkTmk/string, keySchemeZmkTmk/string, delimiterLmk/string, lmkIdentifier/string, delimiterKeyblock/string, keyUsageKeyblock/string, algorithmKeyblock/string, modeOfUseKeyblock/string, keyVersionNumberKeyblock/string, exportabilityKeyblock/string, optionalBlocksCountKeyblock/string, optionalBlocksDataKeyblock/string, delimiterExportKeyblock/string, modExportabilityKeyblock/string, delimiterVersionIdKeyblock/string, keyBlockVersionIdKeyblock/string, delimiterVariant/string, keyUsageVariant/string, modeOfUseVariant/string, keyVersionNumberVariant/string, exportabilityVariant/string, optionalBlocksCountVariant/string, optionalBlocksDataVariant/string, delimiterVersionIdVariant/string, keyBlockVersionIdVariant/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "10": "ZMK or TMK Parity error"
         }
@@ -11,8 +11,8 @@
     "formKeyFromComponents": {
         "requestCode": "A4",
         "responseCode": "A5",
-        "requestPattern": "numberOfComponents:1/string, keyType:3/string, keySchemeLmk:1/string, keyComponents:keyComponentsLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
+        "requestPattern": "numberOfComponents:1/string, keyType:3/string, keySchemeLmk:1/string, keyComponents/string, delimiterLmk/string, lmkIdentifier/string, delimiterKeyBlock/string, keyVersionNumber/string, optionalBlocksCount/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "03": "Invalid number of components",
             "10": "Component parity error"
@@ -21,8 +21,8 @@
     "importKey": {
         "requestCode": "A6",
         "responseCode": "A7",
-        "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
+        "requestPattern": "keyType:3/string, zmk/string, key/string, keyScheme:1/string, delimiterLmk/string, lmkIdentifier/string, delimiterTr31/string, keyUsageTr31/string, optionalBlocksCountTr31/string, optionalBlocksDataTr31/string, delimiterKeyblock/string, keyUsageKeyblock/string, modeOfUseKeyblock/string, keyVersionNumberKeyblock/string, exportabilityKeyblock/string, optionalBlocksCountKeyblock/string, optionalBlocksDataKeyblock/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "warnings": ["01"],
         "customResponseError": {
             "10": "ZMK Parity error"
@@ -31,8 +31,8 @@
     "exportKey": {
         "requestCode": "A8",
         "responseCode": "A9",
-        "requestPattern": "keyType:3/string, zmk:33/string, key:33/string, keyScheme:1/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, key:33/string, keyCheckValue:6/string",
+        "requestPattern": "keyType:3/string, zmk/string, key/string, keyScheme:1/string, delimiterLmk/string, lmkIdentifier/string, delimiterKeyblock/string, modExportabilityKeyblock/string, delimiterVersionIdKeyblock/string, keyBlockVersionIdKeyblock/string, delimiterVariant/string, keyUsageVariant/string, modeOfUseVariant/string, keyVersionNumberVariant/string, exportabilityVariant/string, optionalBlocksCountVariant/string, optionalBlocksDataVariant/string, delimiterVersionIdVariant/string, keyBlockVersionIdVariant/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "10": "ZMK or TMK Parity error",
             "11": "Key parity error"
@@ -41,19 +41,19 @@
     "echo": {
         "requestCode": "B2",
         "responseCode": "B3",
-        "requestPattern": "length:4/string-left-zero, data:length/string-left-zero",
-        "responsePattern": "errorCode:2/string, data:4/string"
+        "requestPattern": "length:4/string-left-zero, data/string-left-zero",
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "translatePinLmkLmk": {
         "requestCode": "BG",
         "responseCode": "BH",
-        "requestPattern": "account:12/string, pin:pinLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
+        "requestPattern": "account:12/string, pin/string, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "generateOffsetIbm": {
         "requestCode": "BK",
         "responseCode": "BL",
-        "requestPattern": "keyType:3/string, key:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "keyType:3/string, key/string, pvk/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, offset:12/string",
         "warnings": ["02"],
         "customResponseError": {
@@ -73,7 +73,7 @@
     "generateKeyCheckValue": {
         "requestCode": "BU",
         "responseCode": "BV",
-        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key:keyLength/string, delimiter1:delimiter1Length/string, keyType:keyTypeLength/string, delimiter2:delimiter2Length/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string, hashId:hashIdLength/string, hmacKeyLengthBytes:hmacKeyLengthBytesLength/string, hmacKey:hmacKeyLength/string-binhex, delimiter3:delimiter3Length/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key/string, delimiterKeyType/string, keyType/string, delimiterKcvType/string, reserved/string, kcvType/string, hashId/string, hmacKeyLengthBytes/string, hmacKey/string-binhex, delimiterHmac/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, keyCheckValue/binary",
         "customResponseError": {
             "10": "Key parity error"
@@ -82,8 +82,8 @@
     "translateKeyLmkLmk": {
         "requestCode": "BW",
         "responseCode": "BX",
-        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key:33/string, delimiter1:delimiter1Length/string, keyType:keyTypeLength/string, delimiter2:delimiter2Length/string, reserved1:reserved1Length/string, keySchemeLmk:keySchemeLmkLength/string, reserved2:reserved2Length/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, keyTranslated:33/string",
+        "requestPattern": "keyTypeCode:2/string, keyLengthFlag:1/string, key/string, \";\", keyType:3/string, \";\", \"0\", keySchemeLmk/string, \"0\", delimiterLmk/string, lmkIdentifier/string, \"!11\"",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "04": "Invalid key type code",
             "05": "Invalid key length flag",
@@ -92,11 +92,11 @@
             "45": "Invalid key migration destination key type"
         }
     },
-    "translatePinTpkZpk": {
+    "translatePinTpkZpkBdk": {
         "requestCode": "CA",
         "responseCode": "CB",
-        "requestPattern": "sourceTpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, pinBlock:16/string, pinBlockFormat:2/string",
+        "requestPattern": "sourceTpk/string, destinationKeyFlag/string, destinationKey/string, destinationKsnDescriptor/string, destinationKsn/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, checkLength:2/string, rest/binary",
         "customResponseError": {
             "10": "Source TPK parity error",
             "11": "Destination ZPK parity error"
@@ -105,8 +105,8 @@
     "translatePinZpkZpk": {
         "requestCode": "CC",
         "responseCode": "CD",
-        "requestPattern": "sourceZpk:33/string, destinationZpk:33/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, checkLength:2/string, pinBlock:16/string, pinBlockFormat:2/string",
+        "requestPattern": "sourceZpk/string, destinationZpk/string, maximumPinLength:2/string-left-zero, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, checkLength:2/string, rest/binary",
         "customResponseError": {
             "10": "Source ZPK parity error",
             "11": "Destination ZPK parity error"
@@ -115,7 +115,7 @@
     "verifyPinGeneratePvv": {
         "requestCode": "CU",
         "responseCode": "CV",
-        "requestPattern": "keyType:3/string, key:33/string, pvk:33/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, pan:12/string, pvki:1/string, sourcePvv:4/string, destinationPinBlock:16/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "keyType:3/string, key/string, pvk/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, pan:12/string, pvki:1/string, sourcePvv:4/string, destinationPinBlock:16/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, pvv:4/string",
         "customResponseError": {
             "01": "PIN Verification failure",
@@ -129,7 +129,7 @@
     "generateCvv": {
         "requestCode": "CW",
         "responseCode": "CX",
-        "requestPattern": "cvk:33/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "cvk/string, pan/string, \";\", expirationDate:4/string, serviceCode:3/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, cvv:3/string",
         "customResponseError": {
             "10": "CVK A or CVK B parity error",
@@ -139,7 +139,7 @@
     "verifyCvv": {
         "requestCode": "CY",
         "responseCode": "CZ",
-        "requestPattern": "cvk:33/string, cvv:3/string, pan:panLength/string, \";\", expirationDate:4/string, serviceCode:3/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "cvk/string, cvv:3/string, pan/string, \";\", expirationDate:4/string, serviceCode:3/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string",
         "customResponseError": {
             "01": "CVV failed verification",
@@ -150,7 +150,7 @@
     "verifyTermPinIbm": {
         "requestCode": "DA",
         "responseCode": "DB",
-        "requestPattern": "tpk:33/string, pvk:pvkLength/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "tpk/string, pvk/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string",
         "warnings": ["02"],
         "customResponseError": {
@@ -162,7 +162,7 @@
     "verifyTermPinPvv": {
         "requestCode": "DC",
         "responseCode": "DD",
-        "requestPattern": "tpk:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, pvki:1/string, pvv:4/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "tpk/string, pvk/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, pvki:1/string, pvv:4/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string",
         "customResponseError": {
             "01": "PIN verification failure",
@@ -174,7 +174,7 @@
     "generateOffsetIbmLmk": {
         "requestCode": "DE",
         "responseCode": "DF",
-        "requestPattern": "pvk:pvkLength/string, pin:encryptedPinLength/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "pvk/string, pin/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, offset:12/string",
         "warnings": ["02"],
         "customResponseError": {
@@ -186,7 +186,7 @@
     "generatePvvLmk": {
         "requestCode": "DG",
         "responseCode": "DH",
-        "requestPattern": "pvk:pvkLength/string, pin:encryptedPinLength/string, account:12/string, pvki:1/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "pvk/string, pin/string, account:12/string, pvki:1/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, pvv:4/string",
         "customResponseError": {
             "10": "PVK parity error",
@@ -198,7 +198,7 @@
     "verifyPinGenerateOffset": {
         "requestCode": "DU",
         "responseCode": "DV",
-        "requestPattern": "keyType:3/string, key:33/string, pvk:pvkLength/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, sourceOffset:12/string, destinationPinBlock:16/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "keyType:3/string, key/string, pvk/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, sourceOffset:12/string, destinationPinBlock:16/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, offset:12/string",
         "warnings": ["02"],
         "customResponseError": {
@@ -212,7 +212,7 @@
     "verifyInterPinIbm": {
         "requestCode": "EA",
         "responseCode": "EB",
-        "requestPattern": "zpk:33/string, pvk:pvkLength/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "zpk/string, pvk/string, maximumPinLength:2/string-left-zero, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string",
         "warnings": ["02"],
         "customResponseError": {
@@ -224,7 +224,7 @@
     "verifyInterPinPvv": {
         "requestCode": "EC",
         "responseCode": "ED",
-        "requestPattern": "zpk:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiter:delimiterLength/string, verificationPan:verificationPanLength/string, pvki:1/string, pvv:4/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "zpk/string, pvk/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiter/string, verificationPan/string, pvki:1/string, pvv:4/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string",
         "customResponseError": {
             "01": "PIN verification failure",
@@ -236,8 +236,8 @@
     "derivePinIbm": {
         "requestCode": "EE",
         "responseCode": "EF",
-        "requestPattern": "pvk:pvkLength/string, offset:12/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, pin/binary",
+        "requestPattern": "pvk/string, offset:12/string, checkLength:2/string-left-zero, account:12/string, decimalisationTable:16/string, pinValidationData:12/string, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "warnings": ["02"],
         "customResponseError": {
             "10": "PVK parity error",
@@ -249,8 +249,8 @@
         "requestCode": "EI",
         "responseCode": "EJ",
         "_requestPattern": "keyTypeIndicator:1/string, keyLength:4/string, publicKeyEncoding:2/string",
-        "requestPattern": "keyTypeIndicator:1/string, \"2048\", \"01\", delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, publicKey:269/string-binhex, privateKeyLength:4/string-left-zero, privateKey:privateKeyLength/string-binhex",
+        "requestPattern": "keyTypeIndicator:1/string, \"2048\", \"01\", delimiterLmk/string, lmkIdentifier/string, delimiterKeyBlock/string, keyVersionNumber/string, optionalBlocksCount/string, delimiterExport/string, exportability/string",
+        "responsePattern": "errorCode:2/string, publicKey:269/string-binhex, privateKeyLength:4/string-left-zero, rest/binary",
         "customResponseError": {
             "03": "Invalid public key encoding type",
             "04": "Key Length error",
@@ -265,7 +265,7 @@
     "generateRsaSignature": {
         "requestCode": "EW",
         "responseCode": "EX",
-        "requestPattern": "hashIdentifier:2/string, signatureIdentifier:2/string, padModeIdentifier:2/string, messageDataLength:4/string-left-zero, messageData:messageDataLength/string-binhex, \";\", privateKeyFlag:2/string, privateKeyLength:4/string-left-zero, privateKey:privateKeyLength/string-binhex, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "hashIdentifier:2/string, signatureIdentifier:2/string, padModeIdentifier:2/string, messageDataLength:4/string-left-zero, messageData:messageDataLength/string-binhex, \";\", privateKeyFlag:2/string, privateKeyLength:4/string-left-zero, privateKey:privateKeyBytes/string-binhex, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, signatureLength:4/string-left-zero, signature:signatureLength/string-binhex",
         "customResponseError": {
             "03": "Invalid private key type",
@@ -284,13 +284,13 @@
     "translateZekZakLmkZmk": {
         "requestCode": "FM",
         "responseCode": "FN",
-        "requestPattern": "flag:1/string, zmk:33/string, zek:zekLength/string, zak:zakLength/string, atallaVariant:atallaVariantLength/string, delimiter:delimiterLength/string, keySchemeZmk:keySchemeZmkLength/string, reserved:reservedLength/string, kcvType:kcvTypeLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, responseData/binary"
+        "requestPattern": "flag:1/string, zmk/string, zek/string, zak/string, atallaVariant/string, delimiter/string, keySchemeZmk/string, reserved/string, \"1\", delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "generatePvv": {
         "requestCode": "FW",
         "responseCode": "FX",
-        "requestPattern": "keyType:3/string, key:33/string, pvk:pvkLength/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, pvki:1/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "keyType:3/string, key/string, pvk/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, pvki:1/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, pvv:4/string",
         "customResponseError": {
             "10": "PVK parity error",
@@ -302,7 +302,7 @@
     "translatePinBdkBdkZpk": {
         "requestCode": "G0",
         "responseCode": "G1",
-        "requestPattern": "sourceKeyFlag:sourceKeyFlagLength/string, sourceKey:33/string, destinationKeyFlag:destinationKeyFlagLength/string, destinationKey:33/string, sourceKsnDescriptor:3/string, sourceKsn:sourceKsnLength/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, destinationPanDelimiter:destinationPanDelimiterLength/string, destinationPan:destinationPanLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "sourceKeyFlag/string, sourceKey/string, destinationKeyFlag/string, destinationKey/string, sourceKsnDescriptor:3/string, sourceKsn/string, destinationKsnDescriptor/string, destinationKsn/string, sourcePinBlock:16/string, sourcePinBlockFormat:2/string, destinationPinBlockFormat:2/string, pan:12/string, destinationPanDelimiter/string, destinationPan/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, checkLength:2/string, pinBlock:16/string, pinBlockFormat:2/string",
         "customResponseError": {
             "10": "BDK parity error",
@@ -314,7 +314,7 @@
         "requestCode": "GM",
         "responseCode": "GN",
         "requestPattern": "hashId:2/string, messageDataLength:5/string-left-zero, messageData:messageDataLength/string-binhex",
-        "responsePattern": "errorCode:2/string, hash/binary",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "05": "Invalid hash identifier"
         }
@@ -322,7 +322,7 @@
     "verifyOffsetIbmDukpt": {
         "requestCode": "GO",
         "responseCode": "GP",
-        "requestPattern": "mode:1/string, macMode:macModeLength/string, macMethod:macMethodLength/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:ksnLength/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string, mac:macLength/string, messageDataLengthBytes:messageDataLengthBytesLength/string-left-zero, messageData:messageDataLength/string-binhex, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "mode:1/string, macMode/string, macMethod/string, bdk/string, pvk/string, ksnDescriptor:3/string, ksn/string, pinBlock:16/string, pinBlockFormat:2/string, checkLength:2/string-left-zero, pan:12/string, decimalisationTable:16/string, pinValidationData:12/string, offset:12/string, mac/string, messageDataLengthBytes:messageDataLengthBytesLength/string-left-zero, messageData:messageDataLengthBytes/string-binhex, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "warnings": ["02"],
         "customResponseError": {
@@ -335,7 +335,7 @@
     "verifyPvvDukpt": {
         "requestCode": "GQ",
         "responseCode": "GR",
-        "requestPattern": "mode:1/string, macMode:macModeLength/string, macMethod:macMethodLength/string, bdk:33/string, pvk:pvkLength/string, ksnDescriptor:3/string, ksn:ksnLength/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiter:delimiterLength/string, verificationPan:verificationPanLength/string, pvki:1/string, pvv:4/string, mac:macLength/string, messageDataLengthBytes:messageDataLengthBytesLength/string-left-zero, messageData:messageDataLength/string-binhex, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "mode:1/string, macMode/string, macMethod/string, bdk/string, pvk/string, ksnDescriptor:3/string, ksn/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiter/string, verificationPan/string, pvki:1/string, pvv:4/string, mac/string, messageDataLengthBytes/string-left-zero, messageData/string-binhex, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "01": "PIN Verification failure",
@@ -347,7 +347,7 @@
     "generateVerifyMacDukpt": {
         "requestCode": "GW",
         "responseCode": "GX",
-        "requestPattern": "macMode:1/string, macMethod:1/string, bdk:33/string, ksnDescriptor:3/string, ksn:ksnLength/string, mac:macLength/string, messageDataLengthBytes:4/string-left-zero, messageData:messageDataLengthBytes/string-binhex, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "macMode:1/string, macMethod:1/string, bdk/string, ksnDescriptor:3/string, ksn/string, mac/string, messageDataLengthBytes:4/string-left-zero, messageData:messageDataLengthBytes/string-binhex, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "01": "MAC Verification Failure"
@@ -356,8 +356,8 @@
     "generateRandomPin": {
         "requestCode": "JA",
         "responseCode": "JB",
-        "requestPattern": "account:12/string, checkLength:2/string-left-zero, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, pin/binary",
+        "requestPattern": "account:12/string, checkLength:2/string-left-zero, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "81": "PIN length mismatch"
         }
@@ -365,8 +365,8 @@
     "translatePinTpkLmk": {
         "requestCode": "JC",
         "responseCode": "JD",
-        "requestPattern": "tpk:33/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, pin/binary",
+        "requestPattern": "tpk/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "10": "TPK parity error"
         }
@@ -374,8 +374,8 @@
     "translatePinZpkLmk": {
         "requestCode": "JE",
         "responseCode": "JF",
-        "requestPattern": "zpk:33/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, pin/binary",
+        "requestPattern": "zpk/string, pinBlock:16/string, pinBlockFormat:2/string, pan:12/string, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "10": "ZPK parity error"
         }
@@ -383,8 +383,8 @@
     "translatePinLmkZpk": {
         "requestCode": "JG",
         "responseCode": "JH",
-        "requestPattern": "zpk:33/string, pinBlockFormat:2/string, pan:12/string, delimiter:delimiterLength/string, pin:pinLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, pinBlock:16/string",
+        "requestPattern": "zpk/string, pinBlockFormat:2/string, pan:12/string, delimiter/string, pin/string, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "11": "ZPK parity error"
         }
@@ -392,8 +392,8 @@
     "generateArqc3": {
         "requestCode": "KQ",
         "responseCode": "KR",
-        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, mksmi:mksmiLength/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter:delimiterLength/string, arqc:8/string-binhex, arc:arcLength/string-binhex, discretionaryDataMac:discretionaryDataMacLength/string-binhex, discretionaryDataBytes:discretionaryDataBytesLength/string, discretionaryData:discretionaryDataLength/string-binhex, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, arpc/binary",
+        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac/string, mksmi/string, panSeqNo:8/string-binhex, atc:2/string-binhex, unpredictableNumber:4/string-binhex, transactionDataLengthHex/string, transactionData:transactionDataLengthDec/string-binhex, delimiter/string, arqc:8/string-binhex, arc:arcLength/string-binhex, discretionaryDataMac:discretionaryDataMacLength/string-binhex, discretionaryDataBytes/string, discretionaryData:discretionaryDataLength/string-binhex, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex",
         "customResponseError": {
             "01": "ARQC/TC/AAC verification failed",
@@ -411,8 +411,8 @@
     "generateArqc4": {
         "requestCode": "KW",
         "responseCode": "KX",
-        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac:33/string, ivac:ivacLength/string-binhex, panLength:panSeqNoLengthLength/string-left-zero, panSeqNo:panSeqNoLength/string-binhex, delimiter1:delimiter1Length/string, branchHeightParams:branchHeightParamsLength/string, atc:2/string-binhex, transactionDataLengthHex:transactionDataLengthLength/string, transactionData:transactionDataLengthDec/string-binhex, delimiter2:delimiter2Length/string, arqc:8/string-binhex, arc:arcLength/string-binhex, csu:csuLength/string-binhex, padLength:padLengthLength/string, pad:padLength/string-binhex, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, arpc/binary",
+        "requestPattern": "modeFlag:1/string, schemeId:1/string, mkac/string, ivac:ivacLength/string-binhex, panLength:panSeqNoLengthLength/string-left-zero, panSeqNo:panSeqNoLength/string-binhex, delimiter1/string, branchHeightParams/string, atc:2/string-binhex, transactionDataLengthHex/string, transactionData:transactionDataLengthDec/string-binhex, delimiter2/string, arqc:8/string-binhex, arc:arcLength/string-binhex, csu:csuLength/string-binhex, padLength/string, pad:padLength/string-binhex, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary",
         "errorPattern": "errorCode:2/string, diagnosticData:8/string-binhex",
         "customResponseError": {
             "01": "ARQC/TC/AAC/MPVV verification failure",
@@ -426,13 +426,13 @@
     "translateDtab": {
         "requestCode": "LO",
         "responseCode": "LP",
-        "requestPattern": "decimalisationTable:16/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "decimalisationTable:16/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, decimalisationTableTranslated:16/string"
     },
     "encryptDataBlock": {
         "requestCode": "M0",
         "responseCode": "M1",
-        "requestPattern": "modeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageDataLengthHex:4/string-left-zero, messageData:messageDataLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "modeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key/string, ksnDescriptor/string, ksn/string, iv/string, messageDataLengthHex:4/string-left-zero, messageData/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "02": "Invalid Mode Flag field",
@@ -447,7 +447,7 @@
     "decryptDataBlock": {
         "requestCode": "M2",
         "responseCode": "M3",
-        "requestPattern": "modeFlag:2/string, bpsRadixFlag:bpsRadixFlagLength/string, bpsRadixValue:bpsRadixValueLength/string, bpsTweak:bpsTweakLength/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key:33/string, ksnDescriptor:ksnDescriptorLength/string, ksn:ksnLength/string, iv:ivLength/string, messageDataLengthHex:4/string-left-zero, messageData:messageDataLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "modeFlag:2/string, bpsRadixFlag/string, bpsRadixValue/string, bpsTweak:bpsTweakLength/string-binhex, inputFormatFlag:1/string, outputFormatFlag:1/string, keyType:3/string, key/string, ksnDescriptor/string, ksn/string, iv/string, messageDataLengthHex:4/string-left-zero, messageData/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "02": "Invalid Mode Flag field",
@@ -462,7 +462,7 @@
     "translateDataBlock": {
         "requestCode": "M4",
         "responseCode": "M5",
-        "requestPattern": "sourceModeFlag:2/string, destinationModeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, sourceKeyType:3/string, sourceKey:33/string, sourceKsnDescriptor:sourceKsnDescriptorLength/string, sourceKsn:sourceKsnLength/string, destinationKeyType:3/string, destinationKey:33/string, destinationKsnDescriptor:destinationKsnDescriptorLength/string, destinationKsn:destinationKsnLength/string, sourceIv:sourceIvLength/string, destinationIv:destinationIvLength/string, messageDataLengthHex:4/string-left-zero, messageData:messageDataLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "sourceModeFlag:2/string, destinationModeFlag:2/string, inputFormatFlag:1/string, outputFormatFlag:1/string, sourceKeyType:3/string, sourceKey/string, sourceKsnDescriptor/string, sourceKsn/string, destinationKeyType:3/string, destinationKey/string, destinationKsnDescriptor/string, destinationKsn/string, sourceIv/string, destinationIv/string, messageDataLengthHex:4/string-left-zero, messageData/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "02": "Invalid Mode Flag field",
@@ -481,7 +481,7 @@
     "generateMac": {
         "requestCode": "M6",
         "responseCode": "M7",
-        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, iv:ivLength/string, macDataLengthHex:4/string-left-zero, macData:macDataLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key/string, iv/string, macDataLengthHex:4/string-left-zero, macData/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "02": "Invalid Mode Flag field",
@@ -496,7 +496,7 @@
     "verifyMac": {
         "requestCode": "M8",
         "responseCode": "M9",
-        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key:33/string, macDataLengthHex:4/string-left-zero, macData:macDataLength/string, mac:macLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "modeFlag:1/string, inputFormatFlag:1/string, macSize:1/string, macAlgorithm:1/string, paddingMethod:1/string, keyType:3/string, key/string, macDataLengthHex:4/string-left-zero, macData/string, mac/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string, rest/binary",
         "customResponseError": {
             "01": "MAC verification failed",
@@ -512,14 +512,14 @@
     "printFormat": {
         "requestCode": "PA",
         "responseCode": "PB",
-        "requestPattern": "data:dataLength/string",
+        "requestPattern": "data/string",
         "responsePattern": "errorCode:2/string"
     },
     "printPin": {
         "requestCode": "PE",
         "responseCode": "PF",
-        "requestPattern": "documentType:1/string, account:12/string, pin:encryptedPinLength/string, printFields:printFieldsLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, checkValue/binary"
+        "requestPattern": "documentType:1/string, account:12/string, pin/string, printFields/string, \"~\", delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "printPinEnd": {
         "responseCode": "PZ",
@@ -532,13 +532,13 @@
     "translateAccountNumber": {
         "requestCode": "QK",
         "responseCode": "QL",
-        "requestPattern": "pin:pinLength/string, oldAccountNumber:12/string, newAccountNumber:12/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
-        "responsePattern": "errorCode:2/string, pin/binary"
+        "requestPattern": "pin/string, oldAccountNumber:12/string, newAccountNumber:12/string, delimiterLmk/string, lmkIdentifier/string",
+        "responsePattern": "errorCode:2/string, rest/binary"
     },
     "printTmkMailer": {
         "requestCode": "TA",
         "responseCode": "TB",
-        "requestPattern": "tmk:33/string, printFields:printFieldsLength/string, delimiterLmk:delimiterLmkLen/string, lmkIdentifier:lmkIdentifierLen/string",
+        "requestPattern": "tmk/string, printFields/string, delimiterLmk/string, lmkIdentifier/string",
         "responsePattern": "errorCode:2/string",
         "customResponseError": {
             "10": "TMK parity error"

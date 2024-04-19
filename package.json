@@ -1,14 +1,14 @@
 {
   "name": "ut-codec-payshield",
-  "version": "7.3.0",
+  "version": "8.0.0-keyBlock.1",
   "main": "./index.js",
   "dependencies": {
     "lodash.merge": "4.6.2",
-    "ut-bitsyntax": "^6.2.4"
+    "ut-bitsyntax": "^6.2.6"
   },
   "devDependencies": {
-    "tap": "^14.10.7",
-    "ut-tools": "^6.37.0",
+    "tap": "^14.11.0",
+    "ut-tools": "^7.11.1",
     "ut-unittest": "^1.1.0"
   },
   "scripts": {
